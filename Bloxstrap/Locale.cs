@@ -1,108 +1,119 @@
-﻿using System.Globalization;
-using System.Linq;
-using System.Threading;
-using System.Windows;
-using System.Collections.Generic;
+﻿using System.Windows;
 
-namespace Voidstrap
+namespace Bloxstrap
 {
     internal static class Locale
     {
-        public const string DefaultLocale = "nil";
-        private static readonly HashSet<string> _rtlLocales = new() { "ar", "he", "fa" };
-
         public static CultureInfo CurrentCulture { get; private set; } = CultureInfo.InvariantCulture;
 
         public static bool RightToLeft { get; private set; } = false;
 
+        private static readonly List<string> _rtlLocales = new() { "ar", "he", "fa" };
+
         public static readonly Dictionary<string, string> SupportedLocales = new()
         {
-            { DefaultLocale, Strings.Common_SystemDefault },
-            { "en-US", "English (Recommended)" },
+            { "nil", Strings.Common_SystemDefault },
+            { "en", "English" },
+            { "en-US", "English (United States)" },
+#if QA_BUILD
+            { "sq", "Albanian" }, // Albanian (TODO: translate string)
+#endif
             { "ar", "العربية" }, // Arabic
             { "bg", "Български" }, // Bulgarian
+#if QA_BUILD
+            { "bn", "বাংলা" }, // Bengali
+#endif
+            { "bs", "Bosanski" }, // Bosnian
             { "cs", "Čeština" }, // Czech
             { "de", "Deutsch" }, // German
+            { "da", "Dansk" }, // Danish
             { "es-ES", "Español" }, // Spanish
+#if QA_BUILD
+            { "el", "Ελληνικά" }, // Greek
+#endif
             { "fa", "فارسی" }, // Persian
             { "fi", "Suomi" }, // Finnish
             { "fil", "Filipino" }, // Filipino
             { "fr", "Français" }, // French
+#if QA_BUILD
+            { "he", "עברית‎" }, // Hebrew
+            { "hi", "Hindi (Latin)" }, // Hindi
+#endif
             { "hr", "Hrvatski" }, // Croatian
             { "hu", "Magyar" }, // Hungarian
+#if QA_BUILD
+            { "is", "Íslenska" }, // Icelandic
+#endif
             { "id", "Bahasa Indonesia" }, // Indonesian
             { "it", "Italiano" }, // Italian
             { "ja", "日本語" }, // Japanese
             { "ko", "한국어" }, // Korean
+            { "lv", "Latviešu" }, // Latvian
             { "lt", "Lietuvių" }, // Lithuanian
             { "ms", "Malay" }, // Malay
             { "nl", "Nederlands" }, // Dutch
+#if QA_BUILD
+            { "et", "Eesti Keel" }, // Estonian
+            { "no", "Bokmål" }, // Norwegian
+#endif
             { "pl", "Polski" }, // Polish
-            { "pt-BR", "Português (Brasil)" }, // Portuguese (Brazilian)
+#if QA_BUILD
+            { "pt-PT", "Portugese (European)" }, // Portuguese (TODO: translate)
+#endif
+            { "pt-BR", "Português (Brasil)" }, // Portuguese, Brazilian
             { "ro", "Română" }, // Romanian
             { "ru", "Русский" }, // Russian
+#if QA_BUILD
+            { "sr-CS", "Serbian (Latin)" }, // Serbian (TODO: translate)
+#endif
             { "sv-SE", "Svenska" }, // Swedish
             { "th", "ภาษาไทย" }, // Thai
             { "tr", "Türkçe" }, // Turkish
             { "uk", "Українська" }, // Ukrainian
             { "vi", "Tiếng Việt" }, // Vietnamese
             { "zh-CN", "中文 (简体)" }, // Chinese Simplified
+            { "zh-HK", "中文 (香港)" }, // Chinese Traditional, Hong Kong
             { "zh-TW", "中文 (繁體)" } // Chinese Traditional
         };
 
-        public static string GetIdentifierFromName(string language) =>
-            SupportedLocales.FirstOrDefault(x => x.Value == language).Key ?? DefaultLocale;
+        public static string GetIdentifierFromName(string language) => SupportedLocales.FirstOrDefault(x => x.Value == language).Key ?? "nil";
 
         public static List<string> GetLanguages()
         {
-            var languages = SupportedLocales.Values.Take(3).ToList();
+            var languages = new List<string>();
+            
+            languages.AddRange(SupportedLocales.Values.Take(3));
             languages.AddRange(SupportedLocales.Values.Where(x => !languages.Contains(x)).OrderBy(x => x));
-
             languages[0] = Strings.Common_SystemDefault; // set again for any locale changes
+
             return languages;
         }
 
         public static void Set(string identifier)
         {
             if (!SupportedLocales.ContainsKey(identifier))
-                identifier = DefaultLocale;
+                identifier = "nil";
 
-            if (identifier == DefaultLocale)
+            if (identifier == "nil")
             {
                 CurrentCulture = Thread.CurrentThread.CurrentUICulture;
             }
             else
             {
-                try
-                {
-                    CurrentCulture = new CultureInfo(identifier);
-                }
-                catch (CultureNotFoundException)
-                {
-                    // Handle unsupported culture identifier (could log or fall back to default)
-                    CurrentCulture = CultureInfo.InvariantCulture;
-                }
+                CurrentCulture = new CultureInfo(identifier);
 
-                // Update culture settings for the current thread
                 CultureInfo.DefaultThreadCurrentUICulture = CurrentCulture;
                 Thread.CurrentThread.CurrentUICulture = CurrentCulture;
             }
 
-            RightToLeft = IsRightToLeft(CurrentCulture.Name);
-        }
-
-        private static bool IsRightToLeft(string cultureName)
-        {
-            // Extract the language code (first two characters) to check for RTL support
-            string languageCode = cultureName.Substring(0, 2);
-            return _rtlLocales.Contains(languageCode);
+            RightToLeft = _rtlLocales.Any(CurrentCulture.Name.StartsWith);
         }
 
         public static void Initialize()
         {
-            Set(DefaultLocale);
+            Set("nil");
 
-            // Setting FlowDirection for RTL languages
+            // https://supportcenter.devexpress.com/ticket/details/t905790/is-there-a-way-to-set-right-to-left-mode-in-wpf-for-the-whole-application
             EventManager.RegisterClassHandler(typeof(Window), FrameworkElement.LoadedEvent, new RoutedEventHandler((sender, _) =>
             {
                 var window = (Window)sender;
@@ -119,12 +130,10 @@ namespace Voidstrap
                     window.FontFamily = new System.Windows.Media.FontFamily(new Uri("pack://application:,,,/Resources/Fonts/"), "./#Noto Sans Thai");
                 }
 
-
 #if QA_BUILD
-            this.BorderBrush = System.Windows.Media.Brushes.Red;
-            this.BorderThickness = new Thickness(4);
+                window.BorderBrush = System.Windows.Media.Brushes.Red;
+                window.BorderThickness = new Thickness(4);
 #endif
-
             }));
         }
     }

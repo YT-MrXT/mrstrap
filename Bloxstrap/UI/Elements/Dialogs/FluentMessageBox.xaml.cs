@@ -7,11 +7,11 @@ using System.Windows.Media.Imaging;
 using Windows.Win32;
 using Windows.Win32.Foundation;
 
-using Voidstrap.UI.Utility;
+using Bloxstrap.UI.Utility;
 
-namespace Voidstrap.UI.Elements.Dialogs
+namespace Bloxstrap.UI.Elements.Dialogs
 {
-    // wpfui does have its own messagebox control but it SUCKS so heres this instead, ayo man chill out on wpf ui its amazing :3
+    // wpfui does have its own messagebox control but it SUCKS so heres this instead
 
     /// <summary>
     /// Interaction logic for FluentMessageBox.xaml
@@ -24,7 +24,7 @@ namespace Voidstrap.UI.Elements.Dialogs
         {
             InitializeComponent();
 
-            Title = App.DisplayName;
+            Title = App.ProjectName;
             RootTitleBar.Title = Title;
 
             string? iconFilename = null;
@@ -58,7 +58,7 @@ namespace Voidstrap.UI.Elements.Dialogs
             else
                 IconImage.Source = new BitmapImage(new Uri($"pack://application:,,,/Resources/MessageBox/{iconFilename}.png"));
 
-            Title = App.DisplayName;
+            Title = App.ProjectName;
             MessageTextBlock.Text = message;
             MessageTextBlock.MarkdownText = message;
             ButtonOne.Visibility = Visibility.Collapsed;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Xml.Linq;
 
-namespace Voidstrap.UI.Converters
+namespace Bloxstrap.UI.Converters
 {
     class EnumNameConverter : IValueConverter
     {

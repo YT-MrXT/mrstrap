@@ -1,6 +1,6 @@
 ﻿using Microsoft.Win32;
 
-namespace Voidstrap.Extensions
+namespace Bloxstrap.Extensions
 {
     public static class RegistryKeyEx
     {

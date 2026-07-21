@@ -1,100 +1,79 @@
-using DiscordRPC;
-using DiscordRPC.Logging;
-using Microsoft.Win32;
-using System.IO.Compression;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Shell;
 using System.Windows.Threading;
-using Voidstrap.Integrations;
-using Voidstrap.UI.Elements.Bootstrapper;
-using Voidstrap.UI.ViewModels.ContextMenu;
-using Wpf.Ui.Hardware;
 
-namespace Voidstrap
+using Microsoft.Win32;
+
+namespace Bloxstrap
 {
+    /// <summary>
+    /// Interaction logic for App.xaml
+    /// </summary>
     public partial class App : Application
     {
 #if QA_BUILD
-        public const string ProjectName = "Voidstrap-QA";
-        public const string DisplayName = "Mrstrap-QA";
+        public const string ProjectName = "Mrstrap-QA";
 #else
-        public const string ProjectName = "Voidstrap";
-        public const string DisplayName = "Mrstrap";
+        public const string ProjectName = "Mrstrap";
 #endif
-        public const string ProjectOwner = "Voidstrap";
-        public const string ProjectRepository = "/voidstrap/Voidstrap/";
-        public const string ProjectDownloadLink = "https://github.com/voidstrap/Voidstrap/releases";
-        public const string ProjectHelpLink = "https://github.com/BloxstrapLabs/Bloxstrap/wiki";
-        public const string ProjectSupportLink = "https://github.com/voidstrap/Voidstrap/issues/new";
+        public const string ProjectOwner = "returnrqt";
+        public const string ProjectRepository = "returnrqt/fishstrap";
+        public const string ProjectDownloadLink = "https://github.com/returnrqt/fishstrap/releases";
+        public const string ProjectHelpLink = "https://github.com/bloxstraplabs/bloxstrap/wiki";
+        public const string ProjectSupportLink = "https://github.com/returnrqt/fishstrap/issues/new";
+        public const string ProjectRemoteDataLink = "https://config.fishstrap.app/v1/Data.json";
 
-        public const string RobloxPlayerAppName = "RobloxPlayerBeta";
-        public const string RobloxStudioAppName = "RobloxStudioBeta";
+        public const string RobloxPlayerAppName = "RobloxPlayerBeta.exe";
+        public const string RobloxStudioAppName = "RobloxStudioBeta.exe";
+        // one day ill add studio support, haha i never did!
+        public const string RobloxAnselAppName = "eurotrucks2.exe";
+
+        // simple shorthand for extremely frequently used and long string - this goes under HKCU
         public const string UninstallKey = $@"Software\Microsoft\Windows\CurrentVersion\Uninstall\{ProjectName}";
 
         public const string ApisKey = $"Software\\{ProjectName}";
 
         public static LaunchSettings LaunchSettings { get; private set; } = null!;
 
-        public static readonly string RobloxCookiesFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), @"Roblox\LocalStorage\RobloxCookies.dat");
-
         public static BuildMetadataAttribute BuildMetadata = Assembly.GetExecutingAssembly().GetCustomAttribute<BuildMetadataAttribute>()!;
 
         public static string Version = Assembly.GetExecutingAssembly().GetName().Version!.ToString();
 
         public static Bootstrapper? Bootstrapper { get; set; } = null!;
-        public const int TaskbarProgressMaximum = 100;
 
         public static bool IsActionBuild => !String.IsNullOrEmpty(BuildMetadata.CommitRef);
 
         public static bool IsProductionBuild => IsActionBuild && BuildMetadata.CommitRef.StartsWith("tag", StringComparison.Ordinal);
 
-        public static bool IsStudioVisible => !String.IsNullOrEmpty(App.State.Prop.Studio.VersionGuid);
+        public static bool IsStudioVisible => !String.IsNullOrEmpty(App.RobloxState.Prop.Studio.VersionGuid);
 
-        public static byte[] ComputeSha256(byte[] data)
-        {
-            using var sha = SHA256.Create();
-            return sha.ComputeHash(data);
-        }
-
-        public static byte[] ComputeSha256(Stream stream)
-        {
-            using var sha = SHA256.Create();
-            return sha.ComputeHash(stream);
-        }
-
+        public static readonly MD5 MD5Provider = MD5.Create();
 
         public static readonly Logger Logger = new();
 
         public static readonly Dictionary<string, BaseTask> PendingSettingTasks = new();
 
-        public static readonly JsonManager<Models.Persistable.AppSettings> Settings = new();
-
-        public static readonly JsonManager<DownloadStats> DownloadStats = new();
+        public static readonly JsonManager<Settings> Settings = new();
 
         public static readonly JsonManager<State> State = new();
 
         public static readonly JsonManager<RobloxState> RobloxState = new();
 
+        public static readonly RemoteDataManager RemoteData = new();
+
         public static readonly FastFlagManager FastFlags = new();
 
         public static readonly GBSEditor GlobalSettings = new();
 
-        private CancellationTokenSource? _memoryTrimCts;
-
-        private static HttpClient? _httpClient;
-        public static HttpClient HttpClient => _httpClient ??= new HttpClient(
+        public static readonly HttpClient HttpClient = new(
             new HttpClientLoggingHandler(
                 new HttpClientHandler { AutomaticDecompression = DecompressionMethods.All }
             )
         );
 
         private static bool _showingExceptionDialog = false;
-        public static DiscordRpcClient? DiscordClient;
 
         public static void Terminate(ErrorCode exitCode = ErrorCode.ERROR_SUCCESS)
         {
@@ -146,7 +125,7 @@ namespace Voidstrap
             if (Bootstrapper?.Dialog != null)
             {
                 if (Bootstrapper.Dialog.TaskbarProgressValue == 0)
-                    Bootstrapper.Dialog.TaskbarProgressValue = 1;
+                    Bootstrapper.Dialog.TaskbarProgressValue = 1; // make sure it's visible
 
                 Bootstrapper.Dialog.TaskbarProgressState = TaskbarItemProgressState.Error;
             }
@@ -179,10 +158,6 @@ namespace Voidstrap
 
             return null;
         }
-        public static void SendStat(string key, string value)
-        {
-
-        }
 
         public static void SendLog()
         {
@@ -194,25 +169,27 @@ namespace Voidstrap
             const string LOG_IDENT = "App::AssertWindowsOSVersion";
 
             int major = Environment.OSVersion.Version.Major;
-            if (major < 7)
+            if (major < 10) // Windows 10 and newer only
             {
                 Logger.WriteLine(LOG_IDENT, $"Detected unsupported Windows version ({Environment.OSVersion.Version}).");
 
                 if (!LaunchSettings.QuietFlag.Active)
-                    Frontend.ShowMessageBox("Your Windows Version is not supported with Mrstrap!", MessageBoxImage.Error);
+                    Frontend.ShowMessageBox(Strings.App_OSDeprecation_Win7_81, MessageBoxImage.Error);
 
                 Terminate(ErrorCode.ERROR_INVALID_FUNCTION);
             }
         }
 
-        protected override async void OnStartup(StartupEventArgs e)
+        protected override void OnStartup(StartupEventArgs e)
         {
             const string LOG_IDENT = "App::OnStartup";
 
             Locale.Initialize();
+
             base.OnStartup(e);
 
             Logger.WriteLine(LOG_IDENT, $"Starting {ProjectName} v{Version}");
+
             string userAgent = $"{ProjectName}/{Version}";
 
             if (IsActionBuild)
@@ -235,13 +212,14 @@ namespace Voidstrap
 #endif
             }
 
+            Logger.WriteLine(LOG_IDENT, $"OSVersion: {Environment.OSVersion}");
             Logger.WriteLine(LOG_IDENT, $"Loaded from {Paths.Process}");
             Logger.WriteLine(LOG_IDENT, $"Temp path is {Paths.Temp}");
             Logger.WriteLine(LOG_IDENT, $"WindowsStartMenu path is {Paths.WindowsStartMenu}");
 
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
-
+            ApplicationConfiguration.Initialize();
 
             HttpClient.Timeout = TimeSpan.FromSeconds(30);
             HttpClient.DefaultRequestHeaders.Add("User-Agent", userAgent);
@@ -261,6 +239,7 @@ namespace Voidstrap
                 }
                 else
                 {
+                    // check if user profile folder has been renamed
                     var match = Regex.Match(value, @"^[a-zA-Z]:\\Users\\([^\\]+)", RegexOptions.IgnoreCase);
 
                     if (match.Success)
@@ -282,7 +261,7 @@ namespace Voidstrap
                 var files = Directory.GetFiles(processDir).Select(x => Path.GetFileName(x)).ToArray();
 
                 // check if settings.json and state.json are the only files in the folder
-                if (files.Length <= 3 && files.Contains("Settings.json") && files.Contains("State.json") && files.Contains("DownloadStats.json"))
+                if (files.Length <= 3 && files.Contains("Settings.json") && files.Contains("State.json"))
                 {
                     installLocation = processDir;
                     fixInstallLocation = true;
@@ -312,6 +291,9 @@ namespace Voidstrap
             if (installLocation is null)
             {
                 Logger.Initialize(true);
+                AssertWindowsOSVersion();
+                Logger.WriteLine(LOG_IDENT, "Not installed, launching the installer");
+                AssertWindowsOSVersion(); // prevent new installs from unsupported operating systems
                 LaunchHandler.LaunchInstaller();
             }
             else
@@ -330,68 +312,11 @@ namespace Voidstrap
                     Terminate();
                 }
 
-                DownloadStats.Load();
+                Settings.Load();
                 State.Load();
                 RobloxState.Load();
                 FastFlags.Load();
-                Settings.Load();
-
-                try
-                {
-                    if (App.Settings.Prop.ClearFont)
-                    {
-                        EventManager.RegisterClassHandler(
-                            typeof(Window),
-                            FrameworkElement.LoadedEvent,
-                            new RoutedEventHandler((sender, e) =>
-                            {
-                                if (sender is Window window)
-                                {
-                                    TextOptions.SetTextRenderingMode(window, TextRenderingMode.ClearType);
-                                    TextOptions.SetTextFormattingMode(window, TextFormattingMode.Display);
-
-                                    window.UseLayoutRounding = true;
-                                    window.SnapsToDevicePixels = true;
-
-                                    RenderOptions.SetClearTypeHint(window, ClearTypeHint.Enabled);
-                                    foreach (var textBlock in window.FindVisualChildren<System.Windows.Controls.TextBlock>())
-                                    {
-                                        TextOptions.SetTextRenderingMode(textBlock, TextRenderingMode.ClearType);
-                                        TextOptions.SetTextFormattingMode(textBlock, TextFormattingMode.Display);
-                                    }
-                                }
-                            })
-                        );
-                    }
-                }
-                catch
-                {
-                }
-
-                if (App.Settings.Prop.SmooothBARRyesirikikthxlucipook)
-                {
-                    await Task.Delay(50);
-                    System.Runtime.CompilerServices.RuntimeHelpers
-                        .RunClassConstructor(typeof(Helpers.SmoothScrollBehavior).TypeHandle);
-                }
-                TrimTimer();
-                var rpcVm = new RPCCustomizerViewModel();
-                if (rpcVm.AutoStartRpc && !string.IsNullOrWhiteSpace(rpcVm.ApplicationId))
-                {
-                    rpcVm.GetType()
-                         .GetMethod("SafeStartRpc", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?
-                         .Invoke(rpcVm, null);
-                }
-                Current.Resources["RPCCustomizerVM"] = rpcVm;
-
-                if (Settings?.Prop?.WPFSoftwareRender == true)
-                {
-                    HardwareAcceleration.DisableAllAnimations();
-                    HardwareAcceleration.FreeMemory();
-                    HardwareAcceleration.OptimizeVisualRendering();
-                    HardwareAcceleration.DisableTransparencyEffects();
-                    HardwareAcceleration.MinimizeMemoryFootprint();
-                }
+                GlobalSettings.Load();
 
                 if (!Locale.SupportedLocales.ContainsKey(Settings.Prop.Locale))
                 {
@@ -404,69 +329,15 @@ namespace Voidstrap
                 if (!LaunchSettings.BypassUpdateCheck)
                     Installer.HandleUpgrade();
 
-                WindowsRegistry.RegisterApis();
+                Task.Run(App.RemoteData.LoadData); // ok
+
+                WindowsRegistry.RegisterApis(); // we want to register those early on
+                                                // so we wont have any issues with bloxshade
+
                 LaunchHandler.ProcessLaunchArgs();
             }
-        }
 
-        private void TrimTimer()
-        {
-            _memoryTrimCts = new CancellationTokenSource();
-            CancellationToken token = _memoryTrimCts.Token;
-
-            Task.Run(async () =>
-            {
-                while (!token.IsCancellationRequested)
-                {
-                    try
-                    {
-                        if (DiscordClient != null)
-                        {
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
-                            GC.Collect();
-#if NET5_0_OR_GREATER
-                            System.Runtime.GCSettings.LargeObjectHeapCompactionMode =
-                                System.Runtime.GCLargeObjectHeapCompactionMode.CompactOnce;
-                            GC.Collect();
-#endif
-                            Logger.WriteLine("App::MemoryTrim", "Memory trimmed successfully (background).");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logger.WriteException("App::MemoryTrim", ex);
-                    }
-
-                    await Task.Delay(TimeSpan.FromSeconds(5), token);
-                }
-            }, token);
-        }
-
-        protected override void OnExit(ExitEventArgs e)
-        {
-            try
-            {
-                if (Current.MainWindow?.DataContext is RPCCustomizerViewModel rpcVm)
-                {
-                    rpcVm?.GetType()
-                          .GetMethod("SafeStopRpc", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance)?
-                          .Invoke(rpcVm, null);
-                }
-
-                DiscordClient?.Dispose();
-                DiscordClient = null;
-                if (Current.MainWindow?.DataContext is MusicPlayerViewModel musicVm)
-                {
-                    musicVm.Dispose();
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine($"[OnExit] Cleanup error: {ex.Message}");
-            }
-
-            base.OnExit(e);
+            // you must *explicitly* call terminate when everything is done, it won't be called implicitly
         }
     }
 }

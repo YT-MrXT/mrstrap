@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace Voidstrap.UI.Converters
+namespace Bloxstrap.UI.Converters
 {
     public class StringFormatConverter : IValueConverter
     {

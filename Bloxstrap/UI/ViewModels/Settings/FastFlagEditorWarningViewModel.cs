@@ -5,9 +5,9 @@ using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 using Wpf.Ui.Mvvm.Contracts;
 
-using Voidstrap.UI.Elements.Settings.Pages;
+using Bloxstrap.UI.Elements.Settings.Pages;
 
-namespace Voidstrap.UI.ViewModels.Settings
+namespace Bloxstrap.UI.ViewModels.Settings
 {
     internal class FastFlagEditorWarningViewModel : NotifyPropertyChangedViewModel
     {
@@ -17,7 +17,11 @@ namespace Voidstrap.UI.ViewModels.Settings
 
         public string ContinueButtonText { get; set; } = "";
 
-        public bool CanContinue { get; set; } = true;
+        public bool CanContinue { get; set; } = false;
+
+        public ICommand GoBackCommand => new RelayCommand(GoBack);
+
+        public ICommand ContinueCommand => new RelayCommand(Continue);
 
         public FastFlagEditorWarningViewModel(Page page)
         {

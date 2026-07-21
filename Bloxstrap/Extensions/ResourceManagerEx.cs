@@ -1,6 +1,6 @@
 ﻿using System.Resources;
 
-namespace Voidstrap.Extensions
+namespace Bloxstrap.Extensions
 {
     static class ResourceManagerEx
     {

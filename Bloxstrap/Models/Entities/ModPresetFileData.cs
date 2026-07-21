@@ -1,13 +1,13 @@
 ﻿using System.Security.Cryptography;
 using System.Windows.Markup;
 
-namespace Voidstrap.Models.Entities
+namespace Bloxstrap.Models.Entities
 {
     public class ModPresetFileData
     {
         public string FilePath { get; private set; }
 
-        public string FullFilePath => Path.Combine(Paths.Mods, FilePath);
+        public string FullFilePath => Path.Combine(Paths.Modifications, FilePath);
 
         public FileStream FileStream => File.OpenRead(FullFilePath);
 
@@ -23,8 +23,7 @@ namespace Voidstrap.Models.Entities
             ResourceIdentifier = resource;
 
             using var stream = ResourceStream;
-            stream.Position = 0;
-            ResourceHash = App.ComputeSha256(stream);
+            ResourceHash = App.MD5Provider.ComputeHash(stream);
         }
 
         public bool HashMatches()
@@ -33,8 +32,7 @@ namespace Voidstrap.Models.Entities
                 return false;
 
             using var fileStream = FileStream;
-            fileStream.Position = 0;
-            var fileHash = App.ComputeSha256(fileStream);
+            var fileHash = App.MD5Provider.ComputeHash(fileStream);
 
             return fileHash.SequenceEqual(ResourceHash);
         }

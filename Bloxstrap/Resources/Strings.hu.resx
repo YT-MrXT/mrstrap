@@ -157,9 +157,6 @@
   <data name="Bootstrapper.Status.Upgrading" xml:space="preserve">
     <value>{product} frissítése...</value>
   </data>
-  <data name="Bootstrapper.Status.UpgradingVoidstrap" xml:space="preserve">
-    <value>A legújabb Mrstrap beszerzése...</value>
-  </data>
   <data name="Bootstrapper.Status.WaitingOtherInstances" xml:space="preserve">
     <value>Várakozás más példányokra...</value>
   </data>
@@ -289,7 +286,7 @@ Kattintson további információért</value>
     <value>Kivétel lépett fel a Mrstrap futtatása közben</value>
   </data>
   <data name="Dialog.Exception.Info.2" xml:space="preserve">
-    <value>Először nézze át a [Mrstrap Wikit]({0}), mert lehet, hogy a problémáját már megválaszoltuk.
+    <value>Először nézze át a [Bloxstrap Wikit]({0}), mert lehet, hogy a problémáját már megválaszoltuk.
 
 Ha nem, kérjük, hogy jelentse ezt egy [GitHub problémaként]({1}) a Mrstrap által készített naplófájllal együtt.</value>
   </data>
@@ -389,12 +386,6 @@ Ha nem, kérjük, hogy jelentse ezt egy [GitHub problémaként]({1}) a Mrstrap �
   <data name="Enums.Theme.Light" xml:space="preserve">
     <value>Világos</value>
   </data>
-  <data name="Enums.Theme.Red" xml:space="preserve">
-    <value>Világos</value>
-  </data>
-  <data name="Enums.Theme.Blue" xml:space="preserve">
-    <value>Világos</value>
-  </data>
   <data name="InstallChecker.Updated" xml:space="preserve">
     <value>A Mrstrap frissítve lett v{0}-ra/re</value>
   </data>
@@ -446,7 +437,7 @@ Szeretné frissíteni a jelenleg telepített verzióját?</value>
   </data>
   <data name="Menu.About.Version" xml:space="preserve">
     <value>Verzió {0}</value>
-    <comment>{0} is replaced with the version, i.e. "Version 1.0.3.6"</comment>
+    <comment>{0} is replaced with the version, i.e. "Version 2.8.0"</comment>
   </data>
   <data name="Menu.AllFiles" xml:space="preserve">
     <value>Összes fálj</value>
@@ -617,32 +608,11 @@ Biztosan folytatja?</value>
   <data name="Menu.FastFlags.Presets.D3DExclusiveFullscreenInfo" xml:space="preserve">
     <value>A Direct3D [kizárólagos teljes képernyő]({0}) az Alt+Enter billentyűkombináció használatával alapértelmezés szerint engedélyezve van.</value>
   </data>
-  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
-    <value>Előnyben részesített játék menü verzió</value>
-  </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Description" xml:space="preserve">
     <value>A Roblox csökkenti a renderelési minőséget attól függően, hogy a kijelző hogyan van méretezve a Windows-ban.</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Title" xml:space="preserve">
     <value>A megjelenítés minőségének megőrzése a kijelző méretezésével</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
-    <value>Állítsd 0-ra az alapértelmezettért, ha a Roblox saját FPS korlát eltörlőjét akarod használni.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
-    <value>FPS korlát</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
-    <value>A [billentyűparancsok]({0}) segítségével kapcsolható. Csak akkor működik, ha a [Mrstrap Roblox csoportban]({1}) vagy.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
-    <value>A GUI-k elrejtésének lehetővé tétele</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
-    <value>A kiválasztott feltétlenül meg fog jelenni az összes játékban. [Vigyázz, ez el tudja rontani a játék kinézetét!]({0})</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
-    <value>Előnyben részesített világítási technológia</value>
   </data>
   <data name="Menu.FastFlags.Presets.RenderingMode.Title" xml:space="preserve">
     <value>Renderelési mód</value>
@@ -799,12 +769,6 @@ A 'Nem' választása figyelmen kívül hagyja ezt a figyelmeztetést, és folyta
   <data name="Menu.Mods.Presets.OldCharacterSounds.Title" xml:space="preserve">
     <value>Régi karakterhangok visszahozása</value>
   </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Description" xml:space="preserve">
-    <value>A klasszikus 'oof' hang visszahozása.</value>
-  </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Title" xml:space="preserve">
-    <value>Régi halálhang használata</value>
-  </data>
   <data name="Menu.Mods.Title" xml:space="preserve">
     <value>Modok</value>
   </data>
@@ -859,12 +823,6 @@ A 'Nem' választása figyelmen kívül hagyja ezt a figyelmeztetést, és folyta
   <data name="Menu.FastFlags.Presets.MSAA.Title" xml:space="preserve">
     <value>Élsimítás minőség (MSAA)</value>
   </data>
-  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
-    <value>Utófeldolgozási effektusok letiltása</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
-    <value>A teljesképernyős címsor letiltása</value>
-  </data>
   <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Description" xml:space="preserve">
     <value>Nem fog megjelenni, ha az egerét a képernyő tetejére mozdítja.</value>
   </data>
@@ -882,18 +840,6 @@ A 'Nem' választása figyelmen kívül hagyja ezt a figyelmeztetést, és folyta
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level3" xml:space="preserve">
     <value>3. szint (Legmagasabb)</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
-    <value>Játékosok árnyékai letiltása</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
-    <value>Betűtípus méret</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
-    <value>Az alapértelmezett érték 1. Változtassa meg ezt, ha egy saját betűtípust használ.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
-    <value>Tereptextúrák kikapcsolása</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownload" xml:space="preserve">
     <value>A Mrstrap nem tudja letölteni a Roblox-ot</value>
@@ -1043,7 +989,7 @@ A Mrstrap telepítése a „{1}” helyre történt.</value>
     <value>A Mrstrap nem tudott parancsikonokat létrehozni az Asztal és a Start menü számára. Próbálja meg később létrehozni őket a beállításokon keresztül.</value>
   </data>
   <data name="Dialog.Exception.Info.2.Alt" xml:space="preserve">
-    <value>Nézd meg először a [Mrstrap Wiki]({0}) oldalát, hátha már találtak megoldást erre a problémára.
+    <value>Nézd meg először a [Bloxstrap Wiki]({0}) oldalát, hátha már találtak megoldást erre a problémára.
 
 Ha nem, akkor kérjük, jelentse ezt a kivételt a fork karbantartóinak. NE jelentse ezt a Mrstrap GitHub issue-jeiben, mivel ez egy nem hivatalos build.</value>
     <comment>"fork" in general means "a variation of" or "a different version of". You can alternatively write the first sentence as "...to the maintainers of this version."</comment>
@@ -1080,9 +1026,6 @@ Ha nem, akkor kérjük, jelentse ezt a kivételt a fork karbantartóinak. NE jel
   </data>
   <data name="Dialog.AlreadyRunning.Uninstaller" xml:space="preserve">
     <value>Kérjük, várjon, amíg az eltávolítás befejeződik.</value>
-  </data>
-  <data name="About.Title" xml:space="preserve">
-    <value>A Mrstrapről</value>
   </data>
   <data name="About.Licenses.Title" xml:space="preserve">
     <value>Licencek</value>
@@ -1197,15 +1140,6 @@ Kérjük, manuálisan törölje a Mrstrap.exe fájlt a telepítési helyről, va
   <data name="About.Supporters.OneOff" xml:space="preserve">
     <value>Egyszeri</value>
   </data>
-  <data name="Menu.Voidstrap.Description" xml:space="preserve">
-    <value>A Mrstrap viselkedésével kapcsolatos beállítások konfigurálása.</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Title" xml:space="preserve">
-    <value>Az analitika küldésének engedélyezése</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Description" xml:space="preserve">
-    <value>Névtelen és semmi rossz, ígérjük. Ha többet szeretne megtudni arról, hogy mit és miért gyűjtünk, olvassa el az [adatvédelmi szabályzatunkat]({0}).</value>
-  </data>
   <data name="Common.Analytics" xml:space="preserve">
     <value>Analitika</value>
   </data>
@@ -1243,6 +1177,9 @@ Szeretné engedélyezni a teszt üzemmódot?</value>
   <data name="Dialog.Exception.Version" xml:space="preserve">
     <value>Verzió {0}</value>
   </data>
+  <data name="Enums.BootstrapperStyle.CustomDialog" xml:space="preserve">
+    <value>Egyéni</value>
+  </data>
   <data name="Bootstrapper.FilesInUse" xml:space="preserve">
     <value>A Mrstrap megpróbálta frissíteni a Robloxot, de nem tudja, mert a Roblox fájljai még mindig használatban vannak.
 
@@ -1255,7 +1192,7 @@ Kérjük, zárjon be minden olyan alkalmazást, amely a Roblox fájljait haszná
   </data>
   <data name="Common.Export" xml:space="preserve">
     <value>Exportálás</value>
-    <comment>Currently used under the "Voidstrap" settings tab for the button to export diagnostic data</comment>
+    <comment>Currently used under the "Fishstrap" settings tab for the button to export diagnostic data</comment>
   </data>
   <data name="Dialog.Connectivity.Preventing" xml:space="preserve">
     <value>Valami valószínűleg megakadályozza, hogy a Mrstrap csatlakozzon az internethez.</value>
@@ -1280,6 +1217,301 @@ Kérjük, zárjon be minden olyan alkalmazást, amely a Roblox fájljait haszná
     <value />
   </data>
   <data name="Menu.Channel.RobloxUpgrades" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="App.OSDeprecation.Win7_81" xml:space="preserve">
+    <value>A Roblox már nem támogatja a Windows 7 vagy 8.1 operációs rendszert. A Roblox játék folytatásához kérjük, frissítsen Windows 10-re vagy újabb verzióra.</value>
+  </data>
+  <data name="Bootstrapper.Status.UpgradingBloxstrap" xml:space="preserve">
+    <value>A legújabb Mrstrap beszerzése...</value>
+  </data>
+  <data name="Menu.Fishstrap.Description" xml:space="preserve">
+    <value>A Mrstrap viselkedésével kapcsolatos beállítások konfigurálása.</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Title" xml:space="preserve">
+    <value>Az analitika küldésének engedélyezése</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Description" xml:space="preserve">
+    <value>Névtelen és semmi rossz, ígérjük. Ha többet szeretne megtudni arról, hogy mit és miért gyűjtünk, olvassa el az [adatvédelmi szabályzatunkat]({0}).</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Blank" xml:space="preserve">
+    <value>Üres</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Simple" xml:space="preserve">
+    <value>Egyszerű</value>
+  </data>
+  <data name="CustomTheme.Errors.InvalidRoot" xml:space="preserve">
+    <value>A téma XML gyökere nem {0}</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.DialogAlreadyInitialised" xml:space="preserve">
+    <value>Az egyéni párbeszédpanel már inicializálásra került</value>
+  </data>
+  <data name="CustomTheme.Errors.TooManyElements" xml:space="preserve">
+    <value>Az egyéni bootstrapperek legfeljebb {0} elemet tartalmazhatnak, {1} találva</value>
+    <comment>{0} and {1} are numbers</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSet" xml:space="preserve">
+    <value>{0} verzió nincs megadva</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotNumber" xml:space="preserve">
+    <value>{0} verzió nem egy szám</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSupported" xml:space="preserve">
+    <value>{0} a {1} verzió már nem támogatott</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotRecognised" xml:space="preserve">
+    <value>{0} a {1} verziót nem ismerjük fel</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementInvalidChild" xml:space="preserve">
+    <value>{0} nem lehet {1} gyermeke</value>
+    <comment>{0} and {1} are element names (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownElement" xml:space="preserve">
+    <value>Ismeretlen elem {0}</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.XMLParseFailed" xml:space="preserve">
+    <value>Nem sikerült elemezni a témafájlt: {0}</value>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeConversionError" xml:space="preserve">
+    <value>{0} érvénytelen {1}: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissing" xml:space="preserve">
+    <value>Az {0} elemből hiányzik az {1} attribútum</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeInvalidType" xml:space="preserve">
+    <value>{0}.{1} nem érvényes {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeLargerThanMin" xml:space="preserve">
+    <value>{0}.{1} nagyobbnak kell lennie, mint {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeSmallerThanMax" xml:space="preserve">
+    <value>{0}.{1} kisebbnek kell lennie, mint {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownEnumValue" xml:space="preserve">
+    <value>{0} Ismeretlen {1} '{2}'</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the enum name (e.g. WindowCornerType), {2} is the value</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleDefinitions" xml:space="preserve">
+    <value>{0} csak egy {1} lehet definiálva</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleChildren" xml:space="preserve">
+    <value>{0}.{1} csak egy gyermeke lehet</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementMultipleChildren" xml:space="preserve">
+    <value>{0} csak egy gyermeke lehet</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissingChild" xml:space="preserve">
+    <value>{0}.{1} hiányzik a gyermeke</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseError" xml:space="preserve">
+    <value>{0}.{1} nem lehetett {2}-nek elemezni</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseErrorNull" xml:space="preserve">
+    <value>{0}.{1} {2} null</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeBlacklistedUriScheme" xml:space="preserve">
+    <value>{0}.{1} feketelistán szereplő sémát használ {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the URI scheme (e.g. http)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementTypeCreationFailed" xml:space="preserve">
+    <value>{0} nem sikerült létrehozni {1}: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Editor.Title" xml:space="preserve">
+    <value>Szerkesztése „{0}”</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success" xml:space="preserve">
+    <value>Téma sikeresen mentve!</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Error" xml:space="preserve">
+    <value>Hiba történt a téma mentése közben.</value>
+  </data>
+  <data name="CustomTheme.Editor.ConfirmSave" xml:space="preserve">
+    <value>Változások mentése {0}?</value>
+  </data>
+  <data name="CustomTheme.Editor.Save" xml:space="preserve">
+    <value>Mentés</value>
+  </data>
+  <data name="CustomTheme.Editor.Preview" xml:space="preserve">
+    <value>Előnézet</value>
+  </data>
+  <data name="CustomTheme.Editor.OpenThemeDirectory" xml:space="preserve">
+    <value>Téma könvyvtár kinyitása</value>
+  </data>
+  <data name="CustomTheme.Add.Title" xml:space="preserve">
+    <value>Egyéni téma hozzáadása</value>
+  </data>
+  <data name="Common.Template" xml:space="preserve">
+    <value>Sablon</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameEmpty" xml:space="preserve">
+    <value>A név megadása kötelező</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameIllegalCharacters" xml:space="preserve">
+    <value>A név tiltott karaktereket tartalmaz</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameReserved" xml:space="preserve">
+    <value>A név nem használható</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.Unknown" xml:space="preserve">
+    <value>Ismeretlen hiba</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameTaken" xml:space="preserve">
+    <value>A név már használatban van</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.FileNotZip" xml:space="preserve">
+    <value>A fájlnak ZIP-nek kell lennie</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipMissingThemeFile" xml:space="preserve">
+    <value>A témafájl nem található a ZIP fájlban</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipInvalidData" xml:space="preserve">
+    <value>Érvénytelen vagy sérült ZIP fájl</value>
+  </data>
+  <data name="CustomTheme.Errors.NoThemeSelected" xml:space="preserve">
+    <value>Nincs egyéni téma kiválasztva</value>
+  </data>
+  <data name="CustomTheme.Errors.SetupFailed" xml:space="preserve">
+    <value>Sikertelen az egyéni bootstrapper beállítása: {0}.
+Alapértelmezés szerint {1}.</value>
+    <comment>{0} is the error reason, {1} is the theme name (e.g. Bloxstrap (Classic))</comment>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.NoneSelected" xml:space="preserve">
+    <value>Nincs egyéni téma kiválasztva.</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.DeleteFailed" xml:space="preserve">
+    <value>Nem sikerült törölni az egyéni témát {0}: {1}</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.RenameFailed" xml:space="preserve">
+    <value>Nem sikerült átnevezni az egyéni témát {0}: {1}</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.UIElements" xml:space="preserve">
+    <value>UI elemek elhelyezése ide</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.MoreExamples" xml:space="preserve">
+    <value>Példák egyéni bootstrapperekre találhatók a {0}</value>
+  </data>
+  <data name="CustomTheme.Templates.Simple.MoreExamples" xml:space="preserve">
+    <value>További egyéni bootstrapper példákat találsz a {0}</value>
+  </data>
+  <data name="CustomTheme.DefaultName" xml:space="preserve">
+    <value>Egyedi téma {0}</value>
+    <comment>{0} is a string (e.g. '1', '1-1234')</comment>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success.Description" xml:space="preserve">
+    <value>A témád el lett mentve!</value>
+  </data>
+  <data name="CustomTheme.Editor.Errors.PreviewFailed" xml:space="preserve">
+    <value>Nem sikerült előnézetben megjeleníteni a témát: {0}</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Title" xml:space="preserve">
+    <value>Nem sikerült alkalmazni a módosításokat</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Message" xml:space="preserve">
+    <value>Nem minden módosítás lesz jelen a jelenlegi indításban.</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Title" xml:space="preserve">
+    <value>Nem sikerült extraktálni a fájlokat</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Message" xml:space="preserve">
+    <value>Néhány tartalom hiányozhat. A Roblox újratelepítésének kényszerítése a beállítások között javítja ezt.</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Title" xml:space="preserve">
+    <value>Több példányos indítás engedélyezése</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Description" xml:space="preserve">
+    <value>Lehetővé teszi, hogy egynél több Roblox játékkliens-példány legyen egyszerre nyitva.</value>
+  </data>
+  <data name="Common.Rename" xml:space="preserve">
+    <value>Átnevezés</value>
+  </data>
+  <data name="Common.CreateNew" xml:space="preserve">
+    <value>Új létrehozása</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Title" xml:space="preserve">
+    <value>Háttérfrissítések</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Description" xml:space="preserve">
+    <value>Várakozás helyett a háttérben frissítheti a Robloxot. Lassú hálózatokon nem ajánlott. A funkció működéséhez legalább 3GB szabad tárhely szükséges.</value>
+  </data>
+  <data name="Common.Import" xml:space="preserve">
+    <value>Importálás</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Módosítás</value>
+  </data>
+  <data name="About.Title" xml:space="preserve">
+    <value>A Mrstrapről</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
+    <value>Előnyben részesített játék menü verzió</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
+    <value>Állítsd 0-ra az alapértelmezettért, ha a Roblox saját FPS korlát eltörlőjét akarod használni.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
+    <value>FPS korlát</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
+    <value>A [billentyűparancsok]({0}) segítségével kapcsolható. Csak akkor működik, ha a [Mrstrap Roblox csoportban]({1}) vagy.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
+    <value>A GUI-k elrejtésének lehetővé tétele</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
+    <value>A kiválasztott feltétlenül meg fog jelenni az összes játékban. [Vigyázz, ez el tudja rontani a játék kinézetét!]({0})</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
+    <value>Előnyben részesített világítási technológia</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
+    <value>Utófeldolgozási effektusok letiltása</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
+    <value>A teljesképernyős címsor letiltása</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
+    <value>Játékosok árnyékai letiltása</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
+    <value>Betűtípus méret</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
+    <value>Az alapértelmezett érték 1. Változtassa meg ezt, ha egy saját betűtípust használ.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
+    <value>Tereptextúrák kikapcsolása</value>
+  </data>
+  <data name="Menu.About.Licenses.Apache" xml:space="preserve">
+    <value>Apache License 2.0</value>
+  </data>
+  <data name="Menu.GBSEditor.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Graphics.Description" xml:space="preserve">
     <value />
   </data>
 </root>

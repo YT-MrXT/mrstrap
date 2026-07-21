@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-
-namespace Voidstrap.AppData
+﻿namespace Bloxstrap
 {
     public static class GlobalCache
     {
-        public static readonly ConcurrentDictionary<string, string?> ServerLocation = new();
-        public static readonly ConcurrentDictionary<string, DateTime> ServerTime = new();
+        public static readonly Dictionary<string, string?> ServerLocation = new();
+
+        public static readonly Dictionary<string, DateTime?> ServerTime = new();
     }
 }

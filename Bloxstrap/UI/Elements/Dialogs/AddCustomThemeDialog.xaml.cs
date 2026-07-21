@@ -1,11 +1,10 @@
-﻿using Voidstrap.UI.Elements.Base;
-using Voidstrap.UI.ViewModels.Dialogs;
+﻿using Bloxstrap.UI.Elements.Base;
+using Bloxstrap.UI.ViewModels.Dialogs;
 using Microsoft.Win32;
 using System.IO.Compression;
 using System.Windows;
-using Voidstrap;
 
-namespace Voidstrap.UI.Elements.Dialogs
+namespace Bloxstrap.UI.Elements.Dialogs
 {
     /// <summary>
     /// Interaction logic for AddCustomThemeDialog.xaml
@@ -40,11 +39,12 @@ namespace Voidstrap.UI.Elements.Dialogs
         {
             int count = Directory.GetDirectories(Paths.CustomThemes).Count();
 
-            string name = $"Custom Theme {count + 1}";
+            int i = count + 1;
+            string name = string.Format(Strings.CustomTheme_DefaultName, i);
 
             // TODO: this sucks
             if (File.Exists(GetThemePath(name)))
-                name += " " + Random.Shared.Next(1, 100000).ToString(); // easy
+                name = string.Format(Strings.CustomTheme_DefaultName, $"{i}-{Random.Shared.Next(1, 100000)}"); // easy
 
             return name;
         }
@@ -64,7 +64,7 @@ namespace Voidstrap.UI.Elements.Dialogs
             }
 
             // last resort
-            return $"{name}_{Random.Shared.Next(maxTries + 1, 1_000_000)}";
+            return $"{name}_{Random.Shared.Next(maxTries+1, 1_000_000)}";
         }
 
         private static void CreateCustomTheme(string name, CustomThemeTemplate template)
@@ -77,7 +77,7 @@ namespace Voidstrap.UI.Elements.Dialogs
 
             string themeFilePath = Path.Combine(dir, "Theme.xml");
 
-            string templateContent = Encoding.UTF8.GetString(Resource.Get(template.GetFileName()).Result);
+            string templateContent = template.GetFileContents();
 
             File.WriteAllText(themeFilePath, templateContent);
         }
@@ -121,7 +121,7 @@ namespace Voidstrap.UI.Elements.Dialogs
             {
                 _viewModel.NameError = Strings.CustomTheme_Add_Errors_NameTaken;
                 return false;
-            }
+            }    
 
             return true;
         }

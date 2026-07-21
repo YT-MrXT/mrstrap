@@ -1,6 +1,4 @@
-﻿using Voidstrap;
-
-namespace Voidstrap
+﻿namespace Bloxstrap
 {
     internal class HttpClientLoggingHandler : MessageProcessingHandler
     {

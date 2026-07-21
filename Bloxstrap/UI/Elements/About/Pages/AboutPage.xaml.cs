@@ -1,9 +1,9 @@
-﻿using Voidstrap.UI.ViewModels.About;
+﻿using Bloxstrap.UI.ViewModels.About;
 
 using System.Windows.Input;
 using System.Windows.Media.Animation;
 
-namespace Voidstrap.UI.Elements.About.Pages
+namespace Bloxstrap.UI.Elements.About.Pages
 {
     /// <summary>
     /// Interaction logic for AboutPage.xaml
@@ -43,11 +43,6 @@ namespace Voidstrap.UI.Elements.About.Pages
                 var storyboard = Resources["EggStoryboard"] as Storyboard;
                 storyboard!.Begin();
             }
-        }
-
-        private void Anchor_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-
         }
     }
 }

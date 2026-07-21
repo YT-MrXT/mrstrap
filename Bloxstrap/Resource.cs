@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Voidstrap
+namespace Bloxstrap
 {
     static class Resource
     {
@@ -17,11 +17,10 @@ namespace Voidstrap
         {
             using var stream = GetStream(name);
             using var memoryStream = new MemoryStream();
-
+            
             await stream.CopyToAsync(memoryStream);
             return memoryStream.ToArray();
         }
-
 
         public static async Task<string> GetString(string name)
         {

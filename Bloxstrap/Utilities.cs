@@ -1,11 +1,7 @@
-﻿using Voidstrap.AppData;
+﻿using Bloxstrap.AppData;
 using System.ComponentModel;
-using System.Security.AccessControl;
-using System.Windows;
-using Voidstrap;
-using Microsoft.VisualBasic.Devices;
 
-namespace Voidstrap
+namespace Bloxstrap
 {
     static class Utilities
     {
@@ -13,14 +9,16 @@ namespace Voidstrap
         {
             try
             {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = website,
-                    UseShellExecute = true
+                Process.Start(new ProcessStartInfo 
+                { 
+                    FileName = website, 
+                    UseShellExecute = true 
                 });
             }
             catch (Win32Exception ex)
             {
+                // lmfao
+
                 if (ex.NativeErrorCode != (int)ErrorCode.CO_E_APPNOTFOUND)
                     throw;
 
@@ -32,53 +30,17 @@ namespace Voidstrap
             }
         }
 
-        public static Version? GetVersionFromString(string? version)
+        public static Version GetVersionFromString(string version)
         {
-            var logger = new Logger();
-
-            if (string.IsNullOrWhiteSpace(version))
-                return null;
-
-            version = version.Trim();
-
-            // Remove leading 'v' or 'V'
-            if (version.StartsWith('v') || version.StartsWith('V'))
+            if (version.StartsWith('v'))
                 version = version[1..];
 
-            // Remove metadata after '+'
-            int plusIndex = version.IndexOf('+');
-            if (plusIndex != -1)
-                version = version[..plusIndex];
+            int idx = version.IndexOf('+'); // commit info
+            if (idx != -1)
+                version = version[..idx];
 
-            // Remove pre-release label after '-'
-            int dashIndex = version.IndexOf('-');
-            if (dashIndex != -1)
-                version = version[..dashIndex];
-
-            version = version.Trim();
-
-            try
-            {
-                // Use Version.TryParse for safer parsing (available in .NET 7+),
-                // else fallback to new Version(string)
-#if NET7_0_OR_GREATER
-        if (Version.TryParse(version, out var parsedVersion))
-            return parsedVersion;
-        else
-            throw new ArgumentException("Invalid version format");
-#else
-                return new Version(version);
-#endif
-            }
-            catch (Exception ex)
-            {
-                logger.WriteLine("App::GetVersionFromString", $"Invalid version string '{version}': {ex.Message}");
-                return null;
-            }
+            return new Version(version);
         }
-
-
-
 
         /// <summary>
         /// 
@@ -103,7 +65,7 @@ namespace Voidstrap
             catch (Exception)
             {
                 // temporary diagnostic log for the issue described here:
-                // https://github.com/Bloxstraplabs/Bloxstrap/issues/3193
+                // https://github.com/bloxstraplabs/bloxstrap/issues/3193
                 // the problem is that this happens only on upgrade, so my only hope of catching this is bug reports following the next release
 
                 App.Logger.WriteLine("Utilities::CompareVersions", "An exception occurred when comparing versions");
@@ -129,10 +91,8 @@ namespace Voidstrap
             return version;
         }
 
-        public static string GetRobloxVersion(bool studio)
+        public static string GetRobloxVersionStr(IAppData data)
         {
-            IAppData data = studio ? new RobloxStudioData() : new RobloxPlayerData();
-
             string playerLocation = data.ExecutablePath;
 
             if (!File.Exists(playerLocation))
@@ -144,6 +104,19 @@ namespace Voidstrap
                 return "";
 
             return versionInfo.ProductVersion.Replace(", ", ".");
+        }
+
+        public static string GetRobloxVersionStr(bool studio)
+        {
+            IAppData data = studio ? new RobloxStudioData() : new RobloxPlayerData();
+
+            return GetRobloxVersionStr(data);
+        }
+
+        public static Version? GetRobloxVersion(IAppData data)
+        {
+            string str = GetRobloxVersionStr(data);
+            return ParseVersionSafe(str);
         }
 
         public static Process[] GetProcessesSafe()
@@ -177,32 +150,8 @@ namespace Voidstrap
 
         public static void KillBackgroundUpdater()
         {
-            using EventWaitHandle handle = new EventWaitHandle(false, EventResetMode.AutoReset, "Voidstrap-BackgroundUpdaterKillEvent");
+            using EventWaitHandle handle = new EventWaitHandle(false, EventResetMode.AutoReset, "Bloxstrap-BackgroundUpdaterKillEvent");
             handle.Set();
-        }
-
-        public static void RemoveTeleportFix()
-        {
-            const string LOG_IDENT = "Utilities::RemoveTeleportFix";
-
-            string user = Environment.UserDomainName + "\\" + Environment.UserName;
-
-            try
-            {
-                FileInfo fileInfo = new FileInfo(App.RobloxCookiesFilePath);
-                FileSecurity fileSecurity = fileInfo.GetAccessControl();
-
-                fileSecurity.RemoveAccessRule(new FileSystemAccessRule(user, FileSystemRights.Read, AccessControlType.Deny));
-                fileSecurity.RemoveAccessRule(new FileSystemAccessRule(user, FileSystemRights.Write, AccessControlType.Allow));
-
-                fileInfo.SetAccessControl(fileSecurity);
-
-                App.Logger.WriteLine(LOG_IDENT, "Successfully removed teleport fix.");
-            }
-            catch (Exception ex)
-            {
-                Frontend.ShowExceptionDialog(ex);
-            }
         }
     }
 }

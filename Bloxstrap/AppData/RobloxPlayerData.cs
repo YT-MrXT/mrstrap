@@ -1,12 +1,11 @@
-﻿using Voidstrap.AppData;
-using Voidstrap;
+﻿using Bloxstrap;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Voidstrap.AppData
+namespace Bloxstrap.AppData
 {
     public class RobloxPlayerData : CommonAppData, IAppData
     {
@@ -15,11 +14,7 @@ namespace Voidstrap.AppData
         public string BinaryType => "WindowsPlayer";
 
         public string RegistryName => "RobloxPlayer";
-        public override string ExecutableName => App.Settings.Prop.RenameClientToEuroTrucks2 ? "eurotrucks2.exe" : "RobloxPlayerBeta.exe";
-        public override AppState State => App.State.Prop.Player;
-        public override IReadOnlyDictionary<string, string> PackageDirectoryMap { get; set; } = new Dictionary<string, string>()
-        {
-            { "RobloxApp.zip", @"" }
-        };
+        public override string ExecutableName => App.RobloxPlayerAppName;
+        public override AppState State => App.RobloxState.Prop.Player;
     }
 }

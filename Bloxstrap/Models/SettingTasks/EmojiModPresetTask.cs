@@ -1,12 +1,12 @@
 ﻿using System.Windows;
 
-using Voidstrap.Models.SettingTasks.Base;
+using Bloxstrap.Models.SettingTasks.Base;
 
-namespace Voidstrap.Models.SettingTasks
+namespace Bloxstrap.Models.SettingTasks
 {
     public class EmojiModPresetTask : EnumBaseTask<EmojiType>
     {
-        private string _filePath => Path.Combine(Paths.Mods, @"content\fonts\TwemojiMozilla.ttf");
+        private string _filePath => Path.Combine(Paths.Modifications, @"content\fonts\TwemojiMozilla.ttf");
 
         private IEnumerable<KeyValuePair<EmojiType, string>>? QueryCurrentValue()
         {
@@ -14,7 +14,7 @@ namespace Voidstrap.Models.SettingTasks
                 return null;
 
             using var fileStream = File.OpenRead(_filePath);
-            string hash = Convert.ToHexString(App.ComputeSha256(fileStream));
+            string hash = MD5Hash.Stringify(App.MD5Provider.ComputeHash(fileStream));
 
             return EmojiTypeEx.Hashes.Where(x => x.Value == hash);
         }

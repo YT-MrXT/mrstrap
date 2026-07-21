@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.UI.Elements.Bootstrapper
+﻿namespace Bloxstrap.UI.Elements.Bootstrapper
 {
     partial class VistaDialog
     {
@@ -13,13 +13,9 @@
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
+            if (disposing && (components != null))
             {
-                if (components != null)
-                {
-                    components.Dispose();
-                    components = null;
-                }
+                components.Dispose();
             }
             base.Dispose(disposing);
         }
@@ -33,7 +29,6 @@
         private void InitializeComponent()
         {
             this.SuspendLayout();
-
             // 
             // VistaDialog
             // 
@@ -46,12 +41,10 @@
             this.ShowInTaskbar = false;
             this.Text = "VistaDialog";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
-
-            // Event handlers
             this.Load += new System.EventHandler(this.VistaDialog_Load);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Dialog_FormClosing);
-
+            this.FormClosing += this.Dialog_FormClosing;
             this.ResumeLayout(false);
+
         }
 
         #endregion

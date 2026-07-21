@@ -1,13 +1,13 @@
-﻿namespace Voidstrap.Models.Persistable
+﻿namespace Bloxstrap.Models.Persistable
 {
     public class WindowState
     {
-        public double WidthUpdateV2 { get; set; }
+        public double Width { get; set; }
 
-        public double HeightUpdateV2 { get; set; }
+        public double Height { get; set; }
 
-        public double LeftUpdateV2 { get; set; }
+        public double Left { get; set; }
 
-        public double TopUpdateV2 { get; set; }
+        public double Top { get; set; }
     }
 }

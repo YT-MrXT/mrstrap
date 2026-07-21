@@ -1,84 +1,73 @@
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Windows;
+using Bloxstrap.Models.RobloxApi;
 using DiscordRPC;
-using Voidstrap.Models.RobloxApi;
-using Voidstrap.Models.VoidstrapRPC;
 
-namespace Voidstrap.Integrations
+namespace Bloxstrap.Integrations
 {
     public class DiscordRichPresence : IDisposable
     {
         private readonly DiscordRpcClient _rpcClient = new("1005469189907173486");
         private readonly ActivityWatcher _activityWatcher;
-        private readonly ConcurrentQueue<Message> _messageQueue = new();
-        private readonly SemaphoreSlim _updateLock = new(1, 1);
+        private readonly Queue<Message> _messageQueue = new();
 
         private DiscordRPC.RichPresence? _currentPresence;
         private DiscordRPC.RichPresence? _originalPresence;
 
+        private FixedSizeList<ThumbnailCacheEntry> _thumbnailCache = new FixedSizeList<ThumbnailCacheEntry>(20);
+
+        private ulong? _smallImgBeingFetched = null;
+        private ulong? _largeImgBeingFetched = null;
+        private CancellationTokenSource? _fetchThumbnailsToken;
+
         private bool _visible = true;
-        private long? _previousPlaceId;
-        private DateTime _lastPresenceUpdate = DateTime.MinValue;
-        private readonly TimeSpan _updateCooldown = TimeSpan.FromSeconds(5);
 
         public DiscordRichPresence(ActivityWatcher activityWatcher)
         {
             const string LOG_IDENT = "DiscordRichPresence";
+
             _activityWatcher = activityWatcher;
 
-            _activityWatcher.OnGameJoin += async (_, _) => await SetCurrentGameAsync();
-            _activityWatcher.OnGameLeave += async (_, _) => await SetCurrentGameAsync();
+            _activityWatcher.OnGameJoin += (_, _) => Task.Run(() => SetCurrentGame());
+            _activityWatcher.OnGameLeave += (_, _) => Task.Run(() => SetCurrentGame());
             _activityWatcher.OnRPCMessage += (_, message) => ProcessRPCMessage(message);
 
             _rpcClient.OnReady += (_, e) =>
-                App.Logger.WriteLine(LOG_IDENT, $"Ready: {e.User} ({e.User.ID})");
+                App.Logger.WriteLine(LOG_IDENT, $"Received ready from user {e.User} ({e.User.ID})");
 
-            _rpcClient.OnPresenceUpdate += (_, _) =>
+            _rpcClient.OnPresenceUpdate += (_, e) =>
                 App.Logger.WriteLine(LOG_IDENT, "Presence updated");
 
             _rpcClient.OnError += (_, e) =>
-                App.Logger.WriteLine(LOG_IDENT, $"RPC Error: {e.Message}");
+                App.Logger.WriteLine(LOG_IDENT, $"An RPC error occurred - {e.Message}");
 
-            _rpcClient.OnConnectionEstablished += (_, _) =>
-                App.Logger.WriteLine(LOG_IDENT, "Connected to Discord RPC");
+            _rpcClient.OnConnectionEstablished += (_, e) =>
+                App.Logger.WriteLine(LOG_IDENT, "Established connection with Discord RPC");
+
+            //spams log as it tries to connect every ~15 sec when discord is closed so not now
+            //_rpcClient.OnConnectionFailed += (_, e) =>
+            //    App.Logger.WriteLine(LOG_IDENT, "Failed to establish connection with Discord RPC");
 
             _rpcClient.OnClose += (_, e) =>
-            {
-                App.Logger.WriteLine(LOG_IDENT, $"Connection closed: {e.Reason} ({e.Code})");
-                Task.Run(async () =>
-                {
-                    await Task.Delay(3000);
-                    try
-                    {
-                        _rpcClient.Initialize();
-                        App.Logger.WriteLine(LOG_IDENT, "Reinitialized Discord RPC after closure.");
-                    }
-                    catch (Exception ex)
-                    {
-                        App.Logger.WriteLine(LOG_IDENT, $"Failed to reinitialize RPC: {ex.Message}");
-                    }
-                });
-            };
+                App.Logger.WriteLine(LOG_IDENT, $"Lost connection to Discord RPC - {e.Reason} ({e.Code})");
 
             _rpcClient.Initialize();
         }
 
         public void ProcessRPCMessage(Message message, bool implicitUpdate = true)
         {
-            if (message.Command != "SetRichPresence" && message.Command != "SetLaunchData") return;
+            const string LOG_IDENT = "DiscordRichPresence::ProcessRPCMessage";
+
+            if (message.Command != "SetRichPresence" && message.Command != "SetLaunchData")
+                return;
 
             if (_currentPresence is null || _originalPresence is null)
             {
+                App.Logger.WriteLine(LOG_IDENT, "Presence is not set, enqueuing message");
                 _messageQueue.Enqueue(message);
                 return;
             }
+
+            // a lot of repeated code here, could this somehow be cleaned up?
 
             if (message.Command == "SetLaunchData")
             {
@@ -86,379 +75,414 @@ namespace Voidstrap.Integrations
             }
             else if (message.Command == "SetRichPresence")
             {
-                if (!TryDeserializePresence(message.Data, out Voidstrap.Models.VoidstrapRPC.RichPresence? presenceData))
-                    return;
-
-                _currentPresence.Details = UpdateField(_currentPresence.Details, presenceData.Details, _originalPresence.Details, 128);
-                _currentPresence.State = UpdateField(_currentPresence.State, presenceData.State, _originalPresence.State, 128);
-
-                UpdateAssets(_currentPresence.Assets, _originalPresence.Assets, presenceData.SmallImage, true);
-                UpdateAssets(_currentPresence.Assets, _originalPresence.Assets, presenceData.LargeImage, false);
+                ProcessSetRichPresence(message, implicitUpdate);
             }
 
             if (implicitUpdate)
                 UpdatePresence();
         }
 
-        private static bool TryDeserializePresence(JsonElement data, out Voidstrap.Models.VoidstrapRPC.RichPresence? presence)
+        private void AddToThumbnailCache(ulong id, string? url)
         {
+            if (url != null)
+                _thumbnailCache.Add(new ThumbnailCacheEntry { Id = id, Url = url });
+        }
+
+        private async Task UpdatePresenceIconsAsync(ulong? smallImg, ulong? largeImg, bool implicitUpdate, CancellationToken token)
+        {
+            Debug.Assert(smallImg != null || largeImg != null);
+
+            if (smallImg != null && largeImg != null)
+            {
+                string?[] urls = await Thumbnails.GetThumbnailUrlsAsync(new List<ThumbnailRequest>
+                {
+                    new ThumbnailRequest
+                    {
+                        TargetId = (ulong)smallImg,
+                        Type = "Asset",
+                        Size = "512x512",
+                        IsCircular = false
+                    },
+                    new ThumbnailRequest
+                    {
+                        TargetId = (ulong)largeImg,
+                        Type = "Asset",
+                        Size = "512x512",
+                        IsCircular = false
+                    }
+                }, token);
+
+                string? smallUrl = urls[0];
+                string? largeUrl = urls[1];
+
+                AddToThumbnailCache((ulong)smallImg, smallUrl);
+                AddToThumbnailCache((ulong)largeImg, largeUrl);
+
+                if (_currentPresence != null)
+                {
+                    _currentPresence.Assets.SmallImageKey = smallUrl;
+                    _currentPresence.Assets.LargeImageKey = largeUrl;
+                }
+            }
+            else if (smallImg != null)
+            {
+                string? url = await Thumbnails.GetThumbnailUrlAsync(new ThumbnailRequest
+                {
+                    TargetId = (ulong)smallImg,
+                    Type = "Asset",
+                    Size = "512x512",
+                    IsCircular = false
+                }, token);
+
+                AddToThumbnailCache((ulong)smallImg, url);
+
+                if (_currentPresence != null)
+                    _currentPresence.Assets.SmallImageKey = url;
+            }
+            else if (largeImg != null)
+            {
+                string? url = await Thumbnails.GetThumbnailUrlAsync(new ThumbnailRequest
+                {
+                    TargetId = (ulong)largeImg,
+                    Type = "Asset",
+                    Size = "512x512",
+                    IsCircular = false
+                }, token);
+
+                AddToThumbnailCache((ulong)largeImg, url);
+
+                if (_currentPresence != null)
+                    _currentPresence.Assets.LargeImageKey = url;
+            }
+
+            _smallImgBeingFetched = null;
+            _largeImgBeingFetched = null;
+
+            if (implicitUpdate)
+                UpdatePresence();
+        }
+
+        private void ProcessSetRichPresence(Message message, bool implicitUpdate)
+        {
+            const string LOG_IDENT = "DiscordRichPresence::ProcessSetRichPresence";
+            Models.BloxstrapRPC.RichPresence? presenceData;
+
+            Debug.Assert(_currentPresence is not null);
+            Debug.Assert(_originalPresence is not null);
+
+            if (_fetchThumbnailsToken != null)
+            {
+                _fetchThumbnailsToken.Cancel();
+                _fetchThumbnailsToken = null;
+            }
+
             try
             {
-                presence = data.Deserialize<Voidstrap.Models.VoidstrapRPC.RichPresence>();
-                return presence != null;
+                presenceData = message.Data.Deserialize<Models.BloxstrapRPC.RichPresence>();
             }
-            catch
+            catch (Exception)
             {
-                presence = null;
-                return false;
-            }
-        }
-
-        private static string? UpdateField(string? current, string? newValue, string? original, int maxLength)
-        {
-            if (string.IsNullOrEmpty(newValue)) return current;
-            if (newValue == "<reset>") return original;
-            if (newValue.Length > maxLength) return current;
-            return newValue;
-        }
-
-        private void UpdateAssets(Assets current, Assets original, RichPresenceImage? data, bool small)
-        {
-            if (data == null) return;
-
-            if (data.Clear)
-            {
-                if (small) current.SmallImageKey = "";
-                else current.LargeImageKey = "";
+                App.Logger.WriteLine(LOG_IDENT, "Failed to parse message! (JSON deserialization threw an exception)");
                 return;
             }
 
-            if (data.Reset)
+            if (presenceData is null)
             {
-                if (small)
+                App.Logger.WriteLine(LOG_IDENT, "Failed to parse message! (JSON deserialization returned null)");
+                return;
+            }
+
+            if (presenceData.Details is not null)
+            {
+                if (presenceData.Details.Length > 128)
+                    App.Logger.WriteLine(LOG_IDENT, $"Details cannot be longer than 128 characters");
+                else if (presenceData.Details == "<reset>")
+                    _currentPresence.Details = _originalPresence.Details;
+                else
+                    _currentPresence.Details = presenceData.Details;
+            }
+
+            if (presenceData.State is not null)
+            {
+                if (presenceData.State.Length > 128)
+                    App.Logger.WriteLine(LOG_IDENT, $"State cannot be longer than 128 characters");
+                else if (presenceData.State == "<reset>")
+                    _currentPresence.State = _originalPresence.State;
+                else
+                    _currentPresence.State = presenceData.State;
+            }
+
+            if (presenceData.TimestampStart == 0)
+                _currentPresence.Timestamps.Start = null;
+            else if (presenceData.TimestampStart is not null)
+                _currentPresence.Timestamps.StartUnixMilliseconds = presenceData.TimestampStart * 1000;
+
+            if (presenceData.TimestampEnd == 0)
+                _currentPresence.Timestamps.End = null;
+            else if (presenceData.TimestampEnd is not null)
+                _currentPresence.Timestamps.EndUnixMilliseconds = presenceData.TimestampEnd * 1000;
+
+            // set these to start fetching
+            ulong? smallImgFetch = null;
+            ulong? largeImgFetch = null;
+
+            if (presenceData.SmallImage is not null)
+            {
+                if (presenceData.SmallImage.Clear)
                 {
-                    current.SmallImageKey = original.SmallImageKey;
-                    current.SmallImageText = original.SmallImageText;
+                    _currentPresence.Assets.SmallImageKey = "";
+                    _smallImgBeingFetched = null;
+                }
+                else if (presenceData.SmallImage.Reset)
+                {
+                    _currentPresence.Assets.SmallImageText = _originalPresence.Assets.SmallImageText;
+                    _currentPresence.Assets.SmallImageKey = _originalPresence.Assets.SmallImageKey;
+                    _smallImgBeingFetched = null;
                 }
                 else
                 {
-                    current.LargeImageKey = original.LargeImageKey;
-                    current.LargeImageText = original.LargeImageText;
+                    if (presenceData.SmallImage.AssetId is not null)
+                    {
+                        ThumbnailCacheEntry? entry = _thumbnailCache.FirstOrDefault(x => x.Id == presenceData.SmallImage.AssetId);
+
+                        if (entry == null)
+                        {
+                            smallImgFetch = presenceData.SmallImage.AssetId;
+                        }
+                        else
+                        {
+                            _currentPresence.Assets.SmallImageKey = entry.Url;
+                            _smallImgBeingFetched = null;
+                        }
+                    }
+
+                    if (presenceData.SmallImage.HoverText is not null)
+                        _currentPresence.Assets.SmallImageText = presenceData.SmallImage.HoverText;
                 }
-                return;
             }
 
-            if (!string.IsNullOrEmpty(data.CustomKey))
+            if (presenceData.LargeImage is not null)
             {
-                if (small) current.SmallImageKey = data.CustomKey;
-                else current.LargeImageKey = data.CustomKey;
-                return;
+                if (presenceData.LargeImage.Clear)
+                {
+                    _currentPresence.Assets.LargeImageKey = "";
+                    _largeImgBeingFetched = null;
+                }
+                else if (presenceData.LargeImage.Reset)
+                {
+                    _currentPresence.Assets.LargeImageText = _originalPresence.Assets.LargeImageText;
+                    _currentPresence.Assets.LargeImageKey = _originalPresence.Assets.LargeImageKey;
+                    _largeImgBeingFetched = null;
+                }
+                else
+                {
+                    if (presenceData.LargeImage.AssetId is not null)
+                    {
+                        ThumbnailCacheEntry? entry = _thumbnailCache.FirstOrDefault(x => x.Id == presenceData.LargeImage.AssetId);
+
+                        if (entry == null)
+                        {
+                            largeImgFetch = presenceData.LargeImage.AssetId;
+                        }
+                        else
+                        {
+                            _currentPresence.Assets.LargeImageKey = entry.Url;
+                            _largeImgBeingFetched = null;
+                        }
+                    }
+
+                    if (presenceData.LargeImage.HoverText is not null)
+                        _currentPresence.Assets.LargeImageText = presenceData.LargeImage.HoverText;
+                }
             }
 
-            if (data.AssetId.HasValue)
-            {
-                var url = $"https://assetdelivery.roblox.com/v1/asset/?id={data.AssetId.Value}";
-                if (small) current.SmallImageKey = url;
-                else current.LargeImageKey = url;
-            }
+            if (smallImgFetch != null)
+                _smallImgBeingFetched = smallImgFetch;
+            if (largeImgFetch != null)
+                _largeImgBeingFetched = largeImgFetch;
 
-            if (!string.IsNullOrEmpty(data.HoverText))
+            if (_smallImgBeingFetched != null || _largeImgBeingFetched != null)
             {
-                if (small) current.SmallImageText = data.HoverText;
-                else current.LargeImageText = data.HoverText;
+                _fetchThumbnailsToken = new CancellationTokenSource();
+                Task.Run(() => UpdatePresenceIconsAsync(_smallImgBeingFetched, _largeImgBeingFetched, implicitUpdate, _fetchThumbnailsToken.Token));
             }
         }
 
         public void SetVisibility(bool visible)
         {
+            App.Logger.WriteLine("DiscordRichPresence::SetVisibility", $"Setting presence visibility ({visible})");
+
             _visible = visible;
-            if (_visible) UpdatePresence();
-            else _rpcClient.ClearPresence();
-        }
 
-        private async Task SetCurrentGameAsync()
-        {
-            if (!await _updateLock.WaitAsync(0)) return;
-            try
-            {
-                bool changed = await SetCurrentGame();
-                if (changed) RobloxMemoryCleaner.CleanRobloxMemory();
-            }
-            finally
-            {
-                _updateLock.Release();
-            }
-        }
-
-        private int LoadFlags()
-        {
-            try
-            {
-                string modsPath = Path.Combine(Paths.Mods, "ClientSettings");
-                string settingsFile = Path.Combine(modsPath, "ClientAppSettings.json");
-
-                if (!File.Exists(settingsFile))
-                {
-                    return 0;
-                }
-
-                string json = File.ReadAllText(settingsFile);
-
-                var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
-                var dict = JsonSerializer.Deserialize<Dictionary<string, string>>(json, options);
-                int totalFlags = dict?.Count ?? 0;
-
-                return totalFlags;
-            }
-            catch (Exception ex)
-            {
-                return -1;
-            }
+            if (_visible)
+                UpdatePresence();
+            else
+                _rpcClient.ClearPresence();
         }
 
         public async Task<bool> SetCurrentGame()
         {
-            const string LOG_IDENT = "DiscordRichPresence";
-
+            const string LOG_IDENT = "DiscordRichPresence::SetCurrentGame";
+            
             if (!_activityWatcher.InGame)
             {
-                _currentPresence = _originalPresence = null;
+                App.Logger.WriteLine(LOG_IDENT, "Not in game, clearing presence");
+
+                _currentPresence = _originalPresence =  null;
                 _messageQueue.Clear();
-                _previousPlaceId = null;
+
                 UpdatePresence();
-                App.Logger.WriteLine(LOG_IDENT, "Not in game, cleared presence.");
                 return true;
             }
 
+            string icon = "roblox";
+            string smallImageText = "Roblox";
+            string smallImage = "roblox";
+            
+
             var activity = _activityWatcher.Data;
-            var timeStarted = activity.RootActivity?.TimeJoined ?? activity.TimeJoined;
-            var placeId = activity.PlaceId;
-            bool teleported = _previousPlaceId.HasValue && _previousPlaceId.Value != placeId;
-            _previousPlaceId = placeId;
+            long placeId = activity.PlaceId;
 
-            int totalFlags = 0;
+            App.Logger.WriteLine(LOG_IDENT, $"Setting presence for Place ID {placeId}");
 
-            if (App.Settings.Prop.FFlagRPCDisplayer)
-            {
-                totalFlags = LoadFlags();
-            }
+            // preserve time spent playing if we're teleporting between places in the same universe
+            var timeStarted = activity.TimeJoined;
+
+            if (activity.RootActivity is not null)
+                timeStarted = activity.RootActivity.TimeJoined;
 
             if (activity.UniverseDetails is null)
             {
                 try
                 {
                     await UniverseDetails.FetchSingle(activity.UniverseId);
-                    activity.UniverseDetails = UniverseDetails.LoadFromCache(activity.UniverseId);
                 }
                 catch (Exception ex)
                 {
-                    App.Logger.WriteLine(LOG_IDENT, $"Failed to fetch universe details: {ex.Message}");
+                    App.Logger.WriteException(LOG_IDENT, ex);
+                    Frontend.ShowMessageBox($"{Strings.ActivityWatcher_RichPresenceLoadFailed}\n\n{ex.Message}", MessageBoxImage.Warning);
                     return false;
                 }
+
+                activity.UniverseDetails = UniverseDetails.LoadFromCache(activity.UniverseId);
             }
 
-            var universe = activity.UniverseDetails!;
-            var (smallImage, smallText) = await GetSmallImageAsync(activity);
+            var universeDetails = activity.UniverseDetails!;
 
-            string serverPrivacy = activity.ServerType switch
+            icon = universeDetails.Thumbnail.ImageUrl!;
+
+            if (App.Settings.Prop.ShowAccountOnRichPresence)
             {
-                ServerType.Private => "Private Server",
-                ServerType.Reserved => "Reserved Server",
-                _ => "Public Server"
+                var userDetails = await UserDetails.Fetch(activity.UserId);
+
+                smallImage = userDetails.Thumbnail.ImageUrl!;
+                smallImageText = $"Playing on {userDetails.Data.DisplayName} (@{userDetails.Data.Name})"; // i.e. "axell (@Axelan_se)"
+            }
+
+            if (!_activityWatcher.InGame || placeId != activity.PlaceId)
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Aborting presence set because game activity has changed");
+                return false;
+            }
+
+            string status = _activityWatcher.Data.ServerType switch
+            {
+                ServerType.Private => "In a private server",
+                ServerType.Reserved => "In a reserved server",
+                _ => $"by {universeDetails.Data.Creator.Name}" + (universeDetails.Data.Creator.HasVerifiedBadge ? " ☑️" : ""),
             };
 
-            var (cleanName, betaTag) = ExtractBetaTag(universe.Data.Name, universe.Data.Description);
-            string universeName = !string.IsNullOrWhiteSpace(App.Settings.Prop.CustomGameName)
-                ? App.Settings.Prop.CustomGameName!
-                : cleanName.Length < 2 ? cleanName + "\x2800\x2800\x2800" : cleanName;
+            string universeName = universeDetails.Data.Name;
 
-            if (teleported)
-                universeName = $"Teleported to {universeName}";
+            if (universeName.Length < 2)
+                universeName = $"{universeName}\x2800\x2800\x2800";
 
-            string serverLocation = string.Empty;
-            if (App.Settings.Prop.ServerLocationGame)
+            _currentPresence = new DiscordRPC.RichPresence
             {
-                try { serverLocation = await activity.QueryServerLocation(); }
-                catch { serverLocation = "Unknown Location"; }
-            }
-
-            var detailsParts = new List<string>();
-            if (App.Settings.Prop.GameNameChecked) detailsParts.Add(universeName);
-            if (App.Settings.Prop.GameStatusChecked) detailsParts.Add(serverPrivacy);
-            if (App.Settings.Prop.ServerLocationGame) detailsParts.Add(serverLocation);
-            string details = string.Join(" • ", detailsParts);
-            if (!string.IsNullOrEmpty(betaTag))
-                details = $"{details} {betaTag}";
-
-            string state = App.Settings.Prop.GameCreatorChecked
-                ? $"by {universe.Data.Creator.Name}{(universe.Data.Creator.HasVerifiedBadge ? " ☑️" : "")}"
-                : "";
-
-            if (App.Settings.Prop.FFlagRPCDisplayer)
-            {
-                state = string.IsNullOrWhiteSpace(state)
-                    ? $"FFlags: {totalFlags}"
-                    : $"{state} • FFlags: {totalFlags}";
-            }
-
-            string largeImageKey = !string.IsNullOrWhiteSpace(App.Settings.Prop.UseCustomIcon)
-                ? App.Settings.Prop.UseCustomIcon
-                : (App.Settings.Prop.GameIconChecked ? universe.Thumbnail.ImageUrl : "");
-
-            string largeImageText = !string.IsNullOrWhiteSpace(App.Settings.Prop.UseCustomIcon)
-                ? ""
-                : (App.Settings.Prop.GameIconChecked && App.Settings.Prop.GameNameChecked ? universe.Data.Name : "");
-
-            if (_currentPresence != null)
-            {
-                _currentPresence.Details = details;
-                _currentPresence.State = state;
-                _currentPresence.Assets.LargeImageKey = largeImageKey;
-                _currentPresence.Assets.LargeImageText = largeImageText;
-                _currentPresence.Assets.SmallImageKey = smallImage;
-                _currentPresence.Assets.SmallImageText = smallText;
-                _currentPresence.Buttons = GetButtons();
-                _currentPresence.Timestamps.Start = timeStarted.ToUniversalTime();
-            }
-            else
-            {
-                _currentPresence = new DiscordRPC.RichPresence
+                Details = universeName,
+                State = status,
+                Timestamps = new Timestamps { Start = timeStarted.ToUniversalTime() },
+                Buttons = GetButtons(),
+                Assets = new Assets
                 {
-                    Details = details,
-                    State = state,
-                    Timestamps = new Timestamps { Start = timeStarted.ToUniversalTime() },
-                    Buttons = GetButtons(),
-                    Assets = new Assets
-                    {
-                        LargeImageKey = largeImageKey,
-                        LargeImageText = largeImageText,
-                        SmallImageKey = smallImage,
-                        SmallImageText = smallText
-                    }
-                };
-                _originalPresence = _currentPresence;
-            }
-
-            while (_messageQueue.TryDequeue(out var msg))
-                ProcessRPCMessage(msg, false);
-
-            UpdatePresence();
-            App.Logger.WriteLine(LOG_IDENT, $"Updated presence for {details} with FFlags: {totalFlags}");
-            return true;
-        }
-
-        private static (string CleanName, string? Tag) ExtractBetaTag(string gameName, string? description)
-        {
-            if (string.IsNullOrWhiteSpace(gameName))
-                return (gameName ?? "", null);
-
-            if (!App.Settings.Prop.GameWIP)
-                return (gameName, null);
-
-            string combined = (gameName + " " + (description ?? "")).ToUpperInvariant();
-            var keywords = new Dictionary<string, string>
-    {
-        { "BETA", "[BETA]" },
-        { "TESTING", "[TESTING]" },
-        { "IN WORKS", "[IN WORKS]" },
-        { "ALPHA", "[ALPHA]" },
-        { "PREVIEW", "[PREVIEW]" },
-    };
-
-            foreach (var kvp in keywords)
-            {
-                string pattern = @"[\[\{]?\s*" + Regex.Escape(kvp.Key) + @"\s*[\]\}]?";
-                if (Regex.IsMatch(combined, pattern, RegexOptions.IgnoreCase))
-                {
-                    string cleanName = Regex.Replace(gameName, pattern, "", RegexOptions.IgnoreCase).Trim();
-                    return (string.IsNullOrEmpty(cleanName) ? gameName : cleanName, kvp.Value);
+                    LargeImageKey = icon,
+                    LargeImageText = universeDetails.Data.Name,
+                    SmallImageKey = smallImage,
+                    SmallImageText = smallImageText
                 }
-            }
+            };
 
-            return (gameName, null);
-        }
+            // this is used for configuration from BloxstrapRPC
+            _originalPresence = _currentPresence.Clone();
 
-        private async Task<(string key, string text)> GetSmallImageAsync(ActivityData activity)
-        {
-            if (!App.Settings.Prop.ShowAccountOnRichPresence)
-                return ("voidstrap", "Mrstrap");
-
-            try
+            if (_messageQueue.Any())
             {
-                var user = await UserDetails.Fetch(activity.UserId);
-                return (user.Thumbnail.ImageUrl, $"{user.Data.DisplayName} (@{user.Data.Name})");
+                App.Logger.WriteLine(LOG_IDENT, "Processing queued messages");
+                ProcessRPCMessage(_messageQueue.Dequeue(), false);
             }
-            catch
-            {
-                return ("voidstrap", "Mrstrap");
-            }
+            
+            UpdatePresence();
+
+            return true;
         }
 
         public Button[] GetButtons()
         {
-            var data = _activityWatcher.Data;
             var buttons = new List<Button>();
+
+            var data = _activityWatcher.Data;
 
             if (!App.Settings.Prop.HideRPCButtons)
             {
-                string? inviteUrl = null;
-                if (data.ServerType == ServerType.Public ||
-                    (data.ServerType == ServerType.Reserved && !string.IsNullOrEmpty(data.RPCLaunchData)))
-                {
-                    inviteUrl = data.GetInviteDeeplink();
-                }
+                bool show = false;
 
-                if (!string.IsNullOrEmpty(inviteUrl))
-                    buttons.Add(new Button { Label = "Join server", Url = inviteUrl });
+                if (data.ServerType == ServerType.Public)
+                    show = true;
+                else if (data.ServerType == ServerType.Reserved && !String.IsNullOrEmpty(data.RPCLaunchData))
+                    show = true;
+
+                if (show)
+                {
+                    buttons.Add(new Button
+                    {
+                        Label = "Join server",
+                        Url = data.GetInviteDeeplink()
+                    });
+                }
             }
 
-            buttons.Add(new Button { Label = "Game Page", Url = $"https://www.roblox.com/games/{data.PlaceId}" });
+            buttons.Add(new Button
+            {
+                Label = "See game page",
+                Url = $"https://www.roblox.com/games/{data.PlaceId}"
+            });
+
             return buttons.ToArray();
         }
 
         public void UpdatePresence()
         {
+            const string LOG_IDENT = "DiscordRichPresence::UpdatePresence";
+            
             if (_currentPresence is null)
             {
+                App.Logger.WriteLine(LOG_IDENT, $"Presence is empty, clearing");
                 _rpcClient.ClearPresence();
                 return;
             }
 
-            if (!_visible) return;
-            if ((DateTime.UtcNow - _lastPresenceUpdate) < _updateCooldown) return;
+            App.Logger.WriteLine(LOG_IDENT, $"Updating presence");
 
-            _lastPresenceUpdate = DateTime.UtcNow;
-            _rpcClient.SetPresence(_currentPresence);
+            if (_visible)
+                _rpcClient.SetPresence(_currentPresence);
         }
 
         public void Dispose()
         {
+            App.Logger.WriteLine("DiscordRichPresence::Dispose", "Cleaning up Discord RPC and Presence");
             _rpcClient.ClearPresence();
             _rpcClient.Dispose();
             GC.SuppressFinalize(this);
         }
-    }
-
-    public static class RobloxMemoryCleaner
-    {
-        public static void CleanRobloxMemory()
-        {
-            var robloxProcesses = Process.GetProcessesByName("Roblox")
-                .Concat(Process.GetProcessesByName("RobloxPlayerBeta"));
-
-            foreach (var proc in robloxProcesses)
-            {
-                try
-                {
-                    proc.Refresh();
-                    if (!proc.HasExited)
-                        EmptyWorkingSet(proc.Handle);
-                }
-                catch { }
-            }
-        }
-
-        [System.Runtime.InteropServices.DllImport("psapi.dll")]
-        private static extern bool EmptyWorkingSet(IntPtr hProcess);
     }
 }

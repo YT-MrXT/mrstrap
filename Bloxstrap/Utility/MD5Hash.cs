@@ -1,6 +1,6 @@
-﻿using System.Security.Cryptography;
+using System.Security.Cryptography;
 
-namespace Voidstrap.Utility
+namespace Bloxstrap.Utility
 {
     public static class MD5Hash
     {
@@ -23,6 +23,11 @@ namespace Voidstrap.Utility
             using MD5 md5 = MD5.Create();
             using FileStream stream = File.OpenRead(filename);
             return FromStream(stream);
+        }
+
+        public static string FromString(string str)
+        {
+            return FromBytes(Encoding.UTF8.GetBytes(str));
         }
 
         public static string Stringify(byte[] hash)

@@ -1,14 +1,10 @@
-﻿using Voidstrap.UI.Elements.Bootstrapper.Base;
-using Voidstrap.UI.ViewModels.Bootstrapper;
+﻿using Bloxstrap.UI.Elements.Bootstrapper.Base;
+using Bloxstrap.UI.ViewModels.Bootstrapper;
 using System.ComponentModel;
-using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Shell;
-using System.Windows.Threading;
-using Voidstrap;
-using System.Windows;
 
-namespace Voidstrap.UI.Elements.Bootstrapper
+namespace Bloxstrap.UI.Elements.Bootstrapper
 {
     /// <summary>
     /// Interaction logic for CustomDialog.xaml
@@ -16,8 +12,8 @@ namespace Voidstrap.UI.Elements.Bootstrapper
     public partial class CustomDialog : IBootstrapperDialog
     {
         private readonly BootstrapperDialogViewModel _viewModel;
-        private Window? _mainWindow;
-        public Voidstrap.Bootstrapper? Bootstrapper { get; set; }
+
+        public Bloxstrap.Bootstrapper? Bootstrapper { get; set; }
 
         private bool _isClosing;
 
@@ -98,25 +94,7 @@ namespace Voidstrap.UI.Elements.Bootstrapper
         public CustomDialog()
         {
             InitializeComponent();
-            _mainWindow = System.Windows.Application.Current.Windows
-            .OfType<Voidstrap.UI.Elements.Settings.MainWindow>()
-            .FirstOrDefault();
-            if (App.Settings.Prop.BackgroundWindow)
-            {
-                _mainWindow?.Hide();
-            }
-            Voidstrap.UI.Elements.Bootstrapper.AudioPlayerHelper.PlayStartupAudio();
-            this.Closed += (s, e) =>
-            {
-                _mainWindow = System.Windows.Application.Current.Windows
-                .OfType<Voidstrap.UI.Elements.Settings.MainWindow>()
-                .FirstOrDefault();
-                if (App.Settings.Prop.BackgroundWindow)
-                {
-                    _mainWindow?.Show();
-                }
-                Voidstrap.UI.Elements.Bootstrapper.AudioPlayerHelper.StopAudio();
-            };
+
             _viewModel = new BootstrapperDialogViewModel(this);
             DataContext = _viewModel;
             Title = App.Settings.Prop.BootstrapperTitle;

@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.AppData
+﻿namespace Bloxstrap.AppData
 {
     internal interface IAppData
     {
@@ -15,7 +15,5 @@
         string ExecutablePath { get; }
 
         AppState State { get; }
-
-        IReadOnlyDictionary<string, string> PackageDirectoryMap { get; set; }
     }
 }

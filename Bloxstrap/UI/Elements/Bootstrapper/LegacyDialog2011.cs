@@ -1,88 +1,60 @@
-using System.ComponentModel;
 using System.Windows.Forms;
-using Voidstrap.UI.Elements.Bootstrapper.Base;
 
-namespace Voidstrap.UI.Elements.Bootstrapper
+using Bloxstrap.UI.Elements.Bootstrapper.Base;
+
+namespace Bloxstrap.UI.Elements.Bootstrapper
 {
     // https://youtu.be/3K9oCEMHj2s?t=35
+
     public partial class LegacyDialog2011 : WinFormsDialogBase
     {
-        public override string Message
+        protected override string _message
         {
-            get => labelMessage?.Text ?? string.Empty;
-            set
-            {
-                if (labelMessage != null)
-                    labelMessage.Text = value;
-            }
+            get => labelMessage.Text;
+            set => labelMessage.Text = value;
         }
 
-        public override ProgressBarStyle ProgressStyle
+        protected override ProgressBarStyle _progressStyle
         {
-            get => ProgressBar?.Style ?? ProgressBarStyle.Continuous;
-            set
-            {
-                if (ProgressBar != null)
-                    ProgressBar.Style = value;
-            }
+            get => ProgressBar.Style;
+            set => ProgressBar.Style = value;
         }
 
-        public override int ProgressMaximum
+        protected override int _progressMaximum
         {
-            get => ProgressBar?.Maximum ?? 0;
-            set
-            {
-                if (ProgressBar != null)
-                    ProgressBar.Maximum = value;
-            }
+            get => ProgressBar.Maximum;
+            set => ProgressBar.Maximum = value;
         }
 
-        public override int ProgressValue
+        protected override int _progressValue
         {
-            get => ProgressBar?.Value ?? 0;
-            set
-            {
-                if (ProgressBar != null)
-                    ProgressBar.Value = value;
-            }
+            get => ProgressBar.Value;
+            set => ProgressBar.Value = value;
         }
 
-        public override bool CancelEnabled
+        protected override bool _cancelEnabled
         {
-            get => buttonCancel?.Enabled ?? false;
-            set
-            {
-                if (buttonCancel != null)
-                {
-                    buttonCancel.Enabled = value;
-                    buttonCancel.Visible = value;
-                }
-            }
+            get => this.buttonCancel.Enabled;
+            set => this.buttonCancel.Enabled = this.buttonCancel.Visible = value;
         }
 
         public LegacyDialog2011()
         {
             InitializeComponent();
 
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                return;
-
-            IconBox.BackgroundImage =
-                App.Settings.Prop.BootstrapperIcon.GetIcon().ToBitmap();
-
-            buttonCancel.Text = Strings.Common_Cancel;
+            this.IconBox.BackgroundImage = App.Settings.Prop.BootstrapperIcon.GetIcon().ToBitmap();
+            this.buttonCancel.Text = Strings.Common_Cancel;
 
             ScaleWindow();
             SetupDialog();
 
-            ProgressBar.RightToLeft = RightToLeft;
-            ProgressBar.RightToLeftLayout = RightToLeftLayout;
+            this.ProgressBar.RightToLeft = this.RightToLeft;
+            this.ProgressBar.RightToLeftLayout = this.RightToLeftLayout;
         }
 
-        private void LegacyDialog2011_Load(object sender, System.EventArgs e)
+        private void LegacyDialog2011_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-                Activate();
+            this.Activate();
         }
     }
 }

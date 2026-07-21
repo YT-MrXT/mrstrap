@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.Extensions
+﻿namespace Bloxstrap.Extensions
 {
     static class CleanerOptionsEx
     {

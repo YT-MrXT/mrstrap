@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace Voidstrap.Utility
+namespace Bloxstrap.Utility
 {
     internal static class Filesystem
     {
@@ -13,8 +13,8 @@ namespace Voidstrap.Utility
         {
             foreach (var drive in DriveInfo.GetDrives())
             {
-                // https://github.com/Bloxstraplabs/Bloxstrap/issues/1648#issuecomment-2192571030
-                if (path.ToUpperInvariant().StartsWith(drive.Name.ToUpperInvariant()))
+                // https://github.com/bloxstraplabs/bloxstrap/issues/1648#issuecomment-2192571030
+                if (path.ToUpperInvariant().StartsWith(drive.Name))
                     return drive.AvailableFreeSpace;
             }
 
@@ -34,27 +34,12 @@ namespace Voidstrap.Utility
 
         internal static void AssertReadOnlyDirectory(string directoryPath)
         {
-            var directory = new DirectoryInfo(directoryPath);
-
-            if (!directory.Exists)
-                return;
-            directory.Attributes = FileAttributes.Normal;
+            var directory = new DirectoryInfo(directoryPath) { Attributes = FileAttributes.Normal };
 
             foreach (var info in directory.GetFileSystemInfos("*", SearchOption.AllDirectories))
-            {
-                try
-                {
-                    info.Attributes = FileAttributes.Normal;
-                }
-                catch (Exception ex)
-                {
-                    App.Logger.WriteLine("Filesystem::AssertReadOnlyDirectory",
-                        $"Failed to change attributes for {info.FullName}: {ex.Message}");
-                }
-            }
+                info.Attributes = FileAttributes.Normal;
 
-            App.Logger.WriteLine("Filesystem::AssertReadOnlyDirectory",
-                $"Removed read-only attributes from directory: {directoryPath}");
+            App.Logger.WriteLine("Filesystem::AssertReadOnlyDirectory", $"The following directory was set as read-only: {directoryPath}");
         }
     }
 }

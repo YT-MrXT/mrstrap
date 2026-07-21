@@ -1,7 +1,7 @@
-﻿using Voidstrap.Models.Entities;
-using Voidstrap.Models.SettingTasks.Base;
+﻿using Bloxstrap.Models.Entities;
+using Bloxstrap.Models.SettingTasks.Base;
 
-namespace Voidstrap.Models.SettingTasks
+namespace Bloxstrap.Models.SettingTasks
 {
     public class ModPresetTask : BoolBaseTask
     {

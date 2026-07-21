@@ -1,42 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
+﻿using Bloxstrap.Enums.FlagPresets;
+using Bloxstrap.Enums.GBSPresets;
+using Microsoft.VisualBasic;
+using System.ComponentModel.Design.Serialization;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace Voidstrap
+namespace Bloxstrap
 {
     public class GBSEditor
     {
-        public XDocument? Document { get; set; }
+        public XDocument? Document { get; set; } = null!;
 
-        public Dictionary<string, string> PresetPaths { get; } = new()
+        public Dictionary<string, string> PresetPaths = new()
         {
             { "Rendering.FramerateCap", "{UserSettings}/int[@name='FramerateCap']" },
-            { "Rendering.SavedQualityLevel", "{UserSettings}/token[@name='SavedQualityLevel']" }, // 0 = automatic
+            { "Rendering.SavedQualityLevel", "{UserSettings}/token[@name='SavedQualityLevel']" }, // 0 is automatic
+            
             { "User.MouseSensitivity", "{UserSettings}/float[@name='MouseSensitivity']"},
             { "User.VREnabled", "{UserSettings}/bool[@name='VREnabled']"},
+
+            // mostly accessibility
             { "UI.Transparency", "{UserSettings}/float[@name='PreferredTransparency']" },
             { "UI.ReducedMotion", "{UserSettings}/bool[@name='ReducedMotion']" },
             { "UI.FontSize", "{UserSettings}/token[@name='PreferredTextSize']" }
         };
 
-        public Dictionary<string, string> RootPaths { get; } = new()
+        // we are making it easier for ourselves
+        // basically replacing {...} with a path
+        // might expand in the future (studio support)
+        public Dictionary<string, string> RootPaths = new()
         {
             { "UserSettings", "//Item[@class='UserGameSettings']/Properties" },
         };
 
-        public bool Loaded { get; private set; } = false;
+        public static IReadOnlyDictionary<FontSize, string?> FontSizes => new Dictionary<FontSize, string?>
+        {
+            { FontSize.x1, "1" },
+            { FontSize.x2, "2" },
+            { FontSize.x3, "3" },
+            { FontSize.x4, "4" }
+        };
 
-        public string FileLocation => Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "Roblox",
-            "GlobalBasicSettings_13.xml"
-        );
+        public bool Loaded { get; set; } = false;
 
-        public bool PreviousReadOnlyState { get; private set; }
+        public string FileLocation => Path.Combine(Paths.Roblox, "GlobalBasicSettings_13.xml");
 
         public void SetPreset(string prefix, object? value)
         {
@@ -60,14 +69,17 @@ namespace Voidstrap
             if (element is null)
                 return;
 
-            element.Value = value?.ToString() ?? string.Empty;
+            element.Value = value?.ToString()!;
         }
 
         public string? GetValue(string path)
         {
             path = ResolvePath(path);
+
             return Document?.XPathSelectElement(path)?.Value;
         }
+
+        public bool previousReadOnlyState;
 
         public void SetReadOnly(bool readOnly, bool preserveState = false)
         {
@@ -88,12 +100,11 @@ namespace Voidstrap
                 File.SetAttributes(FileLocation, attributes);
 
                 if (!preserveState)
-                    PreviousReadOnlyState = readOnly;
-            }
-            catch (Exception ex)
+                    previousReadOnlyState = readOnly;
+            } catch (Exception ex)
             {
-                App.Logger?.WriteLine(LOG_IDENT, $"Failed to set read-only on {FileLocation}");
-                App.Logger?.WriteException(LOG_IDENT, ex);
+                App.Logger.WriteLine(LOG_IDENT, $"Failed to set read-only on {FileLocation}");
+                App.Logger.WriteException(LOG_IDENT, ex);
             }
         }
 
@@ -107,46 +118,49 @@ namespace Voidstrap
 
         public void Load()
         {
-            const string LOG_IDENT = "GBSEditor::Load";
+            string LOG_IDENT = "GBSEditor::Load";
 
-            App.Logger?.WriteLine(LOG_IDENT, $"Loading from {FileLocation}...");
+            App.Logger.WriteLine(LOG_IDENT, $"Loading from {FileLocation}...");
 
-            if (!File.Exists(FileLocation))
+            if (!File.Exists(FileLocation)) // since the file gets created after roblox starts it might not exist yet  
                 return;
 
             try
             {
                 Document = XDocument.Load(FileLocation);
                 Loaded = true;
-                PreviousReadOnlyState = GetReadOnly();
+
+                previousReadOnlyState = GetReadOnly();
             }
             catch (Exception ex)
             {
-                App.Logger?.WriteLine(LOG_IDENT, "Failed to load!");
-                App.Logger?.WriteException(LOG_IDENT, ex);
+                App.Logger.WriteLine(LOG_IDENT, "Failed to load!");
+                App.Logger.WriteException(LOG_IDENT, ex);
             }
         }
 
         public virtual void Save()
         {
-            const string LOG_IDENT = "GBSEditor::Save";
+            string LOG_IDENT = "GBSEditor::Save";
 
-            App.Logger?.WriteLine(LOG_IDENT, $"Saving to {FileLocation}...");
+            App.Logger.WriteLine(LOG_IDENT, $"Saving to {FileLocation}...");
 
             try
             {
                 SetReadOnly(false, true);
                 Document?.Save(FileLocation);
-                SetReadOnly(PreviousReadOnlyState);
+
+                SetReadOnly(previousReadOnlyState);
             }
             catch (Exception ex)
             {
-                App.Logger?.WriteLine(LOG_IDENT, "Failed to save");
-                App.Logger?.WriteException(LOG_IDENT, ex);
+                App.Logger.WriteLine(LOG_IDENT, "Failed to save");
+                App.Logger.WriteException(LOG_IDENT, ex);
+
                 return;
             }
 
-            App.Logger?.WriteLine(LOG_IDENT, "Save complete!");
+            App.Logger.WriteLine(LOG_IDENT, "Save complete!");
         }
 
         private string ResolvePath(string rawPath)
@@ -154,7 +168,7 @@ namespace Voidstrap
             return Regex.Replace(rawPath, @"\{(.+?)\}", match =>
             {
                 string key = match.Groups[1].Value;
-                return RootPaths.TryGetValue(key, out var value) ? value : match.Value;
+                return RootPaths.TryGetValue(key, out var value) ? value : match.Value; ;
             });
         }
     }

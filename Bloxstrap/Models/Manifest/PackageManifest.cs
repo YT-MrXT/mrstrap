@@ -4,7 +4,7 @@
  * Copyright (c) 2015-present MaximumADHD
 */
 
-namespace Voidstrap.Models.Manifest
+namespace Bloxstrap.Models.Manifest
 {
     public class PackageManifest : List<Package>
     {

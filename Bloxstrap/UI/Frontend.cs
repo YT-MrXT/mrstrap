@@ -1,10 +1,9 @@
 ﻿using System.Windows;
 
-using Voidstrap.UI.Elements.Bootstrapper;
-using Voidstrap.UI.Elements.Dialogs;
-using Voidstrap;
+using Bloxstrap.UI.Elements.Bootstrapper;
+using Bloxstrap.UI.Elements.Dialogs;
 
-namespace Voidstrap.UI
+namespace Bloxstrap.UI
 {
     static class Frontend
     {
@@ -23,12 +22,18 @@ namespace Voidstrap.UI
             if (App.LaunchSettings.QuietFlag.Active)
                 return;
 
-            try
-            {
-            }
-            catch
-            {
-            }
+            string topLine = Strings.Dialog_PlayerError_FailedLaunch;
+
+            if (crash)
+                topLine = Strings.Dialog_PlayerError_Crash;
+
+            string info = String.Format(
+                Strings.Dialog_PlayerError_HelpInformation,
+                $"https://github.com/{App.ProjectRepository}/wiki/Roblox-crashes-or-does-not-launch",
+                $"https://github.com/{App.ProjectRepository}/wiki/Switching-between-Roblox-and-Bloxstrap"
+            );
+
+            ShowMessageBox($"{topLine}\n\n{info}", MessageBoxImage.Error);
         }
 
         public static void ShowExceptionDialog(Exception exception)
@@ -62,7 +67,7 @@ namespace Voidstrap.UI
             try
             {
                 if (App.Settings.Prop.SelectedCustomTheme == null)
-                    throw new CustomThemeException("CustomTheme.Errors.NoThemeSelected");
+                    throw new Exception("No custom theme selected");
 
                 CustomDialog dialog = new CustomDialog();
                 dialog.ApplyCustomTheme(App.Settings.Prop.SelectedCustomTheme);
@@ -73,7 +78,7 @@ namespace Voidstrap.UI
                 App.Logger.WriteException(LOG_IDENT, ex);
 
                 if (!App.LaunchSettings.QuietFlag.Active)
-                    ShowMessageBox(string.Format(Strings.CustomTheme_Errors_SetupFailed, ex.Message), MessageBoxImage.Error);
+                    Frontend.ShowMessageBox($"Failed to setup custom bootstrapper: {ex.Message}.\nDefaulting to Fluent.", MessageBoxImage.Error);
 
                 return GetBootstrapperDialog(BootstrapperStyle.FluentDialog);
             }
@@ -110,8 +115,8 @@ namespace Voidstrap.UI
         {
             var notifyIcon = new System.Windows.Forms.NotifyIcon
             {
-                Icon = Properties.Resources.IconVoidstrap,
-                Text = App.DisplayName,
+                Icon = Properties.Resources.IconBloxstrap,
+                Text = App.ProjectName,
                 Visible = true
             };
 

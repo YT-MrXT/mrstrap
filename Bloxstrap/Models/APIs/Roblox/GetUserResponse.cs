@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.Models.RobloxApi
+﻿namespace Bloxstrap.Models.RobloxApi
 {
     /// <summary>
     /// Roblox.Users.Api.GetUserResponse

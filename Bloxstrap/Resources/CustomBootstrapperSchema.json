@@ -44,9 +44,11 @@
 			"Attributes": {
 				"Version": "int",
 				"Theme": "Theme",
-				"Title": "string",
 				"IgnoreTitleBarInset": "bool",
-				"WindowCornerPreference": "WindowCornerPreference"
+				"Title": "string",
+				"WindowBackdropType": "BackgroundType",
+				"WindowCornerPreference": "WindowCornerPreference",
+				"AllowTransparency": "bool"
 			}
 		},
 		"TitleBar": {
@@ -116,6 +118,18 @@
 			"IsCreatable": true,
 			"Attributes": {}
 		},
+		"MediaElement": {
+			"SuperClass": "FrameworkElement",
+			"IsCreatable": true,
+			"Attributes": {
+				"Stretch": "Stretch",
+				"StretchDirection": "StretchDirection",
+				"Source": "Uri",
+				"Volume": "double",
+				"UnloadedBehaviour": "MediaState",
+				"LoadedBehaviour": "MediaState"
+			}
+		},
 		"Image": {
 			"SuperClass": "FrameworkElement",
 			"IsCreatable": true,
@@ -123,7 +137,8 @@
 				"Stretch": "Stretch",
 				"StretchDirection": "StretchDirection",
 				"Source": "ImageSource",
-				"IsAnimated": "bool"
+				"IsAnimated": "bool",
+				"RepeatBehaviour": "string"
 			}
 		},
 		"Grid": {
@@ -240,6 +255,17 @@
 				"SpreadMethod": "GradientSpreadMethod"
 			}
 		},
+		"RadialGradientBrush": {
+			"SuperClass": "Brush",
+			"IsCreatable": true,
+			"Attributes": {
+				"GradientOrigin": "Point",
+				"Center": "Point",
+				"ColorInterpolationMode": "ColorInterpolationMode",
+				"MappingMode": "BrushMappingMode",
+				"SpreadMethod": "GradientSpreadMethod"
+			}
+		},
 		"GradientStop": {
 			"IsCreatable": true,
 			"Attributes": {
@@ -261,6 +287,43 @@
 				"StrokeMiterLimit": "double",
 				"StrokeStartLineCap": "PenLineCap",
 				"StrokeThickness": "double"
+			}
+		},
+		"SvgViewbox": {
+			"SuperClass": "FrameworkElement",
+			"IsCreatable": true,
+			"Attributes": {
+				"SvgSource": "string",
+				"Source": "Uri",
+				"Stretch": "Stretch",
+				"StretchDirection": "StretchDirection"
+			}
+		},
+		"SvgIcon": {
+			"SuperClass": "FrameworkElement",
+			"IsCreatable": true,
+			"Attributes": {
+				"SvgSource": "string",
+				"Source": "Uri",
+				"Fill": "Brush",
+				"Stroke": "Brush"
+			}
+		},
+		"SvgBitmap": {
+			"SuperClass": "FrameworkElement",
+			"IsCreatable": true,
+			"Attributes": {
+				"Stretch": "Stretch",
+				"StretchDirection": "StretchDirection",
+				"SvgSource": "string",
+				"UriSource": "Uri"
+			}
+		},
+		"Path": {
+			"SuperClass": "Shape",
+			"IsCreatable": true,
+			"Attributes": {
+				"Data": "Geometry"
 			}
 		},
 		"Ellipse": {
@@ -323,6 +386,10 @@
 		"CornerRadius": {},
 		"Brush": { "CanHaveElement": true },
 		"Color": {},
+		"Data": {},
+		"Figures": {},
+		"Uri": {},
+		"Geometry": {},
 		"ImageSource": {},
 		"Transform": { "CanHaveElement": true },
 		"FontFamily": {},
@@ -332,6 +399,35 @@
 				"Visible",
 				"Hidden",
 				"Collapsed"
+			]
+		},
+		"MediaState": {
+			"Values": [
+				"Play",
+				"Stop",
+				"Close",
+				"Manual",
+				"Pause"
+			]
+		},
+		"WindowCornerPreference": {
+			"Values": [
+				"Default",
+				"DoNotRound",
+				"Round",
+				"RoundSmall"
+			]
+		},
+		"BackgroundType": {
+			"Values": [
+				"None",
+				"Unkown",
+				"Disable",
+				"Auto",
+				"Mica",
+				"Acrylic",
+				"Tabbed",
+				"Aero"
 			]
 		},
 		"HorizontalAlignment": {
@@ -355,6 +451,12 @@
 				"Default",
 				"Dark",
 				"Light"
+			]
+		},
+		"FillRule": {
+			"Values": [
+				"EvenOdd",
+				"Nonzero"
 			]
 		},
 		"FontWeight": {
@@ -507,14 +609,6 @@
 			"Values": [
 				"Horizontal",
 				"Vertical"
-			]
-		},
-		"WindowCornerPreference": {
-			"Values": [
-				"Default",
-				"DoNotRound",
-				"Round",
-				"RoundSmall"
 			]
 		}
 	}

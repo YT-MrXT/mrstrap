@@ -1,11 +1,11 @@
 ﻿using System.Windows;
 
-namespace Voidstrap.UI.ViewModels.About
+namespace Bloxstrap.UI.ViewModels.About
 {
     public class SupportersViewModel : NotifyPropertyChangedViewModel
     {
         public SupporterData? SupporterData { get; private set; }
-
+        
         public GenericTriState LoadedState { get; set; } = GenericTriState.Unknown;
 
         public string LoadError { get; set; } = "";
@@ -31,7 +31,7 @@ namespace Voidstrap.UI.ViewModels.About
 
             if (Columns == newCols)
                 return;
-
+             
             Columns = newCols;
             OnPropertyChanged(nameof(Columns));
         }
@@ -42,7 +42,7 @@ namespace Voidstrap.UI.ViewModels.About
 
             try
             {
-                SupporterData = await Http.GetJson<SupporterData>("https://raw.githubusercontent.com/voidstrap/Voidstrap/main/supportersdata7.json");
+                SupporterData = await Http.GetJson<SupporterData>("https://raw.githubusercontent.com/bloxstraplabs/config/main/supporters.json");
             }
             catch (Exception ex)
             {
@@ -58,7 +58,7 @@ namespace Voidstrap.UI.ViewModels.About
             if (SupporterData is not null)
             {
                 LoadedState = GenericTriState.Successful;
-
+                
                 OnPropertyChanged(nameof(SupporterData));
             }
 

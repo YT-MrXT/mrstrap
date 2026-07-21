@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.Models.Manifest
+﻿namespace Bloxstrap.Models.Manifest
 {
     public class ManifestFile
     {

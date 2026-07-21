@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Voidstrap.Models.Attributes
+namespace Bloxstrap.Models.Attributes
 {
     class EnumSortAttribute : Attribute
     {

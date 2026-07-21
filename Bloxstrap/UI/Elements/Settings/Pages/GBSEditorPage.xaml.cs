@@ -1,10 +1,14 @@
 ﻿using System.Windows;
 using System.Windows.Input;
-using Voidstrap.UI.ViewModels.Settings;
+
+using Bloxstrap.UI.ViewModels.Settings;
 using Wpf.Ui.Mvvm.Contracts;
 
-namespace Voidstrap.UI.Elements.Settings.Pages
+namespace Bloxstrap.UI.Elements.Settings.Pages
 {
+    /// <summary>
+    /// Interaction logic for FastFlagsPage.xaml
+    /// </summary>
     public partial class GBSEditorPage
     {
         private GBSEditorViewModel _viewModel = null!;
@@ -18,6 +22,7 @@ namespace Voidstrap.UI.Elements.Settings.Pages
         private void SetupViewModel()
         {
             _viewModel = new GBSEditorViewModel();
+
             DataContext = _viewModel;
         }
 

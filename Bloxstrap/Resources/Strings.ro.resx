@@ -157,9 +157,6 @@
   <data name="Bootstrapper.Status.Upgrading" xml:space="preserve">
     <value>{product} se actualizează...</value>
   </data>
-  <data name="Bootstrapper.Status.UpgradingVoidstrap" xml:space="preserve">
-    <value>Se obține cel mai nou Mrstrap...</value>
-  </data>
   <data name="Bootstrapper.Status.WaitingOtherInstances" xml:space="preserve">
     <value>Așteptând pentru celelalte instanțe...</value>
   </data>
@@ -389,12 +386,6 @@ Dacă nu, atunci vă rugăm să raportați această eroare printr-o [problemă G
   <data name="Enums.Theme.Light" xml:space="preserve">
     <value>Luminos</value>
   </data>
-  <data name="Enums.Theme.Red" xml:space="preserve">
-    <value>Luminos</value>
-  </data>
-  <data name="Enums.Theme.Blue" xml:space="preserve">
-    <value>Luminos</value>
-  </data>
   <data name="InstallChecker.Updated" xml:space="preserve">
     <value>Mrstrap a fost actualizat la v{0}</value>
   </data>
@@ -446,7 +437,7 @@ Doriți să actualizați versiunea instalată în prezent?</value>
   </data>
   <data name="Menu.About.Version" xml:space="preserve">
     <value>Versiunea {0}</value>
-    <comment>{0} is replaced with the version, i.e. "Version 1.0.3.6"</comment>
+    <comment>{0} is replaced with the version, i.e. "Version 2.8.0"</comment>
   </data>
   <data name="Menu.AllFiles" xml:space="preserve">
     <value>Toate fișierele</value>
@@ -485,7 +476,7 @@ Doriți să actualizați versiunea instalată în prezent?</value>
     <value>Schimbă cum Mrstrap arată.</value>
   </data>
   <data name="Menu.Appearance.Global.Theme.Title" xml:space="preserve">
-    <value>Tema globală</value>
+    <value>Tema Globală</value>
   </data>
   <data name="Menu.Appearance.Icon.Description" xml:space="preserve">
     <value>Alegeți ce pictogramă trebuie să folosească.</value>
@@ -497,7 +488,7 @@ Doriți să actualizați versiunea instalată în prezent?</value>
     <value>Previzualizare</value>
   </data>
   <data name="Menu.Appearance.Style.Description" xml:space="preserve">
-    <value>Alegeți cum ar trebui să arate. Tema întunecată nu se aplică la Legacy/Vista.</value>
+    <value>Alegeți cum ar trebui să arate. Tematica întunecată nu se aplică la Legacy/Vista.</value>
   </data>
   <data name="Menu.Appearance.Style.Title" xml:space="preserve">
     <value>Stil</value>
@@ -619,32 +610,11 @@ NU folosiți acest editor pentru a importa „liste de flag-uri” făcute de al
   <data name="Menu.FastFlags.Presets.D3DExclusiveFullscreenInfo" xml:space="preserve">
     <value>Direct3D [fullscreen exclusiv]({0}) folosind Alt+Enter este activat în mod implicit.</value>
   </data>
-  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
-    <value>Versiunea preferată a meniului de escape</value>
-  </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Description" xml:space="preserve">
     <value>Roblox reduce calitatea de randare după modul în care afișajul dvs. este dimensionat în Windows.</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Title" xml:space="preserve">
     <value>Păstrează calitatea redării cu scalarea afișajului</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
-    <value>Setați la 0 pentru setările implicite dacă doriți să utilizați deblocarea nativă a framerate-ului Roblox.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
-    <value>Limită de FPS</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
-    <value>Comută cu [comenzi rapide de tastatură]({0}). Funcționează numai dacă vă aflați în [grupul Mrstrap]({1}).</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
-    <value>Permite capacitatea de a ascunde GUI-uri</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
-    <value>Opțiunea aleasă va fi forțat în toate jocurile. [Atenție, pot cauza probleme de iluminare!]({0})</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
-    <value>Tehnologie de iluminat preferată</value>
   </data>
   <data name="Menu.FastFlags.Presets.RenderingMode.Title" xml:space="preserve">
     <value>Modul de rendering</value>
@@ -801,12 +771,6 @@ Selectarea „Nu” va ignora acest avertisment și va continua instalarea.</val
   <data name="Menu.Mods.Presets.OldCharacterSounds.Title" xml:space="preserve">
     <value>Emulează sunetele vechi ale caracterelor</value>
   </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Description" xml:space="preserve">
-    <value>Aduce înapoi sunetul clasic „oof” al morții.</value>
-  </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Title" xml:space="preserve">
-    <value>Folosește sunetul de moarte vechi</value>
-  </data>
   <data name="Menu.Mods.Title" xml:space="preserve">
     <value>Mod-uri</value>
   </data>
@@ -861,12 +825,6 @@ Selectarea „Nu” va ignora acest avertisment și va continua instalarea.</val
   <data name="Menu.FastFlags.Presets.MSAA.Title" xml:space="preserve">
     <value>Calitatea anti-aliasing (MSAA)</value>
   </data>
-  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
-    <value>Dezactivați efectele de post-procesare</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
-    <value>Dezactivați bara de titlu full-screen</value>
-  </data>
   <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Description" xml:space="preserve">
     <value>Oprește afișarea acestuia ori de câte ori mutați mouse-ul în partea de sus a ecranului.</value>
   </data>
@@ -884,18 +842,6 @@ Selectarea „Nu” va ignora acest avertisment și va continua instalarea.</val
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level3" xml:space="preserve">
     <value>Nivelul 3 (Cel mai ridicat)</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
-    <value>Dezactivați umbrele jucătorului</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
-    <value>Dimensiunea fontului</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
-    <value>Valoarea implicită este 1. Ajustați dacă folosiți un font customizat.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
-    <value>Dezactivați texturile terenului</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownload" xml:space="preserve">
     <value>Mrstrap nu poate să descarce Roblox</value>
@@ -1045,7 +991,7 @@ Mrstrap a fost instalat la „{1}”.</value>
     <value>Mrstrap nu a putut crea comenzi rapide pentru Desktop și meniul de Pornire. Încearcă să le creezi mai târziu în setări.</value>
   </data>
   <data name="Dialog.Exception.Info.2.Alt" xml:space="preserve">
-    <value>Verificați mai întâi [Mrstrap Wiki]({0}) pentru a vedea dacă această problemă a fost deja rezolvată printr-o soluție.
+    <value>Verificați mai întâi [Bloxstrap Wiki]({0}) pentru a vedea dacă această problemă a fost deja rezolvată printr-o soluție.
 
 Dacă nu, atunci vă rugăm să raportați această excepție deținătorilor acestei bifurcații. NU raportați acest lucru pe problemele GitHub ale Mrstrap-ului, deoarece acesta este un element neoficial.</value>
     <comment>"fork" in general means "a variation of" or "a different version of". You can alternatively write the first sentence as "...to the maintainers of this version."</comment>
@@ -1082,9 +1028,6 @@ Dacă nu, atunci vă rugăm să raportați această excepție deținătorilor ac
   </data>
   <data name="Dialog.AlreadyRunning.Uninstaller" xml:space="preserve">
     <value>Așteptați ca dezinstalarea să se termine.</value>
-  </data>
-  <data name="About.Title" xml:space="preserve">
-    <value>Despre Mrstrap</value>
   </data>
   <data name="About.Licenses.Title" xml:space="preserve">
     <value>Licențe</value>
@@ -1199,15 +1142,6 @@ Vă rugăm să ștergeți manual Mrstrap.exe din locația de instalare sau să �
   <data name="About.Supporters.OneOff" xml:space="preserve">
     <value>Unic</value>
   </data>
-  <data name="Menu.Voidstrap.Description" xml:space="preserve">
-    <value>Configurați opțiunile legate de comportamentul Mrstrap-ului.</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Title" xml:space="preserve">
-    <value>Activează trimiterea de date analitice</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Description" xml:space="preserve">
-    <value>Este anonimă și fără inteții rele, vă promitem. Pentru a vedea ce colectăm și de ce, vedeți [politica noastră de confidențialitate]({0}).</value>
-  </data>
   <data name="Common.Analytics" xml:space="preserve">
     <value>Analitică</value>
   </data>
@@ -1245,6 +1179,9 @@ Doriți să activați modul de testare?</value>
   <data name="Dialog.Exception.Version" xml:space="preserve">
     <value>Versiunea {0}</value>
   </data>
+  <data name="Enums.BootstrapperStyle.CustomDialog" xml:space="preserve">
+    <value>Personalizat</value>
+  </data>
   <data name="Bootstrapper.FilesInUse" xml:space="preserve">
     <value>Mrstrap a încercat să actualizeze Roblox, dar nu poate fiindcă fișierele Roblox sunt în folosință.
 
@@ -1257,7 +1194,7 @@ Vă rugăm să închideți orice aplicație care poate folosi fișierele Roblox,
   </data>
   <data name="Common.Export" xml:space="preserve">
     <value>Exportă</value>
-    <comment>Currently used under the "Voidstrap" settings tab for the button to export diagnostic data</comment>
+    <comment>Currently used under the "Fishstrap" settings tab for the button to export diagnostic data</comment>
   </data>
   <data name="Dialog.Connectivity.Preventing" xml:space="preserve">
     <value>Este posibil ca ceva să împiedice Mrstrap să se conecteze la internet.</value>
@@ -1282,6 +1219,301 @@ Vă rugăm să închideți orice aplicație care poate folosi fișierele Roblox,
     <value />
   </data>
   <data name="Menu.Channel.RobloxUpgrades" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="App.OSDeprecation.Win7_81" xml:space="preserve">
+    <value>Roblox nu mai suportă Windows 7 sau 8.1. Pentru a continua să joci Roblox, te rugăm să actualizezi la Windows 10 sau mai nou.</value>
+  </data>
+  <data name="Bootstrapper.Status.UpgradingBloxstrap" xml:space="preserve">
+    <value>Se obține cel mai nou Mrstrap...</value>
+  </data>
+  <data name="Menu.Fishstrap.Description" xml:space="preserve">
+    <value>Configurați opțiunile legate de comportamentul Mrstrap-ului.</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Title" xml:space="preserve">
+    <value>Activează trimiterea de date analitice</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Description" xml:space="preserve">
+    <value>Este anonimă și fără inteții rele, vă promitem. Pentru a vedea ce colectăm și de ce, vedeți [politica noastră de confidențialitate]({0}).</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Blank" xml:space="preserve">
+    <value>Gol</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Simple" xml:space="preserve">
+    <value>Simplu</value>
+  </data>
+  <data name="CustomTheme.Errors.InvalidRoot" xml:space="preserve">
+    <value>Rădăcina temei XML nu este {0}</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.DialogAlreadyInitialised" xml:space="preserve">
+    <value>Dialogul personalizat a fost inițializat deja</value>
+  </data>
+  <data name="CustomTheme.Errors.TooManyElements" xml:space="preserve">
+    <value>Inițializatoare personalizate pot avea maxim {0} elemente, s-au obținut {1}</value>
+    <comment>{0} and {1} are numbers</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSet" xml:space="preserve">
+    <value>Versiunea {0} nu este setată</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotNumber" xml:space="preserve">
+    <value>Versiunea {0} nu este un număr</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSupported" xml:space="preserve">
+    <value>{0} versiunea {1} nu mai este suportată</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotRecognised" xml:space="preserve">
+    <value>{0} versiunea {1} nu este recunoscută</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementInvalidChild" xml:space="preserve">
+    <value>Elementul {0} nu poate avea un element de tipul {1}</value>
+    <comment>{0} and {1} are element names (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownElement" xml:space="preserve">
+    <value>Element necunoscut {0}</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.XMLParseFailed" xml:space="preserve">
+    <value>Nu s-a reușit analizarea fișierului de temă: {0}</value>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeConversionError" xml:space="preserve">
+    <value>{0} are {1} invalid: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissing" xml:space="preserve">
+    <value>Elementul {0} îi lipsește atributul {1}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeInvalidType" xml:space="preserve">
+    <value>{0}.{1} nu este valid {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeLargerThanMin" xml:space="preserve">
+    <value>{0}.{1} trebuie să fie mai mare decât {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeSmallerThanMax" xml:space="preserve">
+    <value>{0}.{1} trebuie să fie mai mic decât {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownEnumValue" xml:space="preserve">
+    <value>{0} {1} Necunoscut '{2}'</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the enum name (e.g. WindowCornerType), {2} is the value</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleDefinitions" xml:space="preserve">
+    <value>{0} poate avea definit doar un singur {1}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleChildren" xml:space="preserve">
+    <value>{0}.{1} poate avea doar un singur element</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementMultipleChildren" xml:space="preserve">
+    <value>{0} poate avea doar un singur element</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissingChild" xml:space="preserve">
+    <value>{0}.{1} își lipsește elementul</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseError" xml:space="preserve">
+    <value>{0}.{1} nu a putut fi prelucrat într-un {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseErrorNull" xml:space="preserve">
+    <value>{0}.{1} {2} este nul</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeBlacklistedUriScheme" xml:space="preserve">
+    <value>{0}.{1} folosește o schemă de pe lista neagră {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the URI scheme (e.g. http)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementTypeCreationFailed" xml:space="preserve">
+    <value>{0} nu a reușit să creeze {1}: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Editor.Title" xml:space="preserve">
+    <value>Se Editează „{0}”</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success" xml:space="preserve">
+    <value>Tema a fost salvată cu succes!</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Error" xml:space="preserve">
+    <value>A apărut o eroare la salvarea temei tale.</value>
+  </data>
+  <data name="CustomTheme.Editor.ConfirmSave" xml:space="preserve">
+    <value>Vrei să salvezi modificările la {0}?</value>
+  </data>
+  <data name="CustomTheme.Editor.Save" xml:space="preserve">
+    <value>Salvare</value>
+  </data>
+  <data name="CustomTheme.Editor.Preview" xml:space="preserve">
+    <value>Previzualizare</value>
+  </data>
+  <data name="CustomTheme.Editor.OpenThemeDirectory" xml:space="preserve">
+    <value>Deschide directorul de teme</value>
+  </data>
+  <data name="CustomTheme.Add.Title" xml:space="preserve">
+    <value>Adaugă temă personalizată</value>
+  </data>
+  <data name="Common.Template" xml:space="preserve">
+    <value>Șablon</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameEmpty" xml:space="preserve">
+    <value>Numele nu poate fi gol</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameIllegalCharacters" xml:space="preserve">
+    <value>Numele conține caractere nepermise</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameReserved" xml:space="preserve">
+    <value>Numele nu poate fi folosit</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.Unknown" xml:space="preserve">
+    <value>Eroare necunoscută</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameTaken" xml:space="preserve">
+    <value>Numele este deja utilizat</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.FileNotZip" xml:space="preserve">
+    <value>Fișierul trebuie să fie un ZIP</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipMissingThemeFile" xml:space="preserve">
+    <value>Fișierul temei nu a putut fi găsit în fișierul ZIP</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipInvalidData" xml:space="preserve">
+    <value>Fișier ZIP invalid sau corupt</value>
+  </data>
+  <data name="CustomTheme.Errors.NoThemeSelected" xml:space="preserve">
+    <value>Nicio temă personalizată selectată</value>
+  </data>
+  <data name="CustomTheme.Errors.SetupFailed" xml:space="preserve">
+    <value>Nu s-a putut seta inițializatorul: {0}.
+Setat implicit la {1}.</value>
+    <comment>{0} is the error reason, {1} is the theme name (e.g. Bloxstrap (Classic))</comment>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.NoneSelected" xml:space="preserve">
+    <value>Nicio temă personalizată selectată.</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.DeleteFailed" xml:space="preserve">
+    <value>Nu s-a putut șterge tema personalizată {0}: {1}</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.RenameFailed" xml:space="preserve">
+    <value>Nu s-a putut redenumi tema personalizată {0}: {1}</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.UIElements" xml:space="preserve">
+    <value>Puneți elementele UI aici</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.MoreExamples" xml:space="preserve">
+    <value>Exemple de inițializatoare personalizate pot fi găsite la {0}</value>
+  </data>
+  <data name="CustomTheme.Templates.Simple.MoreExamples" xml:space="preserve">
+    <value>Găsiți mai multe exemple personalizate de inițializatoare la {0}</value>
+  </data>
+  <data name="CustomTheme.DefaultName" xml:space="preserve">
+    <value>Temă personalizată {0}</value>
+    <comment>{0} is a string (e.g. '1', '1-1234')</comment>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success.Description" xml:space="preserve">
+    <value>Tematica dvs. a fost salvată!</value>
+  </data>
+  <data name="CustomTheme.Editor.Errors.PreviewFailed" xml:space="preserve">
+    <value>Nu s-a putut previzualiza tematica: {0}</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Title" xml:space="preserve">
+    <value>Aplicarea modificărilor a eșuat</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Message" xml:space="preserve">
+    <value>Nu toate modificările vor fi prezente în lansarea curentă.</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Title" xml:space="preserve">
+    <value>Extragerea fișierelor a eșuat</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Message" xml:space="preserve">
+    <value>Este posibil ca unele conținuturi să lipsească. Forțează o reinstalare a Roblox din setări pentru a rezolva acest lucru.</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Title" xml:space="preserve">
+    <value>Permite lansarea mai multor instanțe</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Description" xml:space="preserve">
+    <value>Permite deschiderea simultană a mai multor instanțe de client Roblox.</value>
+  </data>
+  <data name="Common.Rename" xml:space="preserve">
+    <value>Redenumire</value>
+  </data>
+  <data name="Common.CreateNew" xml:space="preserve">
+    <value>Creează</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Title" xml:space="preserve">
+    <value>Actualizare în fundal</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Description" xml:space="preserve">
+    <value>Actualizați Roblox în fundal in loc să așteptați. Nu este recomandat pentru rețele slabe. Aveți nevoie de minim 3GB de spațiu de stocare pentru această proprietate sa meargă.</value>
+  </data>
+  <data name="Common.Import" xml:space="preserve">
+    <value>Importă</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Editează</value>
+  </data>
+  <data name="About.Title" xml:space="preserve">
+    <value>Despre Mrstrap</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
+    <value>Versiunea preferată a meniului de escape</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
+    <value>Setați la 0 pentru setările implicite dacă doriți să utilizați deblocarea nativă a framerate-ului Roblox.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
+    <value>Limită de FPS</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
+    <value>Comută cu [comenzi rapide de tastatură]({0}). Funcționează numai dacă vă aflați în [grupul Mrstrap]({1}).</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
+    <value>Permite capacitatea de a ascunde GUI-uri</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
+    <value>Opțiunea aleasă va fi forțat în toate jocurile. [Atenție, pot cauza probleme de iluminare!]({0})</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
+    <value>Tehnologie de iluminat preferată</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
+    <value>Dezactivați efectele de post-procesare</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
+    <value>Dezactivați bara de titlu full-screen</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
+    <value>Dezactivați umbrele jucătorului</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
+    <value>Dimensiunea fontului</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
+    <value>Valoarea implicită este 1. Ajustați dacă folosiți un font customizat.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
+    <value>Dezactivați texturile terenului</value>
+  </data>
+  <data name="Menu.About.Licenses.Apache" xml:space="preserve">
+    <value>Licență Apache 2.0</value>
+  </data>
+  <data name="Menu.GBSEditor.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Graphics.Description" xml:space="preserve">
     <value />
   </data>
 </root>

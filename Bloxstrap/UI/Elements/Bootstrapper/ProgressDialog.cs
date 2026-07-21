@@ -1,117 +1,94 @@
-﻿using System.ComponentModel;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Windows.Forms;
-using Voidstrap.UI.Elements.Bootstrapper.Base;
 
-namespace Voidstrap.UI.Elements.Bootstrapper
+using Bloxstrap.UI.Elements.Bootstrapper.Base;
+
+namespace Bloxstrap.UI.Elements.Bootstrapper
 {
     // basically just the modern dialog
+
     public partial class ProgressDialog : WinFormsDialogBase
     {
-        public override string Message
+        protected override string _message
         {
-            get => labelMessage?.Text ?? string.Empty;
-            set
-            {
-                if (labelMessage != null)
-                    labelMessage.Text = value;
-            }
+            get => labelMessage.Text;
+            set => labelMessage.Text = value;
         }
 
-        public override ProgressBarStyle ProgressStyle
+        protected override ProgressBarStyle _progressStyle
         {
-            get => ProgressBar?.Style ?? ProgressBarStyle.Continuous;
-            set
-            {
-                if (ProgressBar != null)
-                    ProgressBar.Style = value;
-            }
+            get => ProgressBar.Style;
+            set => ProgressBar.Style = value;
         }
 
-        public override int ProgressMaximum
+        protected override int _progressMaximum
         {
-            get => ProgressBar?.Maximum ?? 0;
-            set
-            {
-                if (ProgressBar != null)
-                    ProgressBar.Maximum = value;
-            }
+            get => ProgressBar.Maximum;
+            set => ProgressBar.Maximum = value;
         }
 
-        public override int ProgressValue
+        protected override int _progressValue
         {
-            get => ProgressBar?.Value ?? 0;
-            set
-            {
-                if (ProgressBar != null)
-                    ProgressBar.Value = value;
-            }
+            get => ProgressBar.Value;
+            set => ProgressBar.Value = value;
         }
 
-        public override bool CancelEnabled
+        protected override bool _cancelEnabled
         {
-            get => buttonCancel?.Enabled ?? false;
-            set
-            {
-                if (buttonCancel != null)
-                {
-                    buttonCancel.Enabled = value;
-                    buttonCancel.Visible = value;
-                }
-            }
+            get => this.buttonCancel.Enabled;
+            set => this.buttonCancel.Enabled = this.buttonCancel.Visible = value;
         }
 
         public ProgressDialog()
         {
             InitializeComponent();
 
-            if (LicenseManager.UsageMode == LicenseUsageMode.Designtime)
-                return;
-
-            if (App.Settings.Prop.Theme2.GetFinal() == Theme.Dark)
+            if (App.Settings.Prop.Theme.GetFinal() == Theme.Dark)
             {
-                labelMessage.ForeColor = SystemColors.Window;
-                buttonCancel.ForeColor = Color.FromArgb(196, 197, 196);
-                buttonCancel.Image = Properties.Resources.DarkCancelButton;
-                panel1.BackColor = Color.FromArgb(35, 37, 39);
-                BackColor = Color.FromArgb(25, 27, 29);
+                this.labelMessage.ForeColor = SystemColors.Window;
+                this.buttonCancel.ForeColor = Color.FromArgb(196, 197, 196);
+                this.buttonCancel.Image = Properties.Resources.DarkCancelButton;
+                this.panel1.BackColor = Color.FromArgb(35, 37, 39);
+                this.BackColor = Color.FromArgb(25, 27, 29);
             }
 
-            labelMessage.Text = Strings.Bootstrapper_StylePreview_TextCancel;
-            buttonCancel.Text = Strings.Common_Cancel;
-
-            IconBox.BackgroundImage =
-                App.Settings.Prop.BootstrapperIcon
-                    .GetIcon()
-                    .GetSized(128, 128)
-                    .ToBitmap();
+            this.labelMessage.Text = Strings.Bootstrapper_StylePreview_TextCancel;
+            this.buttonCancel.Text = Strings.Common_Cancel;
+            this.IconBox.BackgroundImage = App.Settings.Prop.BootstrapperIcon.GetIcon().GetSized(128, 128).ToBitmap();
 
             SetupDialog();
 
-            ProgressBar.RightToLeft = RightToLeft;
-            ProgressBar.RightToLeftLayout = RightToLeftLayout;
+            this.ProgressBar.RightToLeft = this.RightToLeft;
+            this.ProgressBar.RightToLeftLayout = this.RightToLeftLayout;
         }
 
-        private void ButtonCancel_MouseEnter(object sender, System.EventArgs e)
+        private void ButtonCancel_MouseEnter(object sender, EventArgs e)
         {
-            if (App.Settings.Prop.Theme2.GetFinal() == Theme.Dark)
-                buttonCancel.Image = Properties.Resources.DarkCancelButtonHover;
+            if (App.Settings.Prop.Theme.GetFinal() == Theme.Dark)
+            {
+                this.buttonCancel.Image = Properties.Resources.DarkCancelButtonHover;
+            }
             else
-                buttonCancel.Image = Properties.Resources.CancelButtonHover;
+            {
+                this.buttonCancel.Image = Properties.Resources.CancelButtonHover;
+            }
         }
 
-        private void ButtonCancel_MouseLeave(object sender, System.EventArgs e)
+        private void ButtonCancel_MouseLeave(object sender, EventArgs e)
         {
-            if (App.Settings.Prop.Theme2.GetFinal() == Theme.Dark)
-                buttonCancel.Image = Properties.Resources.DarkCancelButton;
+            if (App.Settings.Prop.Theme.GetFinal() == Theme.Dark)
+            {
+                this.buttonCancel.Image = Properties.Resources.DarkCancelButton;
+            }
             else
-                buttonCancel.Image = Properties.Resources.CancelButton;
+            {
+                this.buttonCancel.Image = Properties.Resources.CancelButton;
+            }
         }
 
-        private void ProgressDialog_Load(object sender, System.EventArgs e)
+        private void ProgressDialog_Load(object sender, EventArgs e)
         {
-            if (!DesignMode)
-                Activate();
+            this.Activate();
         }
     }
 }

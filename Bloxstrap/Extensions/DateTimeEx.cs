@@ -1,21 +1,10 @@
-﻿using System;
-using System.Globalization;
-
-namespace Voidstrap.Extensions
+﻿namespace Bloxstrap.Extensions
 {
-    public static class DateTimeExtensions
+    static class DateTimeEx
     {
-        /// <summary>
-        /// Converts a DateTime to a human-friendly string format.
-        /// Example: "Monday, 26 May 2025 at 4:30:45 PM"
-        /// </summary>
-        /// <param name="dateTime">The DateTime to format.</param>
-        /// <param name="culture">Optional culture info (defaults to InvariantCulture).</param>
-        /// <returns>A formatted, friendly string representation of the date and time.</returns>
-        public static string ToFriendlyString(this DateTime dateTime, CultureInfo? culture = null)
+        public static string ToFriendlyString(this DateTime dateTime)
         {
-            var cultureInfo = culture ?? CultureInfo.InvariantCulture;
-            return dateTime.ToString("dddd, d MMMM yyyy 'at' h:mm:ss tt", cultureInfo);
+            return dateTime.ToString("dddd, d MMMM yyyy 'at' h:mm:ss tt", CultureInfo.InvariantCulture);
         }
     }
 }

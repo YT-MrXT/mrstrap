@@ -1,9 +1,11 @@
-﻿namespace Voidstrap.Enums
+﻿namespace Bloxstrap.Enums
 {
     public enum BootstrapperIcon
     {
+        [EnumName(StaticName = "Mrstrap")] //ermmmm it goes unused as of rn
+        IconFishstrap,
         [EnumName(StaticName = "Mrstrap")]
-        IconVoidstrap,
+        IconBloxstrap,
         [EnumName(StaticName = "2008")]
         Icon2008,
         [EnumName(StaticName = "2011")]
@@ -19,6 +21,8 @@
         [EnumName(StaticName = "2022")]
         Icon2022,
         [EnumName(FromTranslation = "Common.Custom")]
-        IconCustom
+        IconCustom,
+        [EnumName(StaticName = "Bloxstrap (Classic)")]
+        IconBloxstrapClassic
     }
 }

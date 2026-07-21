@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Voidstrap.UI.ViewModels.Installer;
+using Bloxstrap.UI.ViewModels.Installer;
 
-namespace Voidstrap.UI.Elements.Installer.Pages
+namespace Bloxstrap.UI.Elements.Installer.Pages
 {
     /// <summary>
     /// Interaction logic for CompletionPage.xaml

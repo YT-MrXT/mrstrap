@@ -1,12 +1,13 @@
 ﻿using System.Drawing;
 
-namespace Voidstrap.Extensions
+namespace Bloxstrap.Extensions
 {
     static class BootstrapperIconEx
     {
         public static IReadOnlyCollection<BootstrapperIcon> Selections => new BootstrapperIcon[]
         {
-            BootstrapperIcon.IconVoidstrap,
+            //BootstrapperIcon.IconFishstrap,
+            BootstrapperIcon.IconBloxstrap,
             BootstrapperIcon.Icon2022,
             BootstrapperIcon.Icon2019,
             BootstrapperIcon.Icon2017,
@@ -14,6 +15,7 @@ namespace Voidstrap.Extensions
             BootstrapperIcon.IconEarly2015,
             BootstrapperIcon.Icon2011,
             BootstrapperIcon.Icon2008,
+            BootstrapperIcon.IconBloxstrapClassic,
             BootstrapperIcon.IconCustom
         };
 
@@ -48,12 +50,13 @@ namespace Voidstrap.Extensions
                     }
                 }
 
-                return customIcon ?? Properties.Resources.IconVoidstrap;
+                return customIcon ?? Properties.Resources.IconBloxstrap;
             }
 
             return icon switch
             {
-                BootstrapperIcon.IconVoidstrap => Properties.Resources.IconVoidstrap,
+                //BootstrapperIcon.IconFishstrap => Properties.Resources.IconFishstrap,
+                BootstrapperIcon.IconBloxstrap => Properties.Resources.IconBloxstrap,
                 BootstrapperIcon.Icon2008 => Properties.Resources.Icon2008,
                 BootstrapperIcon.Icon2011 => Properties.Resources.Icon2011,
                 BootstrapperIcon.IconEarly2015 => Properties.Resources.IconEarly2015,
@@ -61,7 +64,8 @@ namespace Voidstrap.Extensions
                 BootstrapperIcon.Icon2017 => Properties.Resources.Icon2017,
                 BootstrapperIcon.Icon2019 => Properties.Resources.Icon2019,
                 BootstrapperIcon.Icon2022 => Properties.Resources.Icon2022,
-                _ => Properties.Resources.IconVoidstrap
+                BootstrapperIcon.IconBloxstrapClassic => Properties.Resources.IconBloxstrapClassic,
+                _ => Properties.Resources.IconBloxstrap
             };
         }
     }

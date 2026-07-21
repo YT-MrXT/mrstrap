@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Voidstrap.Resources {
+namespace Bloxstrap.Resources {
     using System;
     
     
@@ -19,7 +19,7 @@ namespace Voidstrap.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -39,7 +39,7 @@ namespace Voidstrap.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Voidstrap.Resources.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Bloxstrap.Resources.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,7 +70,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These are the people who&apos;ve supported Voidstrap through Ko-fi. A massive thank you to everyone here!
+        ///   Looks up a localized string similar to These are the people who&apos;ve supported Mrstrap through Ko-fi. A massive thank you to everyone here!
         ///Every person here is ranked by their overall pledge..
         /// </summary>
         public static string About_Supporters_Description {
@@ -98,7 +98,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap supporters.
+        ///   Looks up a localized string similar to Mrstrap supporters.
         /// </summary>
         public static string About_Supporters_Title {
             get {
@@ -107,7 +107,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to About Voidstrap.
+        ///   Looks up a localized string similar to About Mrstrap.
         /// </summary>
         public static string About_Title {
             get {
@@ -116,7 +116,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All of Voidstrap&apos;s translations are crowdsourced through [Crowdin]({0}). Everyone listed here are people who generously volunteered their time and effort to help localise Voidstrap. A massive thank you to everyone here!.
+        ///   Looks up a localized string similar to All of Mrstrap&apos;s translations are crowdsourced through [Crowdin]({0}). Everyone listed here are people who generously volunteered their time and effort to help localise Mrstrap. A massive thank you to everyone here!.
         /// </summary>
         public static string About_Translators_Description {
             get {
@@ -152,6 +152,15 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Roblox no longer supports Windows 7 or 8.1. To continue playing Roblox, please upgrade to Windows 10 or newer..
+        /// </summary>
+        public static string App_OSDeprecation_Win7_81 {
+            get {
+                return ResourceManager.GetString("App.OSDeprecation.Win7_81", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The channel you&apos;re currently on ({0}) has now been restricted from public use. You will now be on the default channel ({1})..
         /// </summary>
         public static string Boostrapper_Dialog_UnauthorizedChannel {
@@ -161,7 +170,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap was unable to automatically update to version {0}. Please update it manually by downloading and running it from the website..
+        ///   Looks up a localized string similar to Mrstrap was unable to automatically update to version {0}. Please update it manually by downloading and running it from the website..
         /// </summary>
         public static string Bootstrapper_AutoUpdateFailed {
             get {
@@ -191,6 +200,16 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ansel is not supported.
+        ///You can no longer use Bloxshade with Mrstrap..
+        /// </summary>
+        public static string Bootstrapper_Dialog_AnselDisabled {
+            get {
+                return ResourceManager.GetString("Bootstrapper.Dialog.AnselDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The channel you&apos;re currently on ({0}) is out of date, and appears to no longer be receiving updates.\n
         ///Would you like to switch to the default channel ({1})?.
         /// </summary>
@@ -201,8 +220,8 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Launching failed due to missing client.
-        ///		Please enable Roblox upgrades..
+        ///   Looks up a localized string similar to Upgrades were disabled with missing client.
+        ///	To prevent issues upgrading will continue..
         /// </summary>
         public static string Bootstrapper_Dialog_NoUpgradeWithoutClient {
             get {
@@ -211,7 +230,25 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap tried to upgrade Roblox but can&apos;t because Roblox&apos;s files are still in use.
+        ///   Looks up a localized string similar to Some content may be missing. Force a Roblox reinstallation in settings to fix this..
+        /// </summary>
+        public static string Bootstrapper_ExtractionFailed_Message {
+            get {
+                return ResourceManager.GetString("Bootstrapper.ExtractionFailed.Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to extract files.
+        /// </summary>
+        public static string Bootstrapper_ExtractionFailed_Title {
+            get {
+                return ResourceManager.GetString("Bootstrapper.ExtractionFailed.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mrstrap tried to upgrade Roblox but can&apos;t because Roblox&apos;s files are still in use.
         ///
         ///Please close any applications that may be using Roblox&apos;s files, and relaunch..
         /// </summary>
@@ -222,7 +259,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must first install Voidstrap before uninstalling..
+        ///   Looks up a localized string similar to You must first install Mrstrap before uninstalling..
         /// </summary>
         public static string Bootstrapper_FirstRunUninstall {
             get {
@@ -240,7 +277,25 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap does not have enough disk space to download and install Roblox. Please free up some disk space and try again..
+        ///   Looks up a localized string similar to Not all modifications will be present in the current launch..
+        /// </summary>
+        public static string Bootstrapper_ModificationsFailed_Message {
+            get {
+                return ResourceManager.GetString("Bootstrapper.ModificationsFailed.Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to apply modifications.
+        /// </summary>
+        public static string Bootstrapper_ModificationsFailed_Title {
+            get {
+                return ResourceManager.GetString("Bootstrapper.ModificationsFailed.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mrstrap does not have enough disk space to download and install Roblox. Please free up some disk space and try again..
         /// </summary>
         public static string Bootstrapper_NotEnoughSpace {
             get {
@@ -249,7 +304,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applying Voidstrap modifications....
+        ///   Looks up a localized string similar to Applying Roblox modifications....
         /// </summary>
         public static string Bootstrapper_Status_ApplyingModifications {
             get {
@@ -330,11 +385,20 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Getting the latest Voidstrap....
+        ///   Looks up a localized string similar to Getting the latest Mrstrap....
         /// </summary>
-        public static string Bootstrapper_Status_UpgradingVoidstrap {
+        public static string Bootstrapper_Status_UpgradingBloxstrap {
             get {
-                return ResourceManager.GetString("Bootstrapper.Status.UpgradingVoidstrap", resourceCulture);
+                return ResourceManager.GetString("Bootstrapper.Status.UpgradingBloxstrap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waiting for data.
+        /// </summary>
+        public static string Bootstrapper_Status_WaitingForData {
+            get {
+                return ResourceManager.GetString("Bootstrapper.Status.WaitingForData", resourceCulture);
             }
         }
         
@@ -366,7 +430,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap has successfully uninstalled.
+        ///   Looks up a localized string similar to Mrstrap has successfully uninstalled.
         /// </summary>
         public static string Bootstrapper_SuccessfullyUninstalled {
             get {
@@ -375,7 +439,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Roblox is currently running, but must be closed before uninstalling Voidstrap. Would you like to close Roblox now?.
+        ///   Looks up a localized string similar to Roblox is currently running, but must be closed before uninstalling Mrstrap. Would you like to close Roblox now?.
         /// </summary>
         public static string Bootstrapper_Uninstall_RobloxRunning {
             get {
@@ -555,11 +619,38 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Geometry.
+        /// </summary>
+        public static string Common_Geometry {
+            get {
+                return ResourceManager.GetString("Common.Geometry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global Settings.
+        /// </summary>
+        public static string Common_GlobalSettings {
+            get {
+                return ResourceManager.GetString("Common.GlobalSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help.
         /// </summary>
         public static string Common_Help {
             get {
                 return ResourceManager.GetString("Common.Help", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Highest quality.
+        /// </summary>
+        public static string Common_HighestQuality {
+            get {
+                return ResourceManager.GetString("Common.HighestQuality", resourceCulture);
             }
         }
         
@@ -596,6 +687,15 @@ namespace Voidstrap.Resources {
         public static string Common_Loading {
             get {
                 return ResourceManager.GetString("Common.Loading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lowest quality.
+        /// </summary>
+        public static string Common_LowestQuality {
+            get {
+                return ResourceManager.GetString("Common.LowestQuality", resourceCulture);
             }
         }
         
@@ -708,6 +808,15 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string Common_Other {
+            get {
+                return ResourceManager.GetString("Common.Other", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Presets.
         /// </summary>
         public static string Common_Presets {
@@ -744,7 +853,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Roblox has not yet been installed. Please launch Roblox using Voidstrap at least once before trying to use this option..
+        ///   Looks up a localized string similar to Roblox has not yet been installed. Please launch Roblox using Mrstrap at least once before trying to use this option..
         /// </summary>
         public static string Common_RobloxNotInstalled {
             get {
@@ -798,7 +907,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System Default.
+        ///   Looks up a localized string similar to System default.
         /// </summary>
         public static string Common_SystemDefault {
             get {
@@ -816,15 +925,6 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Time.
-        /// </summary>
-        public static string Common_Time {
-            get {
-                return ResourceManager.GetString("Common.Time", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Type.
         /// </summary>
         public static string Common_Type {
@@ -834,20 +934,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User Id.
+        ///   Looks up a localized string similar to Unknown status.
         /// </summary>
-        public static string Common_UserId {
+        public static string Common_UnknownStatus {
             get {
-                return ResourceManager.GetString("Common.UserId", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Username.
-        /// </summary>
-        public static string Common_Username {
-            get {
-                return ResourceManager.GetString("Common.Username", resourceCulture);
+                return ResourceManager.GetString("Common.UnknownStatus", resourceCulture);
             }
         }
         
@@ -951,24 +1042,6 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Displays recently sent messages by players..
-        /// </summary>
-        public static string ContextMenu_MessageLogs_Description {
-            get {
-                return ResourceManager.GetString("ContextMenu.MessageLogs.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Message logs.
-        /// </summary>
-        public static string ContextMenu_MessageLogs_Title {
-            get {
-                return ResourceManager.GetString("ContextMenu.MessageLogs.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Player logs.
         /// </summary>
         public static string ContextMenu_PlayerLogs_Title {
@@ -1001,6 +1074,15 @@ namespace Voidstrap.Resources {
         public static string ContextMenu_ServerInformation_Location {
             get {
                 return ResourceManager.GetString("ContextMenu.ServerInformation.Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not tracked.
+        /// </summary>
+        public static string ContextMenu_ServerInformation_Notification_ServerNotTracked {
+            get {
+                return ResourceManager.GetString("ContextMenu.ServerInformation.Notification.ServerNotTracked", resourceCulture);
             }
         }
         
@@ -1056,6 +1138,35 @@ namespace Voidstrap.Resources {
         public static string ContextMenu_ServerInformation_Type {
             get {
                 return ResourceManager.GetString("ContextMenu.ServerInformation.Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimated uptime.
+        /// </summary>
+        public static string ContextMenu_ServerInformation_Uptime {
+            get {
+                return ResourceManager.GetString("ContextMenu.ServerInformation.Uptime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Estimated uptime: {0}
+        ///Click for more information.
+        /// </summary>
+        public static string ContextMenu_ServerInformationUptime_Notification_Text {
+            get {
+                return ResourceManager.GetString("ContextMenu.ServerInformationUptime.Notification.Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location: {0}
+        ///Estimated uptime: {1}.
+        /// </summary>
+        public static string ContextMenu_ServerInformationUptimeAndLocation_Notification_Text {
+            get {
+                return ResourceManager.GetString("ContextMenu.ServerInformationUptimeAndLocation.Notification.Text", resourceCulture);
             }
         }
         
@@ -1141,11 +1252,29 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Theme {0}.
+        /// </summary>
+        public static string CustomTheme_DefaultName {
+            get {
+                return ResourceManager.GetString("CustomTheme.DefaultName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save changes to {0}?.
         /// </summary>
         public static string CustomTheme_Editor_ConfirmSave {
             get {
                 return ResourceManager.GetString("CustomTheme.Editor.ConfirmSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to preview theme: {0}.
+        /// </summary>
+        public static string CustomTheme_Editor_Errors_PreviewFailed {
+            get {
+                return ResourceManager.GetString("CustomTheme.Editor.Errors.PreviewFailed", resourceCulture);
             }
         }
         
@@ -1195,6 +1324,15 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your theme has been saved!.
+        /// </summary>
+        public static string CustomTheme_Editor_Save_Success_Description {
+            get {
+                return ResourceManager.GetString("CustomTheme.Editor.Save.Success.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Editing &quot;{0}&quot;.
         /// </summary>
         public static string CustomTheme_Editor_Title {
@@ -1231,7 +1369,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1} is not a valid {2}.
+        ///   Looks up a localized string similar to {0}.{1} is not a valid {2}.
         /// </summary>
         public static string CustomTheme_Errors_ElementAttributeInvalidType {
             get {
@@ -1249,7 +1387,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0}.{1} is missing it&apos;s child.
+        ///   Looks up a localized string similar to {0}.{1} is missing its child.
         /// </summary>
         public static string CustomTheme_Errors_ElementAttributeMissingChild {
             get {
@@ -1276,7 +1414,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1} must be larger than {2}.
+        ///   Looks up a localized string similar to {0}.{1} must be larger than {2}.
         /// </summary>
         public static string CustomTheme_Errors_ElementAttributeMustBeLargerThanMin {
             get {
@@ -1285,7 +1423,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1} must be smaller than {2}.
+        ///   Looks up a localized string similar to {0}.{1} must be smaller than {2}.
         /// </summary>
         public static string CustomTheme_Errors_ElementAttributeMustBeSmallerThanMax {
             get {
@@ -1358,7 +1496,7 @@ namespace Voidstrap.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Failed to setup custom bootstrapper: {0}.
-        /// Defaulting to Fluent..
+        ///Defaulting to {1}..
         /// </summary>
         public static string CustomTheme_Errors_SetupFailed {
             get {
@@ -1367,7 +1505,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Custom bootstrappers can only have a maximum of {0} elements, got {1}..
+        ///   Looks up a localized string similar to Custom bootstrappers can only have a maximum of {0} elements, got {1}.
         /// </summary>
         public static string CustomTheme_Errors_TooManyElements {
             get {
@@ -1385,7 +1523,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} Unknown {1} {2}.
+        ///   Looks up a localized string similar to {0} Unknown {1} &apos;{2}&apos;.
         /// </summary>
         public static string CustomTheme_Errors_UnknownEnumValue {
             get {
@@ -1439,6 +1577,33 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Examples of custom bootstrappers can be found at {0}.
+        /// </summary>
+        public static string CustomTheme_Templates_Blank_MoreExamples {
+            get {
+                return ResourceManager.GetString("CustomTheme.Templates.Blank.MoreExamples", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Put UI elements here.
+        /// </summary>
+        public static string CustomTheme_Templates_Blank_UIElements {
+            get {
+                return ResourceManager.GetString("CustomTheme.Templates.Blank.UIElements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find more custom bootstrapper examples at {0}.
+        /// </summary>
+        public static string CustomTheme_Templates_Simple_MoreExamples {
+            get {
+                return ResourceManager.GetString("CustomTheme.Templates.Simple.MoreExamples", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Fast Flag.
         /// </summary>
         public static string Dialog_AddFastFlag_Title {
@@ -1466,7 +1631,8 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bloxshade support has been enabled.
+        ///   Looks up a localized string similar to Mrstrap no longer supports Bloxshade.
+        ///For more information join Bloxshade discord server..
         /// </summary>
         public static string Dialog_Bloxshade_Setting {
             get {
@@ -1475,7 +1641,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thank you for using Bloxshade with Voidstrap.
+        ///   Looks up a localized string similar to Sorry.
         /// </summary>
         public static string Dialog_Bloxshade_ThankYou {
             get {
@@ -1484,7 +1650,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap was unable to create shortcuts for the Desktop and Start menu. Try creating them later through the settings..
+        ///   Looks up a localized string similar to Mrstrap was unable to create shortcuts for the Desktop and Start menu. Try creating them later through the settings..
         /// </summary>
         public static string Dialog_CannotCreateShortcuts {
             get {
@@ -1493,7 +1659,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A connection could not be made, which likely indicates a poor internet connection or a firewall block. If your connection is fine, please ensure that your antivirus isn&apos;t blocking Voidstrap..
+        ///   Looks up a localized string similar to A connection could not be made, which likely indicates a poor internet connection or a firewall block. If your connection is fine, please ensure that your antivirus isn&apos;t blocking Mrstrap..
         /// </summary>
         public static string Dialog_Connectivity_BadConnection {
             get {
@@ -1529,7 +1695,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Because Roblox needs to be installed or upgraded, Voidstrap cannot continue..
+        ///   Looks up a localized string similar to Because Roblox needs to be installed or upgraded, Mrstrap cannot continue..
         /// </summary>
         public static string Dialog_Connectivity_RobloxUpgradeNeeded {
             get {
@@ -1574,7 +1740,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap is unable to connect to {0}.
+        ///   Looks up a localized string similar to Mrstrap is unable to connect to {0}.
         /// </summary>
         public static string Dialog_Connectivity_UnableToConnect {
             get {
@@ -1583,7 +1749,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap is unable to download Roblox.
+        ///   Looks up a localized string similar to Mrstrap is unable to download Roblox.
         /// </summary>
         public static string Dialog_Connectivity_UnableToDownload {
             get {
@@ -1610,7 +1776,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to An exception occurred while running Voidstrap/Voidstrap.
+        ///   Looks up a localized string similar to An exception occurred while running Mrstrap/Bloxstrap.
         /// </summary>
         public static string Dialog_Exception_Info_1 {
             get {
@@ -1619,7 +1785,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check the [Voidstrap Wiki]({0}) first to see if this problem has already been addressed with a fix.
+        ///   Looks up a localized string similar to Check the [Bloxstrap Wiki]({0}) first to see if this problem has already been addressed with a fix.
         ///
         ///If not, then please report this exception through a [GitHub issue]({1}) along with a copy of the log file that was created..
         /// </summary>
@@ -1630,9 +1796,9 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Check the [Voidstrap Wiki]({0}) first to see if this problem has already been addressed with a fix.
+        ///   Looks up a localized string similar to Check the [Bloxstrap Wiki]({0}) first to see if this problem has already been addressed with a fix.
         ///
-        ///If not, then please report this exception to the maintainers of this fork. Do NOT report this to Voidstrap&apos;s GitHub issues, as this is an unoffical build..
+        ///If not, then please report this exception to the maintainers of this fork. Do NOT report this to Bloxstrap&apos;s GitHub issues, as this is an unoffical build..
         /// </summary>
         public static string Dialog_Exception_Info_2_Alt {
             get {
@@ -1650,7 +1816,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap Exception.
+        ///   Looks up a localized string similar to Mrstrap Exception.
         /// </summary>
         public static string Dialog_Exception_Title {
             get {
@@ -1718,7 +1884,7 @@ namespace Voidstrap.Resources {
         /// <summary>
         ///   Looks up a localized string similar to For information about why this could be happening and how this can be resolved, please read [this help article]({0}).
         ///
-        ///Check if Roblox works with [the original launcher]({1}). If it doesn&apos;t, then this isn&apos;t a Voidstrap issue. If it does, then refer to the help article..
+        ///Check if Roblox works with [the original launcher]({1}). If it doesn&apos;t, then this isn&apos;t a Mrstrap issue. If it does, then refer to the help article..
         /// </summary>
         public static string Dialog_PlayerError_HelpInformation {
             get {
@@ -1727,7 +1893,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap is unable to write to the Windows Registry. An antivirus is likely interfering and causing issues. Please check to make sure there isn&apos;t anything that would restrict Voidstrap&apos;s operation..
+        ///   Looks up a localized string similar to Mrstrap is unable to write to the Windows Registry. An antivirus is likely interfering and causing issues. Please check to make sure there isn&apos;t anything that would restrict Mrstrap&apos;s operation..
         /// </summary>
         public static string Dialog_RegistryWriteError {
             get {
@@ -1763,7 +1929,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap (Classic).
+        ///   Looks up a localized string similar to Mrstrap (Classic).
         /// </summary>
         public static string Enums_BootstrapperStyle_ClassicFluentDialog {
             get {
@@ -1781,7 +1947,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap (Glass).
+        ///   Looks up a localized string similar to Mrstrap (Glass).
         /// </summary>
         public static string Enums_BootstrapperStyle_FluentAeroDialog {
             get {
@@ -1826,20 +1992,47 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CleanCursor.
+        ///   Looks up a localized string similar to Never.
         /// </summary>
-        public static string Enums_CursorType_CleanCursor {
+        public static string Enums_CleanerOptions_Never {
             get {
-                return ResourceManager.GetString("Enums.CursorType.CleanCursor", resourceCulture);
+                return ResourceManager.GetString("Enums.CleanerOptions.Never", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FPSCursor.
+        ///   Looks up a localized string similar to After 1 day.
         /// </summary>
-        public static string Enums_CursorType_FPSCursor {
+        public static string Enums_CleanerOptions_OneDay {
             get {
-                return ResourceManager.GetString("Enums.CursorType.FPSCursor", resourceCulture);
+                return ResourceManager.GetString("Enums.CleanerOptions.OneDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After 1 month.
+        /// </summary>
+        public static string Enums_CleanerOptions_OneMonth {
+            get {
+                return ResourceManager.GetString("Enums.CleanerOptions.OneMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After 1 week.
+        /// </summary>
+        public static string Enums_CleanerOptions_OneWeek {
+            get {
+                return ResourceManager.GetString("Enums.CleanerOptions.OneWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to After 2 months.
+        /// </summary>
+        public static string Enums_CleanerOptions_TwoMonths {
+            get {
+                return ResourceManager.GetString("Enums.CleanerOptions.TwoMonths", resourceCulture);
             }
         }
         
@@ -1858,15 +2051,6 @@ namespace Voidstrap.Resources {
         public static string Enums_CursorType_From2013 {
             get {
                 return ResourceManager.GetString("Enums.CursorType.From2013", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StoofsCursor.
-        /// </summary>
-        public static string Enums_CursorType_StoofsCursor {
-            get {
-                return ResourceManager.GetString("Enums.CursorType.StoofsCursor", resourceCulture);
             }
         }
         
@@ -2105,56 +2289,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Berry.
-        /// </summary>
-        public static string Enums_Theme_Berry {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Berry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Blue.
-        /// </summary>
-        public static string Enums_Theme_Blue {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Blue", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Custom.
-        /// </summary>
-        public static string Enums_Theme_Custom {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Custom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Cyan.
-        /// </summary>
-        public static string Enums_Theme_Cyan {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Cyan", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Dark.
         /// </summary>
         public static string Enums_Theme_Dark {
             get {
                 return ResourceManager.GetString("Enums.Theme.Dark", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Green.
-        /// </summary>
-        public static string Enums_Theme_Green {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Green", resourceCulture);
             }
         }
         
@@ -2168,70 +2307,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Orange.
-        /// </summary>
-        public static string Enums_Theme_Orange {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Orange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Pink.
-        /// </summary>
-        public static string Enums_Theme_Pink {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Pink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Purple.
-        /// </summary>
-        public static string Enums_Theme_Purple {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Purple", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Red.
-        /// </summary>
-        public static string Enums_Theme_Red {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Red", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to UltraGray.
-        /// </summary>
-        public static string Enums_Theme_UltraGray {
-            get {
-                return ResourceManager.GetString("Enums.Theme.UltraGray", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Voidstrap.
-        /// </summary>
-        public static string Enums_Theme_Voidstrap {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Voidstrap", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Yellow.
-        /// </summary>
-        public static string Enums_Theme_Yellow {
-            get {
-                return ResourceManager.GetString("Enums.Theme.Yellow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to JSON, TXT, and Markdown files.
+        ///   Looks up a localized string similar to JSON files.
         /// </summary>
         public static string FileTypes_JSONFiles {
             get {
@@ -2249,7 +2325,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap has been upgraded to a new version.
+        ///   Looks up a localized string similar to Mrstrap has been upgraded to v{0}.
         /// </summary>
         public static string InstallChecker_Updated {
             get {
@@ -2258,7 +2334,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The version of Voidstrap you&apos;ve launched is different to the version you currently have installed.
+        ///   Looks up a localized string similar to The version of Mrstrap you&apos;ve launched is different to the version you currently have installed.
         ///Would you like to upgrade your currently installed version?.
         /// </summary>
         public static string InstallChecker_VersionDifferentThanInstalled {
@@ -2268,7 +2344,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The version of Voidstrap you&apos;ve launched is older than the version you currently have installed.
+        ///   Looks up a localized string similar to The version of Mrstrap you&apos;ve launched is older than the version you currently have installed.
         ///Issues may occur and your settings may be altered. A reinstall is recommended.
         ///Are you sure you want to continue?.
         /// </summary>
@@ -2306,7 +2382,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure Voidstrap&apos;s settings.
+        ///   Looks up a localized string similar to Configure Mrstrap&apos;s settings.
         /// </summary>
         public static string Installer_Completion_Settings_Title {
             get {
@@ -2315,11 +2391,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap has been installed!    
+        ///   Looks up a localized string similar to Mrstrap has successfully been installed.
         ///
-        ///Roblox will install when you launch it with Voidstrap for the first time. Before that, you may want to adjust Voidstrap’s settings.  
+        ///Roblox has not yet been installed, that will happen when you launch it with Mrstrap for the first time. However, before you do that, you may want to configure Mrstrap&apos;s settings first.
         ///
-        ///Don’t use the &quot;Roblox Player&quot; shortcut Voidstrap won’t run with it. If Voidstrap doesn’t appear when launching from the website, open Roblox with Voidstrap once from the desktop to fix it.  
+        ///Also, avoid using the &quot;Roblox Player&quot; shortcut to launch Roblox, as Mrstrap won&apos;t launch with Roblox. If you don&apos;t see Mrstrap show when launching from the website, simply launch Roblox with Mrstrap once from the desktop to fix it.
         ///
         ///What would you like to do?.
         /// </summary>
@@ -2339,9 +2415,29 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap has been installed to this location before and is still present, however the installer cannot overwrite the old executable. 
+        ///   Looks up a localized string similar to Failed to import Bloxstrap settings.
         ///
-        ///Please manually delete Voidstrap.exe from the install location or try restarting your system, and then retry installation afterwards..
+        ///{0}.
+        /// </summary>
+        public static string Installer_FailedToImportSettings {
+            get {
+                return ResourceManager.GetString("Installer.FailedToImportSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import settings from Bloxstrap.
+        /// </summary>
+        public static string Installer_ImportSettings {
+            get {
+                return ResourceManager.GetString("Installer.ImportSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mrstrap has been installed to this location before and is still present, however the installer cannot overwrite the old executable. 
+        ///
+        ///Please manually delete Mrstrap.exe from the install location or try restarting your system, and then retry installation afterwards..
         /// </summary>
         public static string Installer_Install_CannotOverwrite {
             get {
@@ -2395,6 +2491,15 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bloxstrap installation was not found..
+        /// </summary>
+        public static string Installer_InstallationNotFound {
+            get {
+                return ResourceManager.GetString("Installer.InstallationNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to cancel the installation?.
         /// </summary>
         public static string Installer_ShouldCancel {
@@ -2404,7 +2509,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap Installer.
+        ///   Looks up a localized string similar to Mrstrap Installer.
         /// </summary>
         public static string Installer_Title {
             get {
@@ -2413,9 +2518,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thank you for downloading Voidstrap.
+        ///   Looks up a localized string similar to Thank you for downloading Mrstrap. 
         ///
-        ///This installation process will be quick and simple, and you will be able to configure any of Voidstrap&apos;s settings after installation..
+        ///The only official source to download Mrstrap from is {0} so please verify that you got it from an official source.
+        ///
+        ///This installation process will be quick and simple, and you will be able to configure any of Mrstrap&apos;s settings after installation..
         /// </summary>
         public static string Installer_Welcome_MainText {
             get {
@@ -2442,7 +2549,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are trying to install version {0} of Voidstrap, but the latest version available is {1}. Would you like to download it?.
+        ///   Looks up a localized string similar to You are trying to install version {0} of Mrstrap, but the latest version available is {1}. Would you like to download it?.
         /// </summary>
         public static string Installer_Welcome_UpdateNotice {
             get {
@@ -2478,11 +2585,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Join our discord server.
+        ///   Looks up a localized string similar to Join our Discord server.
         /// </summary>
-        public static string LaunchMenu_Donate {
+        public static string LaunchMenu_Discord {
             get {
-                return ResourceManager.GetString("LaunchMenu.Donate", resourceCulture);
+                return ResourceManager.GetString("LaunchMenu.Discord", resourceCulture);
             }
         }
         
@@ -2523,7 +2630,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No log file will be written for this launch because Voidstrap is unable to write to the folder at &apos;{0}&apos;.
+        ///   Looks up a localized string similar to No log file will be written for this launch because Mrstrap is unable to write to the folder at &apos;{0}&apos;.
         /// </summary>
         public static string Logger_NoWriteMode {
             get {
@@ -2550,7 +2657,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to These are the people who have made notable contributions to Voidstrap/Voidstrap, helping make it what it is..
+        ///   Looks up a localized string similar to These are the people who have made notable contributions to Mrstrap/Bloxstrap, helping make it what it is..
         /// </summary>
         public static string Menu_About_Contributors_Description {
             get {
@@ -2622,15 +2729,6 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Apache License 2.0.
-        /// </summary>
-        public static string Menu_About_Licenses_Apache {
-            get {
-                return ResourceManager.GetString("Menu.About.Licenses.Apache", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to BSD 2-Clause License.
         /// </summary>
         public static string Menu_About_Licenses_BSD2 {
@@ -2694,7 +2792,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap is already running.
+        ///   Looks up a localized string similar to Mrstrap is already running.
         /// </summary>
         public static string Menu_AlreadyRunning_Title {
             get {
@@ -2820,7 +2918,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure how Voidstrap should look..
+        ///   Looks up a localized string similar to Configure how Mrstrap should look..
         /// </summary>
         public static string Menu_Appearance_Description {
             get {
@@ -2910,16 +3008,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bloxshade support is required for shaders..
-        /// </summary>
-        public static string Menu_Behaviour_AnselBanner {
-            get {
-                return ResourceManager.GetString("Menu.Behaviour.AnselBanner", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Voidstrap will automatically check and update itself when launching Roblox..
+        ///   Looks up a localized string similar to Mrstrap will automatically check and update itself when launching Roblox..
         /// </summary>
         public static string Menu_Behaviour_AutoUpdate_Description {
             get {
@@ -2928,11 +3017,29 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Automatically update Voidstrap.
+        ///   Looks up a localized string similar to Automatically update Mrstrap.
         /// </summary>
         public static string Menu_Behaviour_AutoUpdate_Title {
             get {
                 return ResourceManager.GetString("Menu.Behaviour.AutoUpdate.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Roblox in the background instead of waiting. Not recommended for slow networks. At least 3GB of free storage space is required for this feature to work..
+        /// </summary>
+        public static string Menu_Behaviour_BackgroundUpdates_Description {
+            get {
+                return ResourceManager.GetString("Menu.Behaviour.BackgroundUpdates.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background updates.
+        /// </summary>
+        public static string Menu_Behaviour_BackgroundUpdates_Title {
+            get {
+                return ResourceManager.GetString("Menu.Behaviour.BackgroundUpdates.Title", resourceCulture);
             }
         }
         
@@ -2964,7 +3071,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure what Voidstrap should do when launching Roblox..
+        ///   Looks up a localized string similar to Configure what Mrstrap should do when launching Roblox..
         /// </summary>
         public static string Menu_Behaviour_Description {
             get {
@@ -3027,30 +3134,110 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For optimal performance, a supported graphics card is required.
-        ///This feature is essential for shaders to function properly..
-        /// </summary>
-        public static string Menu_Behaviour_RenameToEurotrucks_Description {
-            get {
-                return ResourceManager.GetString("Menu.Behaviour.RenameToEurotrucks.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Bloxshade support.
-        /// </summary>
-        public static string Menu_Behaviour_RenameToEurotrucks_Title {
-            get {
-                return ResourceManager.GetString("Menu.Behaviour.RenameToEurotrucks.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Bootstrapper.
         /// </summary>
         public static string Menu_Behaviour_Title {
             get {
                 return ResourceManager.GetString("Menu.Behaviour.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure options related to Mrstrap&apos;s behaviour itself..
+        /// </summary>
+        public static string Menu_Bloxstrap_Description {
+            get {
+                return ResourceManager.GetString("Menu.Bloxstrap.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Files older than set amount will be deleted..
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_Age_Description {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.Age.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When should the files get deleted.
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_Age_Title {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.Age.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old downloads will be deleted..
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_Cache_Description {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.Cache.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cache.
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_Cache_Title {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.Cache.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mrstrap logs will be deleted..
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_IncludeBloxstrap_Description {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.IncludeBloxstrap.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mrstrap logs.
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_IncludeBloxstrap_Title {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.IncludeBloxstrap.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Old log files will be deleted..
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_Logs_Description {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.Logs.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logs.
+        /// </summary>
+        public static string Menu_Bootstrapper_Cleaner_Logs_Title {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.Cleaner.Logs.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mrstrap will remove old data to save on space.
+        /// </summary>
+        public static string Menu_Bootstrapper_CleanUp_Description {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.CleanUp.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cleaner.
+        /// </summary>
+        public static string Menu_Bootstrapper_CleanUp_Title {
+            get {
+                return ResourceManager.GetString("Menu.Bootstrapper.CleanUp.Title", resourceCulture);
             }
         }
         
@@ -3064,7 +3251,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Roblox or Voidstrap may try to change your preferred channel..
+        ///   Looks up a localized string similar to Roblox or Mrstrap may try to change your preferred channel..
         /// </summary>
         public static string Menu_Channel_ChangeAction_Description {
             get {
@@ -3100,7 +3287,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change deployment and installation settings for Roblox &amp; Voidstrap..
+        ///   Looks up a localized string similar to Change deployment and installation settings for Roblox &amp; Mrstrap..
         /// </summary>
         public static string Menu_Channel_Description {
             get {
@@ -3145,7 +3332,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Force Voidstrap to download version from specific hash. Please do not change if you have no idea what this does..
+        ///   Looks up a localized string similar to Force Mrstrap to download version from specific hash. Please do not change if you have no idea what this does..
         /// </summary>
         public static string Menu_Channel_VersionHash_Desription {
             get {
@@ -3168,15 +3355,6 @@ namespace Voidstrap.Resources {
         public static string Menu_ChannelChanger_Description {
             get {
                 return ResourceManager.GetString("Menu.ChannelChanger.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Player logs.
-        /// </summary>
-        public static string Menu_Context_PlayerLogs {
-            get {
-                return ResourceManager.GetString("Menu.Context.PlayerLogs", resourceCulture);
             }
         }
         
@@ -3283,6 +3461,15 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Would you like to include preset FFlags?.
+        /// </summary>
+        public static string Menu_FastFlagEditor_ExportJson_IncludePresets {
+            get {
+                return ResourceManager.GetString("Menu.FastFlagEditor.ExportJson.IncludePresets", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The entry for &apos;{0}&apos; is not valid as the value must be a boolean (either &apos;True&apos; or &apos;False&apos;).
         /// </summary>
         public static string Menu_FastFlagEditor_InvalidBoolValue {
@@ -3360,15 +3547,6 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FFlag Backups.
-        /// </summary>
-        public static string Menu_FastFlagEditor_ProfilesDescription {
-            get {
-                return ResourceManager.GetString("Menu.FastFlagEditor.ProfilesDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Menu_FastFlagEditor_Search {
@@ -3425,20 +3603,11 @@ namespace Voidstrap.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Fast Flags are extremely powerful, being that they are intended to only be used by Roblox engineers. While they can be very useful, manually configuring them can cause serious issues with stability and functionality. Do NOT use the editor if you are unsure of what you are doing.
         ///
-        ///Do NOT use this to import large &quot;flag lists&quot; made by other people that promise to improve performance or such. They are subject to the aforementioned issues, and they will cause problems for you since you will not be fully aware of [rest of string was truncated]&quot;;.
+        ///Do NOT use this to import large &quot;flag lists&quot; made by other people that promise to improve performance or such. They are subject to the aforementioned issues, and they will cause problems for you since you will not be fully aware  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string Menu_FastFlagEditor_Warning_Text {
             get {
                 return ResourceManager.GetString("Menu.FastFlagEditor.Warning.Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save current flags.
-        /// </summary>
-        public static string Menu_FastFlagProfiles_Save {
-            get {
-                return ResourceManager.GetString("Menu_FastFlagProfiles_Save", resourceCulture);
             }
         }
         
@@ -3461,6 +3630,42 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Roblox only applies whitelisted FFlags. Double click to learn more..
+        /// </summary>
+        public static string Menu_FastFlags_EditorInfo {
+            get {
+                return ResourceManager.GetString("Menu.FastFlags.EditorInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose the FRM quality that Roblox should use..
+        /// </summary>
+        public static string Menu_FastFlags_FRMQualityOverride_Description {
+            get {
+                return ResourceManager.GetString("Menu.FastFlags.FRMQualityOverride.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FRM Quality Override.
+        /// </summary>
+        public static string Menu_FastFlags_FRMQualityOverride_Title {
+            get {
+                return ResourceManager.GetString("Menu.FastFlags.FRMQualityOverride.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Control how Roblox renders 3D geometry..
+        /// </summary>
+        public static string Menu_FastFlags_Geometry_Description {
+            get {
+                return ResourceManager.GetString("Menu.FastFlags.Geometry.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Learn more about Fast Flags, what these presets do, and how to use them..
         /// </summary>
         public static string Menu_FastFlags_Help_Description {
@@ -3479,11 +3684,38 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allow Voidstrap to manage Fast Flags.
+        ///   Looks up a localized string similar to Allow Mrstrap to manage Fast Flags.
         /// </summary>
         public static string Menu_FastFlags_ManagerEnabled_Title {
             get {
                 return ResourceManager.GetString("Menu.FastFlags.ManagerEnabled.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Control how detailed meshes appear in-game..
+        /// </summary>
+        public static string Menu_FastFlags_MeshDetail_Description {
+            get {
+                return ResourceManager.GetString("Menu.FastFlags.MeshDetail.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mesh detail.
+        /// </summary>
+        public static string Menu_FastFlags_MeshDetail_Header {
+            get {
+                return ResourceManager.GetString("Menu.FastFlags.MeshDetail.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lower qualities may cause meshes to disappear..
+        /// </summary>
+        public static string Menu_FastFlags_MeshDetail_LowQualityWarning {
+            get {
+                return ResourceManager.GetString("Menu.FastFlags.MeshDetail.LowQualityWarning", resourceCulture);
             }
         }
         
@@ -3497,7 +3729,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Debloat Roblox menu with custom toggles.
+        ///   Looks up a localized string similar to Debloat Roblox menu with FFlags.
         /// </summary>
         public static string Menu_FastFlags_Presets_Categories_IngameMenu_Description {
             get {
@@ -3524,101 +3756,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When disabled Roblox will use old top bar..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Chromeui_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Chromeui.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chrome UI.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Chromeui_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Chromeui.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Direct3D exclusive fullscreen using Alt+Enter is enabled by default..
         /// </summary>
         public static string Menu_FastFlags_Presets_D3DExclusiveFullscreenInfo {
             get {
                 return ResourceManager.GetString("Menu.FastFlags.Presets.D3DExclusiveFullscreenInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DarkMode.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_DarkMode {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.DarkMode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Activates roblox&apos;s early access DarkMode.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_DarkMode_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.DarkMode.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to DarkMode.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_DarkMode_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.DarkMode.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable grass motion.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_DisableGrass_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.DisableGrass.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable player shadows.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_DisablePlayerShadows_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.DisablePlayerShadows.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable post-processing effects.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_DisablePostFX_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.DisablePostFX.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable terrain textures.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_DisableTerrainTextures_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.DisableTerrainTextures.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preferred escape menu version.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_EscapeMenuVersion_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.EscapeMenuVersion.Title", resourceCulture);
             }
         }
         
@@ -3641,245 +3783,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Show values of specified flags during runtime. Each flag is comma separated..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_FlagState_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.FlagState.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Flag state.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_FlagState_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.FlagState.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Default value is 1. Adjust if you use a custom font..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_FontPadding_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.FontPadding.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Font size.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_FontPadding_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.FontPadding.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set to 0 for defaults if you want to use Roblox&apos;s native framerate unlocker..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_FPSLimit_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.FPSLimit.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Framerate limit.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_FPSLimit_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.FPSLimit.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Stops it from showing whenever you move your mouse to the top of the screen..
         /// </summary>
         public static string Menu_FastFlags_Presets_FullscreenTitlebar_Description {
             get {
                 return ResourceManager.GetString("Menu.FastFlags.Presets.FullscreenTitlebar.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable full-screen titlebar.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_FullscreenTitlebar_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.FullscreenTitlebar.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Toggled with [keyboard shortcuts]({0}). Input id of a group you&apos;re in..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_HideGuis_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.HideGuis.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hiding GUIs.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_HideGuis_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.HideGuis.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disables automatic translation of chat messages..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_ChatTranslation_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.ChatTranslation.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chat translation.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_ChatTranslation_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.ChatTranslation.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Removes FPS presets from the menu..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_Framerate_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.Framerate.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Framerate cap.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_Framerate_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.Framerate.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disables haptic feedback features, such as vibrations for controllers..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_Haptics_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.Haptics.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Haptics button.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_Haptics_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.Haptics.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Allows players to disable interface translation..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_LanguageSelector_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.LanguageSelector.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language selector.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_LanguageSelector_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.LanguageSelector.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hides the button for submitting feedback on translation quality..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_SoothsayerCheck_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.SoothsayerCheck.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Feedback button.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_SoothsayerCheck_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.SoothsayerCheck.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Allows to disable VR mode toggle..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_VRToggle_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.VRToggle.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to VR toggle.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_IngameMenu_VRToggle_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.IngameMenu.VRToggle.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Layered.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Layered {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Layered", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Prevent layered clothing from rendering on other players&apos; avatars..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Layered_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Layered.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Layered clothing.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Layered_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Layered.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chosen one will be force enabled in all games. [Beware, may cause lighting issues!]({0}).
-        /// </summary>
-        public static string Menu_FastFlags_Presets_LightingTechnology_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.LightingTechnology.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preferred lighting technology.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_LightingTechnology_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.LightingTechnology.Title", resourceCulture);
             }
         }
         
@@ -3893,83 +3801,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sends detailed ping information to the Roblox console..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_PingBreakdown_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.PingBreakdown.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Ping breakdown.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_PingBreakdown_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.PingBreakdown.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preload.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Preload {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Preload", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preloads Most Textures and Fonts (Warning: May Increase Loading Time!).
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Preload_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Preload.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Preload.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Preload_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Preload.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Rendering mode.
         /// </summary>
         public static string Menu_FastFlags_Presets_RenderingMode_Title {
             get {
                 return ResourceManager.GetString("Menu.FastFlags.Presets.RenderingMode.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Telemetry.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Telemetry {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Telemetry", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Note this disables only some of the Roblox telemetry..
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Telemetry_Description {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Telemetry.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable Roblox telemetry.
-        /// </summary>
-        public static string Menu_FastFlags_Presets_Telemetry_Title {
-            get {
-                return ResourceManager.GetString("Menu.FastFlags.Presets.Telemetry.Title", resourceCulture);
             }
         }
         
@@ -4001,29 +3837,92 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Clear Current FFlags.
+        ///   Looks up a localized string similar to For more information join Mrstrap Discord server.
+        /// </summary>
+        public static string Menu_FastFlagsDisabled_Description {
+            get {
+                return ResourceManager.GetString("Menu.FastFlagsDisabled.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FastFlags have been temporarily disabled.
+        /// </summary>
+        public static string Menu_FastFlagsDisabled_Header {
+            get {
+                return ResourceManager.GetString("Menu.FastFlagsDisabled.Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It&apos;s anonymous and nothing evil, promise. For insight on what Mrstrap collects and why, see Mrstrap&apos;s [privacy policy]({0})..
+        /// </summary>
+        public static string Menu_Fishstrap_Analytics_Description {
+            get {
+                return ResourceManager.GetString("Menu.Fishstrap.Analytics.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable sending of analytics to Mrstrap.
+        /// </summary>
+        public static string Menu_Fishstrap_Analytics_Title {
+            get {
+                return ResourceManager.GetString("Menu.Fishstrap.Analytics.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure options related to Mrstrap&apos;s behaviour itself..
+        /// </summary>
+        public static string Menu_Fishstrap_Description {
+            get {
+                return ResourceManager.GetString("Menu.Fishstrap.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gather information that can be uploaded online to troubleshoot a problem you&apos;re having..
+        /// </summary>
+        public static string Menu_Fishstrap_ExportData_Description {
+            get {
+                return ResourceManager.GetString("Menu.Fishstrap.ExportData.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mrstrap configuration.
+        /// </summary>
+        public static string Menu_Fishstrap_ExportData_ExportConfig {
+            get {
+                return ResourceManager.GetString("Menu.Fishstrap.ExportData.ExportConfig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Mrstrap logs.
+        /// </summary>
+        public static string Menu_Fishstrap_ExportData_ExportLogs {
+            get {
+                return ResourceManager.GetString("Menu.Fishstrap.ExportData.ExportLogs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export diagnostic data.
+        /// </summary>
+        public static string Menu_Fishstrap_ExportData_Title {
+            get {
+                return ResourceManager.GetString("Menu.Fishstrap.ExportData.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear FFlags.
         /// </summary>
         public static string Menu_FlagProfiles_ClearFlags {
             get {
                 return ResourceManager.GetString("Menu.FlagProfiles.ClearFlags", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save and load fast flag Backups..
-        /// </summary>
-        public static string Menu_FlagProfiles_Description {
-            get {
-                return ResourceManager.GetString("Menu_FlagProfiles_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fast Flag Backups.
-        /// </summary>
-        public static string Menu_FlagProfiles_Title {
-            get {
-                return ResourceManager.GetString("Menu_FlagProfiles_Title", resourceCulture);
             }
         }
         
@@ -4037,6 +3936,150 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set in-game settings from Mrstrap menu..
+        /// </summary>
+        public static string Menu_GBSEditor_Description {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose how large the font should appear..
+        /// </summary>
+        public static string Menu_GBSEditor_FontSize_Description {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.FontSize.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Font Size.
+        /// </summary>
+        public static string Menu_GBSEditor_FontSize_Title {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.FontSize.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the graphics quality of your game.
+        /// </summary>
+        public static string Menu_GBSEditor_GraphicsQuality_Description {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.GraphicsQuality.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Graphics Quality.
+        /// </summary>
+        public static string Menu_GBSEditor_GraphicsQuality_Title {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.GraphicsQuality.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change how fast the camera will move in-game..
+        /// </summary>
+        public static string Menu_GBSEditor_MouseSensitivity_Description {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.MouseSensitivity.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mouse Sensitivity.
+        /// </summary>
+        public static string Menu_GBSEditor_MouseSensitivity_Title {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.MouseSensitivity.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prevent Roblox from overriding global settings..
+        /// </summary>
+        public static string Menu_GBSEditor_ReadOnly_Description {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.ReadOnly.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set as Read-Only.
+        /// </summary>
+        public static string Menu_GBSEditor_ReadOnly_Title {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.ReadOnly.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Removes the animation on the escape menu..
+        /// </summary>
+        public static string Menu_GBSEditor_ReducedMotion_Description {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.ReducedMotion.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reduced Motion.
+        /// </summary>
+        public static string Menu_GBSEditor_ReducedMotion_Title {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.ReducedMotion.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom transparency for UI elements..
+        /// </summary>
+        public static string Menu_GBSEditor_UITransparency_Description {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.UITransparency.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transparency.
+        /// </summary>
+        public static string Menu_GBSEditor_UITransparency_Title {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.UITransparency.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to VR Enabled.
+        /// </summary>
+        public static string Menu_GBSEditor_VREnabled_Title {
+            get {
+                return ResourceManager.GetString("Menu.GBSEditor.VREnabled.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unlock framerate limit for Roblox. Going above 240 FPS is not recommended..
+        /// </summary>
+        public static string Menu_GPSEditor_FramerateCap_Description {
+            get {
+                return ResourceManager.GetString("Menu.GPSEditor.FramerateCap.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Framerate Limit.
+        /// </summary>
+        public static string Menu_GPSEditor_FramerateCap_Title {
+            get {
+                return ResourceManager.GetString("Menu.GPSEditor.FramerateCap.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Icon files.
         /// </summary>
         public static string Menu_IconFiles {
@@ -4046,7 +4089,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap cannot be installed here. Please choose a different location, or resort to using the default location by clicking the reset button..
+        ///   Looks up a localized string similar to Mrstrap cannot be installed here. Please choose a different location, or resort to using the default location by clicking the reset button..
         /// </summary>
         public static string Menu_InstallLocation_CantInstall {
             get {
@@ -4055,7 +4098,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The folder you&apos;ve chosen to install Voidstrap to already exists and is NOT empty. It is strongly recommended for Voidstrap to be installed to its own independent folder.
+        ///   Looks up a localized string similar to The folder you&apos;ve chosen to install Mrstrap to already exists and is NOT empty. It is strongly recommended for Mrstrap to be installed to its own independent folder.
         ///
         ///Changing to the following location is suggested:
         ///{0}
@@ -4079,7 +4122,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap does not have write access to the install location you&apos;ve selected. Please choose another location..
+        ///   Looks up a localized string similar to Mrstrap does not have write access to the install location you&apos;ve selected. Please choose another location..
         /// </summary>
         public static string Menu_InstallLocation_NoWritePerms {
             get {
@@ -4133,29 +4176,11 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Auto close when the game closes.
-        /// </summary>
-        public static string Menu_Integrations_Custom_AutoCloseOnGame {
-            get {
-                return ResourceManager.GetString("Menu.Integrations.Custom.AutoCloseOnGame", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Here, you can have other programs launch with Roblox automatically..
         /// </summary>
         public static string Menu_Integrations_Custom_Description {
             get {
                 return ResourceManager.GetString("Menu.Integrations.Custom.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Game ID.
-        /// </summary>
-        public static string Menu_Integrations_Custom_GameID {
-            get {
-                return ResourceManager.GetString("Menu.Integrations.Custom.GameID", resourceCulture);
             }
         }
         
@@ -4196,15 +4221,6 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Run on a specific game.
-        /// </summary>
-        public static string Menu_Integrations_Custom_SpecifyGame {
-            get {
-                return ResourceManager.GetString("Menu.Integrations.Custom.SpecifyGame", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Custom Integrations.
         /// </summary>
         public static string Menu_Integrations_Custom_Title {
@@ -4241,7 +4257,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allows for Voidstrap to detect what Roblox game you&apos;re playing. Certain features may require this..
+        ///   Looks up a localized string similar to Allows for Mrstrap to detect what Roblox game you&apos;re playing. Certain features may require this..
         /// </summary>
         public static string Menu_Integrations_EnableActivityTracking_Description {
             get {
@@ -4259,21 +4275,20 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shows you players joining/leaving and messages being sent.
-        ///		Only works with [text chat service](https://devforum.roblox.com/t/new-in-experience-text-chat-system-public-release/1848837)..
+        ///   Looks up a localized string similar to Allows for having more than one Roblox game client instance open simultaneously..
         /// </summary>
-        public static string Menu_Integrations_PlayerMessageLogs_Description {
+        public static string Menu_Integrations_MultiInstanceLaunching_Description {
             get {
-                return ResourceManager.GetString("Menu.Integrations.PlayerMessageLogs.Description", resourceCulture);
+                return ResourceManager.GetString("Menu.Integrations.MultiInstanceLaunching.Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Player and Message logs.
+        ///   Looks up a localized string similar to Allow multi-instance launching.
         /// </summary>
-        public static string Menu_Integrations_PlayerMessageLogs_Title {
+        public static string Menu_Integrations_MultiInstanceLaunching_Title {
             get {
-                return ResourceManager.GetString("Menu.Integrations.PlayerMessageLogs.Title", resourceCulture);
+                return ResourceManager.GetString("Menu.Integrations.MultiInstanceLaunching.Title", resourceCulture);
             }
         }
         
@@ -4287,11 +4302,29 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Server location.
+        ///   Looks up a localized string similar to Query server location.
         /// </summary>
         public static string Menu_Integrations_QueryServerLocation_Title {
             get {
                 return ResourceManager.GetString("Menu.Integrations.QueryServerLocation.Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Displays the server’s estimated uptime using data from [RoValra&apos;s APIs]({0}). [RoValra&apos;s privacy policy]({0}/privacy) applies..
+        /// </summary>
+        public static string Menu_Integrations_QueryServerUptime_Description {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.QueryServerUptime.Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Query server uptime.
+        /// </summary>
+        public static string Menu_Integrations_QueryServerUptime_Title {
+            get {
+                return ResourceManager.GetString("Menu.Integrations.QueryServerUptime.Title", resourceCulture);
             }
         }
         
@@ -4485,7 +4518,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose a cursor style that suits your playstyle..
+        ///   Looks up a localized string similar to Choose between using two classic Roblox cursor styles..
         /// </summary>
         public static string Menu_Mods_Presets_MouseCursor_Description {
             get {
@@ -4539,24 +4572,6 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bring back the classic &apos;oof&apos; death sound..
-        /// </summary>
-        public static string Menu_Mods_Presets_OldDeathSound_Description {
-            get {
-                return ResourceManager.GetString("Menu.Mods.Presets.OldDeathSound.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use old death sound.
-        /// </summary>
-        public static string Menu_Mods_Presets_OldDeathSound_Title {
-            get {
-                return ResourceManager.GetString("Menu.Mods.Presets.OldDeathSound.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Mods.
         /// </summary>
         public static string Menu_Mods_Title {
@@ -4602,7 +4617,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap Settings Saved!.
+        ///   Looks up a localized string similar to Settings saved!.
         /// </summary>
         public static string Menu_SettingsSaved_Title {
             get {
@@ -4611,7 +4626,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Configure how Voidstrap can be readily launched..
+        ///   Looks up a localized string similar to Configure how Mrstrap can be readily launched..
         /// </summary>
         public static string Menu_Shortcuts_Description {
             get {
@@ -4620,7 +4635,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Allows you to use Voidstrap&apos;s range of Roblox icons for your shortcuts. [See how.]({0}).
+        ///   Looks up a localized string similar to Allows you to use Mrstrap&apos;s range of Roblox icons for your shortcuts. [See how.]({0}).
         /// </summary>
         public static string Menu_Shortcuts_ExtractIcons_Description {
             get {
@@ -4696,7 +4711,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Voidstrap Settings.
+        ///   Looks up a localized string similar to Mrstrap Settings.
         /// </summary>
         public static string Menu_Title {
             get {
@@ -4714,69 +4729,6 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It&apos;s anonymous and nothing evil, promise. For insight on what Voidstrap collects and why, see Voidstrap&apos;s [privacy policy]({0})..
-        /// </summary>
-        public static string Menu_Voidstrap_Analytics_Description {
-            get {
-                return ResourceManager.GetString("Menu.Voidstrap.Analytics.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable sending of analytics to Voidstrap.
-        /// </summary>
-        public static string Menu_Voidstrap_Analytics_Title {
-            get {
-                return ResourceManager.GetString("Menu.Voidstrap.Analytics.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Configure options related to Voidstrap&apos;s behaviour itself..
-        /// </summary>
-        public static string Menu_Voidstrap_Description {
-            get {
-                return ResourceManager.GetString("Menu.Voidstrap.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Gather information that can be uploaded online to troubleshoot a problem you&apos;re having..
-        /// </summary>
-        public static string Menu_Voidstrap_ExportData_Description {
-            get {
-                return ResourceManager.GetString("Menu.Voidstrap.ExportData.Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Voidstrap configuration.
-        /// </summary>
-        public static string Menu_Voidstrap_ExportData_ExportConfig {
-            get {
-                return ResourceManager.GetString("Menu.Voidstrap.ExportData.ExportConfig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to All Voidstrap logs.
-        /// </summary>
-        public static string Menu_Voidstrap_ExportData_ExportLogs {
-            get {
-                return ResourceManager.GetString("Menu.Voidstrap.ExportData.ExportLogs", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Export diagnostic data.
-        /// </summary>
-        public static string Menu_Voidstrap_ExportData_Title {
-            get {
-                return ResourceManager.GetString("Menu.Voidstrap.ExportData.Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Icons.
         /// </summary>
         public static string Paths_Icons {
@@ -4786,7 +4738,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to They&apos;ll be kept where Voidstrap was installed, and will automatically be restored on a reinstall..
+        ///   Looks up a localized string similar to They&apos;ll be kept where Mrstrap was installed, and will automatically be restored on a reinstall..
         /// </summary>
         public static string Uninstaller_KeepData_Description {
             get {
@@ -4804,10 +4756,13 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uninstalling Voidstrap will remove it from your system and restore the default Roblox launcher if it’s still installed.  
+        ///   Looks up a localized string similar to Uninstalling will remove Mrstrap from your system, and automatically reconfigure the default Roblox launcher if it&apos;s still installed.
         ///
-        ///However, the uninstallation process may not remove all leftover files, so you may need to clean them up manually from the installation directory.
-        ///.
+        ///If you&apos;re uninstalling or reinstalling because you are having issues with Roblox, read [this help page]({0}) first.
+        ///
+        ///The uninstall process may not be able to fully clean up itself, so you may need to manually clean up leftover files where Mrstrap was installed.
+        ///
+        ///Mrstrap was installed at &quot;{1}&quot;..
         /// </summary>
         public static string Uninstaller_Text {
             get {
@@ -4816,7 +4771,7 @@ namespace Voidstrap.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Uninstall Voidstrap.
+        ///   Looks up a localized string similar to Uninstall Mrstrap.
         /// </summary>
         public static string Uninstaller_Title {
             get {

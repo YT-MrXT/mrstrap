@@ -1,4 +1,4 @@
-﻿using Voidstrap.UI.Elements.Bootstrapper;
+﻿using Bloxstrap.UI.Elements.Bootstrapper;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -7,10 +7,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using Voidstrap.UI.ViewModels;
-using Voidstrap;
 
-namespace Voidstrap.UI.ViewModels.Editor
+namespace Bloxstrap.UI.ViewModels.Editor
 {
     public class BootstrapperEditorWindowViewModel : NotifyPropertyChangedViewModel
     {
@@ -29,7 +27,6 @@ namespace Voidstrap.UI.ViewModels.Editor
         public string Code { get; set; } = "";
 
         public bool CodeChanged { get; set; } = false;
-
         private void Preview()
         {
             const string LOG_IDENT = "BootstrapperEditorWindowViewModel::Preview";
@@ -66,7 +63,7 @@ namespace Voidstrap.UI.ViewModels.Editor
             {
                 File.WriteAllText(path, Code);
                 CodeChanged = false;
-                ThemeSavedCallback.Invoke(true, "Your theme has been saved!");
+                ThemeSavedCallback.Invoke(true, Strings.CustomTheme_Editor_Save_Success_Description);
             }
             catch (Exception ex)
             {
@@ -77,6 +74,7 @@ namespace Voidstrap.UI.ViewModels.Editor
                 ThemeSavedCallback.Invoke(false, ex.Message);
             }
         }
+
 
         private void OpenThemeFolder()
         {

@@ -1,61 +1,30 @@
-﻿using System;
-using System.Drawing;
+﻿using System.Windows;
 using System.Windows.Forms;
-using Microsoft.Win32;
-using System.Runtime.InteropServices;
 
-namespace Voidstrap.UI.Utility
+namespace Bloxstrap.UI.Utility
 {
     public static class WindowScaling
     {
-        private static double _scaleFactor = 1.0;
+        public static double ScaleFactor => Screen.PrimaryScreen.Bounds.Width / SystemParameters.PrimaryScreenWidth;
 
-        static WindowScaling()
+        public static int GetScaledNumber(int number)
         {
-            RecalculateScaleFactor();
-            SystemEvents.DisplaySettingsChanged += (s, e) => RecalculateScaleFactor();
-
-            if (Environment.OSVersion.Version.Major >= 10)
-            {
-                SystemEvents.UserPreferenceChanged += (s, e) =>
-                {
-                    if (e.Category == UserPreferenceCategory.Window)
-                        RecalculateScaleFactor();
-                };
-            }
-        }
-        public static void RecalculateScaleFactor()
-        {
-            try
-            {
-                using (Graphics g = Graphics.FromHwnd(IntPtr.Zero))
-                {
-                    _scaleFactor = g.DpiX / 96.0;
-                }
-            }
-            catch
-            {
-                _scaleFactor = 1.0;
-            }
+            return (int)Math.Ceiling(number * ScaleFactor);
         }
 
-        public static double ScaleFactor => _scaleFactor;
-        public static int GetScaledValue(int value) => (int)Math.Round(value * _scaleFactor);
-        public static Size GetScaledSize(Size size) =>
-            new Size(GetScaledValue(size.Width), GetScaledValue(size.Height));
-        public static Point GetScaledPoint(Point point) =>
-            new Point(GetScaledValue(point.X), GetScaledValue(point.Y));
-        public static Padding GetScaledPadding(Padding padding) =>
-            new Padding(
-                GetScaledValue(padding.Left),
-                GetScaledValue(padding.Top),
-                GetScaledValue(padding.Right),
-                GetScaledValue(padding.Bottom));
-        public static Rectangle GetScaledRectangle(Rectangle rect) =>
-            new Rectangle(
-                GetScaledValue(rect.X),
-                GetScaledValue(rect.Y),
-                GetScaledValue(rect.Width),
-                GetScaledValue(rect.Height));
+        public static System.Drawing.Size GetScaledSize(System.Drawing.Size size)
+        {
+            return new System.Drawing.Size(GetScaledNumber(size.Width), GetScaledNumber(size.Height));
+        }
+
+        public static System.Drawing.Point GetScaledPoint(System.Drawing.Point point)
+        {
+            return new System.Drawing.Point(GetScaledNumber(point.X), GetScaledNumber(point.Y));
+        }
+
+        public static Padding GetScaledPadding(Padding padding)
+        {
+            return new Padding(GetScaledNumber(padding.Left), GetScaledNumber(padding.Top), GetScaledNumber(padding.Right), GetScaledNumber(padding.Bottom));
+        }
     }
 }

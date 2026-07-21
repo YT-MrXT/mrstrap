@@ -1,8 +1,7 @@
 ﻿using System.Windows;
-using System.Windows.Navigation;
-using Voidstrap.UI.ViewModels.Installer;
+using Bloxstrap.UI.ViewModels.Installer;
 
-namespace Voidstrap.UI.Elements.Installer.Pages
+namespace Bloxstrap.UI.Elements.Installer.Pages
 {
     /// <summary>
     /// Interaction logic for WelcomePage.xaml
@@ -24,20 +23,6 @@ namespace Voidstrap.UI.Elements.Installer.Pages
         {
             if (Window.GetWindow(this) is MainWindow window)
                 window.SetNextButtonText(Strings.Common_Navigation_Next);
-        }
-
-        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
-            e.Handled = true;
-        }
-        private void DonateButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo("https://voidstrapp.netlify.app/donate/donate") { UseShellExecute = true });
-        }
-        private void ContributorsButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo("https://voidstrapp.netlify.app/contributors/contributors") { UseShellExecute = true });
         }
     }
 }

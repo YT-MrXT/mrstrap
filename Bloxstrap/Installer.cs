@@ -1,8 +1,10 @@
-﻿using System.Windows;
-using Voidstrap;
+﻿using System.IO;
+using System.Windows;
+using System.Xml.Linq;
+using Bloxstrap.AppData;
 using Microsoft.Win32;
 
-namespace Voidstrap
+namespace Bloxstrap
 {
     internal class Installer
     {
@@ -16,6 +18,8 @@ namespace Voidstrap
 
         private static string StartMenuShortcut => Path.Combine(Paths.WindowsStartMenu, $"{App.ProjectName}.lnk");
 
+        public string BloxstrapInstallDirectory = Path.Combine(Paths.LocalAppData, "Bloxstrap"); // default directory for bloxstrap
+                                                                                                 // TODO dynamically fetch from uninstall/player registry keys
         public string InstallLocation = Path.Combine(Paths.LocalAppData, App.ProjectName);
 
         public bool ExistingDataPresent => File.Exists(Path.Combine(InstallLocation, "Settings.json"));
@@ -24,13 +28,20 @@ namespace Voidstrap
 
         public bool CreateStartMenuShortcuts = true;
 
-        public bool EnableAnalytics = true;
-
-        public bool VoidstrapRPCReal = true;
+        public bool ImportSettings = Directory.Exists(Path.Combine(Paths.LocalAppData, "Bloxstrap")); // if bloxstrap isnt detected this will be set to false
+                                                                                                      // another scenerio is user simply toggling it off
 
         public bool IsImplicitInstall = false;
 
         public string InstallLocationError { get; set; } = "";
+
+        // anything we want copied should be put in here
+        // root directory only
+        public string[] FilesForImporting = {
+            "CustomThemes", // from feature/custom-bootstrappers
+            "Modifications",
+            "Settings.json"
+        };
 
         public void DoInstall()
         {
@@ -64,7 +75,7 @@ namespace Voidstrap
             using (var uninstallKey = Registry.CurrentUser.CreateSubKey(App.UninstallKey))
             {
                 uninstallKey.SetValueSafe("DisplayIcon", $"{Paths.Application},0");
-                uninstallKey.SetValueSafe("DisplayName", App.DisplayName);
+                uninstallKey.SetValueSafe("DisplayName", App.ProjectName);
 
                 uninstallKey.SetValueSafe("DisplayVersion", App.Version);
 
@@ -84,7 +95,7 @@ namespace Voidstrap
 
             WindowsRegistry.RegisterApis();
 
-            // only register player, for the scenario where the user installs Voidstrap, closes it,
+            // only register player, for the scenario where the user installs bloxstrap, closes it,
             // and then launches from the website expecting it to work
             // studio can be implicitly registered when it's first launched manually
             WindowsRegistry.RegisterPlayer();
@@ -95,12 +106,29 @@ namespace Voidstrap
             if (CreateStartMenuShortcuts)
                 Shortcut.Create(Paths.Application, "", StartMenuShortcut);
 
+            if (ImportSettings)
+            {
+                // we dont have to worry about directories messing up
+                // if something doenst exist fishstrap will recreate the file/directory
+                try
+                {
+                    ImportSettingsFromBloxstrap();
+                } catch (Exception ex)
+                {
+                    Frontend.ShowMessageBox(
+                        String.Format(Strings.Installer_FailedToImportSettings, ex.Message),
+                        MessageBoxImage.Error,
+                        MessageBoxButton.OK
+                    );
+                }
+            }
+
             // existing configuration persisting from an earlier install
+            // or from importing settings
             App.Settings.Load(false);
             App.State.Load(false);
             App.FastFlags.Load(false);
 
-            App.Settings.Prop.EnableAnalytics = EnableAnalytics;
             if (App.IsStudioVisible)
                 WindowsRegistry.RegisterStudio();
 
@@ -136,6 +164,10 @@ namespace Voidstrap
             if (InstallLocation.Contains("Program Files"))
                 return false;
 
+            // prevent issues with settings importing
+            if (InstallLocation.Contains("Local\\Bloxstrap"))
+                return false;
+
             return true;
         }
 
@@ -151,7 +183,7 @@ namespace Voidstrap
             }
             else
             {
-                if (!IsImplicitInstall
+                if (!IsImplicitInstall 
                     && !InstallLocation.EndsWith(App.ProjectName, StringComparison.InvariantCultureIgnoreCase)
                     && Directory.Exists(InstallLocation)
                     && Directory.EnumerateFileSystemEntries(InstallLocation).Any())
@@ -198,8 +230,8 @@ namespace Voidstrap
             const string LOG_IDENT = "Installer::DoUninstall";
 
             var processes = new List<Process>();
-
-            if (!String.IsNullOrEmpty(App.State.Prop.Player.VersionGuid))
+            
+            if (!String.IsNullOrEmpty(App.RobloxState.Prop.Player.VersionGuid))
                 processes.AddRange(Process.GetProcessesByName(App.RobloxPlayerAppName));
 
             if (App.IsStudioVisible)
@@ -252,7 +284,8 @@ namespace Voidstrap
             }
             else
             {
-                string playerPath = Path.Combine((string)playerFolder, "RobloxPlayerBeta.exe");
+                bool AnselApp = File.Exists(Path.Combine((string)playerFolder, App.RobloxAnselAppName));
+                string playerPath = Path.Combine((string)playerFolder, AnselApp ? App.RobloxAnselAppName : "RobloxPlayerBeta.exe");
 
                 WindowsRegistry.RegisterPlayer(playerPath, "%1");
             }
@@ -315,7 +348,7 @@ namespace Voidstrap
             {
                 cleanupSequence.AddRange(new List<Action>
                 {
-                    () => Directory.Delete(Paths.Mods, true),
+                    () => Directory.Delete(Paths.Modifications, true),
                     () => Directory.Delete(Paths.Logs, true),
 
                     () => File.Delete(App.Settings.FileLocation)
@@ -423,8 +456,8 @@ namespace Voidstrap
                 }
             }
 
-            // prior to 1.0.3.6, auto-updating was handled with this... bruteforce method
-            // now it's handled with the system mutex you see above, but we need to keep this logic for <1.0.3.6 versions
+            // prior to 2.8.0, auto-updating was handled with this... bruteforce method
+            // now it's handled with the system mutex you see above, but we need to keep this logic for <2.8.0 versions
             for (int i = 1; i <= 10; i++)
             {
                 try
@@ -480,8 +513,8 @@ namespace Voidstrap
 
                 if (Utilities.CompareVersions(existingVer, "2.3.0") == VersionComparison.LessThan)
                 {
-                    string injectorLocation = Path.Combine(Paths.Mods, "dxgi.dll");
-                    string configLocation = Path.Combine(Paths.Mods, "ReShade.ini");
+                    string injectorLocation = Path.Combine(Paths.Modifications, "dxgi.dll");
+                    string configLocation = Path.Combine(Paths.Modifications, "ReShade.ini");
 
                     if (File.Exists(injectorLocation))
                         File.Delete(injectorLocation);
@@ -503,7 +536,7 @@ namespace Voidstrap
                     {
                         try
                         {
-                            File.Delete(Path.Combine(Paths.Mods, "ExtraContent\\places\\Mobile.rbxl"));
+                            File.Delete(Path.Combine(Paths.Modifications, "ExtraContent\\places\\Mobile.rbxl"));
                         }
                         catch (Exception ex)
                         {
@@ -521,7 +554,7 @@ namespace Voidstrap
                         App.FastFlags.SetPreset("Rendering.Framerate", null);
                 }
 
-                if (Utilities.CompareVersions(existingVer, "1.0.3.6") == VersionComparison.LessThan)
+                if (Utilities.CompareVersions(existingVer, "2.8.0") == VersionComparison.LessThan)
                 {
                     if (isAutoUpgrade)
                     {
@@ -538,7 +571,7 @@ namespace Voidstrap
                     }
 
                     string oldDesktopPath = Path.Combine(Paths.Desktop, "Play Roblox.lnk");
-                    string oldStartPath = Path.Combine(Paths.WindowsStartMenu, "Voidstrap");
+                    string oldStartPath = Path.Combine(Paths.WindowsStartMenu, "Bloxstrap");
 
                     if (File.Exists(oldDesktopPath))
                         File.Move(oldDesktopPath, DesktopShortcut, true);
@@ -557,7 +590,7 @@ namespace Voidstrap
                         Shortcut.Create(Paths.Application, "", StartMenuShortcut);
                     }
 
-                    Registry.CurrentUser.DeleteSubKeyTree("Software\\Voidstrap", false);
+                    Registry.CurrentUser.DeleteSubKeyTree("Software\\Bloxstrap", false);
 
                     WindowsRegistry.RegisterPlayer();
 
@@ -597,16 +630,23 @@ namespace Voidstrap
                     }
                 }
 
-                if (Utilities.CompareVersions(existingVer, "2.8.3") == VersionComparison.LessThan)
+                if (Utilities.CompareVersions(existingVer, "2.9.0") == VersionComparison.LessThan)
                 {
-                    // force reinstallation
-                    App.State.Prop.Player.VersionGuid = "";
-                    App.State.Prop.Studio.VersionGuid = "";
+                    // move from App.State to App.RobloxState
+                    if (App.State.Prop.GetDeprecatedPlayer() != null)
+                        App.RobloxState.Prop.Player = App.State.Prop.GetDeprecatedPlayer()!;
+
+                    if (App.State.Prop.GetDeprecatedStudio() != null)
+                        App.RobloxState.Prop.Studio = App.State.Prop.GetDeprecatedStudio()!;
+
+                    if (App.State.Prop.GetDeprecatedModManifest() != null)
+                        App.RobloxState.Prop.ModManifest = App.State.Prop.GetDeprecatedModManifest()!;
                 }
 
                 App.Settings.Save();
                 App.FastFlags.Save();
                 App.State.Save();
+                App.RobloxState.Save();
             }
 
             if (currentVer is null)
@@ -616,7 +656,7 @@ namespace Voidstrap
             {
 #pragma warning disable CS0162 // Unreachable code detected
                 if (OpenReleaseNotes)
-                    Utilities.ShellExecute($"https://github.com/{App.ProjectRepository}/wiki/Release-notes-for-Voidstrap-v{currentVer}");
+                    Utilities.ShellExecute($"https://github.com/{App.ProjectRepository}/wiki/Release-notes-for-Bloxstrap-v{currentVer}");
 #pragma warning restore CS0162 // Unreachable code detected
             }
             else
@@ -627,6 +667,73 @@ namespace Voidstrap
                     MessageBoxButton.OK
                 );
             }
+        }
+
+        public void ImportSettingsFromBloxstrap()
+        {
+            const string LOG_IDENT = "Installer::ImportSettings";
+
+            if (!Directory.Exists(BloxstrapInstallDirectory))
+            {
+                Frontend.ShowMessageBox(Strings.Installer_InstallationNotFound, MessageBoxImage.Exclamation);
+                return;
+            } // bloxstrap default directory is not present
+
+            foreach (string FileName in FilesForImporting)
+            {
+                string Source = Path.Combine(BloxstrapInstallDirectory, FileName);
+                if (!Directory.Exists(Source) && !File.Exists(Source))
+                    continue; // customthemes
+
+                FileAttributes Attributes = File.GetAttributes(Source);
+                bool IsDirectory = Attributes.HasFlag(FileAttributes.Directory);
+
+                App.Logger.WriteLine(LOG_IDENT, $"Found file {Source}, IsDirectory: {IsDirectory}");
+
+                if (IsDirectory)
+                {
+                    // delete existing file from fishstrap folder
+                    string ExistingFile = Path.Combine(InstallLocation, FileName);
+                    if (Directory.Exists(ExistingFile))
+                    {
+                        App.Logger.WriteLine(LOG_IDENT, $"Deleting existing {FileName}...");
+                        Directory.Delete(ExistingFile, true);
+                    }
+
+                    // https://stackoverflow.com/questions/58744/copy-the-entire-contents-of-a-directory-in-c-sharp
+                    // we could use Directory.Move but that deletes the directory from bloxstrap folder
+                    // instead we will use this
+
+                    // create the directory
+                    Directory.CreateDirectory(ExistingFile);
+
+                    // Now Create all of the directories
+                    foreach (string dirPath in Directory.GetDirectories(Source, "*", SearchOption.AllDirectories))
+                    {
+                        Directory.CreateDirectory(dirPath.Replace(Source, ExistingFile));
+                    }
+
+                    // Copy all the files & Replaces any files with the same name
+                    foreach (string newPath in Directory.GetFiles(Source, "*.*", SearchOption.AllDirectories))
+                    {
+                        File.Copy(newPath, newPath.Replace(Source, ExistingFile), true);
+                    }
+                } else
+                {
+                    string FileLocation = Path.Combine(InstallLocation, FileName);
+                    // we dont have to delete the file here
+                    // we can simply override it
+                    File.Copy(Source, FileLocation, true);
+                    App.Logger.WriteLine(LOG_IDENT, $"Overridding {FileName} in InstallLocation");
+                }
+            }
+
+            App.Logger.WriteLine(LOG_IDENT, $"Importing succeded");
+
+            // these happen later on in installation process
+            // App.Settings.Load(false);
+            // App.State.Load(false);
+            // App.FastFlags.Load(false);
         }
     }
 }

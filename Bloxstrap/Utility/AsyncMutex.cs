@@ -1,95 +1,97 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Voidstrap.Utility
+﻿namespace Bloxstrap.Utility
 {
+    // https://gist.github.com/dfederm/35c729f6218834b764fa04c219181e4e
+
     public sealed class AsyncMutex : IAsyncDisposable
     {
         private readonly bool _initiallyOwned;
         private readonly string _name;
         private Task? _mutexTask;
         private ManualResetEventSlim? _releaseEvent;
-        private CancellationTokenSource? _cts;
+        private CancellationTokenSource? _cancellationTokenSource;
+
         public AsyncMutex(bool initiallyOwned, string name)
         {
-            if (string.IsNullOrWhiteSpace(name))
-                throw new ArgumentException("Mutex name cannot be null or whitespace.", nameof(name));
             _initiallyOwned = initiallyOwned;
             _name = name;
         }
 
-        public Task AcquireAsync(CancellationToken cancellationToken = default)
+        public Task AcquireAsync(CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-            var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-            _releaseEvent = new ManualResetEventSlim(false);
-            _cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+
+            TaskCompletionSource taskCompletionSource = new();
+
+            _releaseEvent = new ManualResetEventSlim();
+            _cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+
+            // Putting all mutex manipulation in its own task as it doesn't work in async contexts
+            // Note: this task should not throw.
             _mutexTask = Task.Factory.StartNew(
-                () =>
+                state =>
                 {
                     try
                     {
+                        CancellationToken cancellationToken = _cancellationTokenSource.Token;
                         using var mutex = new Mutex(_initiallyOwned, _name);
-                        var token = _cts.Token;
-
                         try
                         {
-                            int signaledIndex = WaitHandle.WaitAny(new[] { mutex, token.WaitHandle });
-                            if (signaledIndex != 0)
+                            // Wait for either the mutex to be acquired, or cancellation
+                            if (WaitHandle.WaitAny(new[] { mutex, cancellationToken.WaitHandle }) != 0)
                             {
-                                tcs.TrySetCanceled(token);
+                                taskCompletionSource.SetCanceled(cancellationToken);
                                 return;
                             }
                         }
                         catch (AbandonedMutexException)
                         {
+                            // Abandoned by another process, we acquired it.
                         }
 
-                        tcs.TrySetResult();
-                        _releaseEvent.Wait(token);
+                        taskCompletionSource.SetResult();
+
+                        // Wait until the release call
+                        _releaseEvent.Wait();
 
                         mutex.ReleaseMutex();
                     }
                     catch (OperationCanceledException)
                     {
-                        tcs.TrySetCanceled(_cts.Token);
+                        taskCompletionSource.TrySetCanceled(cancellationToken);
                     }
                     catch (Exception ex)
                     {
-                        tcs.TrySetException(ex);
+                        taskCompletionSource.TrySetException(ex);
                     }
                 },
-                CancellationToken.None,
+                state: null,
+                cancellationToken,
                 TaskCreationOptions.LongRunning,
                 TaskScheduler.Default);
 
-            return tcs.Task;
+            return taskCompletionSource.Task;
         }
 
         public async Task ReleaseAsync()
         {
             _releaseEvent?.Set();
 
-            if (_mutexTask is not null)
-                await _mutexTask.ConfigureAwait(false);
+            if (_mutexTask != null)
+            {
+                await _mutexTask;
+            }
         }
 
         public async ValueTask DisposeAsync()
         {
-            try
-            {
-                _cts?.Cancel();
-                await ReleaseAsync().ConfigureAwait(false);
-            }
-            catch (OperationCanceledException)
-            {
-            }
-            finally
-            {
-                _releaseEvent?.Dispose();
-                _cts?.Dispose();
-            }
+            // Ensure the mutex task stops waiting for any acquire
+            _cancellationTokenSource?.Cancel();
+
+            // Ensure the mutex is released
+            await ReleaseAsync();
+
+            _releaseEvent?.Dispose();
+            _cancellationTokenSource?.Dispose();
         }
     }
 }

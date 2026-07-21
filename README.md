@@ -1,130 +1,57 @@
 <p align="center">
-<a href="https://voidstrapp.netlify.app/">
-<img src="https://raw.githubusercontent.com/voidstrap/Voidstrap/main/Bloxstrap/Voidstrap.png" alt="preview" width="100px"/>
-</a>
+    <img src="https://github.com/fishstrap/fishstrap/raw/main/Images/Bloxstrap-full-dark.png#gh-dark-mode-only" width="820">
+    <img src="https://github.com/fishstrap/fishstrap/raw/main/Images/Bloxstrap-full-light.png#gh-light-mode-only" width="820">
 </p>
 
-<h1 align="center"><b>Voidstrap</b></h1>
+> [!CAUTION]
+> The only official places to download Fishstrap are this GitHub repository and [fishstrap.app](https://fishstrap.app). Any other websites offering downloads or claiming to be us are not controlled by us (eg. fishstrap.org, fishstrap.com). Do not download from them.
 
-<p align="center">
-<img src="https://raw.githubusercontent.com/KloBraticc/RandomMods/main/Untitled%20design%20(2)-Photoroom.png" alt="preview" width="100%"/>
-</p>
+Fishstrap is a bootstrapper for Roblox that aims to provide additional features to compliment your experience. Fishstrap only supports computers running Windows 10 and above, and we do not have any plans to port Fishstrap to any other operating systems.
 
-<p align="center">
-  <a href="github.com/voidstrap/Voidstrap/releases/latest">Latest release</a> |
-  <a href="https://www.youtube.com/watch?v=P-GqTUo_HIA&t">Tutorial</a> |
-  <a href="https://voidstrapp.netlify.app/donate/donate">Donate</a> |
-  <a href="https://discord.gg/5tJBqBH8ck">Discord</a>
-</p>
+Found any bugs? [Submit an issue](https://github.com/fishstrap/fishstrap/issues/new/choose) or create a bug report in our [Discord server](https://discord.gg/SRs5zb9BJd).
+
+Download the latest release [here][repo-latest]
 
 <div align="center">
 
-[![Total Downloads][shield-repo-total]][repo-releases]
-[![Latest Downloads][shield-repo-downloads]][repo-latest]
-[![Latest Release][shield-repo-latest]][repo-latest]
-[![Discord][shield-discord-server]][discord-invite]
-[![Stars][shield-repo-stars]][repo-stargazers]
+[![License][badge-repo-license]][repo-license]
+[![Workflow][badge-repo-workflow]][repo-actions]
+[![Downloads][badge-repo-downloads]][repo-releases]
+[![Version][badge-repo-latest]][repo-latest]
+[![Discord][badge-discord]][discord-invite]
+![Stars][badge-repo-stars]
 
 </div>
 
-<h5 align="center">
-Leave a star if you like the project! ⭐️
-</h5>
 
-> [!IMPORTANT]
-> Voidstrap currently supports **Windows 10 and above**.  
-> **macOS support is in the works**, but it is not available yet.
->
-> In the meantime, you can use **[AppleBlox](https://github.com/AppleBlox/appleblox)** *(for macOS)* or **[Sober](https://sober.vinegarhq.org/)** *(for Linux)*.  
-> More experienced Linux users can also try tools like **[Lution](https://github.com/wookhq/Lution)**.
+## Feature List
+- Detailed player logs
+- Detailed server information (Thanks to [RoValra](https://www.rovalra.com/))
+- Studio Support
+- Flag editor (Roblox Studio only)
+- Framerate cap unlocking
+- Global Settings page
+- Custom Fishstrap game invite links
+- Cache cleaner
+- Channel changer
 
-## Installation
+And many more!
 
-1. Download the latest version
-   👉 https://github.com/voidstrap/Voidstrap/releases/latest
-2. Run the Exe and Finish the setup
-3. Launch Voidstrap
-4. Enjoy a more simple Roblox
+<div align="center">
+    <img src="https://www.fishstrap.app/img/Showcase.webp" width="420">
+</div>
 
----
+[badge-repo-license]:    https://img.shields.io/github/license/fishstrap/fishstrap?style=flat-square
+[badge-repo-workflow]:   https://img.shields.io/github/actions/workflow/status/fishstrap/fishstrap/ci-release.yml?branch=main&style=flat-square&label=builds
+[badge-repo-downloads]:  https://img.shields.io/github/downloads/fishstrap/fishstrap/latest/total?style=flat-square&color=981bfe
+[badge-repo-latest]:     https://img.shields.io/github/v/release/fishstrap/fishstrap?style=flat-square&color=7a39fb
+[badge-repo-stars]:      https://img.shields.io/github/stars/fishstrap/fishstrap?style=flat-square&color=dd9900
 
-## Frequently Asked Questions (FAQ)
+[badge-discord]: https://img.shields.io/discord/1299397064165429360?style=flat-square&logo=discord&logoColor=white&logoSize=auto&label=discord&color=4d3dff
 
-<details>
-  <summary><strong>Can it get you banned?</strong></summary>
-  <br>
+[repo-license]:  https://github.com/fishstrap/fishstrap/blob/main/LICENSE
+[repo-actions]:  https://github.com/fishstrap/fishstrap/actions
+[repo-releases]: https://github.com/fishstrap/fishstrap/releases
+[repo-latest]:   https://github.com/fishstrap/fishstrap/releases/latest
 
-  No. Voidstrap does not inject cheats, exploits, or bypass Roblox security.  
-  It functions as a launcher and configuration manager. However, as with any third-party tool, use it at your own discretion.
-</details>
-
-<br>
-
-<details>
-  <summary><strong>Is it a virus?</strong></summary>
-  <br>
-
-  No. Voidstrap is fully open-source, meaning anyone can inspect the code.  
-  If your antivirus flags it, it is most likely a false positive due to how launchers interact with Roblox processes and updates.
-
-  You can verify the source code yourself at:
-  https://github.com/voidstrap/Voidstrap
-  or just scroll up dummy <!-- hada add this -->
-</details>
-
-<!-- Removed build will prob show how to do that in a later date im lazy for rn -->
-## How to Fork
-
-<p align="left">
-  <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer">
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/>
-    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet" width="40" height="40"/>
-  </a>
-</p>
-
-Voidstrap is built using **C# and .NET**.
-
----
-
-### Fork the Repository
-
-1. Go to:  
-   https://github.com/voidstrap/Voidstrap
-2. Click **Fork** (top right)
-3. This creates your own copy under your GitHub account
-
-<table style="width: 100%; border-collapse: collapse;">
-  <tr>
-    <td style="width: 33%; text-align: left;">© Voidstrap</td>
-    <td style="width: 33%; text-align: right;"><a href="https://github.com/voidstrap/Voidstrap/blob/main/LICENSE.VOIDSTRAP" target="_blank">MIT</a></td>
-  </tr>
-</table>
-
-## Star History
-
-<p align="center">
-  <a href="https://www.star-history.com/?repos=voidstrap%2FVoidstrap%2CKloBraticc%2Fvoidstrap&type=timeline&legend=top-left">
-    <img src="https://api.star-history.com/svg?repos=voidstrap%2FVoidstrap%2CKloBraticc%2Fvoidstrap&type=timeline&legend=top-left&theme=dark" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://discord.gg/5tJBqBH8ck">
-    <img src="https://invidget.switchblade.xyz/5tJBqBH8ck">
-  </a>
-</p>
-
-> [!NOTE]
-> Voidstrap is still in **early development**, even though the project has existed for over **2 years**.  
-> Features may change and some things may still be unfinished.
-
-[shield-repo-downloads]:  https://img.shields.io/github/downloads/voidstrap/Voidstrap/latest/total?color=981bfe
-[shield-repo-total]:      https://img.shields.io/github/downloads/voidstrap/Voidstrap/total?color=8a2be2
-[shield-repo-latest]:     https://img.shields.io/github/v/release/voidstrap/Voidstrap?color=7a39fb
-[shield-repo-stars]:      https://img.shields.io/github/stars/voidstrap/Voidstrap?color=ffd700
-[shield-discord-server]:  https://img.shields.io/discord/1327967202015580223?logo=discord&logoColor=white&label=Discord&color=4d3dff
-
-[repo-releases]:          https://github.com/voidstrap/Voidstrap/releases
-[repo-latest]:            https://github.com/voidstrap/Voidstrap/releases/latest
-[repo-stargazers]:        https://github.com/voidstrap/Voidstrap/stargazers
-[discord-invite]:         https://discord.gg/dfA9PdWgcV
+[discord-invite]:  https://discord.gg/SRs5zb9BJd

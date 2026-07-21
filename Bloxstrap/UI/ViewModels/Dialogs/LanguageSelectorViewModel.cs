@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 using CommunityToolkit.Mvvm.Input;
 
-namespace Voidstrap.UI.ViewModels.Dialogs
+namespace Bloxstrap.UI.ViewModels.Dialogs
 {
     internal class LanguageSelectorViewModel
     {

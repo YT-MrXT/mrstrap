@@ -157,9 +157,6 @@
   <data name="Bootstrapper.Status.Upgrading" xml:space="preserve">
     <value>Aktualizowanie {product}...</value>
   </data>
-  <data name="Bootstrapper.Status.UpgradingVoidstrap" xml:space="preserve">
-    <value>Pobieranie najnowszej wersji Mrstrap...</value>
-  </data>
   <data name="Bootstrapper.Status.WaitingOtherInstances" xml:space="preserve">
     <value>Czekam na inne instancje...</value>
   </data>
@@ -289,7 +286,7 @@ Kliknij, aby dowiedzieć się więcej</value>
     <value>Wystąpił błąd podczas uruchamiania Mrstrap</value>
   </data>
   <data name="Dialog.Exception.Info.2" xml:space="preserve">
-    <value>Najpierw sprawdź [Mrstrap Wiki]({0}), by zobaczyć czy ten problem nie został już rozwiązany.
+    <value>Najpierw sprawdź [Bloxstrap Wiki]({0}), by zobaczyć czy ten problem nie został już rozwiązany.
 
 Jeśli nie, zgłoś ten błąd przez [GitHub]({1}) wraz z utworzoną kopią pliku dziennika.</value>
   </data>
@@ -389,12 +386,6 @@ Jeśli nie, zgłoś ten błąd przez [GitHub]({1}) wraz z utworzoną kopią plik
   <data name="Enums.Theme.Light" xml:space="preserve">
     <value>Jasny</value>
   </data>
-  <data name="Enums.Theme.Red" xml:space="preserve">
-    <value>Jasny</value>
-  </data>
-  <data name="Enums.Theme.Blue" xml:space="preserve">
-    <value>Jasny</value>
-  </data>
   <data name="InstallChecker.Updated" xml:space="preserve">
     <value>Mrstrap został zaktualizowany do wersji v{0}</value>
   </data>
@@ -418,7 +409,7 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
     <value>Specjalne Podziękowania</value>
   </data>
   <data name="Menu.About.Description" xml:space="preserve">
-    <value>Alternatywny launcher dla Roblox z wieloma dodatkowymi funkcjami.</value>
+    <value>Alternatywny bootstrapper dla Roblox z wieloma dodatkowymi funkcjami.</value>
   </data>
   <data name="Menu.About.DiscordServer" xml:space="preserve">
     <value>Serwer Discord</value>
@@ -446,7 +437,7 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
   </data>
   <data name="Menu.About.Version" xml:space="preserve">
     <value>Wersja {0}</value>
-    <comment>{0} is replaced with the version, i.e. "Version 1.0.3.6"</comment>
+    <comment>{0} is replaced with the version, i.e. "Version 2.8.0"</comment>
   </data>
   <data name="Menu.AllFiles" xml:space="preserve">
     <value>Wszystkie pliki</value>
@@ -458,10 +449,10 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
     <value>Mrstrap już jest uruchomiony</value>
   </data>
   <data name="Menu.Appearance.Bootstrapper.Description" xml:space="preserve">
-    <value>Możesz sprawić, że będzie wyglądać inaczej, retro lub nawet po prostu jak Roblox.</value>
+    <value>Możesz sprawić, że będzie wyglądać inaczej, w stylu retro lub po prostu jak standardowy Roblox.</value>
   </data>
   <data name="Menu.Appearance.Bootstrapper.Title" xml:space="preserve">
-    <value>Launcher</value>
+    <value>Bootstrapper</value>
   </data>
   <data name="Menu.Appearance.Customisation.Description" xml:space="preserve">
     <value>Skonfiguruj inne różne konfigurowalne opcje.</value>
@@ -470,13 +461,13 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
     <value>Dostosowywanie</value>
   </data>
   <data name="Menu.Appearance.CustomisationIcon.Description" xml:space="preserve">
-    <value>Musi to być plik .ico o rozmiarach od 16px do 128px. Ustaw ikonę jako „Niestandardową”, aby ją zastosować.</value>
+    <value>Musi to być plik w formacie .ico o rozmiarach od 16px do 128px. Ustaw ikonę jako „Niestandardową”, aby ją zastosować.</value>
   </data>
   <data name="Menu.Appearance.CustomisationIcon.Title" xml:space="preserve">
     <value>Niestandardowa Ikona</value>
   </data>
   <data name="Menu.Appearance.CustomisationTitle.Description" xml:space="preserve">
-    <value>Tekst, który się wyświetla jako nazwa launchera.</value>
+    <value>Tekst, który się wyświetla jako nazwa bootstrappera.</value>
   </data>
   <data name="Menu.Appearance.CustomisationTitle.Title" xml:space="preserve">
     <value>Tytuł</value>
@@ -488,7 +479,7 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
     <value>Globalny motyw</value>
   </data>
   <data name="Menu.Appearance.Icon.Description" xml:space="preserve">
-    <value>Wybierz jakiej ikony ma używać.</value>
+    <value>Wybierz, jaką ikonę ma używać.</value>
   </data>
   <data name="Menu.Appearance.Icon.Title" xml:space="preserve">
     <value>Ikona</value>
@@ -497,7 +488,7 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
     <value>Podgląd</value>
   </data>
   <data name="Menu.Appearance.Style.Description" xml:space="preserve">
-    <value>Wybierz, jak ma to wyglądać. Ciemny motyw nie dotyczy Legacy/Vista.</value>
+    <value>Wybierz, jak ma to wyglądać. Ciemny motyw nie dotyczy stylów Legacy i Vista.</value>
   </data>
   <data name="Menu.Appearance.Style.Title" xml:space="preserve">
     <value>Styl</value>
@@ -524,10 +515,10 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
     <value>Roblox będzie zainstalowany na nowo przy następnym uruchomieniu.</value>
   </data>
   <data name="Menu.Behaviour.ForceRobloxReinstall.Title" xml:space="preserve">
-    <value>Zmuś Roblox do re-instalacji</value>
+    <value>Zmuś Roblox do ponownej instalacji</value>
   </data>
   <data name="Menu.Behaviour.Title" xml:space="preserve">
-    <value>Launcher</value>
+    <value>Bootstrapper</value>
   </data>
   <data name="Menu.FastFlagEditor.AddNew" xml:space="preserve">
     <value>Dodaj nową</value>
@@ -539,14 +530,14 @@ Czy chcesz zaktualizować aktualnie zainstalowaną wersję?</value>
     <value>Wróć</value>
   </data>
   <data name="Menu.FastFlagEditor.BannerText" xml:space="preserve">
-    <value>Niewłaściwe użycie tego może doprowadzić do niestabilności lub nieoczekiwanych zdarzeń.</value>
+    <value>Niewłaściwe używanie może doprowadzić do niestabilności lub nieoczekiwanych zdarzeń.</value>
     <comment>The element that this string is rendered in *cannot be wrapped* and may be truncated when displayed if too long. If so, try and paraphrase a shortened version.</comment>
   </data>
   <data name="Menu.FastFlagEditor.BannerTitle" xml:space="preserve">
     <value>Używaj z ostrożnością.</value>
   </data>
   <data name="Menu.FastFlagEditor.ConflictingImport" xml:space="preserve">
-    <value>Niektóre flagi, które próbujesz zaimportować, mają już ustawione wartości. Czy chcesz nadpisać ich aktualne wartości wartościami zdefiniowanymi w imporcie?
+    <value>Niektóre flagi, które próbujesz importować, mają już ustawione wartości. Czy chcesz nadpisać ich aktualne wartości wartościami zdefiniowanymi w imporcie?
 
 Istnieje {0} sprzecznych definicji flag:
 {1}</value>
@@ -565,7 +556,7 @@ Istnieje {0} sprzecznych definicji flag:
     <value>Wpis dla '{0}' jest nieprawidłowy, ponieważ nazwa może zawierać tylko litery, cyfry i znaki podłogi</value>
   </data>
   <data name="Menu.FastFlagEditor.InvalidJSON" xml:space="preserve">
-    <value>JSON, który wprowadziłeś, wydaje się nieprawidłowy. Sprawdź to dokładnie i spróbuj ponownie.
+    <value>JSON, który wprowadziłeś, wydaje się nieprawidłowy. Sprawdź kod dokładnie i spróbuj ponownie.
 
 Więcej informacji:
 {0}</value>
@@ -589,7 +580,7 @@ Czy jesteś pewien, że chcesz kontynuować?</value>
     <value>Pokaż ustawione flagi</value>
   </data>
   <data name="Menu.FastFlagEditor.Title" xml:space="preserve">
-    <value>Edytor Fast Flag'ów</value>
+    <value>Edytor Fast Flagów</value>
   </data>
   <data name="Menu.FastFlagEditor.Warning.Back" xml:space="preserve">
     <value>Wróć</value>
@@ -598,12 +589,12 @@ Czy jesteś pewien, że chcesz kontynuować?</value>
     <value>Wiem, co robię!</value>
   </data>
   <data name="Menu.FastFlagEditor.Warning.Header" xml:space="preserve">
-    <value>Czy na pewno wiesz, co robisz?</value>
+    <value>Czy jesteś świadom, co robisz?</value>
   </data>
   <data name="Menu.FastFlagEditor.Warning.Text" xml:space="preserve">
-    <value>Fast Flagi są niezwykle potężne, ponieważ są przeznaczone do użytku wyłącznie przez inżynierów Roblox. Chociaż mogą być bardzo przydatne, ręczna konfiguracja może spowodować poważne problemy ze stabilnością i funkcjonalnością. NIE używaj edytora, jeśli nie jesteś pewien, co robisz.
+    <value>Fast Flagi są niezwykle potężne, ponieważ są przeznaczone do użytku wyłącznie przez deweloperów Roblox. Chociaż mogą być bardzo przydatne, ręczna konfiguracja może spowodować poważne problemy ze stabilnością i funkcjonalnością. NIE używaj edytora, jeśli nie jesteś w pełni pewien, co robisz.
 
-Również NIE używaj tego do importowania dużych „list flag” utworzonych przez inne osoby, które obiecują poprawę wydajności lub tym podobne. Podlegają one wyżej wymienionym problemom i będą powodować problemy, ponieważ nie będziesz w pełni świadomy tego, co się zmienia. Jeśli miałeś zamiar to zrobić, WRÓĆ.</value>
+Również NIE używaj tego do importowania dużych „list fast flagów” utworzonych przez inne osoby, które obiecują rzekomą poprawę wydajności i tym podobne. Podlegają one wyżej wymienionym problemom i mogą one powodować różne problemy, ponieważ nie będziesz w pełni świadomy wprowadzonych zmian. Jeśli miałeś zamiar to zrobić, lepiej WRÓĆ.</value>
   </data>
   <data name="Menu.FastFlags.Description" xml:space="preserve">
     <value>Kontroluj sposób konfiguracji określonych parametrów i funkcji silnika Roblox.</value>
@@ -619,32 +610,11 @@ Również NIE używaj tego do importowania dużych „list flag” utworzonych p
   <data name="Menu.FastFlags.Presets.D3DExclusiveFullscreenInfo" xml:space="preserve">
     <value>Direct3D [wyłącznie dla trybu pełnoekranowego]({0}) przy użyciu Alt+Enter jest już domyślnie włączone.</value>
   </data>
-  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
-    <value>Preferowana wersja menu gry</value>
-  </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Description" xml:space="preserve">
     <value>Roblox koryguje jakość renderowania w zależności od tego, jak twój ekran jest skalowany w systemie Windows.</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Title" xml:space="preserve">
     <value>Zachowaj jakość renderowania dzięki skalowaniu wyświetlacza</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
-    <value>Ustaw wartość na 0, jeśli chcesz użyć domyślnego limitera klatek na sekundę Roblox'a.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
-    <value>Limit liczby klatek na sekundę</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
-    <value>Przełączane za pomocą [skrótów klawiaturowych]({0}). Działa tylko wtedy, gdy należysz do [grupy Mrstrap]({1}) w Roblox.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
-    <value>Włącz możliwość ukrywania GUI (interfejsu gry)</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
-    <value>Wybrany zostanie wymuszony we wszystkich grach. [Uwaga, to może powodować problemy z oświetleniem!]({0})</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
-    <value>Preferowana technologia oświetlenia</value>
   </data>
   <data name="Menu.FastFlags.Presets.RenderingMode.Title" xml:space="preserve">
     <value>Tryb renderowania</value>
@@ -750,7 +720,7 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Wtyczki</value>
   </data>
   <data name="Menu.Mods.Description" xml:space="preserve">
-    <value>Zarządzaj i stosuj modyfikacje plików w kliencie gry Roblox.</value>
+    <value>Zarządzaj i stosuj modyfikacje plików w kliencie Roblox.</value>
   </data>
   <data name="Menu.Mods.Help.Description" xml:space="preserve">
     <value>Zobacz informacje o zarządzaniu i tworzeniu modów.</value>
@@ -760,7 +730,7 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Wybierz czcionkę...</value>
   </data>
   <data name="Menu.Mods.Misc.CustomFont.Description" xml:space="preserve">
-    <value>Rozmiar czcionki można dostosować w zakładce ustawienia silnika.</value>
+    <value>Rozmiar czcionki można dostosować w zakładce „Ustawienia silnika”.</value>
   </data>
   <data name="Menu.Mods.Misc.CustomFont.Invalid" xml:space="preserve">
     <value>Wybrany plik nie wydaje się być prawidłowym plikiem czcionki.</value>
@@ -778,34 +748,28 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Otwórz folder z modami</value>
   </data>
   <data name="Menu.Mods.Presets.EmojiType.Description" xml:space="preserve">
-    <value>Wybierz jakich emotikonów Roblox ma używać.</value>
+    <value>Wybierz, jaki rodzaj emoji Roblox powinien używać.</value>
   </data>
   <data name="Menu.Mods.Presets.EmojiType.Title" xml:space="preserve">
-    <value>Preferowany wygląd emotikonów</value>
+    <value>Preferowany wygląd emoji</value>
   </data>
   <data name="Menu.Mods.Presets.MouseCursor.Description" xml:space="preserve">
-    <value>Wybierz, między dwoma klasycznymi kursorami.</value>
+    <value>Wybierz między dwoma klasycznymi kursorami.</value>
   </data>
   <data name="Menu.Mods.Presets.MouseCursor.Title" xml:space="preserve">
     <value>Kursor myszki</value>
   </data>
   <data name="Menu.Mods.Presets.OldAvatarEditor.Description" xml:space="preserve">
-    <value>Przywróć stare tło edytora awataru, które było używane w aplikacji Roblox przed 2020 rokiem.</value>
+    <value>Przywróć stare tło edytora awatarów, które było używane w aplikacji Roblox przed 2020.</value>
   </data>
   <data name="Menu.Mods.Presets.OldAvatarEditor.Title" xml:space="preserve">
-    <value>Użyj starego tła edytora awatara</value>
+    <value>Użyj starego tła edytora awatarów</value>
   </data>
   <data name="Menu.Mods.Presets.OldCharacterSounds.Description" xml:space="preserve">
-    <value>Próba przywrócenia z powrotem klasycznych dźwięków postaci, które były używane przed rokiem 2014.</value>
+    <value>Przywróć z powrotem klasyczne dźwięki postaci, które były używane przed rokiem 2014.</value>
   </data>
   <data name="Menu.Mods.Presets.OldCharacterSounds.Title" xml:space="preserve">
     <value>Dodaj klasyczne dźwięki postaci</value>
-  </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Description" xml:space="preserve">
-    <value>Przynieś z powrotem klasyczny dźwięk śmierci 'oof'.</value>
-  </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Title" xml:space="preserve">
-    <value>Użyj klasycznego dźwięku śmierci</value>
   </data>
   <data name="Menu.Mods.Title" xml:space="preserve">
     <value>Mody</value>
@@ -844,7 +808,7 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Dotyczy tylko gier uruchamianych ze strony Roblox.</value>
   </data>
   <data name="Enums.FlagPresets.InGameMenuVersion.V4Chrome" xml:space="preserve">
-    <value>2024 (Wersja 4 + Nowy interfejs gry)</value>
+    <value>2023 (Wersja 4 + Nowy interfejs gry)</value>
   </data>
   <data name="Menu.FastFlags.Presets.Categories.Rendering" xml:space="preserve">
     <value>Renderowanie i grafika</value>
@@ -856,16 +820,10 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Zezwól Mrstrap'owi na zarządzanie Fast Flagami</value>
   </data>
   <data name="Menu.FastFlags.ManagerEnabled.Description" xml:space="preserve">
-    <value>Wyłączenie tego zapobiegnie zastosowaniu jakichkolwiek ustawień skonfigurowanych tutaj do Roblox.</value>
+    <value>Wyłączenie tego uniemożliwi zastosowanie jakichkolwiek ustawień skonfigurowanych tutaj do Roblox.</value>
   </data>
   <data name="Menu.FastFlags.Presets.MSAA.Title" xml:space="preserve">
     <value>Jakość antyaliasingu (MSAA)</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
-    <value>Wyłącz efekty post-processingu</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
-    <value>Wyłącz pasek tytułowy w trybie pełnoekranowym</value>
   </data>
   <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Description" xml:space="preserve">
     <value>Wyłącza pasek tytułowy, gdy przesuwasz mysz na górę ekranu.</value>
@@ -874,7 +832,7 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Jakość tekstur</value>
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level0" xml:space="preserve">
-    <value>Poziom 0 (najniższy)</value>
+    <value>Poziom 0 (Najniższy)</value>
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level1" xml:space="preserve">
     <value>Poziom 1</value>
@@ -883,19 +841,7 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Poziom 2</value>
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level3" xml:space="preserve">
-    <value>Poziom 3 (najwyższy)</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
-    <value>Wyłącz cienie graczy</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
-    <value>Rozmiar czcionki</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
-    <value>Domyślna wartość to 1. Dostosuj, jeśli używasz niestandardowej czcionki.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
-    <value>Wyłącz tekstury terenu</value>
+    <value>Poziom 3 (Najwyższy)</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownload" xml:space="preserve">
     <value>Mrstrap nie może pobrać Roblox</value>
@@ -940,11 +886,11 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
     <value>Witaj</value>
   </data>
   <data name="Installer.Install.Title" xml:space="preserve">
-    <value>Zainstaluj</value>
+    <value>Instalacja</value>
     <comment>Refers to "Install" as a verb</comment>
   </data>
   <data name="Installer.Completion.Title" xml:space="preserve">
-    <value>Ukończenie</value>
+    <value>Zakończenie</value>
   </data>
   <data name="Common.Navigation.Back" xml:space="preserve">
     <value>Wstecz</value>
@@ -957,7 +903,7 @@ Wybranie opcji „Nie” spowoduje zignorowanie tego ostrzeżenia i kontynuowani
 
 Jedynymi oficjalnymi stronami internetowymi do pobrania Mrstrap to {0} i {1}, więc potwierdź, że na pewno zainstalowałeś program z jednego z powyżej wymienionych źródeł.
 
-Instalacja nie zajmie długo, i będziesz mógł skonfigurować wszystkie ustawienia dopiero po procesie instalacji.</value>
+Instalacja nie powinna zająć długo. Po tym procesie będziesz mógł skonfigurować wszystkie ustawienia.</value>
     <comment>{0} and {1} are URLs</comment>
   </data>
   <data name="Installer.Welcome.NextToContinue" xml:space="preserve">
@@ -991,7 +937,7 @@ Roblox nie został jeszcze zainstalowany, co powinno nastąpić po pierwszym uru
 
 Zalecane jest unikanie używania skrótu „Roblox Player” do uruchomienia Roblox, ponieważ ten nie uruchamia Mrstrap. Jeżeli nie widzisz Mrstrap podczas uruchamiania ze strony internetowej, zwyczajnie uruchom Roblox z Mrstrap jeden raz z pulpitu, aby to naprawić.
 
-Co chciałbyś teraz zrobić?</value>
+Co chciałbyś zrobić teraz?</value>
   </data>
   <data name="Installer.Completion.Settings.Title" xml:space="preserve">
     <value>Skonfiguruj ustawienia Mrstrap</value>
@@ -1045,9 +991,9 @@ Mrstrap był zainstalowany na "{1}".</value>
     <value>Mrstrap nie mógł utworzyć skrótów na pulpicie i w Menu Start. Spróbuj utworzyć je później w ustawieniach.</value>
   </data>
   <data name="Dialog.Exception.Info.2.Alt" xml:space="preserve">
-    <value>Sprawdź [Mrstrap Wiki]({0}), aby upewnić się, czy twój problem nie został już rozwiązany.
+    <value>Sprawdź [Bloxstrap Wiki]({0}), aby upewnić się, czy twój problem nie został już rozwiązany.
 
-Jeśli nie, zgłoś problem twórcom tego „fork”-a. Podkreślamy, aby NIE zgłaszać tego na oficjalnego GitHub'a, gdyż nie jest to oficjalna wersja programu i nie jesteśmy za nią odpowiedzialni.</value>
+Jeśli nie, zgłoś problem twórcom tej zmodyfikowanej wersji programu. Podkreślamy, aby NIE zgłaszać tego na oficjalnego GitHuba, gdyż nie jest to oficjalna wersja programu i nie jesteśmy za nią odpowiedzialni.</value>
     <comment>"fork" in general means "a variation of" or "a different version of". You can alternatively write the first sentence as "...to the maintainers of this version."</comment>
   </data>
   <data name="Installer.Install.Shortcuts.Description" xml:space="preserve">
@@ -1075,16 +1021,13 @@ Jeśli nie, zgłoś problem twórcom tego „fork”-a. Podkreślamy, aby NIE zg
     <value>Połączono z serwerem zarezerwowanym</value>
   </data>
   <data name="Menu.Mods.Presets.EmojiType.Error" xml:space="preserve">
-    <value>Modyfikacja emotikonów nie może być w tej chwili zastosowana.</value>
+    <value>Modyfikacja emoji nie może być w tej chwili zastosowana.</value>
   </data>
   <data name="Dialog.AlreadyRunning.Installer" xml:space="preserve">
     <value>Proszę poczekać na zakończenie instalacji.</value>
   </data>
   <data name="Dialog.AlreadyRunning.Uninstaller" xml:space="preserve">
     <value>Proszę poczekać na zakończenie odinstalowywania.</value>
-  </data>
-  <data name="About.Title" xml:space="preserve">
-    <value>O Mrstrap</value>
   </data>
   <data name="About.Licenses.Title" xml:space="preserve">
     <value>Licencje</value>
@@ -1108,7 +1051,7 @@ Czy jesteś pewien, że chcesz kontynuować?</value>
     <value>Roblox uległ awarii.</value>
   </data>
   <data name="Dialog.PlayerError.HelpInformation" xml:space="preserve">
-    <value>Aby dowiedzieć się, dlaczego może to się zdarzyć i jak można to rozwiązać, proszę przeczytaj [ten artykuł pomocy] ({0}).
+    <value>Aby dowiedzieć się, dlaczego to się dzieje i jak można to rozwiązać, proszę przeczytać [ten artykuł pomocy]({0}).
 
 Sprawdź, czy Roblox współpracuje z [oryginalnym programem uruchamiającym]({1}). Jeśli nie, to nie jest to problem Mrstrap. Jeśli tak, odnieś się do artykułu pomocy.</value>
   </data>
@@ -1135,7 +1078,7 @@ Każda osoba jest tutaj uszeregowana według swojego ogólnego zobowiązania.</v
     <value>Historia rozgrywek</value>
   </data>
   <data name="ContextMenu.GameHistory.Rejoin" xml:space="preserve">
-    <value>Zagraj ponownie</value>
+    <value>Dołącz ponownie</value>
   </data>
   <data name="ActivityWatcher.RichPresenceLoadFailed" xml:space="preserve">
     <value>Gra, w którą obecnie grasz, nie zostanie pokazana na twoim profilu Discord, ponieważ próba załadowania informacji o grze nie powiodła się.</value>
@@ -1178,7 +1121,7 @@ Prosimy ręcznie usunąć Mrstrap.exe z folderu instalacji lub spróbuj ponownie
     <value>Nie udało się zapisać {0}: {1}</value>
   </data>
   <data name="Dialog.IconLoadFailed" xml:space="preserve">
-    <value>Wybrana ikona launchera nie może być załadowana.
+    <value>Wybrana ikona bootstrappera nie może być załadowana.
 
 {0}</value>
     <comment>{0} is an exception message</comment>
@@ -1198,15 +1141,6 @@ Prosimy ręcznie usunąć Mrstrap.exe z folderu instalacji lub spróbuj ponownie
   <data name="About.Supporters.OneOff" xml:space="preserve">
     <value>Jednorazowo</value>
   </data>
-  <data name="Menu.Voidstrap.Description" xml:space="preserve">
-    <value>Skonfiguruj ustawienia związane z zachowaniem Mrstrap.</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Title" xml:space="preserve">
-    <value>Włącz anonimowe wysyłanie danych analitycznych</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Description" xml:space="preserve">
-    <value>Jest to anonimowe i w pełni bezpieczne, obiecujemy! Jest to nawet do sprawdzenia w naszym kodzie źródłowym. By poznać, jakie dane zbieramy i dlaczego, zobacz naszą [politykę prywatności]({0}).</value>
-  </data>
   <data name="Common.Analytics" xml:space="preserve">
     <value>Analityka</value>
   </data>
@@ -1214,7 +1148,7 @@ Prosimy ręcznie usunąć Mrstrap.exe z folderu instalacji lub spróbuj ponownie
     <value>Zresetuj wszystko do ustawień domyślnych</value>
   </data>
   <data name="Dialog.Exception.Report" xml:space="preserve">
-    <value>Zgłoszenie błędu</value>
+    <value>Zgłoś błąd</value>
   </data>
   <data name="Menu.TestMode" xml:space="preserve">
     <value>Tryb testowania</value>
@@ -1244,19 +1178,22 @@ Czy chcesz włączyć tryb testowania?</value>
   <data name="Dialog.Exception.Version" xml:space="preserve">
     <value>Wersja {0}</value>
   </data>
+  <data name="Enums.BootstrapperStyle.CustomDialog" xml:space="preserve">
+    <value>Niestandardowy</value>
+  </data>
   <data name="Bootstrapper.FilesInUse" xml:space="preserve">
     <value>Mrstrap próbował zaktualizować Roblox, ale nie może, ponieważ pliki Roblox są w użyciu.
 
-Proszę, zamknij wszystkie aplikacje, które mogą używać plików Roblox i uruchom aplikacje ponownie.</value>
+Prosimy zamknąć wszystkie aplikacje, które mogą używać plików Roblox i uruchom aplikację ponownie.</value>
     <comment>This is *not* for when Roblox is still running when trying to upgrade. This applies to files being open (i.e. image assets)</comment>
   </data>
   <data name="FileTypes.ZipArchive" xml:space="preserve">
-    <value>Archiwum zip</value>
+    <value>Archiwum ZIP</value>
     <comment>Shown in the save file dialog, where the file type selection dropdown is, e.g. "Zip archive (*.zip)"</comment>
   </data>
   <data name="Common.Export" xml:space="preserve">
     <value>Eksportuj</value>
-    <comment>Currently used under the "Voidstrap" settings tab for the button to export diagnostic data</comment>
+    <comment>Currently used under the "Fishstrap" settings tab for the button to export diagnostic data</comment>
   </data>
   <data name="Dialog.Connectivity.Preventing" xml:space="preserve">
     <value>Coś prawdopodobnie uniemożliwia aplikacji połączenia się do internetu.</value>
@@ -1281,6 +1218,301 @@ Proszę, zamknij wszystkie aplikacje, które mogą używać plików Roblox i uru
     <value />
   </data>
   <data name="Menu.Channel.RobloxUpgrades" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="App.OSDeprecation.Win7_81" xml:space="preserve">
+    <value>Roblox nie obsługuje już Windows 7 lub 8.1. Aby kontynuować granie w Roblox, proszę zaktualizować do Windows 10 lub nowszego.</value>
+  </data>
+  <data name="Bootstrapper.Status.UpgradingBloxstrap" xml:space="preserve">
+    <value>Pobieranie najnowszej wersji Mrstrap...</value>
+  </data>
+  <data name="Menu.Fishstrap.Description" xml:space="preserve">
+    <value>Skonfiguruj ustawienia związane z zachowaniem Mrstrap.</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Title" xml:space="preserve">
+    <value>Włącz anonimowe wysyłanie danych analitycznych</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Description" xml:space="preserve">
+    <value>Jest to anonimowe i w pełni bezpieczne, obiecujemy! Jest to nawet do sprawdzenia w naszym kodzie źródłowym. By poznać, jakie dane zbieramy i dlaczego, zobacz naszą [politykę prywatności]({0}).</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Blank" xml:space="preserve">
+    <value>Pusty</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Simple" xml:space="preserve">
+    <value>Prosty</value>
+  </data>
+  <data name="CustomTheme.Errors.InvalidRoot" xml:space="preserve">
+    <value>Temat XML root nie jest {0}</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.DialogAlreadyInitialised" xml:space="preserve">
+    <value>Niestandardowe okno dialogowe zostało już zainicjowane</value>
+  </data>
+  <data name="CustomTheme.Errors.TooManyElements" xml:space="preserve">
+    <value>Niestandardowe bootstrappery mogą mieć maksymalnie {0} elementów, ten ma {1}</value>
+    <comment>{0} and {1} are numbers</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSet" xml:space="preserve">
+    <value>Wersja {0} nie jest ustawiona</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotNumber" xml:space="preserve">
+    <value>Wersja {0} nie jest liczbą</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSupported" xml:space="preserve">
+    <value>{0} Wersja {1} nie jest już obsługiwana</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotRecognised" xml:space="preserve">
+    <value>{0} Wersja {1} nie została rozpoznana</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementInvalidChild" xml:space="preserve">
+    <value>{0} nie może mieć obiektu {1}</value>
+    <comment>{0} and {1} are element names (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownElement" xml:space="preserve">
+    <value>Nieznany element {0}</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.XMLParseFailed" xml:space="preserve">
+    <value>Nie udało się odczytać pliku motywu: {0}</value>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeConversionError" xml:space="preserve">
+    <value>{0} ma nieprawidłowy {1}: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissing" xml:space="preserve">
+    <value>Element {0} nie posiada atrybutu {1}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeInvalidType" xml:space="preserve">
+    <value>{0}.{1} nie jest poprawną {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeLargerThanMin" xml:space="preserve">
+    <value>{0}.{1} musi być większe niż {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeSmallerThanMax" xml:space="preserve">
+    <value>{0}.{1} musi być mniejsze niż {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownEnumValue" xml:space="preserve">
+    <value>{0} nieznane {1} '{2}'</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the enum name (e.g. WindowCornerType), {2} is the value</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleDefinitions" xml:space="preserve">
+    <value>{0} może mieć tylko jeden {1} zdefiniowany</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleChildren" xml:space="preserve">
+    <value>{0}.{1} może mieć tylko jeden obiekt</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementMultipleChildren" xml:space="preserve">
+    <value>{0} może mieć tylko jeden obiekt</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissingChild" xml:space="preserve">
+    <value>{0}.{1} nie ma swojego obiektu</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseError" xml:space="preserve">
+    <value>{0}.{1} nie mógł poprawnie odczytać wartości {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseErrorNull" xml:space="preserve">
+    <value>Wartość typu {2} elementu {0}.{1} jest pusty</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeBlacklistedUriScheme" xml:space="preserve">
+    <value>{0}.{1} używa schematu z czarnej listy {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the URI scheme (e.g. http)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementTypeCreationFailed" xml:space="preserve">
+    <value>{0} nie udało się utworzyć {1}: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Editor.Title" xml:space="preserve">
+    <value>Edytowanie "{0}"</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success" xml:space="preserve">
+    <value>Motyw zapisany pomyślnie!</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Error" xml:space="preserve">
+    <value>Wystąpił błąd podczas zapisywania twojego motywu.</value>
+  </data>
+  <data name="CustomTheme.Editor.ConfirmSave" xml:space="preserve">
+    <value>Zapisać zmiany w {0}?</value>
+  </data>
+  <data name="CustomTheme.Editor.Save" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="CustomTheme.Editor.Preview" xml:space="preserve">
+    <value>Podgląd</value>
+  </data>
+  <data name="CustomTheme.Editor.OpenThemeDirectory" xml:space="preserve">
+    <value>Otwórz folder motywu</value>
+  </data>
+  <data name="CustomTheme.Add.Title" xml:space="preserve">
+    <value>Dodaj niestandardowy motyw</value>
+  </data>
+  <data name="Common.Template" xml:space="preserve">
+    <value>Szablon</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameEmpty" xml:space="preserve">
+    <value>Nazwa nie może być pusta</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameIllegalCharacters" xml:space="preserve">
+    <value>Nazwa zawiera niedozwolone znaki</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameReserved" xml:space="preserve">
+    <value>Nazwa nie może zostać użyta</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.Unknown" xml:space="preserve">
+    <value>Nieznany błąd</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameTaken" xml:space="preserve">
+    <value>Nazwa jest już w użyciu</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.FileNotZip" xml:space="preserve">
+    <value>Plik musi być w formacie ZIP</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipMissingThemeFile" xml:space="preserve">
+    <value>Plik motywu nie został znaleziony w pliku ZIP</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipInvalidData" xml:space="preserve">
+    <value>Nieprawidłowy lub uszkodzony plik ZIP</value>
+  </data>
+  <data name="CustomTheme.Errors.NoThemeSelected" xml:space="preserve">
+    <value>Nie wybrano niestandardowego motywu</value>
+  </data>
+  <data name="CustomTheme.Errors.SetupFailed" xml:space="preserve">
+    <value>Nie udało się załadować niestandardowego bootstrappera: {0}.
+Ustawiono domyślnie do {1}.</value>
+    <comment>{0} is the error reason, {1} is the theme name (e.g. Bloxstrap (Classic))</comment>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.NoneSelected" xml:space="preserve">
+    <value>Nie wybrano niestandardowego motywu.</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.DeleteFailed" xml:space="preserve">
+    <value>Nie udało się usunąć niestandardowego motywu {0}: {1}</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.RenameFailed" xml:space="preserve">
+    <value>Nie udało się zmienić nazwy niestandardowego motywu {0}: {1}</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.UIElements" xml:space="preserve">
+    <value>Umieść elementy UI tutaj</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.MoreExamples" xml:space="preserve">
+    <value>Przykłady niestandardowych bootstrapperów można znaleźć na {0}</value>
+  </data>
+  <data name="CustomTheme.Templates.Simple.MoreExamples" xml:space="preserve">
+    <value>Znajdź więcej przykładów niestandardowych bootstrapperów na {0}</value>
+  </data>
+  <data name="CustomTheme.DefaultName" xml:space="preserve">
+    <value>Niestandardowy Motyw {0}</value>
+    <comment>{0} is a string (e.g. '1', '1-1234')</comment>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success.Description" xml:space="preserve">
+    <value>Twój motyw został zapisany!</value>
+  </data>
+  <data name="CustomTheme.Editor.Errors.PreviewFailed" xml:space="preserve">
+    <value>Nie udało się wyświetlić podglądu motywu: {0}</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Title" xml:space="preserve">
+    <value>Nie udało się zastosować modów</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Message" xml:space="preserve">
+    <value>Nie wszystkie modyfikacje będą obecne w bieżącym uruchomieniu.</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Title" xml:space="preserve">
+    <value>Nie udało się rozpakować plików</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Message" xml:space="preserve">
+    <value>Może brakować niektórych treści. Zmuś ponowną instalację Roblox w ustawieniach, aby to naprawić.</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Title" xml:space="preserve">
+    <value>Zezwól na uruchamianie wielu instancji</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Description" xml:space="preserve">
+    <value>Pozwala na uruchomienie więcej niż jednej instancji klienta Roblox w tym samym czasie.</value>
+  </data>
+  <data name="Common.Rename" xml:space="preserve">
+    <value>Zmień nazwę</value>
+  </data>
+  <data name="Common.CreateNew" xml:space="preserve">
+    <value>Stwórz nowy</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Title" xml:space="preserve">
+    <value>Aktualizacje w tle</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Description" xml:space="preserve">
+    <value>Aktualizuj Roblox w tle, zamiast czekać. Nie jest zalecane dla słabych połączeń sieciowych. Aby funkcja zadziałała wymagane jest co najmniej 3 GB wolnego miejsca.</value>
+  </data>
+  <data name="Common.Import" xml:space="preserve">
+    <value>Importuj</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Edytuj</value>
+  </data>
+  <data name="About.Title" xml:space="preserve">
+    <value>O Mrstrap</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
+    <value>Preferowana wersja menu gry</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
+    <value>Ustaw wartość na 0, jeśli chcesz użyć domyślnego limitera klatek na sekundę.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
+    <value>Limit liczby klatek na sekundę</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
+    <value>Przełączane za pomocą [skrótów klawiaturowych]({0}). Działa tylko wtedy, gdy należysz do [grupy Mrstrap]({1}) w Roblox.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
+    <value>Włącz możliwość ukrywania GUI (interfejsu gry)</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
+    <value>Wybrany zostanie wymuszony we wszystkich grach. [Uwaga, to może powodować problemy z oświetleniem!]({0})</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
+    <value>Preferowana technologia oświetlenia</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
+    <value>Wyłącz efekty post-processingu</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
+    <value>Wyłącz pasek tytułowy w trybie pełnoekranowym</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
+    <value>Wyłącz cienie graczy</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
+    <value>Rozmiar czcionki</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
+    <value>Domyślna wartość to 1. Dostosuj, jeśli używasz niestandardowej czcionki.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
+    <value>Wyłącz tekstury terenu</value>
+  </data>
+  <data name="Menu.About.Licenses.Apache" xml:space="preserve">
+    <value>Licencja Apache 2.0</value>
+  </data>
+  <data name="Menu.GBSEditor.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Graphics.Description" xml:space="preserve">
     <value />
   </data>
 </root>

@@ -2,7 +2,7 @@
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Voidstrap.UI.ViewModels.Bootstrapper
+namespace Bloxstrap.UI.ViewModels.Bootstrapper
 {
     public class ByfronDialogViewModel : BootstrapperDialogViewModel
     {

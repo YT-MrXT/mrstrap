@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace Voidstrap.UI.ViewModels.About
+namespace Bloxstrap.UI.ViewModels.About
 {
     public class AboutViewModel : NotifyPropertyChangedViewModel
     {

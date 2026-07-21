@@ -1,7 +1,7 @@
-﻿using Voidstrap.UI.ViewModels.Settings;
+﻿using Bloxstrap.UI.ViewModels.Settings;
 using System.Windows;
 
-namespace Voidstrap.UI.Elements.Settings.Pages
+namespace Bloxstrap.UI.Elements.Settings.Pages
 {
     /// <summary>
     /// Interaction logic for FastFlagEditorWarningPage.xaml

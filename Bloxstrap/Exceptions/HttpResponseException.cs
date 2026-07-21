@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Voidstrap.Exceptions
+namespace Bloxstrap.Exceptions
 {
     internal class HttpResponseException : Exception
     {

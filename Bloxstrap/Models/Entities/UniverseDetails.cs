@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.Models.Entities
+﻿namespace Bloxstrap.Models.Entities
 {
     /// <summary>
     /// Explicit loading. Load from cache before and after a fetch.

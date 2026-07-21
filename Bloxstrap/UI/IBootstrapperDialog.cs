@@ -1,7 +1,7 @@
 ﻿using System.Windows.Forms;
 using System.Windows.Shell;
 
-namespace Voidstrap.UI
+namespace Bloxstrap.UI
 {
     public interface IBootstrapperDialog
     {

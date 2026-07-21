@@ -1,14 +1,15 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
-namespace Voidstrap.UI.Elements.Bootstrapper.Base
+namespace Bloxstrap.UI.Elements.Bootstrapper.Base
 {
     static class BaseFunctions
     {
-        public static void ShowSuccess(string message, Action? callback = null)
+        public static void ShowSuccess(string message, Action? callback)
         {
             Frontend.ShowMessageBox(message, MessageBoxImage.Information);
-            callback?.Invoke();
+
+            if (callback is not null)
+                callback();
 
             App.Terminate();
         }

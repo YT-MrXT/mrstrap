@@ -1,35 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Voidstrap.Models
+namespace Bloxstrap.Models
 {
     public class LaunchFlag
     {
-        // Auto-implemented read-only property to prevent external modification
-        public string Identifiers { get; }
+        public string Identifiers { get; private set; }
 
-        // Backing field for Active property
-        private bool _active;
+        public bool Active = false;
 
-        // Public property with a getter and setter
-        public bool Active
-        {
-            get => _active;
-            set => _active = value;
-        }
+        public string? Data;
 
-        // Nullable property for optional data
-        public string? Data { get; set; }
-
-        // Constructor with null check for identifiers
         public LaunchFlag(string identifiers)
         {
-            Identifiers = identifiers ?? throw new ArgumentNullException(nameof(identifiers));
-            _active = false;
+            Identifiers = identifiers;
         }
-
-        // Methods to manage Active status
-        public void Activate() => _active = true;
-        public void Deactivate() => _active = false;
-        public void Toggle() => _active = !_active;
     }
 }

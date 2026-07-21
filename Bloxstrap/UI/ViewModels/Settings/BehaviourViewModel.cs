@@ -1,172 +1,23 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Management;
-using System.Net.Http;
-using System.Text.Json;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Threading;
-using Voidstrap.AppData;
-using Voidstrap.RobloxInterfaces;
-using static VoidstrapRobloxSettingsManager;
+﻿using Bloxstrap.AppData;
+using Bloxstrap.Enums;
+using Bloxstrap.RobloxInterfaces;
 
-
-namespace Voidstrap.UI.ViewModels.Settings
+namespace Bloxstrap.UI.ViewModels.Settings
 {
     public class BehaviourViewModel : NotifyPropertyChangedViewModel
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
-        private static readonly ConcurrentDictionary<string, (string Url, DateTime Expiry)> _gameIconCache = new();
-        private static readonly ConcurrentDictionary<string, Task<string>> _ongoingRequests = new();
-        private static readonly TimeSpan CacheDuration = TimeSpan.FromHours(1);
 
         public BehaviourViewModel()
         {
-            CleanerItems = new List<string>(App.Settings.Prop.CleanerDirectories);
-            LoadCpuOptions();
-            LoadSettings();
+
         }
 
+        public bool IsRobloxInstallationMissing => String.IsNullOrEmpty(App.RobloxState.Prop.Player.VersionGuid) && String.IsNullOrEmpty(App.RobloxState.Prop.Studio.VersionGuid);
 
-        private string _cpuModelName;
-        public string CpuModelName
+        public bool UpdateRoblox
         {
-            get => _cpuModelName;
-            set
-            {
-                _cpuModelName = value;
-                OnPropertyChanged(nameof(CpuModelName));
-            }
-        }
-
-        private string _cpuSummary;
-        public string CpuSummary
-        {
-            get => _cpuSummary;
-            set
-            {
-                _cpuSummary = value;
-                OnPropertyChanged(nameof(CpuSummary));
-            }
-        }
-
-        private bool _exclusiveFullscreen;
-
-        public bool ExclusiveFullscreen
-        {
-            get => _exclusiveFullscreen;
-            set
-            {
-                _exclusiveFullscreen = value;
-                App.Settings.Prop.ExclusiveFullscreen = value;
-
-                if (value)
-                {
-                    Frontend.ShowMessageBox(
-                        "This disables overlays. Are you sure you want to enable this?"
-                    );
-                }
-            }
-        }
-
-        private void LoadCpuOptions()
-        {
-            try
-            {
-                CpuOptions.Clear();
-
-                int logicalCount = Environment.ProcessorCount;
-                int physicalCount = GetPhysicalCoreCount();
-                string model = "Unknown CPU";
-                try
-                {
-                    using var searcher = new ManagementObjectSearcher("select Name from Win32_Processor");
-                    foreach (var item in searcher.Get())
-                    {
-                        model = item["Name"]?.ToString()?.Trim() ?? "Unknown CPU";
-                        break;
-                    }
-                }
-                catch { }
-
-                CpuModelName = model;
-                CpuSummary = $"{model} | {physicalCount} cores / {logicalCount} threads";
-
-                CpuOptions.Add("Automatic");
-                for (int i = 1; i <= logicalCount; i++)
-                    CpuOptions.Add($"{i} Core{(i > 1 ? "s" : "")}");
-                if (string.IsNullOrWhiteSpace(App.Settings.Prop.SelectedCpuPriority))
-                {
-                    App.Settings.Prop.SelectedCpuPriority = "Automatic";
-                }
-
-                _selectedCpuPriority = App.Settings.Prop.SelectedCpuPriority;
-                OnPropertyChanged(nameof(SelectedCpuPriority));
-                App.Settings.Prop.TotalLogicalCores = logicalCount;
-                App.Settings.Prop.TotalPhysicalCores = physicalCount;
-            }
-            catch
-            {
-                CpuOptions.Clear();
-                CpuOptions.Add("Automatic");
-                _selectedCpuPriority = "Automatic";
-                CpuModelName = "Unknown CPU";
-                CpuSummary = "CPU information unavailable";
-                OnPropertyChanged(nameof(SelectedCpuPriority));
-            }
-        }
-
-
-        private int GetPhysicalCoreCount()
-        {
-            try
-            {
-                using var searcher = new ManagementObjectSearcher("select NumberOfCores from Win32_Processor");
-                int cores = 0;
-                foreach (var item in searcher.Get())
-                {
-                    cores += Convert.ToInt32(item["NumberOfCores"]);
-                }
-                return cores > 0 ? cores : Environment.ProcessorCount;
-            }
-            catch
-            {
-                return Environment.ProcessorCount;
-            }
-        }
-
-        public ObservableCollection<string> CpuOptions { get; } = new ObservableCollection<string>();
-
-        private string _selectedCpuPriority = "Automatic";
-        public string SelectedCpuPriority
-        {
-            get => _selectedCpuPriority;
-            set
-            {
-                if (_selectedCpuPriority != value)
-                {
-                    _selectedCpuPriority = value;
-                    OnPropertyChanged(nameof(SelectedCpuPriority));
-                    App.Settings.Prop.SelectedCpuPriority = value;
-                }
-            }
-        }
-
-        public bool disablecrashhandleryayyysocool
-        {
-            get => App.Settings.Prop.DisableCrash;
-            set
-            {
-                if (App.Settings.Prop.DisableCrash != value)
-                {
-                    App.Settings.Prop.DisableCrash = value;
-                    OnPropertyChanged(nameof(disablecrashhandleryayyysocool));
-                }
-            }
+            get => App.Settings.Prop.UpdateRoblox && !IsRobloxInstallationMissing;
+            set => App.Settings.Prop.UpdateRoblox = value;
         }
 
         public bool ConfirmLaunches
@@ -175,109 +26,16 @@ namespace Voidstrap.UI.ViewModels.Settings
             set => App.Settings.Prop.ConfirmLaunches = value;
         }
 
-        public bool IsBetterServersEnabled
-        {
-            get => App.Settings.Prop.IsBetterServersEnabled;
-            set => App.Settings.Prop.IsBetterServersEnabled = value;
-        }
-
-        public bool OverClockCPU
-        {
-            get => App.Settings.Prop.OverClockCPU;
-            set => App.Settings.Prop.OverClockCPU = value;
-        }
-
-        public bool IsGameEnabled
-        {
-            get => App.Settings.Prop.IsGameEnabled;
-            set => App.Settings.Prop.IsGameEnabled = value;
-        }
-
-        public bool OverClockGPU
-        {
-            get => App.Settings.Prop.OverClockGPU;
-            set => App.Settings.Prop.OverClockGPU = value;
-        }
-
-        public bool OptimizeRoblox
-        {
-            get => App.Settings.Prop.OptimizeRoblox;
-            set => App.Settings.Prop.OptimizeRoblox = value;
-        }
-
-        public bool MultiAccount
-        {
-            get => App.Settings.Prop.MultiAccount;
-            set => App.Settings.Prop.MultiAccount = value;
-        }
-
         public bool ForceRobloxLanguage
         {
             get => App.Settings.Prop.ForceRobloxLanguage;
             set => App.Settings.Prop.ForceRobloxLanguage = value;
         }
 
-        public bool BackgroundWindow
+        public bool BackgroundUpdates
         {
-            get => App.Settings.Prop.BackgroundWindow;
-            set => App.Settings.Prop.BackgroundWindow = value;
-        }
-
-        public ObservableCollection<MemoryCleanerInterval> MemoryCleanerIntervals { get; }
-            = new()
-            {
-        new() { Name = "Never", Seconds = 0 },
-        new() { Name = "Every 30 seconds", Seconds = 30 },
-        new() { Name = "Every 1 minute", Seconds = 60 },
-        new() { Name = "Every 2 minutes", Seconds = 120 },
-        new() { Name = "Every 5 minutes", Seconds = 300 },
-        new() { Name = "Every 10 minutes", Seconds = 600 },
-        new() { Name = "Every 15 minutes", Seconds = 900 },
-        new() { Name = "Every 20 minutes", Seconds = 1200 },
-        new() { Name = "Every 25 minutes", Seconds = 1500 },
-        new() { Name = "Every 30 minutes", Seconds = 1800 },
-            };
-
-        private MemoryCleanerInterval _selectedMemoryCleanerInterval;
-        public MemoryCleanerInterval SelectedMemoryCleanerInterval
-        {
-            get => _selectedMemoryCleanerInterval;
-            set
-            {
-                if (_selectedMemoryCleanerInterval != value)
-                {
-                    _selectedMemoryCleanerInterval = value;
-                    OnPropertyChanged(nameof(SelectedMemoryCleanerInterval));
-                    SaveSettings();
-                }
-            }
-        }
-
-        private void LoadSettings()
-        {
-            var settings = VoidstrapRobloxSettingsManager.Load();
-
-            SelectedMemoryCleanerInterval =
-                MemoryCleanerIntervals.FirstOrDefault(x =>
-                    x.Seconds == settings.MemoryCleanerIntervalSeconds)
-                ?? MemoryCleanerIntervals[0];
-        }
-
-        private void SaveSettings()
-        {
-            var settings = new VoidstrapRobloxSettings
-            {
-                MemoryCleanerIntervalSeconds =
-                    SelectedMemoryCleanerInterval?.Seconds ?? 0
-            };
-
-            VoidstrapRobloxSettingsManager.Save(settings);
-        }
-
-        public bool RenameClientToEurotrucks2
-        {
-            get => App.Settings.Prop.RenameClientToEuroTrucks2;
-            set => App.Settings.Prop.RenameClientToEuroTrucks2 = value;
+            get => App.Settings.Prop.BackgroundUpdatesEnabled;
+            set => App.Settings.Prop.BackgroundUpdatesEnabled = value;
         }
 
         public CleanerOptions SelectedCleanUpMode
@@ -286,37 +44,28 @@ namespace Voidstrap.UI.ViewModels.Settings
             set => App.Settings.Prop.CleanerOptions = value;
         }
 
-        public IEnumerable<CleanerOptions> CleanerOptions => CleanerOptionsEx.Selections;
+        public IEnumerable<CleanerOptions> CleanerOptions { get; } = CleanerOptionsEx.Selections;
 
         public CleanerOptions CleanerOption
         {
             get => App.Settings.Prop.CleanerOptions;
-            set => App.Settings.Prop.CleanerOptions = value;
+            set
+            {
+                App.Settings.Prop.CleanerOptions = value;
+            }
         }
 
-        private List<string> CleanerItems;
-
-        private void UpdateCleanerItems()
-        {
-            App.Settings.Prop.CleanerDirectories = new List<string>(CleanerItems);
-        }
+        private List<string> CleanerItems = App.Settings.Prop.CleanerDirectories;
 
         public bool CleanerLogs
         {
             get => CleanerItems.Contains("RobloxLogs");
             set
             {
-                if (value && !CleanerItems.Contains("RobloxLogs"))
-                {
+                if (value)
                     CleanerItems.Add("RobloxLogs");
-                    UpdateCleanerItems();
-                }
-                else if (!value && CleanerItems.Contains("RobloxLogs"))
-                {
-                    CleanerItems.Remove("RobloxLogs");
-                    UpdateCleanerItems();
-                }
-                OnPropertyChanged(nameof(CleanerLogs));
+                else
+                    CleanerItems.Remove("RobloxLogs"); // should we try catch it?
             }
         }
 
@@ -325,43 +74,29 @@ namespace Voidstrap.UI.ViewModels.Settings
             get => CleanerItems.Contains("RobloxCache");
             set
             {
-                if (value && !CleanerItems.Contains("RobloxCache"))
-                {
+                if (value)
                     CleanerItems.Add("RobloxCache");
-                    UpdateCleanerItems();
-                }
-                else if (!value && CleanerItems.Contains("RobloxCache"))
-                {
+                else
                     CleanerItems.Remove("RobloxCache");
-                    UpdateCleanerItems();
-                }
-                OnPropertyChanged(nameof(CleanerCache));
             }
         }
 
-        public bool CleanerVoidstrap
+        public bool CleanerFishstrap
         {
-            get => CleanerItems.Contains("VoidstrapLogs");
+            get => CleanerItems.Contains("FishstrapLogs");
             set
             {
-                if (value && !CleanerItems.Contains("VoidstrapLogs"))
-                {
-                    CleanerItems.Add("VoidstrapLogs");
-                    UpdateCleanerItems();
-                }
-                else if (!value && CleanerItems.Contains("VoidstrapLogs"))
-                {
-                    CleanerItems.Remove("VoidstrapLogs");
-                    UpdateCleanerItems();
-                }
-                OnPropertyChanged(nameof(CleanerVoidstrap));
+                if (value)
+                    CleanerItems.Add("FishstrapLogs");
+                else
+                    CleanerItems.Remove("FishstrapLogs");
             }
         }
-
-        public class MemoryCleanerInterval
+        
+        public bool ForceRobloxReinstallation
         {
-            public string Name { get; set; } = string.Empty;
-            public int Seconds { get; set; }
+            get => App.State.Prop.ForceReinstall || IsRobloxInstallationMissing;
+            set => App.State.Prop.ForceReinstall = value;
         }
     }
 }

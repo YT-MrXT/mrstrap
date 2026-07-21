@@ -157,9 +157,6 @@
   <data name="Bootstrapper.Status.Upgrading" xml:space="preserve">
     <value>{product} sedang dinaik taraf...</value>
   </data>
-  <data name="Bootstrapper.Status.UpgradingVoidstrap" xml:space="preserve">
-    <value>Mencuba mendapatkan aplikasi Mrstrap terbaharu...</value>
-  </data>
   <data name="Bootstrapper.Status.WaitingOtherInstances" xml:space="preserve">
     <value>Menunggu "instances" yang lain...</value>
   </data>
@@ -389,12 +386,6 @@ Jika belum, sila laporkan masalah tersebut melalui [isu GitHub]({1}) bersama den
   <data name="Enums.Theme.Light" xml:space="preserve">
     <value>Cerah</value>
   </data>
-  <data name="Enums.Theme.Red" xml:space="preserve">
-    <value>Cerah</value>
-  </data>
-  <data name="Enums.Theme.Blue" xml:space="preserve">
-    <value>Cerah</value>
-  </data>
   <data name="InstallChecker.Updated" xml:space="preserve">
     <value>Mrstrap telah dinaik taraf ke v{0}</value>
   </data>
@@ -445,7 +436,7 @@ Jika belum, sila laporkan masalah tersebut melalui [isu GitHub]({1}) bersama den
   </data>
   <data name="Menu.About.Version" xml:space="preserve">
     <value>Versi {0}</value>
-    <comment>{0} is replaced with the version, i.e. "Version 1.0.3.6"</comment>
+    <comment>{0} is replaced with the version, i.e. "Version 2.8.0"</comment>
   </data>
   <data name="Menu.AllFiles" xml:space="preserve">
     <value>Semua fail</value>
@@ -616,32 +607,11 @@ JANGAN mengimport sebarang senarai "Fast Flags" yang dibuat oleh pengguna lain y
   <data name="Menu.FastFlags.Presets.D3DExclusiveFullscreenInfo" xml:space="preserve">
     <value>Direct3D untuk [skrin penuh eksklusif]({0}) menggunakan Alt+Enter telah diaktifkan secara lalai.</value>
   </data>
-  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
-    <value>Pilih versi menu keluar</value>
-  </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Description" xml:space="preserve">
     <value>Roblox akan mengurangkan kualiti "rendering" bergantung pada skala skrin anda dalam Windows.</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Title" xml:space="preserve">
     <value>Kekalkan kualiti "rendering" bersama dengan skala paparan</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
-    <value>Jika anda ingin menggunakan kadar bingkai Roblox yang asal, tetapkan kepada 0.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
-    <value>Had kadar bingkai</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
-    <value>Diaktifkan menggunakan [pintasan papan kekunci]({0}). Fungsi ini hanya akan berfungsi jika anda berada dalam [kumpulan Mrstrap] sahaja ({1}).</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
-    <value>Aktifkan keupayaan untuk menyembunyikan GUI</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
-    <value>Pilihan yang anda pilih akan dipaksa diaktifkan dalam semua permainan. [Amaran! ia berkemungkinan akan menyebabkan masalah pencahayaan pada permainan]({0})</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
-    <value>Pilihan teknologi pencahayaan</value>
   </data>
   <data name="Menu.FastFlags.Presets.RenderingMode.Title" xml:space="preserve">
     <value>Mod "rendering"</value>
@@ -798,12 +768,6 @@ Memilih 'Tidak' akan mengabaikan amaran ini dan pemasangan akan diteruskan.</val
   <data name="Menu.Mods.Presets.OldCharacterSounds.Title" xml:space="preserve">
     <value>Mensimulasikan bunyi karakter lama</value>
   </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Description" xml:space="preserve">
-    <value>Mengembalikan bunyi klasik "Oof".</value>
-  </data>
-  <data name="Menu.Mods.Presets.OldDeathSound.Title" xml:space="preserve">
-    <value>Gunakan bunyi "Oof" lama</value>
-  </data>
   <data name="Menu.Mods.Title" xml:space="preserve">
     <value>Mod</value>
   </data>
@@ -858,12 +822,6 @@ Memilih 'Tidak' akan mengabaikan amaran ini dan pemasangan akan diteruskan.</val
   <data name="Menu.FastFlags.Presets.MSAA.Title" xml:space="preserve">
     <value>Kualiti anti-aliasing (MSAA)</value>
   </data>
-  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
-    <value>Nyahaktifkan kesan pasca pemprosesan</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
-    <value>Nyahaktifkan bar tajuk skrin penuh</value>
-  </data>
   <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Description" xml:space="preserve">
     <value>Menghalang ia daripada muncul ketika anda menggerakkan tetikus ke bahagian atas skrin.</value>
   </data>
@@ -881,18 +839,6 @@ Memilih 'Tidak' akan mengabaikan amaran ini dan pemasangan akan diteruskan.</val
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level3" xml:space="preserve">
     <value>Tahap 3 (Tertinggi)</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
-    <value>Nyahaktifkan bayang pada pemain</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
-    <value>Saiz font</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
-    <value>Nilai asal adalah 1. Laraskan jika anda menggunakan font sendiri.</value>
-  </data>
-  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
-    <value>Nyahaktifkan tekstur permukaan rupa bumi</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownload" xml:space="preserve">
     <value>Mrstrap tidak dapat memuat turun Roblox</value>
@@ -1079,9 +1025,6 @@ Jika tidak, sila laporkan isu pengecualian ini kepada penyelenggara fork ini. JA
   <data name="Dialog.AlreadyRunning.Uninstaller" xml:space="preserve">
     <value>Sila tunggu sehingga nyahpasang selesai.</value>
   </data>
-  <data name="About.Title" xml:space="preserve">
-    <value>Perihal Mrstrap</value>
-  </data>
   <data name="About.Licenses.Title" xml:space="preserve">
     <value>Lisensi</value>
     <comment>Referring to code licenses; see https://opensource.org/licenses for example</comment>
@@ -1190,15 +1133,6 @@ Sila buang fail Mrstrap.exe secara manual dari lokasi pemasangan atau cuba mulak
   <data name="About.Supporters.OneOff" xml:space="preserve">
     <value>Sumbangan sekali</value>
   </data>
-  <data name="Menu.Voidstrap.Description" xml:space="preserve">
-    <value>Konfigurasi opsyen yang berkaitan dengan tingkah laku Mrstrap itu sendiri.</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Title" xml:space="preserve">
-    <value>Benarkan penghantaran analitik</value>
-  </data>
-  <data name="Menu.Voidstrap.Analytics.Description" xml:space="preserve">
-    <value>Untuk maklumat tentang apa yang kami kumpulkan dan sebabnya, rujuk dasar [privasi kami.]({0}). Ia adalah secara anonim dan tidak berniat jahat, kami janji.</value>
-  </data>
   <data name="Common.Analytics" xml:space="preserve">
     <value>Analitik</value>
   </data>
@@ -1236,6 +1170,9 @@ Adakah anda ingin mengaktifkan mod pengujian?</value>
   <data name="Dialog.Exception.Version" xml:space="preserve">
     <value>Versi {0}</value>
   </data>
+  <data name="Enums.BootstrapperStyle.CustomDialog" xml:space="preserve">
+    <value>Tersuai</value>
+  </data>
   <data name="Bootstrapper.FilesInUse" xml:space="preserve">
     <value>Mrstrap cuba menaik taraf Roblox tetapi gagal kerana fail Roblox sedang digunakan.
 Sila tutup sebarang aplikasi yang mungkin menggunakan fail Roblox, dan cuba lagi.</value>
@@ -1247,7 +1184,7 @@ Sila tutup sebarang aplikasi yang mungkin menggunakan fail Roblox, dan cuba lagi
   </data>
   <data name="Common.Export" xml:space="preserve">
     <value>Eksport</value>
-    <comment>Currently used under the "Voidstrap" settings tab for the button to export diagnostic data</comment>
+    <comment>Currently used under the "Fishstrap" settings tab for the button to export diagnostic data</comment>
   </data>
   <data name="Dialog.Connectivity.Preventing" xml:space="preserve">
     <value>Kemungkinan ada sesuatu yang menghalang Mrstrap daripada menyambung ke internet.</value>
@@ -1272,6 +1209,300 @@ Sila tutup sebarang aplikasi yang mungkin menggunakan fail Roblox, dan cuba lagi
     <value />
   </data>
   <data name="Menu.Channel.RobloxUpgrades" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
+  </data>
+  <data name="App.OSDeprecation.Win7_81" xml:space="preserve">
+    <value>Roblox tidak lagi menyokong Windows 7 atau 8.1. Untuk terus bermain Roblox, sila naik taraf ke Windows 10 atau versi yang lebih baharu.</value>
+  </data>
+  <data name="Bootstrapper.Status.UpgradingBloxstrap" xml:space="preserve">
+    <value>Mencuba mendapatkan aplikasi Mrstrap terbaharu...</value>
+  </data>
+  <data name="Menu.Fishstrap.Description" xml:space="preserve">
+    <value>Konfigurasi opsyen yang berkaitan dengan tingkah laku Mrstrap itu sendiri.</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Title" xml:space="preserve">
+    <value>Benarkan penghantaran analitik</value>
+  </data>
+  <data name="Menu.Fishstrap.Analytics.Description" xml:space="preserve">
+    <value>Untuk maklumat tentang apa yang kami kumpulkan dan sebabnya, rujuk dasar [privasi kami.]({0}). Ia adalah secara anonim dan tidak berniat jahat, kami janji.</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Blank" xml:space="preserve">
+    <value>Kosong</value>
+  </data>
+  <data name="Enums.CustomThemeTemplate.Simple" xml:space="preserve">
+    <value>Ringkas</value>
+  </data>
+  <data name="CustomTheme.Errors.InvalidRoot" xml:space="preserve">
+    <value>Akar XML tema bukan {0}</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.DialogAlreadyInitialised" xml:space="preserve">
+    <value>Dialog tersuai telah dimulakan</value>
+  </data>
+  <data name="CustomTheme.Errors.TooManyElements" xml:space="preserve">
+    <value>Bootstrapper yang diubah boleh mempunyai maksimum {0} elemen, tetapi hanya akan menerima {1}</value>
+    <comment>{0} and {1} are numbers</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSet" xml:space="preserve">
+    <value>Versi {0} tidak ditetapkan</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotNumber" xml:space="preserve">
+    <value>Versi {0} bukan nombor</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotSupported" xml:space="preserve">
+    <value>Versi {0} {1} tidak lagi disokong</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.VersionNotRecognised" xml:space="preserve">
+    <value>Versi {0} {1} tidak dikenali</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementInvalidChild" xml:space="preserve">
+    <value>{0} tidak boleh mempunyai elemen bawahan {1}</value>
+    <comment>{0} and {1} are element names (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownElement" xml:space="preserve">
+    <value>Elemen {0} tidak diketahui</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.XMLParseFailed" xml:space="preserve">
+    <value>Gagal untuk menghuraikan fail tema: {0}</value>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeConversionError" xml:space="preserve">
+    <value>{0} mempunyai {1} yang tidak sah: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissing" xml:space="preserve">
+    <value>Elemen {0} tiada atribut {1}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeInvalidType" xml:space="preserve">
+    <value>{0}.{1} bukan {2} yang sah</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeLargerThanMin" xml:space="preserve">
+    <value>{0}.{1} mesti lebih besar daripada {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMustBeSmallerThanMax" xml:space="preserve">
+    <value>{0}.{1} mesti lebih kecil daripada {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
+  </data>
+  <data name="CustomTheme.Errors.UnknownEnumValue" xml:space="preserve">
+    <value>{0} {1} '{2}' tidak diketahui</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the enum name (e.g. WindowCornerType), {2} is the value</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleDefinitions" xml:space="preserve">
+    <value>{0} hanya boleh mempunyai satu {1} yang ditetapkan</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMultipleChildren" xml:space="preserve">
+    <value>{0}.{1} hanya boleh mempunyai satu elemen bawahan</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementMultipleChildren" xml:space="preserve">
+    <value>{0} hanya boleh mempunyai satu elemen bawahan</value>
+    <comment>{0} is the element name (e.g. Button)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeMissingChild" xml:space="preserve">
+    <value>{0}.{1} tiada eleman bawahan</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseError" xml:space="preserve">
+    <value>{0}.{1} gagal dihuraikan menjadi {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeParseErrorNull" xml:space="preserve">
+    <value>{0}.{1} {2} adalah kosong</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementAttributeBlacklistedUriScheme" xml:space="preserve">
+    <value>{0}: {1} menggunakan skema yang disenaraihitamkan {2}</value>
+    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the URI scheme (e.g. http)</comment>
+  </data>
+  <data name="CustomTheme.Errors.ElementTypeCreationFailed" xml:space="preserve">
+    <value>{0} tidak berjaya mencipta {1}: {2}</value>
+    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
+  </data>
+  <data name="CustomTheme.Editor.Title" xml:space="preserve">
+    <value>Menyunting "{0}"</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success" xml:space="preserve">
+    <value>Tema berjaya disimpan!</value>
+  </data>
+  <data name="CustomTheme.Editor.Save.Error" xml:space="preserve">
+    <value>Ralat berlaku semasa menyimpan tema anda.</value>
+  </data>
+  <data name="CustomTheme.Editor.ConfirmSave" xml:space="preserve">
+    <value>Simpan perubahan pada {0}?</value>
+  </data>
+  <data name="CustomTheme.Editor.Save" xml:space="preserve">
+    <value>Simpan</value>
+  </data>
+  <data name="CustomTheme.Editor.Preview" xml:space="preserve">
+    <value>Previu</value>
+  </data>
+  <data name="CustomTheme.Editor.OpenThemeDirectory" xml:space="preserve">
+    <value>Buka Direktori Tema</value>
+  </data>
+  <data name="CustomTheme.Add.Title" xml:space="preserve">
+    <value>Tambah Tema Suai</value>
+  </data>
+  <data name="Common.Template" xml:space="preserve">
+    <value>Templat</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameEmpty" xml:space="preserve">
+    <value>Nama tidak boleh kosong</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameIllegalCharacters" xml:space="preserve">
+    <value>Nama mengandungi aksara yang tidak sah</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameReserved" xml:space="preserve">
+    <value>Nama tidak boleh digunakan</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.Unknown" xml:space="preserve">
+    <value>Ralat tidak diketahui</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.NameTaken" xml:space="preserve">
+    <value>Nama sudah digunakan</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.FileNotZip" xml:space="preserve">
+    <value>Fail mesti dalam format ZIP</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipMissingThemeFile" xml:space="preserve">
+    <value>Fail tema tidak dapat ditemui dalam fail ZIP</value>
+  </data>
+  <data name="CustomTheme.Add.Errors.ZipInvalidData" xml:space="preserve">
+    <value>Fail ZIP tidak wujud atau telah rosak</value>
+  </data>
+  <data name="CustomTheme.Errors.NoThemeSelected" xml:space="preserve">
+    <value>Tiada tema suai dipilih</value>
+  </data>
+  <data name="CustomTheme.Errors.SetupFailed" xml:space="preserve">
+    <value>Gagal menyediakan bootstrapper tersuai: {0}. Menggunakan tetapan lalai balik kepada {1}.</value>
+    <comment>{0} is the error reason, {1} is the theme name (e.g. Bloxstrap (Classic))</comment>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.NoneSelected" xml:space="preserve">
+    <value>Tiada tema suai dipilih.</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.DeleteFailed" xml:space="preserve">
+    <value>Gagal memadam tema tersuai {0}: {1}</value>
+  </data>
+  <data name="Menu.Appearance.CustomThemes.RenameFailed" xml:space="preserve">
+    <value>Tidak berjaya menamakan semula tema tersuai {0}: {1}</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.UIElements" xml:space="preserve">
+    <value>Letakkan elemen UI di sini</value>
+  </data>
+  <data name="CustomTheme.Templates.Blank.MoreExamples" xml:space="preserve">
+    <value>Contoh bootstrappers suai boleh didapati di {0}</value>
+  </data>
+  <data name="CustomTheme.Templates.Simple.MoreExamples" xml:space="preserve">
+    <value>Cari lebih banyak contoh bootstrapper di {0}</value>
+  </data>
+  <data name="CustomTheme.DefaultName" xml:space="preserve">
+    <value>Tema Suai {0}</value>
+    <comment>{0} is a string (e.g. '1', '1-1234')</comment>
+  </data>
+  <data name="CustomTheme.Editor.Save.Success.Description" xml:space="preserve">
+    <value>Tema anda telah disimpan!</value>
+  </data>
+  <data name="CustomTheme.Editor.Errors.PreviewFailed" xml:space="preserve">
+    <value>Gagal untuk previu tema: {0}</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Title" xml:space="preserve">
+    <value>Gagal menerapkan pengubahsuaian</value>
+  </data>
+  <data name="Bootstrapper.ModificationsFailed.Message" xml:space="preserve">
+    <value>Tidak semua pengubahsuaian akan muncul dalam pelancaran.</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Title" xml:space="preserve">
+    <value>Gagal untuk mengekstrak fail</value>
+  </data>
+  <data name="Bootstrapper.ExtractionFailed.Message" xml:space="preserve">
+    <value>Sebahagian kandungan mungkin hilang. Sila pergi ke bahagian tetapan untuk memaksa pemasangan semula Roblox bagi membetulkan masalah ini.</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Title" xml:space="preserve">
+    <value>Benarkan pelancaran lebih dari satu instance</value>
+  </data>
+  <data name="Menu.Integrations.MultiInstanceLaunching.Description" xml:space="preserve">
+    <value>Membenarkan lebih daripada satu instance klien permainan Roblox dibuka secara serentak.</value>
+  </data>
+  <data name="Common.Rename" xml:space="preserve">
+    <value>Namakan Semula</value>
+  </data>
+  <data name="Common.CreateNew" xml:space="preserve">
+    <value>Buat baharu</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Title" xml:space="preserve">
+    <value>Kemas kini latar belakang</value>
+  </data>
+  <data name="Menu.Behaviour.BackgroundUpdates.Description" xml:space="preserve">
+    <value>Kemas kini Roblox di latar belakang tanpa menunggu. Ciri ini tidak disarankan untuk internet yang perlahan dan memerlukan sekurang-kurangnya 3GB ruang storan kosong untuk ia berfungsi dengan baik.</value>
+  </data>
+  <data name="Common.Import" xml:space="preserve">
+    <value>Import</value>
+  </data>
+  <data name="Common.Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="About.Title" xml:space="preserve">
+    <value>Perihal Mrstrap</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
+    <value>Pilih versi menu keluar</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
+    <value>Jika anda ingin menggunakan kadar bingkai Roblox yang asal, tetapkan kepada 0.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
+    <value>Had kadar bingkai</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
+    <value>Diaktifkan menggunakan [pintasan papan kekunci]({0}). Fungsi ini hanya akan berfungsi jika anda berada dalam [kumpulan Mrstrap] sahaja ({1}).</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
+    <value>Aktifkan keupayaan untuk menyembunyikan GUI</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
+    <value>Pilihan yang anda pilih akan dipaksa diaktifkan dalam semua permainan. [Amaran! ia berkemungkinan akan menyebabkan masalah pencahayaan pada permainan]({0})</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
+    <value>Pilihan teknologi pencahayaan</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
+    <value>Nyahaktifkan kesan pasca pemprosesan</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
+    <value>Nyahaktifkan bar tajuk skrin penuh</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
+    <value>Nyahaktifkan bayang pada pemain</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
+    <value>Saiz font</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
+    <value>Nilai asal adalah 1. Laraskan jika anda menggunakan font sendiri.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
+    <value>Nyahaktifkan tekstur permukaan rupa bumi</value>
+  </data>
+  <data name="Menu.About.Licenses.Apache" xml:space="preserve">
+    <value>Lesen Apache 2.0</value>
+  </data>
+  <data name="Menu.GBSEditor.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Title" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Transparency.Description" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Menu.GBSEditor.Graphics.Description" xml:space="preserve">
     <value />
   </data>
 </root>

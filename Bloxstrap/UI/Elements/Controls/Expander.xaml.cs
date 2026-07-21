@@ -15,7 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Wpf.Ui.Common;
 
-namespace Voidstrap.UI.Elements.Controls
+namespace Bloxstrap.UI.Elements.Controls
 {
   /// <summary>
   /// Interaction logic for Expander.xaml

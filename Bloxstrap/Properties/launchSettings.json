@@ -1,43 +1,39 @@
 {
-    "profiles": {
-        "Voidstrap (Launch)": {
-            "commandName": "Project"
-        },
-        "Voidstrap (Quiet Launch)": {
-            "commandName": "Project",
-            "commandLineArgs": "-quiet"
-        },
-        "Voidstrap (Install)": {
-            "commandName": "Project",
-            "commandLineArgs": "-install"
-        },
-        "Voidstrap (Uninstall)": {
-            "commandName": "Project",
-            "commandLineArgs": "-uninstall"
-        },
-        "Voidstrap (Quiet Uninstall)": {
-            "commandName": "Project",
-            "commandLineArgs": "-uninstall -quiet"
-        },
-        "Voidstrap (Menu)": {
-            "commandName": "Project",
-            "commandLineArgs": "-menu"
-        },
-        "Voidstrap (Deeplink)": {
-            "commandName": "Project",
-            "commandLineArgs": "-player \"roblox://experiences/start?placeId=286090429\""
-        },
-        "Voidstrap (Studio Launch)": {
-            "commandName": "Project",
-            "commandLineArgs": "-studio"
-        },
-        "Voidstrap (Watcher)": {
-            "commandName": "Project",
-            "commandLineArgs": "-watcher"
-        },
-        "Voidstrap (Bloxshade)": {
-            "commandName": "Project",
-            "commandLineArgs": "-bloxshade"
-        }
+  "profiles": {
+    "Fishstrap (Launch)": {
+      "commandName": "Project"
+    },
+    "Fishstrap (Quiet Launch)": {
+      "commandName": "Project",
+      "commandLineArgs": "-quiet"
+    },
+    "Fishstrap (Uninstall)": {
+      "commandName": "Project",
+      "commandLineArgs": "-uninstall"
+    },
+    "Fishstrap (Quiet Uninstall)": {
+      "commandName": "Project",
+      "commandLineArgs": "-uninstall -quiet"
+    },
+    "Fishstrap (Menu)": {
+      "commandName": "Project",
+      "commandLineArgs": "-menu"
+    },
+    "Fishstrap (Deeplink)": {
+      "commandName": "Project",
+      "commandLineArgs": "-player \"roblox://experiences/start?placeId=13700835620\""
+    },
+    "Fishstrap (Studio Launch)": {
+      "commandName": "Project",
+      "commandLineArgs": "-studio"
+    },
+    "Fishstrap (Watcher)": {
+      "commandName": "Project",
+      "commandLineArgs": "-watcher"
+    },
+    "Fishstrap (Bloxshade)": {
+      "commandName": "Project",
+      "commandLineArgs": "-bloxshade"
     }
+  }
 }

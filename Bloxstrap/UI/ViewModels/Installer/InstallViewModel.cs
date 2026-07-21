@@ -2,11 +2,11 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Voidstrap.UI.ViewModels.Installer
+namespace Bloxstrap.UI.ViewModels.Installer
 {
     public class InstallViewModel : NotifyPropertyChangedViewModel
     {
-        private readonly Voidstrap.Installer installer = new();
+        private readonly Bloxstrap.Installer installer = new();
 
         private readonly string _originalInstallLocation;
 
@@ -44,6 +44,22 @@ namespace Voidstrap.UI.ViewModels.Installer
         {
             get => installer.CreateStartMenuShortcuts;
             set => installer.CreateStartMenuShortcuts = value;
+        }
+
+        public bool ImportSettings
+        {
+            get => installer.ImportSettings;
+            set => installer.ImportSettings = value;
+        }
+
+        public bool ImportSettingsEnabled
+        {
+            get => Directory.Exists(installer.BloxstrapInstallDirectory);
+        }
+
+        public bool ShowNotFound // im lazy
+        {
+            get => !Directory.Exists(installer.BloxstrapInstallDirectory);
         }
 
         public ICommand BrowseInstallLocationCommand => new RelayCommand(BrowseInstallLocation);

@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Voidstrap.UI.ViewModels.Installer
+namespace Bloxstrap.UI.ViewModels.Installer
 {
     public class MainWindowViewModel : NotifyPropertyChangedViewModel
     {

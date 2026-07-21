@@ -1,7 +1,7 @@
-﻿using Voidstrap.Integrations;
-using Voidstrap.UI.ViewModels.ContextMenu;
+﻿using Bloxstrap.Integrations;
+using Bloxstrap.UI.ViewModels.ContextMenu;
 
-namespace Voidstrap.UI.Elements.ContextMenu
+namespace Bloxstrap.UI.Elements.ContextMenu
 {
     /// <summary>
     /// Interaction logic for ServerInformation.xaml

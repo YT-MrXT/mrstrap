@@ -1,8 +1,9 @@
-﻿using System.Drawing;
+using System.Drawing;
+using System.IO;
 using System.Windows.Media.Imaging;
 using System.Windows.Media;
 
-namespace Voidstrap.Extensions
+namespace Bloxstrap.Extensions
 {
     public static class IconEx
     {
@@ -12,6 +13,7 @@ namespace Voidstrap.Extensions
         {
             using MemoryStream stream = new();
             icon.Save(stream);
+            stream.Seek(0, SeekOrigin.Begin);
 
             if (handleException)
             {
@@ -22,8 +24,8 @@ namespace Voidstrap.Extensions
                 catch (Exception ex)
                 {
                     App.Logger.WriteException("IconEx::GetImageSource", ex);
-                    Frontend.ShowMessageBox(String.Format(Strings.Dialog_IconLoadFailed, ex.Message));
-                    return BootstrapperIcon.IconVoidstrap.GetIcon().GetImageSource(false);
+                    Frontend.ShowMessageBox(string.Format(Strings.Dialog_IconLoadFailed, ex.Message));
+                    return BootstrapperIcon.IconBloxstrap.GetIcon().GetImageSource(false);
                 }
             }
             else

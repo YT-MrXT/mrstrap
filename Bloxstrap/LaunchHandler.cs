@@ -1,17 +1,12 @@
-﻿using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows;
-using Voidstrap.Integrations;
-using Voidstrap.UI.Elements.Dialogs;
-using Voidstrap.UI.ViewModels.Settings;
+﻿﻿using System.Windows;
+
 using Windows.Win32;
 using Windows.Win32.Foundation;
 
-namespace Voidstrap
+using Bloxstrap.UI.Elements.Dialogs;
+using Bloxstrap.Integrations;
+
+namespace Bloxstrap
 {
     public static class LaunchHandler
     {
@@ -46,6 +41,9 @@ namespace Voidstrap
         public static void ProcessLaunchArgs()
         {
             const string LOG_IDENT = "LaunchHandler::ProcessLaunchArgs";
+
+            // this order is specific
+
             if (App.LaunchSettings.UninstallFlag.Active)
             {
                 App.Logger.WriteLine(LOG_IDENT, "Opening uninstaller");
@@ -60,6 +58,16 @@ namespace Voidstrap
             {
                 App.Logger.WriteLine(LOG_IDENT, "Opening watcher");
                 LaunchWatcher();
+            }
+            else if (App.LaunchSettings.MultiInstanceWatcherFlag.Active)
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Opening multi-instance watcher");
+                LaunchMultiInstanceWatcher();
+            }
+            else if (App.LaunchSettings.BackgroundUpdaterFlag.Active)
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Opening background updater");
+                LaunchBackgroundUpdater();
             }
             else if (App.LaunchSettings.RobloxLaunchMode != LaunchMode.None)
             {
@@ -85,58 +93,51 @@ namespace Voidstrap
 
         public static void LaunchInstaller()
         {
-            var interlock = new InterProcessLock("Installer");
+            using var interlock = new InterProcessLock("Installer");
 
-            try
+            if (!interlock.IsAcquired)
             {
-                if (!interlock.IsAcquired)
-                {
-                    Frontend.ShowMessageBox(Strings.Dialog_AlreadyRunning_Installer, MessageBoxImage.Stop);
-                    App.Terminate();
-                    return;
-                }
+                Frontend.ShowMessageBox(Strings.Dialog_AlreadyRunning_Installer, MessageBoxImage.Stop);
+                App.Terminate();
+                return;
+            }
 
-                if (App.LaunchSettings.UninstallFlag.Active)
-                {
-                    Frontend.ShowMessageBox(Strings.Bootstrapper_FirstRunUninstall, MessageBoxImage.Error);
-                    App.Terminate(ErrorCode.ERROR_INVALID_FUNCTION);
-                    return;
-                }
+            if (App.LaunchSettings.UninstallFlag.Active)
+            {
+                Frontend.ShowMessageBox(Strings.Bootstrapper_FirstRunUninstall, MessageBoxImage.Error);
+                App.Terminate(ErrorCode.ERROR_INVALID_FUNCTION);
+                return;
+            }
 
-                if (App.LaunchSettings.QuietFlag.Active)
-                {
-                    var installer = new Installer();
+            if (App.LaunchSettings.QuietFlag.Active)
+            {
+                var installer = new Installer();
 
-                    if (!installer.CheckInstallLocation())
-                        App.Terminate(ErrorCode.ERROR_INSTALL_FAILURE);
+                if (!installer.CheckInstallLocation())
+                    App.Terminate(ErrorCode.ERROR_INSTALL_FAILURE);
 
-                    installer.DoInstall();
-                    interlock.Dispose();
+                installer.DoInstall();
 
-                    ProcessLaunchArgs();
-                }
-                else
-                {
+                interlock.Dispose();
+
+                ProcessLaunchArgs();
+            }
+            else
+            {
 #if QA_BUILD
-                    Frontend.ShowMessageBox(
-                        "You are about to install a QA build of Mrstrap. The red window border indicates that this is a QA build.\n\n" +
-                        "QA builds are handled completely separately of your standard installation, like a virtual environment.",
-                        MessageBoxImage.Information);
+                Frontend.ShowMessageBox("You are about to install a QA build of Bloxstrap. The red window border indicates that this is a QA build.\n\nQA builds are handled completely separately of your standard installation, like a virtual environment.", MessageBoxImage.Information);
 #endif
 
-                    new LanguageSelectorDialog().ShowDialog();
+                new LanguageSelectorDialog().ShowDialog();
 
-                    var installer = new UI.Elements.Installer.MainWindow();
-                    installer.ShowDialog();
-                    interlock.Dispose();
+                var installer = new UI.Elements.Installer.MainWindow();
+                installer.ShowDialog();
 
-                    ProcessNextAction(installer.CloseAction, !installer.Finished);
-                }
-            }
-            finally
-            {
                 interlock.Dispose();
+
+                ProcessNextAction(installer.CloseAction, !installer.Finished);
             }
+
         }
 
         public static void LaunchUninstaller()
@@ -150,7 +151,7 @@ namespace Voidstrap
                 return;
             }
 
-            bool confirmed;
+            bool confirmed = false;
             bool keepData = true;
 
             if (App.LaunchSettings.QuietFlag.Active)
@@ -175,6 +176,7 @@ namespace Voidstrap
             Installer.DoUninstall(keepData);
 
             Frontend.ShowMessageBox(Strings.Bootstrapper_SuccessfullyUninstalled, MessageBoxImage.Information);
+
             App.Terminate();
         }
 
@@ -189,19 +191,18 @@ namespace Voidstrap
                 bool showAlreadyRunningWarning = Process.GetProcessesByName(App.ProjectName).Length > 1;
 
                 var window = new UI.Elements.Settings.MainWindow(showAlreadyRunningWarning);
+
+                // typically we'd use Show(), but we need to block to ensure IPL stays in scope
                 window.ShowDialog();
             }
             else
             {
                 App.Logger.WriteLine(LOG_IDENT, "Found an already existing menu window");
 
-                var process = Utilities.GetProcessesSafe()
-                    .FirstOrDefault(x => x.MainWindowTitle == Strings.Menu_Title);
+                var process = Utilities.GetProcessesSafe().Where(x => x.MainWindowTitle == Strings.Menu_Title).FirstOrDefault();
 
-                if (process is not null && process.MainWindowHandle != IntPtr.Zero)
-                {
-                    PInvoke.SetForegroundWindow(new HWND(process.MainWindowHandle));
-                }
+                if (process is not null)
+                    PInvoke.SetForegroundWindow((HWND)process.MainWindowHandle);
 
                 App.Terminate();
             }
@@ -218,8 +219,6 @@ namespace Voidstrap
         public static void LaunchRoblox(LaunchMode launchMode)
         {
             const string LOG_IDENT = "LaunchHandler::LaunchRoblox";
-            const string GlobalMutexName = @"Global\ROBLOX_singletonMutex";
-            const string LocalMutexName = "ROBLOX_singletonMutex"; // fallback idk, was cuz someone had a issue with this so added a fallback
 
             if (launchMode == LaunchMode.None)
                 throw new InvalidOperationException("No Roblox launch mode set");
@@ -229,49 +228,18 @@ namespace Voidstrap
                 Frontend.ShowMessageBox(Strings.Bootstrapper_WMFNotFound, MessageBoxImage.Error);
 
                 if (!App.LaunchSettings.QuietFlag.Active)
-                {
-                    Utilities.ShellExecute(
-                        "https://support.microsoft.com/en-us/topic/media-feature-pack-list-for-windows-n-editions-c1c6fffa-d052-8338-7a79-a4bb980a700a");
-                }
+                    Utilities.ShellExecute("https://support.microsoft.com/en-us/topic/media-feature-pack-list-for-windows-n-editions-c1c6fffa-d052-8338-7a79-a4bb980a700a");
 
                 App.Terminate(ErrorCode.ERROR_FILE_NOT_FOUND);
-                return;
             }
 
-            bool robloxRunning = false;
-            try
+            if (App.Settings.Prop.ConfirmLaunches && Mutex.TryOpenExisting("ROBLOX_singletonMutex", out var _) && !App.Settings.Prop.MultiInstanceLaunching)
             {
-                robloxRunning = Mutex.TryOpenExisting(GlobalMutexName, out _);
-            }
-            catch (UnauthorizedAccessException)
-            {
-                robloxRunning = false;
-            }
-            catch
-            {
-                robloxRunning = false;
-            }
+                // this currently doesn't work very well since it relies on checking the existence of the singleton mutex
+                // which often hangs around for a few seconds after the window closes
+                // it would be better to have this rely on the activity tracker when we implement IPC in the planned refactoring
 
-            if (!robloxRunning)
-            {
-                try
-                {
-                    robloxRunning = Mutex.TryOpenExisting(LocalMutexName, out _);
-                }
-                catch
-                {
-                    robloxRunning = false;
-                }
-            }
-
-            if (App.Settings.Prop.ConfirmLaunches
-                && robloxRunning
-                && !(App.Settings.Prop.IsGameEnabled && !string.IsNullOrWhiteSpace(App.Settings.Prop.LaunchGameID)))
-            {
-                var result = Frontend.ShowMessageBox(
-                    Strings.Bootstrapper_ConfirmLaunch,
-                    MessageBoxImage.Warning,
-                    MessageBoxButton.YesNo);
+                var result = Frontend.ShowMessageBox(Strings.Bootstrapper_ConfirmLaunch, MessageBoxImage.Warning, MessageBoxButton.YesNo);
 
                 if (result != MessageBoxResult.Yes)
                 {
@@ -280,10 +248,11 @@ namespace Voidstrap
                 }
             }
 
+            // start bootstrapper and show the bootstrapper modal if we're not running silently
             App.Logger.WriteLine(LOG_IDENT, "Initializing bootstrapper");
             App.Bootstrapper = new Bootstrapper(launchMode);
-
             IBootstrapperDialog? dialog = null;
+
             if (!App.LaunchSettings.QuietFlag.Active)
             {
                 App.Logger.WriteLine(LOG_IDENT, "Initializing bootstrapper dialog");
@@ -292,51 +261,23 @@ namespace Voidstrap
                 dialog.Bootstrapper = App.Bootstrapper;
             }
 
-            Mutex? mutex = null;
-
-            if (App.Settings.Prop.ExclusiveFullscreen)
-            {
-                _ = Task.Run(RobloxFullscreen.WaitAndTriggerFullscreen); // redid https://github.com/voidstrap/Voidstrap/pull/362/changes/f0177af4ec39475a5b5c8ea5adc365dcdba0b0d9#diff-ed77fad50af3a8225af6d4c3e81af6095905805d31369da2b5d54f0c2382180e
-            }
-
             Task.Run(App.Bootstrapper.Run).ContinueWith(t =>
             {
                 App.Logger.WriteLine(LOG_IDENT, "Bootstrapper task has finished");
 
-                try
+                if (t.IsFaulted)
                 {
-                    if (t.IsFaulted)
-                    {
-                        App.Logger.WriteLine(LOG_IDENT, "An exception occurred when running the bootstrapper");
+                    App.Logger.WriteLine(LOG_IDENT, "An exception occurred when running the bootstrapper");
 
-                        if (t.Exception is not null)
-                            App.FinalizeExceptionHandling(t.Exception);
-                    }
-
-                    if (mutex != null)
-                    {
-                        string processName = App.RobloxPlayerAppName.Split('.')[0];
-                        App.Logger.WriteLine(LOG_IDENT, $"Resolved Roblox name {processName}.exe, running in background.");
-
-                        while (Process.GetProcessesByName(processName).Any())
-                            Thread.Sleep(5000);
-
-                        App.Logger.WriteLine(LOG_IDENT, "Every Roblox instance is closed, terminating the process");
-                    }
+                    if (t.Exception is not null)
+                        App.FinalizeExceptionHandling(t.Exception);
                 }
-                finally
-                {
-                    if (mutex != null)
-                    {
-                        try { mutex.ReleaseMutex(); } catch { }
-                        mutex.Dispose();
-                    }
 
-                    App.Terminate();
-                }
+                App.Terminate();
             });
 
             dialog?.ShowBootstrapper();
+
             App.Logger.WriteLine(LOG_IDENT, "Exiting");
         }
 
@@ -344,9 +285,16 @@ namespace Voidstrap
         {
             const string LOG_IDENT = "LaunchHandler::LaunchWatcher";
 
+            // this whole topology is a bit confusing, bear with me:
+            // main thread: strictly UI only, handles showing of the notification area icon, context menu, server details dialog
+            // - server information task: queries server location, invoked if either the explorer notification is shown or the server details dialog is opened
+            // - discord rpc thread: handles rpc connection with discord
+            //    - discord rich presence tasks: handles querying and displaying of game information, invoked on activity watcher events
+            // - watcher task: runs activity watcher + waiting for roblox to close, terminates when it has
+
             var watcher = new Watcher();
 
-            Task.Run(watcher.Run).ContinueWith(t =>
+            Task.Run(watcher.Run).ContinueWith(t => 
             {
                 App.Logger.WriteLine(LOG_IDENT, "Watcher task has finished");
 
@@ -360,6 +308,7 @@ namespace Voidstrap
                         App.FinalizeExceptionHandling(t.Exception);
                 }
 
+                // shouldnt this be done after client closes?
                 if (App.Settings.Prop.CleanerOptions != CleanerOptions.Never)
                     Cleaner.DoCleaning();
 
@@ -367,6 +316,27 @@ namespace Voidstrap
             });
         }
 
+        public static void LaunchMultiInstanceWatcher()
+        {
+            const string LOG_IDENT = "LaunchHandler::LaunchMultiInstanceWatcher";
+
+            App.Logger.WriteLine(LOG_IDENT, "Starting multi-instance watcher");
+
+            Task.Run(MultiInstanceWatcher.Run).ContinueWith(t =>
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Multi instance watcher task has finished");
+
+                if (t.IsFaulted)
+                {
+                    App.Logger.WriteLine(LOG_IDENT, "An exception occurred when running the multi-instance watcher");
+
+                    if (t.Exception is not null)
+                        App.FinalizeExceptionHandling(t.Exception);
+                }
+
+                App.Terminate();
+            });
+        }
         public static void LaunchBloxshadeConfig()
         {
             const string LOG_IDENT = "LaunchHandler::LaunchBloxshade";
@@ -375,6 +345,52 @@ namespace Voidstrap
 
             new BloxshadeDialog().ShowDialog();
             App.SoftTerminate();
+        }
+
+        public static void LaunchBackgroundUpdater()
+        {
+            const string LOG_IDENT = "LaunchHandler::LaunchBackgroundUpdater";
+
+            // Activate some LaunchFlags we need
+            App.LaunchSettings.QuietFlag.Active = true;
+            App.LaunchSettings.NoLaunchFlag.Active = true;
+
+            App.Logger.WriteLine(LOG_IDENT, "Initializing bootstrapper");
+            App.Bootstrapper = new Bootstrapper(LaunchMode.Player)
+            {
+                MutexName = "Bloxstrap-BackgroundUpdater",
+                QuitIfMutexExists = true
+            };
+
+            CancellationTokenSource cts = new CancellationTokenSource();
+
+            Task.Run(() =>
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Started event waiter");
+                using (EventWaitHandle handle = new EventWaitHandle(false, EventResetMode.AutoReset, "Bloxstrap-BackgroundUpdaterKillEvent"))
+                    handle.WaitOne();
+
+                App.Logger.WriteLine(LOG_IDENT, "Received close event, killing it all!");
+                App.Bootstrapper.Cancel();
+            }, cts.Token);
+
+            Task.Run(App.Bootstrapper.Run).ContinueWith(t =>
+            {
+                App.Logger.WriteLine(LOG_IDENT, "Bootstrapper task has finished");
+                cts.Cancel(); // stop event waiter
+
+                if (t.IsFaulted)
+                {
+                    App.Logger.WriteLine(LOG_IDENT, "An exception occurred when running the bootstrapper");
+
+                    if (t.Exception is not null)
+                        App.FinalizeExceptionHandling(t.Exception);
+                }
+
+                App.Terminate();
+            });
+
+            App.Logger.WriteLine(LOG_IDENT, "Exiting");
         }
     }
 }

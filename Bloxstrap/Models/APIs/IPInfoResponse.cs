@@ -1,22 +1,14 @@
-using System.Text.Json.Serialization;
-
-namespace Voidstrap.Models.APIs
+namespace Bloxstrap.Models.APIs
 {
     public class IPInfoResponse
     {
-        [JsonPropertyName("ip")]
-        public string Ip { get; set; } = string.Empty;
-
         [JsonPropertyName("city")]
-        public string City { get; set; } = string.Empty;
-
-        [JsonPropertyName("region")]
-        public string Region { get; set; } = string.Empty;
+        public string City { get; set; } = null!;
 
         [JsonPropertyName("country")]
-        public string Country { get; set; } = string.Empty;
+        public string Country { get; set; } = null!;
 
-        [JsonPropertyName("timezone")]
-        public string Timezone { get; set; } = string.Empty;
+        [JsonPropertyName("region")]
+        public string Region { get; set; } = null!;
     }
 }

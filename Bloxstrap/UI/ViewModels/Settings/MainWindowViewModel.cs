@@ -1,32 +1,26 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using Voidstrap.UI.Elements.About;
-using static Voidstrap.UI.Elements.Settings.MainWindow;
+using Bloxstrap.UI.Elements.About;
+using CommunityToolkit.Mvvm.Input;
 
-namespace Voidstrap.UI.ViewModels.Settings
+namespace Bloxstrap.UI.ViewModels.Settings
 {
     public class MainWindowViewModel : NotifyPropertyChangedViewModel
     {
-        public string AppVersion => System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(); // fakin version
         public ICommand OpenAboutCommand => new RelayCommand(OpenAbout);
-
+        
         public ICommand SaveSettingsCommand => new RelayCommand(SaveSettings);
 
         public ICommand SaveAndLaunchSettingsCommand => new RelayCommand(SaveAndLaunchSettings);
 
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public ICommand CloseWindowCommand => new RelayCommand(CloseWindow);
 
         public EventHandler? RequestSaveNoticeEvent;
-        public EventHandler? RequestSaveLaunchNoticeEvent;
 
         public EventHandler? RequestCloseWindowEvent;
+
+        public bool GBSEnabled = App.GlobalSettings.Loaded;
 
         public bool TestModeEnabled
         {
@@ -47,22 +41,6 @@ namespace Voidstrap.UI.ViewModels.Settings
             }
         }
 
-        private TabItemViewModel _selectedTab;
-        public TabItemViewModel SelectedTab
-        {
-            get => _selectedTab;
-            set
-            {
-                if (_selectedTab != value)
-                {
-                    _selectedTab = value;
-                    OnPropertyChanged(nameof(SelectedTab));
-                }
-            }
-        }
-
-        public ObservableCollection<TabItemViewModel> Tabs { get; set; } = new ObservableCollection<TabItemViewModel>();
-
         private void OpenAbout() => new MainWindow().ShowDialog();
 
         private void CloseWindow() => RequestCloseWindowEvent?.Invoke(this, EventArgs.Empty);
@@ -74,6 +52,7 @@ namespace Voidstrap.UI.ViewModels.Settings
             App.Settings.Save();
             App.State.Save();
             App.FastFlags.Save();
+            App.GlobalSettings.Save();
 
             foreach (var pair in App.PendingSettingTasks)
             {
@@ -90,25 +69,13 @@ namespace Voidstrap.UI.ViewModels.Settings
 
             RequestSaveNoticeEvent?.Invoke(this, EventArgs.Empty);
         }
-
         public void SaveAndLaunchSettings()
         {
             SaveSettings();
-            RequestSaveLaunchNoticeEvent?.Invoke(this, EventArgs.Empty);
-            LaunchHandler.LaunchRoblox(LaunchMode.Player);
-        }
+            if (!App.LaunchSettings.TestModeFlag.Active) // test mode already launches an instance
+                LaunchHandler.LaunchRoblox(LaunchMode.Player);
 
-        protected bool SetProperty<T>(ref T field, T newValue, [CallerMemberName] string? propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, newValue))
-            {
-                return false;
-            }
-
-            field = newValue;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName ?? throw new ArgumentNullException(nameof(propertyName))));
-
-            return true;
+            CloseWindow();
         }
     }
 }

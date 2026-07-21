@@ -1,43 +1,31 @@
-﻿using Voidstrap.Models.SettingTasks.Base;
-using System;
-using System.IO;
-using System.Security.Cryptography;
+﻿using Bloxstrap.Models.SettingTasks.Base;
 
-namespace Voidstrap.Models.SettingTasks
+namespace Bloxstrap.Models.SettingTasks
 {
     public class FontModPresetTask : StringBaseTask
     {
-        public FontModPresetTask() : base("ModPreset", "TextFont")
-        {
-            if (File.Exists(Paths.CustomFont))
-            {
-                OriginalState = Paths.CustomFont;
-            }
-        }
-
         public string? GetFileHash()
         {
             if (!File.Exists(Paths.CustomFont))
-            {
                 return null;
-            }
 
             using var fileStream = File.OpenRead(Paths.CustomFont);
-            using var md5 = MD5.Create();
-            return MD5Hash.Stringify(md5.ComputeHash(fileStream));
+            return MD5Hash.Stringify(App.MD5Provider.ComputeHash(fileStream));
+        }
+
+        public FontModPresetTask() : base("ModPreset", "TextFont")
+        {
+            if (File.Exists(Paths.CustomFont))
+                OriginalState = Paths.CustomFont;
         }
 
         public override void Execute()
         {
-            if (!string.IsNullOrEmpty(NewState) && !string.Equals(NewState, Paths.CustomFont, StringComparison.InvariantCultureIgnoreCase))
+            if (!String.IsNullOrEmpty(NewState))
             {
-                if (File.Exists(NewState))
+                if (String.Compare(NewState, Paths.CustomFont, StringComparison.InvariantCultureIgnoreCase) != 0 && File.Exists(NewState))
                 {
-                    string? directoryPath = Path.GetDirectoryName(Paths.CustomFont);
-                    if (directoryPath != null)
-                    {
-                        Directory.CreateDirectory(directoryPath);
-                    }
+                    Directory.CreateDirectory(Path.GetDirectoryName(Paths.CustomFont)!);
 
                     Filesystem.AssertReadOnly(Paths.CustomFont);
                     File.Copy(NewState, Paths.CustomFont, true);

@@ -1,4 +1,4 @@
-﻿namespace Voidstrap.Models.APIs.GitHub
+﻿namespace Bloxstrap.Models.APIs.GitHub
 {
     public class GithubRelease
     {

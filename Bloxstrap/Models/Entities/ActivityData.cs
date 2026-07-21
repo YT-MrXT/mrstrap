@@ -1,21 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.DirectoryServices.ActiveDirectory;
+using System.Runtime.InteropServices;
 using System.Web;
 using System.Windows;
 using System.Windows.Input;
+using Bloxstrap.AppData;
+using Bloxstrap.Models.APIs;
+using Bloxstrap.Models.APIs.RoValra;
 using CommunityToolkit.Mvvm.Input;
-using Voidstrap.AppData;
-using Voidstrap.Models.APIs;
 
-namespace Voidstrap.Models.Entities
+namespace Bloxstrap.Models.Entities
 {
     public class ActivityData
     {
+
         private long _universeId = 0;
+
+        /// <summary>
+        /// If the current activity stems from an in-universe teleport, then this will be
+        /// set to the activity that corresponds to the initial game join
+        /// </summary>
         public ActivityData? RootActivity;
 
         public long UniverseId
@@ -24,74 +27,52 @@ namespace Voidstrap.Models.Entities
             set
             {
                 _universeId = value;
-                UniverseDetails = UniverseDetails.LoadFromCache(value);
+                UniverseDetails.LoadFromCache(value);
             }
         }
 
-        #region Display Properties
-        public string DisplayTimeJoined { get; private set; } = "Unknown";
-        public string DisplayTimeLeft { get; private set; } = "Unknown";
-        public string ServerStatus { get; private set; } = "Offline";
-
-        public void ComputeDisplayTimes()
-        {
-            DisplayTimeJoined = TimeJoined != default
-                ? TimeJoined.ToString("yyyy-MM-dd HH:mm:ss")
-                : "Unknown";
-
-            bool online = !TimeLeft.HasValue || (DateTime.Now - TimeLeft.Value).TotalHours < 24;
-            DisplayTimeLeft = TimeLeft.HasValue
-                ? TimeLeft.Value.ToString("yyyy-MM-dd HH:mm:ss")
-                : "Still Online";
-            ServerStatus = online ? "Online" : "Offline";
-        }
-        #endregion
-
-        #region Existing Classes
-        public class UserLog
-        {
-            public string UserId { get; set; } = "Unknown";
-            public string Username { get; set; } = "Unknown";
-            public string Type { get; set; } = "Unknown";
-            public DateTime Time { get; set; } = DateTime.Now;
-        }
-
-        public class UserMessage
-        {
-            public string Message { get; set; } = "Unknown";
-            public DateTime Time { get; set; } = DateTime.Now;
-        }
-        #endregion
-
-        #region Core Properties
         public long PlaceId { get; set; } = 0;
-        public string JobId { get; set; } = string.Empty;
-        public string AccessCode { get; set; } = string.Empty;
-        public long UserId { get; set; } = 0;
-        public string MachineAddress { get; set; } = string.Empty;
-        public bool MachineAddressValid =>
-            !string.IsNullOrEmpty(MachineAddress) && !MachineAddress.StartsWith("10.");
-        public bool IsTeleport { get; set; } = false;
-        public ServerType ServerType { get; set; } = ServerType.Public;
-        public DateTime TimeJoined { get; set; }
-        public DateTime? TimeLeft { get; set; }
-        public string RPCLaunchData { get; set; } = string.Empty;
-        public UniverseDetails? UniverseDetails { get; set; }
-        public Dictionary<int, UserLog> PlayerLogs { get; internal set; } = new();
-        public Dictionary<int, UserMessage> MessageLogs { get; internal set; } = new();
-        #endregion
 
-        #region Derived Properties & Commands
+        public string JobId { get; set; } = string.Empty;
+
+        /// <summary>
+        /// This will be empty unless the server joined is a private server
+        /// </summary>
+        public string AccessCode { get; set; } = string.Empty;
+        
+        public long UserId { get; set; } = 0;
+
+        public string MachineAddress { get; set; } = string.Empty;
+
+        public bool MachineAddressValid => !string.IsNullOrEmpty(MachineAddress) && !MachineAddress.StartsWith("10.");
+
+        public bool IsTeleport { get; set; } = false;
+
+        public ServerType ServerType { get; set; } = ServerType.Public;
+
+        public DateTime TimeJoined { get; set; }
+
+        public DateTime? TimeLeft { get; set; }
+
+        // everything below here is optional strictly for bloxstraprpc, discord rich presence, or game history
+
+        /// <summary>
+        /// This is intended only for other people to use, i.e. context menu invite link, rich presence joining
+        /// </summary>
+        public string RPCLaunchData { get; set; } = string.Empty;
+
+        public UniverseDetails? UniverseDetails { get; set; }
+
         public string GameHistoryDescription
         {
             get
             {
                 string desc = string.Format(
-                    "{0} • {1} {2} {3}",
-                    UniverseDetails?.Data.Creator.Name ?? "Unknown",
-                    TimeJoined.ToString("t"),
+                    "{0} • {1} {2} {3}", 
+                    UniverseDetails?.Data.Creator.Name,
+                    TimeJoined.ToString("t"), 
                     Locale.CurrentCulture.Name.StartsWith("ja") ? '~' : '-',
-                    TimeLeft?.ToString("t") ?? "?"
+                    TimeLeft?.ToString("t")
                 );
 
                 if (ServerType != ServerType.Public)
@@ -102,15 +83,16 @@ namespace Voidstrap.Models.Entities
         }
 
         public ICommand RejoinServerCommand => new RelayCommand(RejoinServer);
-        #endregion
 
-        #region Server Methods
         private SemaphoreSlim serverQuerySemaphore = new(1, 1);
+        private SemaphoreSlim serverTimeSemaphore = new(1, 1);
 
         public string GetInviteDeeplink(bool launchData = true)
         {
-            string deeplink = $"https://www.roblox.com/games/start?placeId={PlaceId}";
-            if (ServerType == ServerType.Private)
+            string deeplink = $"{App.RemoteData.Prop.DeeplinkUrl}?placeId={PlaceId}"; // if our data isnt loaded it uses dummy data
+                                                                                      // we only wait for important data
+
+            if (ServerType == ServerType.Private) // thats not going to work
                 deeplink += "&accessCode=" + AccessCode;
             else
                 deeplink += "&gameInstanceId=" + JobId;
@@ -121,6 +103,75 @@ namespace Voidstrap.Models.Entities
             return deeplink;
         }
 
+        public async Task<DateTime?> QueryServerTime()
+        {
+            const string LOG_IDENT = "ActivityData::QueryServerTime";
+
+            if (string.IsNullOrEmpty(JobId))
+                throw new InvalidOperationException("JobId is null");
+
+            if (PlaceId == 0)
+                throw new InvalidOperationException("PlaceId is null");
+
+            await serverTimeSemaphore.WaitAsync();
+
+            if (GlobalCache.ServerTime.TryGetValue(JobId, out DateTime? time))
+            {
+                serverTimeSemaphore.Release();
+                return time;
+            }
+
+            DateTime? firstSeen = DateTime.UtcNow;
+            try
+            {
+                var serverTimeRaw = await Http.GetJson<RoValraTimeResponse>($"https://apis.rovalra.com/v1/servers/details?place_id={PlaceId}&server_ids={JobId}");
+
+                var serverBody = new RoValraProcessServerBody
+                {
+                    PlaceId = PlaceId,
+                    ServerIds = new() { JobId }
+                };
+
+                string json = JsonSerializer.Serialize(serverBody);
+                HttpContent postContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+                // we dont need to await it since its not as important
+                // we want to return uptime quickly
+                _ = App.HttpClient.PostAsync("https://apis.rovalra.com/process_servers", postContent);
+
+
+                RoValraServer? server = null;
+
+                if (serverTimeRaw?.Servers != null && serverTimeRaw.Servers.Count > 0)
+                    server = serverTimeRaw.Servers[0];
+
+                // if the server hasnt been registered we will simply return UtcNow
+                // since firstSeen is UtcNow by default we dont have to check anything else
+                if (server?.FirstSeen != null)
+                    firstSeen = server.FirstSeen;
+
+                GlobalCache.ServerTime[JobId] = firstSeen;
+                serverTimeSemaphore.Release();
+            }
+            catch (Exception ex)
+            {
+                App.Logger.WriteLine(LOG_IDENT, $"Failed to get server time for {PlaceId}/{JobId}");
+                App.Logger.WriteException(LOG_IDENT, ex);
+
+                GlobalCache.ServerTime[JobId] = firstSeen;
+                serverTimeSemaphore.Release();
+
+                Frontend.ShowConnectivityDialog(
+                    string.Format(Strings.Dialog_Connectivity_UnableToConnect, "rovalra.com"),
+                    Strings.ActivityWatcher_LocationQueryFailed,
+                    MessageBoxImage.Warning,
+                    ex
+                );
+            }
+
+            return firstSeen;
+        }
+
         public async Task<string?> QueryServerLocation()
         {
             const string LOG_IDENT = "ActivityData::QueryServerLocation";
@@ -129,32 +180,35 @@ namespace Voidstrap.Models.Entities
                 throw new InvalidOperationException($"Machine address is invalid ({MachineAddress})");
 
             await serverQuerySemaphore.WaitAsync();
-            if (GlobalCache.ServerLocation.TryGetValue(MachineAddress, out string? cachedLocation))
+
+            if (GlobalCache.ServerLocation.TryGetValue(MachineAddress, out string? location))
             {
                 serverQuerySemaphore.Release();
-                return cachedLocation;
+                return location;
             }
 
-            string? location = null;
             try
             {
                 var ipInfo = await Http.GetJson<IPInfoResponse>($"https://ipinfo.io/{MachineAddress}/json");
-                if (string.IsNullOrEmpty(ipInfo.Country))
-                    throw new InvalidHTTPResponseException("Reported country was blank");
 
-                string flag = CountryCodeToFlagEmoji(ipInfo.Country);
+                if (string.IsNullOrEmpty(ipInfo.City))
+                    throw new InvalidHTTPResponseException("Reported city was blank");
 
-                location = !string.IsNullOrEmpty(ipInfo.City)
-                    ? (ipInfo.City == ipInfo.Region ? $"{ipInfo.Region}, {flag}" : $"{ipInfo.City}, {ipInfo.Region}, {flag}")
-                    : $"{ipInfo.Country} {flag}";
+                if (ipInfo.City == ipInfo.Region)
+                    location = $"{ipInfo.Region}, {ipInfo.Country}";
+                else
+                    location = $"{ipInfo.City}, {ipInfo.Region}, {ipInfo.Country}";
 
                 GlobalCache.ServerLocation[MachineAddress] = location;
+                serverQuerySemaphore.Release();
             }
             catch (Exception ex)
             {
                 App.Logger.WriteLine(LOG_IDENT, $"Failed to get server location for {MachineAddress}");
                 App.Logger.WriteException(LOG_IDENT, ex);
+
                 GlobalCache.ServerLocation[MachineAddress] = location;
+                serverQuerySemaphore.Release();
 
                 Frontend.ShowConnectivityDialog(
                     string.Format(Strings.Dialog_Connectivity_UnableToConnect, "ipinfo.io"),
@@ -163,21 +217,8 @@ namespace Voidstrap.Models.Entities
                     ex
                 );
             }
-            finally
-            {
-                serverQuerySemaphore.Release();
-            }
 
             return location;
-        }
-
-        private static string CountryCodeToFlagEmoji(string countryCode)
-        {
-            if (string.IsNullOrWhiteSpace(countryCode) || countryCode.Length != 2)
-                return string.Empty;
-
-            int offset = 0x1F1E6 - 'A';
-            return string.Concat(countryCode.ToUpper().Select(c => char.ConvertFromUtf32(c + offset)));
         }
 
         public override string ToString() => $"{PlaceId}/{JobId}";
@@ -185,8 +226,8 @@ namespace Voidstrap.Models.Entities
         private void RejoinServer()
         {
             string playerPath = new RobloxPlayerData().ExecutablePath;
+
             Process.Start(playerPath, GetInviteDeeplink(false));
         }
-        #endregion
     }
 }

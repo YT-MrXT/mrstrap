@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Voidstrap.UI.ViewModels
+namespace Bloxstrap.UI.ViewModels
 {
     public static class GlobalViewModel
     {
