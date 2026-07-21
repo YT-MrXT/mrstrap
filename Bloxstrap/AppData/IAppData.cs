@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.AppData
+﻿namespace Voidstrap.AppData
 {
     internal interface IAppData
     {
@@ -8,19 +8,13 @@
 
         string RegistryName { get; }
 
-        string ProcessName { get; }
-
         string ExecutableName { get; }
 
         string Directory { get; }
 
         string ExecutablePath { get; }
 
-        JsonManager<DistributionState> DistributionStateManager { get; }
-
-        DistributionState DistributionState { get; }
-
-        List<string> ModManifest { get; }
+        AppState State { get; }
 
         IReadOnlyDictionary<string, string> PackageDirectoryMap { get; set; }
     }

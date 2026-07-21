@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -157,7 +157,7 @@
   <data name="Bootstrapper.Status.Upgrading" xml:space="preserve">
     <value>Обновляем {product}...</value>
   </data>
-  <data name="Bootstrapper.Status.UpgradingBloxstrap" xml:space="preserve">
+  <data name="Bootstrapper.Status.UpgradingVoidstrap" xml:space="preserve">
     <value>Получаем последнюю версию Mrstrap...</value>
   </data>
   <data name="Bootstrapper.Status.WaitingOtherInstances" xml:space="preserve">
@@ -286,12 +286,12 @@
     <value>Скопировать содержимое журнала</value>
   </data>
   <data name="Dialog.Exception.Info.1" xml:space="preserve">
-    <value>Произошла ошибка</value>
+    <value>Возникла ошибка при работе Mrstrap</value>
   </data>
   <data name="Dialog.Exception.Info.2" xml:space="preserve">
-    <value>Эта проблема возможно уже известна на [Вики]({0}).
+    <value>Сначала проверьте [Mrstrap Wiki]({0}), чтобы увидеть, была ли эта проблема уже решена.
 
-Если нет тогда, пожалуйста, сообщите об этой ошибке через [GitHub ошибки]({1}) приложив файл отладки.</value>
+Если нет, то сообщите об этом исключении через [GitHub issue]({1}) вместе с копией созданного файла журнала.</value>
   </data>
   <data name="Dialog.Exception.Title" xml:space="preserve">
     <value>Ошибка Mrstrap</value>
@@ -356,6 +356,18 @@
   <data name="Enums.FlagPresets.InGameMenuVersion.V4" xml:space="preserve">
     <value>2023 (V4)</value>
   </data>
+  <data name="Enums.FlagPresets.LightingMode.Default" xml:space="preserve">
+    <value>Выбрана игрой</value>
+  </data>
+  <data name="Enums.FlagPresets.LightingMode.Future" xml:space="preserve">
+    <value>Future (Phase 3)</value>
+  </data>
+  <data name="Enums.FlagPresets.LightingMode.ShadowMap" xml:space="preserve">
+    <value>Shadow Map (Phase 2)</value>
+  </data>
+  <data name="Enums.FlagPresets.LightingMode.Voxel" xml:space="preserve">
+    <value>Voxel (Phase 1)</value>
+  </data>
   <data name="Enums.FlagPresets.RenderingMode.D3D10" xml:space="preserve">
     <value>Direct3D 10</value>
   </data>
@@ -375,6 +387,12 @@
     <value>Тёмная</value>
   </data>
   <data name="Enums.Theme.Light" xml:space="preserve">
+    <value>Светлая</value>
+  </data>
+  <data name="Enums.Theme.Red" xml:space="preserve">
+    <value>Светлая</value>
+  </data>
+  <data name="Enums.Theme.Blue" xml:space="preserve">
     <value>Светлая</value>
   </data>
   <data name="InstallChecker.Updated" xml:space="preserve">
@@ -428,7 +446,7 @@
   </data>
   <data name="Menu.About.Version" xml:space="preserve">
     <value>Версия {0}</value>
-    <comment>{0} is replaced with the version, i.e. "Version 2.8.0"</comment>
+    <comment>{0} is replaced with the version, i.e. "Version 1.0.3.6"</comment>
   </data>
   <data name="Menu.AllFiles" xml:space="preserve">
     <value>Все файлы</value>
@@ -573,6 +591,20 @@
   <data name="Menu.FastFlagEditor.Title" xml:space="preserve">
     <value>Редактор Fast Flag-ов</value>
   </data>
+  <data name="Menu.FastFlagEditor.Warning.Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Menu.FastFlagEditor.Warning.Continue" xml:space="preserve">
+    <value>Я знаю, что делаю</value>
+  </data>
+  <data name="Menu.FastFlagEditor.Warning.Header" xml:space="preserve">
+    <value>Ты знаешь, что делаешь?</value>
+  </data>
+  <data name="Menu.FastFlagEditor.Warning.Text" xml:space="preserve">
+    <value>Fast Flags чрезвычайно сильны, поскольку предназначены для использования исключительно разработчиками Roblox. Несмотря на то, что они могут быть полезны, их настройка вручную может вызвать серьезные проблемы со стабильностью и функциональностью. НЕ используйте редактор, если вы не знаете, что делаете.
+
+НЕ используйте редактор для импорта больших списков Fast Flags, созданных другими людьми, которые обещают улучшить производительность или что-то в этом роде. Они подвержены вышеупомянутым проблемам и, вероятно, вызовут у вас проблемы, поскольку вы не будете полностью осознавать, что они меняют. Если вы вот-вот собирались это сделать, ВЕРНИТЕСЬ НАЗАД.</value>
+  </data>
   <data name="Menu.FastFlags.Description" xml:space="preserve">
     <value>Контролируйте настройку конкретных параметров и функций движка Roblox.</value>
   </data>
@@ -580,14 +612,39 @@
     <value>Управляйте своими Fast Flags. Используйте с осторожностью.</value>
     <comment>Title is Menu.FastFlagEditor.Title</comment>
   </data>
+  <data name="Menu.FastFlags.Help.Description" xml:space="preserve">
+    <value>Узнайте больше о Fast Flags, что делают те или иные предустановки и как их использовать.</value>
+    <comment>Title is Common.Help</comment>
+  </data>
   <data name="Menu.FastFlags.Presets.D3DExclusiveFullscreenInfo" xml:space="preserve">
-    <value>[Полноэкранный режим]({0}) Direct3D с помощью Alt+Enter включен по умолчанию.</value>
+    <value>Параметры графики и производительности движка Roblox.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
+    <value>Предпочитаемая версия меню-выхода</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Description" xml:space="preserve">
     <value>Roblox снижает качество прорисовки в зависимости от настроек масштабирования экрана в Windows.</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Title" xml:space="preserve">
     <value>Сохранять качество рендеринга при масштабировании дисплея</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
+    <value>Установите на 0, если хотите использовать встроенный разблокировщик частоты кадров Roblox.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
+    <value>Лимит кадров в секунду</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
+    <value>Переключается с помощью [сочетания клавиш]({0}). Работает только если вы находитесь в [группе Mrstrap]({1}).</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
+    <value>Активировать возможность скрывать элементы пользовательского интерфейса</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
+    <value>Выбранное освещение будет всегда включено во всех играх. [Может вызывать проблемы с освещением!]({0})</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
+    <value>Предпочитаемая технология освещения</value>
   </data>
   <data name="Menu.FastFlags.Presets.RenderingMode.Title" xml:space="preserve">
     <value>Режим рендеринга</value>
@@ -702,6 +759,9 @@
   <data name="Menu.Mods.Misc.CustomFont.Choose" xml:space="preserve">
     <value>Выбрать шрифт...</value>
   </data>
+  <data name="Menu.Mods.Misc.CustomFont.Description" xml:space="preserve">
+    <value>Размер шрифта можно изменить во вкладке Настройки движка.</value>
+  </data>
   <data name="Menu.Mods.Misc.CustomFont.Invalid" xml:space="preserve">
     <value>Выбранный вами файл, похоже, не является действительным файлом шрифта.</value>
   </data>
@@ -741,6 +801,12 @@
   <data name="Menu.Mods.Presets.OldCharacterSounds.Title" xml:space="preserve">
     <value>Эмулировать старые звуки персонажей</value>
   </data>
+  <data name="Menu.Mods.Presets.OldDeathSound.Description" xml:space="preserve">
+    <value>Возвращает классический звук смерти "oof".</value>
+  </data>
+  <data name="Menu.Mods.Presets.OldDeathSound.Title" xml:space="preserve">
+    <value>Использовать старый звук смерти</value>
+  </data>
   <data name="Menu.Mods.Title" xml:space="preserve">
     <value>Модификации</value>
   </data>
@@ -771,11 +837,20 @@
   <data name="Menu.Appearance.Language.Description" xml:space="preserve">
     <value>Требуется перезапуск для применения изменений.</value>
   </data>
+  <data name="Menu.Behaviour.ForceRobloxLanguage.Title" xml:space="preserve">
+    <value>Разрешить использование языков, не поддерживаемых Roblox</value>
+  </data>
+  <data name="Menu.Behaviour.ForceRobloxLanguage.Description" xml:space="preserve">
+    <value>Работает только с играми запущенных с сайта Roblox.</value>
+  </data>
   <data name="Enums.FlagPresets.InGameMenuVersion.V4Chrome" xml:space="preserve">
     <value>2023 (V4 + Новый интерфейс)</value>
   </data>
   <data name="Menu.FastFlags.Presets.Categories.Rendering" xml:space="preserve">
     <value>Прорисовка и графика</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.Categories.UserInterface" xml:space="preserve">
+    <value>Пользовательский интерфейс и схема</value>
   </data>
   <data name="Menu.FastFlags.ManagerEnabled.Title" xml:space="preserve">
     <value>Разрешить Mrstrap управлять Fast Flags</value>
@@ -785,6 +860,15 @@
   </data>
   <data name="Menu.FastFlags.Presets.MSAA.Title" xml:space="preserve">
     <value>Качество сглаживания (MSAA)</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
+    <value>Отключить эффекты постобработки</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
+    <value>Отключить заголовок полноэкранного режима</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Description" xml:space="preserve">
+    <value>Останавливает его показ при переносе курсора в верхнюю часть экрана.</value>
   </data>
   <data name="Menu.FastFlags.Presets.TextureQuality.Title" xml:space="preserve">
     <value>Качество текстур</value>
@@ -800,6 +884,18 @@
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level3" xml:space="preserve">
     <value>Уровень 3 (Наивысший)</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
+    <value>Отключить тени игроков</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
+    <value>Размер шрифта</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
+    <value>Значение по умолчанию - 1. При использовании пользовательского шрифта настройте под себя.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
+    <value>Отключить текстуры ландшафта</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownload" xml:space="preserve">
     <value>Mrstrap не удаётся скачать Roblox</value>
@@ -820,7 +916,7 @@
     <comment>Do not translate 'True' and 'False', those must stay in English</comment>
   </data>
   <data name="Menu.FastFlagEditor.InvalidNumberValue" xml:space="preserve">
-    <value>Запись для '{0}' недействительна, так как значение должно быть целым числом</value>
+    <value>Запись для '{0}' недействительна, так как значение должно быть числом</value>
   </data>
   <data name="Logger.NoWriteMode" xml:space="preserve">
     <value>Файл журнала не будет написан для этого запуска, потому что Mrstrap не может записать в папку в '{0}'</value>
@@ -913,11 +1009,13 @@ Roblox еще не установлен, это произойдет, когда
     <value>Удаление Mrstrap</value>
   </data>
   <data name="Uninstaller.Text" xml:space="preserve">
-    <value>Удаление, уберёт Mrstrap с вашей системы, и автоматически перенастроит стандартный лаунчер Roblox если он всё ещё установлен.
+    <value>Деинсталляция удалит Mrstrap из вашей системы и автоматически перенастроит пусковую установку Roblox по умолчанию, если она все еще установлена.
 
-Этот процесс удаления может оставить некоторые файлы, поэтому вам может потребоваться ручная очистка файлов в месте установки Mrstrap.
+Если вы удаляете или переустанавливаете программу из-за проблем с Roblox, сначала прочитайте [эту страницу помощи]({0}).
 
-Mrstrap был установлен в "{1}".</value>
+Возможно, процесс удаления может не полностью завершиться сам по себе, поэтому вам может потребоваться вручную очистить оставшиеся файлы, где был установлен Mrstrap.
+
+Mrstrap был установлен по адресу "{1}".</value>
   </data>
   <data name="Uninstaller.KeepData.Label" xml:space="preserve">
     <value>Оставить мои настройки и моды</value>
@@ -947,9 +1045,9 @@ Mrstrap был установлен в "{1}".</value>
     <value>Mrstrap не смог создать ярлыки для Рабочего стола и меню Пуск. Попробуйте создать их позже через настройки.</value>
   </data>
   <data name="Dialog.Exception.Info.2.Alt" xml:space="preserve">
-    <value>Сначала проверьте [Вики Mrstrap]({0}), чтобы узнать, была ли эта проблема уже решена с исправлением.
+    <value>Сначала проверьте [Wiki Mrstrap]({0}), чтобы узнать, была ли эта проблема уже решена с помощью исправления.
 
-Если нет, то, пожалуйста сообщите об этой ошибке разработчикам этой сборки. Не сообщайте об этом в GitHub ошибках Mrstrap'а, так как это не официальная сборка.</value>
+Если нет, то, пожалуйста, сообщите об этом исключении разработчикам этой сборки. НЕ сообщайте о проблеме в GitHub Mrstrap, так как это неофициальная сборка.</value>
     <comment>"fork" in general means "a variation of" or "a different version of". You can alternatively write the first sentence as "...to the maintainers of this version."</comment>
   </data>
   <data name="Installer.Install.Shortcuts.Description" xml:space="preserve">
@@ -1002,9 +1100,15 @@ Mrstrap был установлен в "{1}".</value>
     <value>Версия Mrstrap, которую вы запустили, старше той, что установлена у вас сейчас. Могут возникнуть проблемы, и измениться настройки. Рекомендуется переустановка. Вы уверены, что хотите продолжить?</value>
   </data>
   <data name="Dialog.PlayerError.FailedLaunch" xml:space="preserve">
-    <value>Roblox не удалось запустить.
+    <value>Не удалось запустить Roblox.</value>
+  </data>
+  <data name="Dialog.PlayerError.Crash" xml:space="preserve">
+    <value>Roblox крашнулся.</value>
+  </data>
+  <data name="Dialog.PlayerError.HelpInformation" xml:space="preserve">
+    <value>О том, почему это может происходить и как это можно решить, читайте в [этой справочной статье]({0}).
 
-Это может быть или не быть проблемой Mrstrap. Чтобы узнать подробнее, смотрите [страницу помощи]({0}).</value>
+Проверьте, работает ли Roblox с [оригинальным загрузчиком]({1}). Если нет, то это не проблема Mrstrap. Если работает, то обратитесь к справочной статье.</value>
   </data>
   <data name="Common.NetworkError" xml:space="preserve">
     <value>Не удалось загрузить данные из-за возникшей сетевой ошибки.</value>
@@ -1093,13 +1197,13 @@ Mrstrap был установлен в "{1}".</value>
   <data name="About.Supporters.OneOff" xml:space="preserve">
     <value>Одноразовые донатеры</value>
   </data>
-  <data name="Menu.Bloxstrap.Description" xml:space="preserve">
+  <data name="Menu.Voidstrap.Description" xml:space="preserve">
     <value>Настройка параметров, связанных с поведением Mrstrap.</value>
   </data>
-  <data name="Menu.Bloxstrap.Analytics.Title" xml:space="preserve">
+  <data name="Menu.Voidstrap.Analytics.Title" xml:space="preserve">
     <value>Включить отправку аналитики</value>
   </data>
-  <data name="Menu.Bloxstrap.Analytics.Description" xml:space="preserve">
+  <data name="Menu.Voidstrap.Analytics.Description" xml:space="preserve">
     <value>Это анонимно и ничего плохого, обещаем. О том, что мы собираем и зачем, читайте в нашей [политике конфиденциальности]({0}).</value>
   </data>
   <data name="Common.Analytics" xml:space="preserve">
@@ -1109,7 +1213,7 @@ Mrstrap был установлен в "{1}".</value>
     <value>Сбросить все по умолчанию</value>
   </data>
   <data name="Dialog.Exception.Report" xml:space="preserve">
-    <value>Создать отчёт</value>
+    <value>Сообщить об ошибке</value>
   </data>
   <data name="Menu.TestMode" xml:space="preserve">
     <value>Режим тестирования</value>
@@ -1139,9 +1243,6 @@ Mrstrap был установлен в "{1}".</value>
   <data name="Dialog.Exception.Version" xml:space="preserve">
     <value>Версия {0}</value>
   </data>
-  <data name="Enums.BootstrapperStyle.CustomDialog" xml:space="preserve">
-    <value>Пользовательский</value>
-  </data>
   <data name="Bootstrapper.FilesInUse" xml:space="preserve">
     <value>Mrstrap попытался обновить Roblox, но не может, так как файлы Roblox все ещё используются.
 
@@ -1154,255 +1255,31 @@ Mrstrap был установлен в "{1}".</value>
   </data>
   <data name="Common.Export" xml:space="preserve">
     <value>Экспортировать</value>
-    <comment>Currently used under the "Bloxstrap" settings tab for the button to export diagnostic data</comment>
+    <comment>Currently used under the "Voidstrap" settings tab for the button to export diagnostic data</comment>
   </data>
-  <data name="Menu.Bloxstrap.ExportData.Title" xml:space="preserve">
-    <value>Экспортировать диагностические данные</value>
+  <data name="Dialog.Connectivity.Preventing" xml:space="preserve">
+    <value>Вероятно, что-то мешает Mrstrap подключиться к Интернету.</value>
   </data>
-  <data name="Menu.Bloxstrap.ExportData.Description" xml:space="preserve">
-    <value>Собрать информацию, которую можно загрузить онлайн для диагностики проблемы.</value>
+  <data name="Dialog.Connectivity.TimedOut" xml:space="preserve">
+    <value>Время ожидания соединения истекло, что может указывать на плохое интернет-соединение или блокировку брандмауэра.</value>
   </data>
-  <data name="Menu.Bloxstrap.ExportData.ExportConfig" xml:space="preserve">
-    <value>Конфигурация Mrstrap</value>
-    <comment>Label that appears next to a checkbox</comment>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Menu.Channel.Description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Menu.Bloxstrap.ExportData.ExportLogs" xml:space="preserve">
-    <value>Все логи Mrstrap</value>
-    <comment>Label that appears next to a checkbox</comment>
+  <data name="Common.Channel" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="App.OSDeprecation.Win7_81" xml:space="preserve">
-    <value>Roblox больше не поддерживает Windows 7 или 8.1. Чтобы продолжить играть в Roblox, обновитесь до Windows 10 или выше.</value>
+  <data name="Menu.ChannelChanger.Description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Bootstrapper.ExtractionFailed.Title" xml:space="preserve">
-    <value>Не удалось извлечь файлы</value>
+  <data name="Common.Version" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Bootstrapper.ExtractionFailed.Message" xml:space="preserve">
-    <value>Некоторое содержимое может быть нету. Чтобы исправить это, сделайте принудительную переустановку Роблокса в настройках.</value>
+  <data name="Common.VersionGuid" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Bootstrapper.ModificationsFailed.Title" xml:space="preserve">
-    <value>Не удалось применить модификации</value>
-  </data>
-  <data name="Bootstrapper.ModificationsFailed.Message" xml:space="preserve">
-    <value>Не все изменения будут присутствовать при текущем запуске.</value>
-  </data>
-  <data name="Menu.About.Licenses.Apache" xml:space="preserve">
-    <value>Лицензия Apache 2.0</value>
-  </data>
-  <data name="Enums.CustomThemeTemplate.Blank" xml:space="preserve">
-    <value>Пустой</value>
-  </data>
-  <data name="Enums.CustomThemeTemplate.Simple" xml:space="preserve">
-    <value>Простой</value>
-  </data>
-  <data name="CustomTheme.Errors.InvalidRoot" xml:space="preserve">
-    <value>XML-корень темы не {0}</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.DialogAlreadyInitialised" xml:space="preserve">
-    <value>Пользовательское окно уже инициализировано</value>
-  </data>
-  <data name="CustomTheme.Errors.TooManyElements" xml:space="preserve">
-    <value>Пользовательские лаунчеры могут иметь максимум {0} элементов, получили {1}</value>
-    <comment>{0} and {1} are numbers</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotSet" xml:space="preserve">
-    <value>Версия {0} не установлена</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotNumber" xml:space="preserve">
-    <value>Версия {0} не является числом</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotSupported" xml:space="preserve">
-    <value>Версия {0} больше не поддерживается версией {1}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotRecognised" xml:space="preserve">
-    <value>Версия {0} не распознала версию {1}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementInvalidChild" xml:space="preserve">
-    <value>Элемент {0} не может иметь дочернего элемента {1}</value>
-    <comment>{0} and {1} are element names (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.UnknownElement" xml:space="preserve">
-    <value>Неизвестный элемент {0}</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.XMLParseFailed" xml:space="preserve">
-    <value>Не удалось разобрать файл темы: {0}</value>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeConversionError" xml:space="preserve">
-    <value>Элемент {0} имеет недопустимое значение {1}: {2}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMissing" xml:space="preserve">
-    <value>В элементе {0} отсутствует атрибут {1}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeInvalidType" xml:space="preserve">
-    <value>Элемент {0}.{1} является недопустимым {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMustBeLargerThanMin" xml:space="preserve">
-    <value>Элемент {0}.{1} должен быть больше чем {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMustBeSmallerThanMax" xml:space="preserve">
-    <value>Элемент {0}.{1} должен быть меньше чем {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
-  </data>
-  <data name="CustomTheme.Errors.UnknownEnumValue" xml:space="preserve">
-    <value>{0} Неизвестный {1} '{2}'</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the enum name (e.g. WindowCornerType), {2} is the value</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMultipleDefinitions" xml:space="preserve">
-    <value>Элемент {0} может иметь только один определенный {1}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMultipleChildren" xml:space="preserve">
-    <value>{0}.{1} может иметь только одного дочернего элемента</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementMultipleChildren" xml:space="preserve">
-    <value>Элемент {0} может иметь только один дочерний элемент</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMissingChild" xml:space="preserve">
-    <value>В элементе {0}.{1} отсутствует дочерний элемент</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeParseError" xml:space="preserve">
-    <value>Элемент {0}.{1} не может быть разобран в {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeParseErrorNull" xml:space="preserve">
-    <value>Элемент {0}.{1} {2} является null</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeBlacklistedUriScheme" xml:space="preserve">
-    <value>Элемент {0}.{1} использует схему из черного списка {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the URI scheme (e.g. http)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementTypeCreationFailed" xml:space="preserve">
-    <value>Элементу {0} не удалось создать {1}: {2}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
-  </data>
-  <data name="CustomTheme.Editor.Title" xml:space="preserve">
-    <value>Редактирование "{0}"</value>
-  </data>
-  <data name="CustomTheme.Editor.Save.Success" xml:space="preserve">
-    <value>Тема успешно сохранена!</value>
-  </data>
-  <data name="CustomTheme.Editor.Save.Error" xml:space="preserve">
-    <value>Произошла ошибка при сохранении вашей темы.</value>
-  </data>
-  <data name="CustomTheme.Editor.ConfirmSave" xml:space="preserve">
-    <value>Сохранить изменения в {0}?</value>
-  </data>
-  <data name="CustomTheme.Editor.Save" xml:space="preserve">
-    <value>Сохранить</value>
-  </data>
-  <data name="CustomTheme.Editor.Preview" xml:space="preserve">
-    <value>Предпросмотр</value>
-  </data>
-  <data name="CustomTheme.Editor.OpenThemeDirectory" xml:space="preserve">
-    <value>Открыть папку темы</value>
-  </data>
-  <data name="Common.CreateNew" xml:space="preserve">
-    <value>Создать новый</value>
-  </data>
-  <data name="Common.Import" xml:space="preserve">
-    <value>Импортировать</value>
-  </data>
-  <data name="CustomTheme.Add.Title" xml:space="preserve">
-    <value>Добавить пользовательскую тему</value>
-  </data>
-  <data name="Common.Template" xml:space="preserve">
-    <value>Шаблон</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameEmpty" xml:space="preserve">
-    <value>Имя не может быть пустым</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameIllegalCharacters" xml:space="preserve">
-    <value>Имя содержит недопустимые символы</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameReserved" xml:space="preserve">
-    <value>Имя не может быть использовано</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.Unknown" xml:space="preserve">
-    <value>Неизвестная ошибка</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameTaken" xml:space="preserve">
-    <value>Имя уже используется</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.FileNotZip" xml:space="preserve">
-    <value>Файл должен быть ZIP</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.ZipMissingThemeFile" xml:space="preserve">
-    <value>Не удалось найти файл темы в ZIP файле</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.ZipInvalidData" xml:space="preserve">
-    <value>Неверный или поврежденный ZIP файл</value>
-  </data>
-  <data name="CustomTheme.Errors.NoThemeSelected" xml:space="preserve">
-    <value>Пользовательская тема не выбрана</value>
-  </data>
-  <data name="CustomTheme.Errors.SetupFailed" xml:space="preserve">
-    <value>Не удалось установить пользовательскую тему лаунчера: {0}.
-Возвращаемся к {1}.</value>
-    <comment>{0} is the error reason, {1} is the theme name (e.g. Bloxstrap (Classic))</comment>
-  </data>
-  <data name="Menu.Appearance.CustomThemes.NoneSelected" xml:space="preserve">
-    <value>Пользовательская тема не выбрана.</value>
-  </data>
-  <data name="Common.Rename" xml:space="preserve">
-    <value>Переименовать</value>
-  </data>
-  <data name="Common.Edit" xml:space="preserve">
-    <value>Изменить</value>
-  </data>
-  <data name="Menu.Appearance.CustomThemes.DeleteFailed" xml:space="preserve">
-    <value>Не удалось удалить пользовательскую тему {0}: {1}</value>
-  </data>
-  <data name="Menu.Appearance.CustomThemes.RenameFailed" xml:space="preserve">
-    <value>Не удалось переименовать пользовательскую тему {0}: {1}</value>
-  </data>
-  <data name="Menu.Behaviour.BackgroundUpdates.Title" xml:space="preserve">
-    <value>Фоновые обновления</value>
-  </data>
-  <data name="Menu.Behaviour.BackgroundUpdates.Description" xml:space="preserve">
-    <value>Обновлять Roblox в фоновом режиме вместо блокировки запуска, когда доступно обновление. Для этой функции, нужно хотя бы 5 ГБ свободного места на диске.</value>
-  </data>
-  <data name="CustomTheme.Templates.Blank.UIElements" xml:space="preserve">
-    <value>Поместите сюда элементы в пользовательский интерфейс</value>
-  </data>
-  <data name="CustomTheme.Templates.Blank.MoreExamples" xml:space="preserve">
-    <value>Примеры пользовательских загрузок можно найти на {0}</value>
-  </data>
-  <data name="CustomTheme.Templates.Simple.MoreExamples" xml:space="preserve">
-    <value>Больше примеров пользовательских лаунчеров в {0}</value>
-  </data>
-  <data name="CustomTheme.DefaultName" xml:space="preserve">
-    <value>Пользовательская тема {0}</value>
-    <comment>{0} is a string (e.g. '1', '1-1234')</comment>
-  </data>
-  <data name="CustomTheme.Editor.Save.Success.Description" xml:space="preserve">
-    <value>Ваша тема сохранена!</value>
-  </data>
-  <data name="CustomTheme.Editor.Errors.PreviewFailed" xml:space="preserve">
-    <value>Не удалось просмотреть тему: {0}</value>
-  </data>
-  <data name="Bootstrapper.Status.ShuttingDown" xml:space="preserve">
-    <value>Завершение работы {product}</value>
-  </data>
-  <data name="LaunchMenu.BloxstrapWiki" xml:space="preserve">
-    <value>Mrstrap Вики</value>
-  </data>
-  <data name="LaunchMenu.RobloxCommunity" xml:space="preserve">
-    <value>Roblox Сообщество</value>
-  </data>
-  <data name="Menu.FastFlagEditor.AllowlistInformation" xml:space="preserve">
-    <value>Из-за [Обновления разрешённого списка Fast Flag'ов]({0}), большинство Fast Flag'ов не повлияют на Roblox.</value>
+  <data name="Menu.Channel.RobloxUpgrades" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

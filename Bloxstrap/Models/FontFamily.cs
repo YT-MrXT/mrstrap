@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models
+﻿namespace Voidstrap.Models
 {
     public class FontFamily
     {

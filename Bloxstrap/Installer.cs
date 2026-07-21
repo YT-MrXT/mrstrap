@@ -1,19 +1,16 @@
 ﻿using System.Windows;
+using Voidstrap;
 using Microsoft.Win32;
 
-namespace Bloxstrap
+namespace Voidstrap
 {
     internal class Installer
     {
         /// <summary>
-        /// Should the release notes open when updating to this version?
+        /// Should this version automatically open the release notes page?
+        /// Recommended for major updates only.
         /// </summary>
-        private const bool OpenReleaseNotes = true;
-        /// <summary>
-        /// Which version's release notes to open
-        /// Leave blank to use the current version
-        /// </summary>
-        private const string ForcedReleaseNotesVersion = "2.11.2";
+        private const bool OpenReleaseNotes = false;
 
         private static string DesktopShortcut => Path.Combine(Paths.Desktop, $"{App.ProjectName}.lnk");
 
@@ -28,6 +25,8 @@ namespace Bloxstrap
         public bool CreateStartMenuShortcuts = true;
 
         public bool EnableAnalytics = true;
+
+        public bool VoidstrapRPCReal = true;
 
         public bool IsImplicitInstall = false;
 
@@ -65,7 +64,7 @@ namespace Bloxstrap
             using (var uninstallKey = Registry.CurrentUser.CreateSubKey(App.UninstallKey))
             {
                 uninstallKey.SetValueSafe("DisplayIcon", $"{Paths.Application},0");
-                uninstallKey.SetValueSafe("DisplayName", App.ProjectName);
+                uninstallKey.SetValueSafe("DisplayName", App.DisplayName);
 
                 uninstallKey.SetValueSafe("DisplayVersion", App.Version);
 
@@ -83,13 +82,12 @@ namespace Bloxstrap
                 uninstallKey.SetValueSafe("URLUpdateInfo", App.ProjectDownloadLink);
             }
 
-            // only register player, for the scenario where the user installs bloxstrap, closes it,
-            // and then launches from the website expecting it to work
-            // studio can be implicitly registered when it's first launched manually or if its configuration files are present
-            WindowsRegistry.RegisterPlayer();
+            WindowsRegistry.RegisterApis();
 
-            if (App.IsStudioInstalled)
-                WindowsRegistry.RegisterStudio();
+            // only register player, for the scenario where the user installs Voidstrap, closes it,
+            // and then launches from the website expecting it to work
+            // studio can be implicitly registered when it's first launched manually
+            WindowsRegistry.RegisterPlayer();
 
             if (CreateDesktopShortcuts)
                 Shortcut.Create(Paths.Application, "", DesktopShortcut);
@@ -103,13 +101,13 @@ namespace Bloxstrap
             App.FastFlags.Load(false);
 
             App.Settings.Prop.EnableAnalytics = EnableAnalytics;
+            if (App.IsStudioVisible)
+                WindowsRegistry.RegisterStudio();
 
             App.Settings.Save();
 
             App.Logger.WriteLine(LOG_IDENT, "Installation finished");
 
-            if (!IsImplicitInstall)
-                App.SendStat("installAction", "install");
         }
 
         private bool ValidateLocation()
@@ -153,7 +151,7 @@ namespace Bloxstrap
             }
             else
             {
-                if (!IsImplicitInstall 
+                if (!IsImplicitInstall
                     && !InstallLocation.EndsWith(App.ProjectName, StringComparison.InvariantCultureIgnoreCase)
                     && Directory.Exists(InstallLocation)
                     && Directory.EnumerateFileSystemEntries(InstallLocation).Any())
@@ -200,11 +198,11 @@ namespace Bloxstrap
             const string LOG_IDENT = "Installer::DoUninstall";
 
             var processes = new List<Process>();
-            
-            if (!String.IsNullOrEmpty(App.PlayerState.Prop.VersionGuid))
+
+            if (!String.IsNullOrEmpty(App.State.Prop.Player.VersionGuid))
                 processes.AddRange(Process.GetProcessesByName(App.RobloxPlayerAppName));
 
-            if (App.IsStudioInstalled)
+            if (App.IsStudioVisible)
                 processes.AddRange(Process.GetProcessesByName(App.RobloxStudioAppName));
 
             // prompt to shutdown roblox if its currently running
@@ -282,6 +280,8 @@ namespace Bloxstrap
                 WindowsRegistry.RegisterStudioFileClass(studioPath, "-ide \"%1\"");
             }
 
+            Registry.CurrentUser.DeleteSubKey(App.ApisKey);
+
             var cleanupSequence = new List<Action>
             {
                 () =>
@@ -298,16 +298,24 @@ namespace Bloxstrap
                 () => File.Delete(StartMenuShortcut),
 
                 () => Directory.Delete(Paths.Versions, true),
+
                 () => Directory.Delete(Paths.Downloads, true),
 
-                () => File.Delete(App.State.FileLocation)
+                () => File.Delete(App.State.FileLocation),
+
+                () =>
+                {
+                if (Paths.Roblox == Path.Combine(Paths.Base, "Roblox")) // checking if roblox is installed in base directory
+                    Directory.Delete(Paths.Roblox, true);               // made that to prevent accidental removals of different builds
+                }
             };
+
 
             if (!keepData)
             {
                 cleanupSequence.AddRange(new List<Action>
                 {
-                    () => Directory.Delete(Paths.Modifications, true),
+                    () => Directory.Delete(Paths.Mods, true),
                     () => Directory.Delete(Paths.Logs, true),
 
                     () => File.Delete(App.Settings.FileLocation)
@@ -356,8 +364,6 @@ namespace Bloxstrap
                     WindowStyle = ProcessWindowStyle.Hidden
                 });
             }
-
-            App.SendStat("installAction", "uninstall");
         }
 
         public static void HandleUpgrade()
@@ -417,8 +423,8 @@ namespace Bloxstrap
                 }
             }
 
-            // prior to 2.8.0, auto-updating was handled with this... bruteforce method
-            // now it's handled with the system mutex you see above, but we need to keep this logic for <2.8.0 versions
+            // prior to 1.0.3.6, auto-updating was handled with this... bruteforce method
+            // now it's handled with the system mutex you see above, but we need to keep this logic for <1.0.3.6 versions
             for (int i = 1; i <= 10; i++)
             {
                 try
@@ -474,8 +480,8 @@ namespace Bloxstrap
 
                 if (Utilities.CompareVersions(existingVer, "2.3.0") == VersionComparison.LessThan)
                 {
-                    string injectorLocation = Path.Combine(Paths.Modifications, "dxgi.dll");
-                    string configLocation = Path.Combine(Paths.Modifications, "ReShade.ini");
+                    string injectorLocation = Path.Combine(Paths.Mods, "dxgi.dll");
+                    string configLocation = Path.Combine(Paths.Mods, "ReShade.ini");
 
                     if (File.Exists(injectorLocation))
                         File.Delete(injectorLocation);
@@ -484,13 +490,20 @@ namespace Bloxstrap
                         File.Delete(configLocation);
                 }
 
+
+                if (Utilities.CompareVersions(existingVer, "2.5.0") == VersionComparison.LessThan)
+                {
+                    App.FastFlags.SetValue("DFFlagDisableDPIScale", null);
+                    App.FastFlags.SetValue("DFFlagVariableDPIScale2", null);
+                }
+
                 if (Utilities.CompareVersions(existingVer, "2.6.0") == VersionComparison.LessThan)
                 {
                     if (App.Settings.Prop.UseDisableAppPatch)
                     {
                         try
                         {
-                            File.Delete(Path.Combine(Paths.Modifications, "ExtraContent\\places\\Mobile.rbxl"));
+                            File.Delete(Path.Combine(Paths.Mods, "ExtraContent\\places\\Mobile.rbxl"));
                         }
                         catch (Exception ex)
                         {
@@ -502,9 +515,13 @@ namespace Bloxstrap
 
                     if (App.Settings.Prop.BootstrapperStyle == BootstrapperStyle.ClassicFluentDialog)
                         App.Settings.Prop.BootstrapperStyle = BootstrapperStyle.FluentDialog;
+
+                    _ = int.TryParse(App.FastFlags.GetPreset("Rendering.Framerate"), out int x);
+                    if (x == 0)
+                        App.FastFlags.SetPreset("Rendering.Framerate", null);
                 }
 
-                if (Utilities.CompareVersions(existingVer, "2.8.0") == VersionComparison.LessThan)
+                if (Utilities.CompareVersions(existingVer, "1.0.3.6") == VersionComparison.LessThan)
                 {
                     if (isAutoUpgrade)
                     {
@@ -521,7 +538,7 @@ namespace Bloxstrap
                     }
 
                     string oldDesktopPath = Path.Combine(Paths.Desktop, "Play Roblox.lnk");
-                    string oldStartPath = Path.Combine(Paths.WindowsStartMenu, "Bloxstrap");
+                    string oldStartPath = Path.Combine(Paths.WindowsStartMenu, "Voidstrap");
 
                     if (File.Exists(oldDesktopPath))
                         File.Move(oldDesktopPath, DesktopShortcut, true);
@@ -540,9 +557,26 @@ namespace Bloxstrap
                         Shortcut.Create(Paths.Application, "", StartMenuShortcut);
                     }
 
-                    Registry.CurrentUser.DeleteSubKeyTree("Software\\Bloxstrap", false);
+                    Registry.CurrentUser.DeleteSubKeyTree("Software\\Voidstrap", false);
 
                     WindowsRegistry.RegisterPlayer();
+
+                    App.FastFlags.SetValue("FFlagDisableNewIGMinDUA", null);
+                    App.FastFlags.SetValue("FFlagFixGraphicsQuality", null);
+                }
+
+                if (Utilities.CompareVersions(existingVer, "2.8.1") == VersionComparison.LessThan)
+                {
+                    // wipe all escape menu flag presets
+                    App.FastFlags.SetValue("FIntNewInGameMenuPercentRollout3", null);
+                    App.FastFlags.SetValue("FFlagEnableInGameMenuControls", null);
+                    App.FastFlags.SetValue("FFlagEnableInGameMenuModernization", null);
+                    App.FastFlags.SetValue("FFlagEnableInGameMenuChrome", null);
+                    App.FastFlags.SetValue("FFlagFixReportButtonCutOff", null);
+                    App.FastFlags.SetValue("FFlagEnableMenuControlsABTest", null);
+                    App.FastFlags.SetValue("FFlagEnableV3MenuABTest3", null);
+                    App.FastFlags.SetValue("FFlagEnableInGameMenuChromeABTest3", null);
+                    App.FastFlags.SetValue("FFlagEnableInGameMenuChromeABTest4", null);
                 }
 
                 if (Utilities.CompareVersions(existingVer, "2.8.2") == VersionComparison.LessThan)
@@ -563,75 +597,26 @@ namespace Bloxstrap
                     }
                 }
 
-                if (Utilities.CompareVersions(existingVer, "2.11.0") == VersionComparison.LessThan)
+                if (Utilities.CompareVersions(existingVer, "2.8.3") == VersionComparison.LessThan)
                 {
-                    JsonManager<RobloxState> legacyRobloxState = new();
-
-                    if (legacyRobloxState.IsSaved)
-                    {
-                        if (legacyRobloxState.Load(false))
-                        {
-                            App.PlayerState.Prop.VersionGuid = legacyRobloxState.Prop.Player.VersionGuid;
-                            App.PlayerState.Prop.PackageHashes = legacyRobloxState.Prop.Player.PackageHashes;
-                            App.PlayerState.Prop.Size = legacyRobloxState.Prop.Player.Size;
-                            App.PlayerState.Prop.ModManifest = legacyRobloxState.Prop.ModManifest;
-
-                            App.StudioState.Prop.VersionGuid = legacyRobloxState.Prop.Studio.VersionGuid;
-                            App.StudioState.Prop.PackageHashes = legacyRobloxState.Prop.Studio.PackageHashes;
-                            App.StudioState.Prop.Size = legacyRobloxState.Prop.Studio.Size;
-                        }
-
-                        legacyRobloxState.Delete();
-                    }
-                }
-
-                if (Utilities.CompareVersions(existingVer, "2.11.3") == VersionComparison.LessThan)
-                {
-                    App.FastFlags.SetValue("FFlagDebugGraphicsPreferD3D11", null);
-                    App.FastFlags.SetValue("FFlagDebugGraphicsPreferD3D11FL10", null);
+                    // force reinstallation
+                    App.State.Prop.Player.VersionGuid = "";
+                    App.State.Prop.Studio.VersionGuid = "";
                 }
 
                 App.Settings.Save();
                 App.FastFlags.Save();
                 App.State.Save();
-
-                if (App.PlayerState.Loaded)
-                    App.PlayerState.Save();
-
-                if (App.StudioState.Loaded)
-                    App.StudioState.Save();
             }
 
             if (currentVer is null)
                 return;
 
-            App.SendStat("installAction", "upgrade");
-
             if (isAutoUpgrade)
             {
 #pragma warning disable CS0162 // Unreachable code detected
                 if (OpenReleaseNotes)
-                {
-                    string releaseNoteVersion;
-                    if (!string.IsNullOrEmpty(ForcedReleaseNotesVersion) && Version.TryParse(ForcedReleaseNotesVersion, out _))
-                    {
-                        if (!string.IsNullOrEmpty(existingVer))
-                        {
-                            // dont show release notes if existingVer is greater than or equal to ForcedReleaseNotesVersion
-                            VersionComparison compareResult = Utilities.CompareVersions(existingVer, ForcedReleaseNotesVersion);
-                            if (compareResult == VersionComparison.Equal || compareResult == VersionComparison.GreaterThan)
-                                return;
-                        }
-
-                        releaseNoteVersion = ForcedReleaseNotesVersion;
-                    }
-                    else
-                    {
-                        releaseNoteVersion = currentVer;
-                    }
-
-                    Utilities.ShellExecute($"https://github.com/{App.ProjectRepository}/wiki/Release-notes-for-Bloxstrap-v{releaseNoteVersion}");
-                }
+                    Utilities.ShellExecute($"https://github.com/{App.ProjectRepository}/wiki/Release-notes-for-Voidstrap-v{currentVer}");
 #pragma warning restore CS0162 // Unreachable code detected
             }
             else

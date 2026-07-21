@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Bloxstrap.Resources;
+using Voidstrap.Resources;
 
-namespace Bloxstrap.Utility
+namespace Voidstrap.Utility
 {
     internal static class Shortcut
     {
@@ -21,7 +21,7 @@ namespace Bloxstrap.Utility
                 if (_loadStatus != GenericTriState.Successful)
                     _loadStatus = GenericTriState.Successful;
             }
-            catch (Exception ex)
+            catch (FileNotFoundException ex)
             {
                 App.Logger.WriteLine(LOG_IDENT, $"Failed to create a shortcut for {lnkPath}!");
                 App.Logger.WriteException(LOG_IDENT, ex);
@@ -31,7 +31,7 @@ namespace Bloxstrap.Utility
 
                 _loadStatus = GenericTriState.Failed;
 
-                Frontend.ShowMessageBox(Strings.Dialog_CannotCreateShortcuts, MessageBoxImage.Warning);
+                Frontend.ShowMessageBox(Strings.Dialog_CannotCreateShortcuts, MessageBoxImage.Information);
             }
         }
     }

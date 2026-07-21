@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.APIs.Roblox
+﻿namespace Voidstrap.Models.APIs.Roblox
 {
     /// <summary>
     /// Roblox.Web.WebAPI.Models.ApiArrayResponse

@@ -5,10 +5,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shell;
 
-using Bloxstrap.UI.Elements.Bootstrapper.Base;
-using Bloxstrap.UI.ViewModels.Bootstrapper;
+using Voidstrap.UI.Elements.Bootstrapper.Base;
+using Voidstrap.UI.ViewModels.Bootstrapper;
 
-namespace Bloxstrap.UI.Elements.Bootstrapper
+namespace Voidstrap.UI.Elements.Bootstrapper
 {
     /// <summary>
     /// Interaction logic for ByfronDialog.xaml
@@ -16,8 +16,8 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
     public partial class ByfronDialog : IBootstrapperDialog
     {
         private readonly ByfronDialogViewModel _viewModel;
-
-        public Bloxstrap.Bootstrapper? Bootstrapper { get; set; }
+        private Window? _mainWindow;
+        public Voidstrap.Bootstrapper? Bootstrapper { get; set; }
 
         private bool _isClosing;
 
@@ -104,13 +104,13 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
 
         public ByfronDialog()
         {
-            string version = Utilities.GetRobloxVersionStr(Bootstrapper?.IsStudioLaunch ?? false);
+            string version = Utilities.GetRobloxVersion(Bootstrapper?.IsStudioLaunch ?? false);
             _viewModel = new ByfronDialogViewModel(this, version);
             DataContext = _viewModel;
             Title = App.Settings.Prop.BootstrapperTitle;
             Icon = App.Settings.Prop.BootstrapperIcon.GetIcon().GetImageSource();
 
-            if (App.Settings.Prop.Theme.GetFinal() == Theme.Light)
+            if (App.Settings.Prop.Theme2.GetFinal() == Theme.Light)
             {
                 // Matching the roblox website light theme as close as possible.
                 _viewModel.DialogBorder = new Thickness(1);
@@ -122,6 +122,25 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
             }
 
             InitializeComponent();
+            _mainWindow = System.Windows.Application.Current.Windows
+            .OfType<Voidstrap.UI.Elements.Settings.MainWindow>()
+            .FirstOrDefault();
+            if (App.Settings.Prop.BackgroundWindow)
+            {
+                _mainWindow?.Hide();
+            }
+            Voidstrap.UI.Elements.Bootstrapper.AudioPlayerHelper.PlayStartupAudio();
+            this.Closed += (s, e) =>
+            {
+                _mainWindow = System.Windows.Application.Current.Windows
+                .OfType<Voidstrap.UI.Elements.Settings.MainWindow>()
+                .FirstOrDefault();
+                if (App.Settings.Prop.BackgroundWindow)
+                {
+                    _mainWindow?.Show();
+                }
+                Voidstrap.UI.Elements.Bootstrapper.AudioPlayerHelper.StopAudio();
+            };
         }
         private void Window_Closing(object sender, CancelEventArgs e)
         {

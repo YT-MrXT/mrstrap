@@ -1,7 +1,8 @@
 ﻿using System.Windows;
-using Bloxstrap.UI.ViewModels.Installer;
+using System.Windows.Navigation;
+using Voidstrap.UI.ViewModels.Installer;
 
-namespace Bloxstrap.UI.Elements.Installer.Pages
+namespace Voidstrap.UI.Elements.Installer.Pages
 {
     /// <summary>
     /// Interaction logic for WelcomePage.xaml
@@ -12,11 +13,8 @@ namespace Bloxstrap.UI.Elements.Installer.Pages
 
         public WelcomePage()
         {
-            _viewModel.CanContinueEvent += (_, _) =>
-            {
                 if (Window.GetWindow(this) is MainWindow window)
                     window.SetButtonEnabled("next", true);
-            };
 
             DataContext = _viewModel;
             InitializeComponent();
@@ -26,8 +24,20 @@ namespace Bloxstrap.UI.Elements.Installer.Pages
         {
             if (Window.GetWindow(this) is MainWindow window)
                 window.SetNextButtonText(Strings.Common_Navigation_Next);
+        }
 
-            _viewModel.DoChecks();
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+            e.Handled = true;
+        }
+        private void DonateButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://voidstrapp.netlify.app/donate/donate") { UseShellExecute = true });
+        }
+        private void ContributorsButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo("https://voidstrapp.netlify.app/contributors/contributors") { UseShellExecute = true });
         }
     }
 }

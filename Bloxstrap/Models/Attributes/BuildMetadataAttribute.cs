@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.Attributes
+﻿namespace Voidstrap.Models.Attributes
 {
     [AttributeUsage(AttributeTargets.Assembly)]
     public class BuildMetadataAttribute : Attribute

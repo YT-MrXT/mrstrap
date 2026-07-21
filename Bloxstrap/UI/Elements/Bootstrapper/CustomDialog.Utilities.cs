@@ -2,8 +2,9 @@
 using System.Windows.Media;
 using System.Windows.Media.Effects;
 using System.Xml.Linq;
+using Voidstrap;
 
-namespace Bloxstrap.UI.Elements.Bootstrapper
+namespace Voidstrap.UI.Elements.Bootstrapper
 {
     public partial class CustomDialog
     {

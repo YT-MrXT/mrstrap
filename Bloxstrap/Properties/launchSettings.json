@@ -1,35 +1,43 @@
 {
-  "profiles": {
-    "Bloxstrap (Launch)": {
-      "commandName": "Project"
-    },
-    "Bloxstrap (Quiet Launch)": {
-      "commandName": "Project",
-      "commandLineArgs": "-quiet"
-    },
-    "Bloxstrap (Uninstall)": {
-      "commandName": "Project",
-      "commandLineArgs": "-uninstall"
-    },
-    "Bloxstrap (Quiet Uninstall)": {
-      "commandName": "Project",
-      "commandLineArgs": "-uninstall -quiet"
-    },
-    "Bloxstrap (Menu)": {
-      "commandName": "Project",
-      "commandLineArgs": "-menu"
-    },
-    "Bloxstrap (Deeplink)": {
-      "commandName": "Project",
-      "commandLineArgs": "-player \"roblox://experiences/start?placeId=13700835620\""
-    },
-    "Bloxstrap (Studio Launch)": {
-      "commandName": "Project",
-      "commandLineArgs": "-studio"
-    },
-    "Bloxstrap (Watcher)": {
-      "commandName": "Project",
-      "commandLineArgs": "-watcher"
+    "profiles": {
+        "Voidstrap (Launch)": {
+            "commandName": "Project"
+        },
+        "Voidstrap (Quiet Launch)": {
+            "commandName": "Project",
+            "commandLineArgs": "-quiet"
+        },
+        "Voidstrap (Install)": {
+            "commandName": "Project",
+            "commandLineArgs": "-install"
+        },
+        "Voidstrap (Uninstall)": {
+            "commandName": "Project",
+            "commandLineArgs": "-uninstall"
+        },
+        "Voidstrap (Quiet Uninstall)": {
+            "commandName": "Project",
+            "commandLineArgs": "-uninstall -quiet"
+        },
+        "Voidstrap (Menu)": {
+            "commandName": "Project",
+            "commandLineArgs": "-menu"
+        },
+        "Voidstrap (Deeplink)": {
+            "commandName": "Project",
+            "commandLineArgs": "-player \"roblox://experiences/start?placeId=286090429\""
+        },
+        "Voidstrap (Studio Launch)": {
+            "commandName": "Project",
+            "commandLineArgs": "-studio"
+        },
+        "Voidstrap (Watcher)": {
+            "commandName": "Project",
+            "commandLineArgs": "-watcher"
+        },
+        "Voidstrap (Bloxshade)": {
+            "commandName": "Project",
+            "commandLineArgs": "-bloxshade"
+        }
     }
-  }
 }

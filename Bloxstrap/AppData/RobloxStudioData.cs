@@ -1,4 +1,7 @@
-﻿namespace Bloxstrap.AppData
+﻿using Voidstrap.AppData;
+using Voidstrap;
+
+namespace Voidstrap.AppData
 {
     public class RobloxStudioData : CommonAppData, IAppData
     {
@@ -8,11 +11,9 @@
 
         public string RegistryName => "RobloxStudio";
 
-        public string ProcessName => "RobloxStudioBeta";
-
         public override string ExecutableName => "RobloxStudioBeta.exe";
 
-        public override JsonManager<DistributionState> DistributionStateManager => App.StudioState;
+        public override AppState State => App.State.Prop.Studio;
 
         public override IReadOnlyDictionary<string, string> PackageDirectoryMap { get; set; } = new Dictionary<string, string>()
         {

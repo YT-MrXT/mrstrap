@@ -1,9 +1,10 @@
 ﻿using System.Windows;
 
-using Bloxstrap.UI.Elements.Bootstrapper;
-using Bloxstrap.UI.Elements.Dialogs;
+using Voidstrap.UI.Elements.Bootstrapper;
+using Voidstrap.UI.Elements.Dialogs;
+using Voidstrap;
 
-namespace Bloxstrap.UI
+namespace Voidstrap.UI
 {
     static class Frontend
     {
@@ -22,12 +23,12 @@ namespace Bloxstrap.UI
             if (App.LaunchSettings.QuietFlag.Active)
                 return;
 
-            string info = String.Format(
-                Strings.Dialog_PlayerError_FailedLaunch,
-                $"https://bloxstraplabs.com/wiki/help/roblox-crashes-or-does-not-launch/"
-            );
-
-            ShowMessageBox(info, MessageBoxImage.Error);
+            try
+            {
+            }
+            catch
+            {
+            }
         }
 
         public static void ShowExceptionDialog(Exception exception)
@@ -72,7 +73,7 @@ namespace Bloxstrap.UI
                 App.Logger.WriteException(LOG_IDENT, ex);
 
                 if (!App.LaunchSettings.QuietFlag.Active)
-                    ShowMessageBox(string.Format(Strings.CustomTheme_Errors_SetupFailed, ex.Message, "Mrstrap"), MessageBoxImage.Error); // NOTE: Bloxstrap is the theme name
+                    ShowMessageBox(string.Format(Strings.CustomTheme_Errors_SetupFailed, ex.Message), MessageBoxImage.Error);
 
                 return GetBootstrapperDialog(BootstrapperStyle.FluentDialog);
             }
@@ -109,8 +110,8 @@ namespace Bloxstrap.UI
         {
             var notifyIcon = new System.Windows.Forms.NotifyIcon
             {
-                Icon = Properties.Resources.IconBloxstrap,
-                Text = App.ProjectName,
+                Icon = Properties.Resources.IconVoidstrap,
+                Text = App.DisplayName,
                 Visible = true
             };
 

@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Enums
+﻿namespace Voidstrap.Enums
 {
     public enum GenericTriState
     {

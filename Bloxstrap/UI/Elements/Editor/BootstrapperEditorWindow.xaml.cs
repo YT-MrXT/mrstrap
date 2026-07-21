@@ -7,11 +7,13 @@ using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using ICSharpCode.AvalonEdit.Highlighting;
 
-using Bloxstrap.UI.Elements.Base;
-using Bloxstrap.UI.ViewModels.Editor;
+using Voidstrap.UI.Elements.Base;
+using Voidstrap.UI.ViewModels.Editor;
 using System.Windows;
+using Voidstrap;
+using Wpf.Ui.Controls;
 
-namespace Bloxstrap.UI.Elements.Editor
+namespace Voidstrap.UI.Elements.Editor
 {
     /// <summary>
     /// Interaction logic for BootstrapperEditorWindow.xaml
@@ -162,7 +164,7 @@ namespace Bloxstrap.UI.Elements.Editor
 
         private void LoadHighlightingTheme()
         {
-            string name = $"Editor-Theme-{App.Settings.Prop.Theme.GetFinal()}.xshd";
+            string name = $"Editor-Theme-{App.Settings.Prop.Theme2.GetFinal()}.xshd";
             using Stream xmlStream = Resource.GetStream(name);
             using XmlReader reader = XmlReader.Create(xmlStream);
             UIXML.SyntaxHighlighting = HighlightingLoader.Load(reader, HighlightingManager.Instance);

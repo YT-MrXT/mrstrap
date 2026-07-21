@@ -1,12 +1,21 @@
-﻿namespace Bloxstrap.Enums.FlagPresets
+﻿
+namespace Voidstrap.Enums.FlagPresets
 {
     public enum TextureQuality
     {
-        [EnumName(FromTranslation = "Common.Automatic")]
+        [EnumName(FromTranslation = "Default")]
         Default,
-        Level0,
-        Level1,
-        Level2,
-        Level3
+
+        [EnumName(StaticName = "Lowest")]
+        Lowest,
+
+        [EnumName(StaticName = "Low")]
+        Low,
+
+        [EnumName(StaticName = "Medium")]
+        Medium,
+
+        [EnumName(StaticName = "High")]
+        High,
     }
 }

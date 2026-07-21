@@ -1,4 +1,4 @@
-﻿using Bloxstrap.UI.Elements.Bootstrapper;
+﻿using Voidstrap.UI.Elements.Bootstrapper;
 using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.Generic;
@@ -7,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using Voidstrap.UI.ViewModels;
+using Voidstrap;
 
-namespace Bloxstrap.UI.ViewModels.Editor
+namespace Voidstrap.UI.ViewModels.Editor
 {
     public class BootstrapperEditorWindowViewModel : NotifyPropertyChangedViewModel
     {
@@ -50,7 +52,7 @@ namespace Bloxstrap.UI.ViewModels.Editor
                 App.Logger.WriteLine(LOG_IDENT, "Failed to preview custom theme");
                 App.Logger.WriteException(LOG_IDENT, ex);
 
-                Frontend.ShowMessageBox(string.Format(Strings.CustomTheme_Editor_Errors_PreviewFailed, ex.Message), MessageBoxImage.Error, MessageBoxButton.OK);
+                Frontend.ShowMessageBox($"Failed to preview theme: {ex.Message}", MessageBoxImage.Error, MessageBoxButton.OK);
             }
         }
 
@@ -64,7 +66,7 @@ namespace Bloxstrap.UI.ViewModels.Editor
             {
                 File.WriteAllText(path, Code);
                 CodeChanged = false;
-                ThemeSavedCallback.Invoke(true, Strings.CustomTheme_Editor_Save_Success_Description);
+                ThemeSavedCallback.Invoke(true, "Your theme has been saved!");
             }
             catch (Exception ex)
             {

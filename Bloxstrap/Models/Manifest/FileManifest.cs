@@ -1,6 +1,6 @@
-﻿using Bloxstrap.RobloxInterfaces;
+﻿using Voidstrap.RobloxInterfaces;
 
-namespace Bloxstrap.Models.Manifest
+namespace Voidstrap.Models.Manifest
 {
     public class FileManifest : List<ManifestFile>
     {

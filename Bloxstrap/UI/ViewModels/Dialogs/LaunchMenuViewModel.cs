@@ -2,13 +2,15 @@
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-using Bloxstrap.UI.Elements.About;
+using Voidstrap.UI.Elements.About;
 
-namespace Bloxstrap.UI.ViewModels.Installer
+namespace Voidstrap.UI.ViewModels.Installer
 {
     public class LaunchMenuViewModel
     {
         public string Version => string.Format(Strings.Menu_About_Version, App.Version);
+
+        public Visibility RobloxStudioOptionVisibility => App.IsStudioVisible ? Visibility.Visible : Visibility.Collapsed;
 
         public ICommand LaunchSettingsCommand => new RelayCommand(LaunchSettings);
 

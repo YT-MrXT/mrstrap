@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models.APIs.Config
+﻿namespace Voidstrap.Models.APIs.Config
 {
     public class SupporterData
     {

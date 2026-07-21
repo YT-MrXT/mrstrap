@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace Bloxstrap.UI.Elements.Bootstrapper
+namespace Voidstrap.UI.Elements.Bootstrapper
 {
     partial class ProgressDialog
     {

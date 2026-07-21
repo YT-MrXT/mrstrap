@@ -59,46 +59,46 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -157,7 +157,7 @@
   <data name="Bootstrapper.Status.Upgrading" xml:space="preserve">
     <value>Uppgraderar {product}...</value>
   </data>
-  <data name="Bootstrapper.Status.UpgradingBloxstrap" xml:space="preserve">
+  <data name="Bootstrapper.Status.UpgradingVoidstrap" xml:space="preserve">
     <value>Skaffar den nyaste Mrstrap...</value>
   </data>
   <data name="Bootstrapper.Status.WaitingOtherInstances" xml:space="preserve">
@@ -286,12 +286,12 @@ Klicka för mer information</value>
     <value>Kopiera loggfilsinnehåll</value>
   </data>
   <data name="Dialog.Exception.Info.1" xml:space="preserve">
-    <value>Ett fel uppstod</value>
+    <value>Ett undantag skedde när Mrstrap kördes</value>
   </data>
   <data name="Dialog.Exception.Info.2" xml:space="preserve">
-    <value>Detta problem kan ha redan tagits upp i [Wikin]({0}).
+    <value>Kolla [Mrstrap Wikin]({0}) först för att se om problemet redan har en lösning.
 
-Om det inte är fallet, vänligen rapportera detta fel genom en [GitHub-issue]({1}) tillsammans med loggfilen.</value>
+Om det inte har det, rapportera gärna detta undantag med ett [GitHub-ärende]({1}) tillsammans med en kopia av loggfilen som skapades.</value>
   </data>
   <data name="Dialog.Exception.Title" xml:space="preserve">
     <value>Mrstrapsundantag</value>
@@ -356,6 +356,18 @@ Om det inte är fallet, vänligen rapportera detta fel genom en [GitHub-issue]({
   <data name="Enums.FlagPresets.InGameMenuVersion.V4" xml:space="preserve">
     <value>2023 (V4)</value>
   </data>
+  <data name="Enums.FlagPresets.LightingMode.Default" xml:space="preserve">
+    <value>Valt av spelet</value>
+  </data>
+  <data name="Enums.FlagPresets.LightingMode.Future" xml:space="preserve">
+    <value>Future (Fas 3)</value>
+  </data>
+  <data name="Enums.FlagPresets.LightingMode.ShadowMap" xml:space="preserve">
+    <value>Shadow Map (Fas 2)</value>
+  </data>
+  <data name="Enums.FlagPresets.LightingMode.Voxel" xml:space="preserve">
+    <value>Voxel (Fas 1)</value>
+  </data>
   <data name="Enums.FlagPresets.RenderingMode.D3D10" xml:space="preserve">
     <value>Direct3D 10</value>
   </data>
@@ -375,6 +387,12 @@ Om det inte är fallet, vänligen rapportera detta fel genom en [GitHub-issue]({
     <value>Mörkt</value>
   </data>
   <data name="Enums.Theme.Light" xml:space="preserve">
+    <value>Ljust</value>
+  </data>
+  <data name="Enums.Theme.Red" xml:space="preserve">
+    <value>Ljust</value>
+  </data>
+  <data name="Enums.Theme.Blue" xml:space="preserve">
     <value>Ljust</value>
   </data>
   <data name="InstallChecker.Updated" xml:space="preserve">
@@ -428,7 +446,7 @@ Vill du uppdatera din nuvarande installerade version?</value>
   </data>
   <data name="Menu.About.Version" xml:space="preserve">
     <value>Version {0}</value>
-    <comment>{0} is replaced with the version, i.e. "Version 2.8.0"</comment>
+    <comment>{0} is replaced with the version, i.e. "Version 1.0.3.6"</comment>
   </data>
   <data name="Menu.AllFiles" xml:space="preserve">
     <value>Alla filer</value>
@@ -573,6 +591,20 @@ Mer information:
   <data name="Menu.FastFlagEditor.Title" xml:space="preserve">
     <value>Fast flag-redigerare</value>
   </data>
+  <data name="Menu.FastFlagEditor.Warning.Back" xml:space="preserve">
+    <value>Gå tillbaka</value>
+  </data>
+  <data name="Menu.FastFlagEditor.Warning.Continue" xml:space="preserve">
+    <value>Jag vet vad jag gör</value>
+  </data>
+  <data name="Menu.FastFlagEditor.Warning.Header" xml:space="preserve">
+    <value>Vet du vad du gör?</value>
+  </data>
+  <data name="Menu.FastFlagEditor.Warning.Text" xml:space="preserve">
+    <value>Fast Flags är extremt kraftfulla, eftersom de endast är avsedda att användas av Roblox-ingenjörer. Även om de kan vara mycket användbara, kan manuell konfigurering av dem orsaka allvarliga problem med stabilitet och funktionalitet. Använd INTE redigeraren om du är osäker på vad du gör.
+
+Använd INTE detta för att importera stora "flagglistor" gjorda av andra personer som lovar att förbättra prestanda eller liknande. De kan ofta orsaka ovannämnda problem, och de kommer att orsaka problem för dig eftersom du inte kommer att vara helt medveten om vad de förändrar. Om du tänkte göra det, GÅ TILLBAKA.</value>
+  </data>
   <data name="Menu.FastFlags.Description" xml:space="preserve">
     <value>Ändra hur vissa specifika Roblox parametrar och funktioner är konfigurerade.</value>
   </data>
@@ -580,14 +612,39 @@ Mer information:
     <value>Hantera dina egna Fast Flags. Använd försiktigt.</value>
     <comment>Title is Menu.FastFlagEditor.Title</comment>
   </data>
+  <data name="Menu.FastFlags.Help.Description" xml:space="preserve">
+    <value>Lär dig mer om Fast Flags, vad förinställningarna gör och hur du använder dem.</value>
+    <comment>Title is Common.Help</comment>
+  </data>
   <data name="Menu.FastFlags.Presets.D3DExclusiveFullscreenInfo" xml:space="preserve">
     <value>Direct3D [exklusiv helskärm]({0}) med Alt+Enter är igång som standard.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.EscapeMenuVersion.Title" xml:space="preserve">
+    <value>Föredragen escapemeny-version</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Description" xml:space="preserve">
     <value>Roblox sänker din renderingskvalitet beroende på hur din skärm är skalad i Windows.</value>
   </data>
   <data name="Menu.FastFlags.Presets.FixDisplayScaling.Title" xml:space="preserve">
     <value>Behåll renderingskvalitet med skärmskalning</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Description" xml:space="preserve">
+    <value>Sätt till 0 för standard om du vill använda Roblox inbyggda bildfrekvensupplåsare.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FPSLimit.Title" xml:space="preserve">
+    <value>Bildfrekvensgräns</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Description" xml:space="preserve">
+    <value>Sätts igång med [tangentbordsgenvägar]({0}). Fungerar endast om du är i [Mrstrap-gruppen]({1}).</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.HideGuis.Title" xml:space="preserve">
+    <value>Aktivera möjligheten att dölja GUIs</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Description" xml:space="preserve">
+    <value>Vald ljusteknologi kommer tvingas igång i alla spel. [Var försiktig, detta kan skapa ljusproblem!]({0})</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.LightingTechnology.Title" xml:space="preserve">
+    <value>Föredragen ljusteknik</value>
   </data>
   <data name="Menu.FastFlags.Presets.RenderingMode.Title" xml:space="preserve">
     <value>Renderingsläge</value>
@@ -702,6 +759,9 @@ Om du väljer "Nej" ignoreras denna varning och installationen fortsätter.</val
   <data name="Menu.Mods.Misc.CustomFont.Choose" xml:space="preserve">
     <value>Välj typsnitt...</value>
   </data>
+  <data name="Menu.Mods.Misc.CustomFont.Description" xml:space="preserve">
+    <value>Typsnittsstorlek kan justeras i fliken Motorinställningar.</value>
+  </data>
   <data name="Menu.Mods.Misc.CustomFont.Invalid" xml:space="preserve">
     <value>Den fil du har valt verkar inte vara en giltig typsnittsfil.</value>
   </data>
@@ -712,7 +772,7 @@ Om du väljer "Nej" ignoreras denna varning och installationen fortsätter.</val
     <value>Använd eget typsnitt</value>
   </data>
   <data name="Menu.Mods.OpenModsFolder.Description" xml:space="preserve">
-    <value>Hantera egna Roblox-moddar här.</value>
+    <value>Hantera egna Roblox moddar här.</value>
   </data>
   <data name="Menu.Mods.OpenModsFolder.Title" xml:space="preserve">
     <value>Öppna Moddmappen</value>
@@ -740,6 +800,12 @@ Om du väljer "Nej" ignoreras denna varning och installationen fortsätter.</val
   </data>
   <data name="Menu.Mods.Presets.OldCharacterSounds.Title" xml:space="preserve">
     <value>Emulera gamla karaktärsljud</value>
+  </data>
+  <data name="Menu.Mods.Presets.OldDeathSound.Description" xml:space="preserve">
+    <value>Få tillbaka det klassiska "oof"-dödsljudet.</value>
+  </data>
+  <data name="Menu.Mods.Presets.OldDeathSound.Title" xml:space="preserve">
+    <value>Använd det gamla dödsljudet</value>
   </data>
   <data name="Menu.Mods.Title" xml:space="preserve">
     <value>Moddar</value>
@@ -771,11 +837,20 @@ Om du väljer "Nej" ignoreras denna varning och installationen fortsätter.</val
   <data name="Menu.Appearance.Language.Description" xml:space="preserve">
     <value>En omstart krävs för att dina ändringar ska träda i kraft.</value>
   </data>
+  <data name="Menu.Behaviour.ForceRobloxLanguage.Title" xml:space="preserve">
+    <value>Tillåt användning av Roblox-språk som inte stöds</value>
+  </data>
+  <data name="Menu.Behaviour.ForceRobloxLanguage.Description" xml:space="preserve">
+    <value>Gäller endast spel som startas från Roblox-webbsidan.</value>
+  </data>
   <data name="Enums.FlagPresets.InGameMenuVersion.V4Chrome" xml:space="preserve">
     <value>2023 (V4 + Ny UI)</value>
   </data>
   <data name="Menu.FastFlags.Presets.Categories.Rendering" xml:space="preserve">
     <value>Rendering och Grafik</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.Categories.UserInterface" xml:space="preserve">
+    <value>Användargränssnitt och Layout</value>
   </data>
   <data name="Menu.FastFlags.ManagerEnabled.Title" xml:space="preserve">
     <value>Tillåt Mrstrap att hantera Fast Flags</value>
@@ -785,6 +860,15 @@ Om du väljer "Nej" ignoreras denna varning och installationen fortsätter.</val
   </data>
   <data name="Menu.FastFlags.Presets.MSAA.Title" xml:space="preserve">
     <value>Anti-aliasing-kvalitet (MSAA)</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePostFX.Title" xml:space="preserve">
+    <value>Stäng av postprocessingseffekter</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Title" xml:space="preserve">
+    <value>Stäng av helskärmstitelrad</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FullscreenTitlebar.Description" xml:space="preserve">
+    <value>Stoppar den från att visas när du rör din mus till toppen av skärmen.</value>
   </data>
   <data name="Menu.FastFlags.Presets.TextureQuality.Title" xml:space="preserve">
     <value>Texturkvalitet</value>
@@ -800,6 +884,18 @@ Om du väljer "Nej" ignoreras denna varning och installationen fortsätter.</val
   </data>
   <data name="Enums.FlagPresets.TextureQuality.Level3" xml:space="preserve">
     <value>Nivå 3 (Högsta)</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisablePlayerShadows.Title" xml:space="preserve">
+    <value>Stäng av spelarskuggor</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Title" xml:space="preserve">
+    <value>Typsnittsstorlek</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.FontPadding.Description" xml:space="preserve">
+    <value>Standardvärde är 1. Ändra om du använder ett eget typsnitt.</value>
+  </data>
+  <data name="Menu.FastFlags.Presets.DisableTerrainTextures.Title" xml:space="preserve">
+    <value>Stäng av terrängtexturer</value>
   </data>
   <data name="Dialog.Connectivity.UnableToDownload" xml:space="preserve">
     <value>Mrstrap kan inte ladda ner Roblox</value>
@@ -820,7 +916,7 @@ Om du väljer "Nej" ignoreras denna varning och installationen fortsätter.</val
     <comment>Do not translate 'True' and 'False', those must stay in English</comment>
   </data>
   <data name="Menu.FastFlagEditor.InvalidNumberValue" xml:space="preserve">
-    <value>Flaggan '{0}' är inte giltig eftersom värdet måste vara ett heltal</value>
+    <value>Flaggan '{0}' är inte giltig eftersom värdet måste vara ett nummer</value>
   </data>
   <data name="Logger.NoWriteMode" xml:space="preserve">
     <value>Ingen loggfil skapas för denna starten eftersom Mrstrap inte kan skriva till mappen på '{0}'</value>
@@ -913,11 +1009,13 @@ Vad skulle du vilja göra?</value>
     <value>Avinstallera Mrstrap</value>
   </data>
   <data name="Uninstaller.Text" xml:space="preserve">
-    <value>Avinstallationen kommer att ta bort Mrstrap från ditt system, och automatiskt konfigurera Roblox standardstartprogram om det fortfarande är installerat.
+    <value>Genom att avinstallera Mrstrap kommer du att ta bort det från ditt system, och automatiskt byta till Roblox egna startprogram om det fortfarande är installerat.
 
-Avinstallationsprocessen kan lämna vissa saker kvar, så du kan behöva manuellt rensa upp de överblivna filerna där Mrstrap installerades.
+Om du avinstallerar eller ominstallerar eftersom du har problem med Roblox, läs [denna hjälpsida]({0}) först.
 
-Mrstrap installerades vid "{1}".</value>
+Avinstallationsprocessen kanske inte kan ta bort alla Mrstraps filer och lämmna kvar några filer där Mrstrap installerades, som du kan behöva ta bort manuellt.
+
+Mrstrap installerades i "{1}".</value>
   </data>
   <data name="Uninstaller.KeepData.Label" xml:space="preserve">
     <value>Behåll mina inställningar och moddar</value>
@@ -947,9 +1045,9 @@ Mrstrap installerades vid "{1}".</value>
     <value>Mrstrap kunde inte skapa genvägar på skrivbordet och för Start-menyn. Försök att skapa dem senare genom inställningarna.</value>
   </data>
   <data name="Dialog.Exception.Info.2.Alt" xml:space="preserve">
-    <value>Kolla [Mrstrap-wikin]({0}) först för att se om detta problem redan har en fix.
+    <value>Kolla [Mrstrap Wikin]({0}) först för att se om detta problem redan har en fix.
 
-Om det inte är fallet, vänligen rapportera detta fel till de ansvariga för denna fork. Rapportera inte detta vid Mrstraps GitHub-issues, eftersom detta är en inofficiell version av Mrstrap.</value>
+Annars så rapportera detta felmeddelande till de ansvariga för denna fork. Rapportera INTE detta på Mrstraps egna GitHub sida, eftersom detta är en inofficiell version av Mrstrap.</value>
     <comment>"fork" in general means "a variation of" or "a different version of". You can alternatively write the first sentence as "...to the maintainers of this version."</comment>
   </data>
   <data name="Installer.Install.Shortcuts.Description" xml:space="preserve">
@@ -1004,9 +1102,15 @@ Problem kan uppstå och dina inställningar kan ändras. En ominstallation rekom
 Är du säker på att du vill fortsätta?</value>
   </data>
   <data name="Dialog.PlayerError.FailedLaunch" xml:space="preserve">
-    <value>Roblox kunde inte startas.
+    <value>Roblox misslyckades med att starta.</value>
+  </data>
+  <data name="Dialog.PlayerError.Crash" xml:space="preserve">
+    <value>Roblox har kraschat.</value>
+  </data>
+  <data name="Dialog.PlayerError.HelpInformation" xml:space="preserve">
+    <value>För information om varför detta sker och hur det kan lösas, se [denna hjälpartikel]({0}).
 
-Detta skulle kunna vara ett problem med Mrstrap. För felsökningsinformation, se [denna hjälpsidan]({0}).</value>
+Kontrollera att Roblox fungerar med [det vanliga startprogrammet]({1}). Om varken Mrstrap eller det vanliga startprogrammer funkar så är detta inte ett Mrstrap-fel. Om det gör det, hänvisa till hjälpartikeln.</value>
   </data>
   <data name="Common.NetworkError" xml:space="preserve">
     <value>Kunde inte ladda data på grund av ett nätverksfel.</value>
@@ -1095,13 +1199,13 @@ Ta manuellt bort Mrstrap.exe från installationsplatsen eller försök starta om
   <data name="About.Supporters.OneOff" xml:space="preserve">
     <value>Engångsdonationer</value>
   </data>
-  <data name="Menu.Bloxstrap.Description" xml:space="preserve">
+  <data name="Menu.Voidstrap.Description" xml:space="preserve">
     <value>Konfigurera alternativ relaterade till Mrstraps beteende i sig.</value>
   </data>
-  <data name="Menu.Bloxstrap.Analytics.Title" xml:space="preserve">
+  <data name="Menu.Voidstrap.Analytics.Title" xml:space="preserve">
     <value>Skicka telemetri</value>
   </data>
-  <data name="Menu.Bloxstrap.Analytics.Description" xml:space="preserve">
+  <data name="Menu.Voidstrap.Analytics.Description" xml:space="preserve">
     <value>Det är anonymt och inget ont. För att se vad vi samlar in och varför, se vår [integritetspolicy]({0}).</value>
   </data>
   <data name="Common.Analytics" xml:space="preserve">
@@ -1111,7 +1215,7 @@ Ta manuellt bort Mrstrap.exe från installationsplatsen eller försök starta om
     <value>Återställ allt till standard</value>
   </data>
   <data name="Dialog.Exception.Report" xml:space="preserve">
-    <value>Gör en rapport</value>
+    <value>Rapportera fel</value>
   </data>
   <data name="Menu.TestMode" xml:space="preserve">
     <value>Testläge</value>
@@ -1141,9 +1245,6 @@ Vill du aktivera testläge?</value>
   <data name="Dialog.Exception.Version" xml:space="preserve">
     <value>Version {0}</value>
   </data>
-  <data name="Enums.BootstrapperStyle.CustomDialog" xml:space="preserve">
-    <value>Egen</value>
-  </data>
   <data name="Bootstrapper.FilesInUse" xml:space="preserve">
     <value>Mrstrap kunde inte uppdatera Roblox eftersom Roblox filer fortfarande används.
 
@@ -1156,255 +1257,31 @@ Var vänlig och stäng applikationer som kan använda Roblox filer, och starta s
   </data>
   <data name="Common.Export" xml:space="preserve">
     <value>Exportera</value>
-    <comment>Currently used under the "Bloxstrap" settings tab for the button to export diagnostic data</comment>
+    <comment>Currently used under the "Voidstrap" settings tab for the button to export diagnostic data</comment>
   </data>
-  <data name="Menu.Bloxstrap.ExportData.Title" xml:space="preserve">
-    <value>Exportera diagnostiskdata</value>
+  <data name="Dialog.Connectivity.Preventing" xml:space="preserve">
+    <value>Någonting hindrar förmodligen Mrstrap från att ansluta till internet.</value>
   </data>
-  <data name="Menu.Bloxstrap.ExportData.Description" xml:space="preserve">
-    <value>Samla in information om eventuella fel som uppstår.</value>
+  <data name="Dialog.Connectivity.TimedOut" xml:space="preserve">
+    <value>Anslutningen tog för lång tid, vilket kan peka på en dålig internetuppkoppling eller en block från din brandvägg.</value>
   </data>
-  <data name="Menu.Bloxstrap.ExportData.ExportConfig" xml:space="preserve">
-    <value>Mrstrap-konfiguration</value>
-    <comment>Label that appears next to a checkbox</comment>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Menu.Channel.Description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Menu.Bloxstrap.ExportData.ExportLogs" xml:space="preserve">
-    <value>Alla Mrstrap loggfiler</value>
-    <comment>Label that appears next to a checkbox</comment>
+  <data name="Common.Channel" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="App.OSDeprecation.Win7_81" xml:space="preserve">
-    <value>Roblox stödjer inte längre Windows 7 eller 8.1. För att fortsätta spela, uppgradera till Windows 10 eller senare.</value>
+  <data name="Menu.ChannelChanger.Description" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Bootstrapper.ExtractionFailed.Title" xml:space="preserve">
-    <value>Det gick inte att extrahera filerna</value>
+  <data name="Common.Version" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Bootstrapper.ExtractionFailed.Message" xml:space="preserve">
-    <value>Vissa filer verkar saknas. Genomför en ominstallation av Roblox i inställningarna för att åtgärda problemet.</value>
+  <data name="Common.VersionGuid" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
-  <data name="Bootstrapper.ModificationsFailed.Title" xml:space="preserve">
-    <value>Det gick inte att tillämpa ändringarna</value>
-  </data>
-  <data name="Bootstrapper.ModificationsFailed.Message" xml:space="preserve">
-    <value>Inte alla ändringar kommer att finnas med i denna session.</value>
-  </data>
-  <data name="Menu.About.Licenses.Apache" xml:space="preserve">
-    <value>Apache-licens 2.0</value>
-  </data>
-  <data name="Enums.CustomThemeTemplate.Blank" xml:space="preserve">
-    <value>Tom</value>
-  </data>
-  <data name="Enums.CustomThemeTemplate.Simple" xml:space="preserve">
-    <value>Simpel</value>
-  </data>
-  <data name="CustomTheme.Errors.InvalidRoot" xml:space="preserve">
-    <value>Temats XML-rot är inte {0}</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.DialogAlreadyInitialised" xml:space="preserve">
-    <value>Egen dialog har redan initierats</value>
-  </data>
-  <data name="CustomTheme.Errors.TooManyElements" xml:space="preserve">
-    <value>Egna startprogram kan maximalt ha {0} element, fick {1}</value>
-    <comment>{0} and {1} are numbers</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotSet" xml:space="preserve">
-    <value>{0} version är inte inställd</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotNumber" xml:space="preserve">
-    <value>{0} version är inte ett nummer</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotSupported" xml:space="preserve">
-    <value>{0} version {1} stöds inte längre</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
-  </data>
-  <data name="CustomTheme.Errors.VersionNotRecognised" xml:space="preserve">
-    <value>{0} version {1} är inte igenkänd</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the version number</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementInvalidChild" xml:space="preserve">
-    <value>{0} kan inte ha ett underordnat element av {1}</value>
-    <comment>{0} and {1} are element names (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.UnknownElement" xml:space="preserve">
-    <value>Okänt element {0}</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.XMLParseFailed" xml:space="preserve">
-    <value>Kunde inte tolka temafilen: {0}</value>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeConversionError" xml:space="preserve">
-    <value>{0} har ogiltig {1}: {2}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMissing" xml:space="preserve">
-    <value>Element {0} saknar attributet {1}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeInvalidType" xml:space="preserve">
-    <value>{0}.{1} är inte en giltig {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMustBeLargerThanMin" xml:space="preserve">
-    <value>{0}.{1} måste vara större än {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMustBeSmallerThanMax" xml:space="preserve">
-    <value>{0}.{1} måste vara mindre än {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is a number</comment>
-  </data>
-  <data name="CustomTheme.Errors.UnknownEnumValue" xml:space="preserve">
-    <value>{0} Okänd {1} '{2}'</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the enum name (e.g. WindowCornerType), {2} is the value</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMultipleDefinitions" xml:space="preserve">
-    <value>{0} kan bara ha en {1} definierad</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMultipleChildren" xml:space="preserve">
-    <value>{0}.{1} kan endast ha ett underordnat element</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementMultipleChildren" xml:space="preserve">
-    <value>{0} kan endast ha ett underordnat element</value>
-    <comment>{0} is the element name (e.g. Button)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeMissingChild" xml:space="preserve">
-    <value>{0}.{1} saknar sitt underordnade element</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeParseError" xml:space="preserve">
-    <value>{0}.{1} kunde inte tolkas till en {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeParseErrorNull" xml:space="preserve">
-    <value>{0}.{1} {2} är null</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the type name (e.g. string)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementAttributeBlacklistedUriScheme" xml:space="preserve">
-    <value>{0}.{1} använder ett svartlistat schema: {2}</value>
-    <comment>{0}.{1} is the element &amp; attribute name (e.g. Button.Text), {2} is the URI scheme (e.g. http)</comment>
-  </data>
-  <data name="CustomTheme.Errors.ElementTypeCreationFailed" xml:space="preserve">
-    <value>{0} misslyckades att skapa {1}: {2}</value>
-    <comment>{0} is the element name (e.g. Button), {1} is the attribute name (e.g. Text), {2} is the error reason</comment>
-  </data>
-  <data name="CustomTheme.Editor.Title" xml:space="preserve">
-    <value>Redigerar "{0}"</value>
-  </data>
-  <data name="CustomTheme.Editor.Save.Success" xml:space="preserve">
-    <value>Temat har sparats!</value>
-  </data>
-  <data name="CustomTheme.Editor.Save.Error" xml:space="preserve">
-    <value>Ett fel inträffade när ditt tema skulle sparas.</value>
-  </data>
-  <data name="CustomTheme.Editor.ConfirmSave" xml:space="preserve">
-    <value>Spara ändringar till {0}?</value>
-  </data>
-  <data name="CustomTheme.Editor.Save" xml:space="preserve">
-    <value>Spara</value>
-  </data>
-  <data name="CustomTheme.Editor.Preview" xml:space="preserve">
-    <value>Förhandsgranska</value>
-  </data>
-  <data name="CustomTheme.Editor.OpenThemeDirectory" xml:space="preserve">
-    <value>Öppna temamappen</value>
-  </data>
-  <data name="Common.CreateNew" xml:space="preserve">
-    <value>Skapa ny</value>
-  </data>
-  <data name="Common.Import" xml:space="preserve">
-    <value>Importera</value>
-  </data>
-  <data name="CustomTheme.Add.Title" xml:space="preserve">
-    <value>Lägg till eget tema</value>
-  </data>
-  <data name="Common.Template" xml:space="preserve">
-    <value>Mall</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameEmpty" xml:space="preserve">
-    <value>Namnet kan inte vara tomt</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameIllegalCharacters" xml:space="preserve">
-    <value>Namnet innehåller ogiltiga tecken</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameReserved" xml:space="preserve">
-    <value>Namnet kan inte användas</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.Unknown" xml:space="preserve">
-    <value>Okänt fel</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.NameTaken" xml:space="preserve">
-    <value>Namnet används redan</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.FileNotZip" xml:space="preserve">
-    <value>Filen måste vara en ZIP-fil</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.ZipMissingThemeFile" xml:space="preserve">
-    <value>Temafilen kunde inte hittas i ZIP-filen</value>
-  </data>
-  <data name="CustomTheme.Add.Errors.ZipInvalidData" xml:space="preserve">
-    <value>Ogiltig eller korrupt ZIP-fil</value>
-  </data>
-  <data name="CustomTheme.Errors.NoThemeSelected" xml:space="preserve">
-    <value>Inget eget tema valt</value>
-  </data>
-  <data name="CustomTheme.Errors.SetupFailed" xml:space="preserve">
-    <value>Misslyckades med att konfigurera egen startprogram: {0}.
-Använder {1} istället.</value>
-    <comment>{0} is the error reason, {1} is the theme name (e.g. Bloxstrap (Classic))</comment>
-  </data>
-  <data name="Menu.Appearance.CustomThemes.NoneSelected" xml:space="preserve">
-    <value>Inget eget tema valt.</value>
-  </data>
-  <data name="Common.Rename" xml:space="preserve">
-    <value>Byt namn</value>
-  </data>
-  <data name="Common.Edit" xml:space="preserve">
-    <value>Redigera</value>
-  </data>
-  <data name="Menu.Appearance.CustomThemes.DeleteFailed" xml:space="preserve">
-    <value>Misslyckades att radera eget tema {0}: {1}</value>
-  </data>
-  <data name="Menu.Appearance.CustomThemes.RenameFailed" xml:space="preserve">
-    <value>Det gick inte att byta namn på eget tema {0}: {1}</value>
-  </data>
-  <data name="Menu.Behaviour.BackgroundUpdates.Title" xml:space="preserve">
-    <value>Bakgrundsuppdateringar</value>
-  </data>
-  <data name="Menu.Behaviour.BackgroundUpdates.Description" xml:space="preserve">
-    <value>Uppdatera Roblox i bakgrunden istället för att behöva vänta under start när en uppdatering är tillgänglig. Minst 5GB ledigt lagringsutrymme krävs för den här funktionen.</value>
-  </data>
-  <data name="CustomTheme.Templates.Blank.UIElements" xml:space="preserve">
-    <value>Sätt användargränssnittselement här</value>
-  </data>
-  <data name="CustomTheme.Templates.Blank.MoreExamples" xml:space="preserve">
-    <value>Exempel på anpassade startprogram finns hos {0}</value>
-  </data>
-  <data name="CustomTheme.Templates.Simple.MoreExamples" xml:space="preserve">
-    <value>Hitta fler anpassade startprogram-exempel hos {0}</value>
-  </data>
-  <data name="CustomTheme.DefaultName" xml:space="preserve">
-    <value>Eget tema {0}</value>
-    <comment>{0} is a string (e.g. '1', '1-1234')</comment>
-  </data>
-  <data name="CustomTheme.Editor.Save.Success.Description" xml:space="preserve">
-    <value>Ditt tema har sparats!</value>
-  </data>
-  <data name="CustomTheme.Editor.Errors.PreviewFailed" xml:space="preserve">
-    <value>Det gick inte att förhandsgranska temat: {0}</value>
-  </data>
-  <data name="Bootstrapper.Status.ShuttingDown" xml:space="preserve">
-    <value>Stänger ner {product}</value>
-  </data>
-  <data name="LaunchMenu.BloxstrapWiki" xml:space="preserve">
-    <value>Mrstrap-wikin</value>
-  </data>
-  <data name="LaunchMenu.RobloxCommunity" xml:space="preserve">
-    <value>Roblox-communityn</value>
-  </data>
-  <data name="Menu.FastFlagEditor.AllowlistInformation" xml:space="preserve">
-    <value>Eftersom [Roblox har begränsat vilka Fast Flags som kan användas]({0}) kommer de flesta egna flaggorna inte ha någon påverkan på Roblox-klienten.</value>
+  <data name="Menu.Channel.RobloxUpgrades" type="System.Resources.ResXNullRef, System.Windows.Forms">
+    <value />
   </data>
 </root>

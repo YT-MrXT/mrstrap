@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bloxstrap.AppData
+namespace Voidstrap.AppData
 {
     public abstract class CommonAppData
     {
@@ -43,15 +43,11 @@ namespace Bloxstrap.AppData
 
         public virtual string ExecutableName { get; } = null!;
 
-        public string Directory => Path.Combine(Paths.Versions, DistributionState.VersionGuid);
+        public string Directory => Path.Combine(Paths.Versions, String.IsNullOrEmpty(State.VersionGuid) ? "" : State.VersionGuid);
 
         public string ExecutablePath => Path.Combine(Directory, ExecutableName);
 
-        public virtual JsonManager<DistributionState> DistributionStateManager { get; } = null!;
-
-        public DistributionState DistributionState => DistributionStateManager.Prop;
-
-        public List<string> ModManifest => DistributionState.ModManifest;
+        public virtual AppState State { get; } = null!;
 
         public virtual IReadOnlyDictionary<string, string> PackageDirectoryMap { get; set; }
 

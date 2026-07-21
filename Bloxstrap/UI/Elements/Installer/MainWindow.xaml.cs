@@ -4,14 +4,14 @@ using Wpf.Ui.Mvvm.Contracts;
 using System.ComponentModel;
 using System.Windows;
 
-using Bloxstrap.UI.ViewModels.Installer;
-using Bloxstrap.UI.Elements.Installer.Pages;
-using Bloxstrap.UI.Elements.Base;
+using Voidstrap.UI.ViewModels.Installer;
+using Voidstrap.UI.Elements.Installer.Pages;
+using Voidstrap.UI.Elements.Base;
 using System.Windows.Media.Animation;
 using System.Reflection.Metadata.Ecma335;
-using Bloxstrap.Resources;
+using Voidstrap.Resources;
 
-namespace Bloxstrap.UI.Elements.Installer
+namespace Voidstrap.UI.Elements.Installer
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -35,6 +35,7 @@ namespace Bloxstrap.UI.Elements.Installer
 
     public partial class MainWindow : WpfUiWindow, INavigationWindow
     {
+        
         internal readonly MainWindowViewModel _viewModel = new();
 
         private Type _currentPage = typeof(WelcomePage);
@@ -50,7 +51,11 @@ namespace Bloxstrap.UI.Elements.Installer
         public bool Finished => _currentPage == _pages.Last();
 
         public MainWindow()
+
         {
+
+
+            SetButtonEnabled("next", true);
             _viewModel.CloseWindowRequest += (_, _) => CloseWindow();
 
             _viewModel.PageRequest += (_, type) =>
@@ -74,6 +79,7 @@ namespace Bloxstrap.UI.Elements.Installer
 
             Closing += new CancelEventHandler(MainWindow_Closing);
         }
+
 
         void NextPage()
         {
@@ -139,5 +145,10 @@ namespace Bloxstrap.UI.Elements.Installer
         public void CloseWindow() => Close();
 
         #endregion INavigationWindow methods
+
+        private void RootFrame_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        {
+
+        }
     }
 }

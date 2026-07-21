@@ -1,7 +1,8 @@
 ﻿using System.Windows;
 using System.Xml.Linq;
+using Voidstrap;
 
-namespace Bloxstrap.UI.Elements.Bootstrapper
+namespace Voidstrap.UI.Elements.Bootstrapper
 {
     public partial class CustomDialog
     {

@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Voidstrap.UI.ViewModels;
 
-namespace Bloxstrap.UI.ViewModels.Dialogs
+namespace Voidstrap.UI.ViewModels.Dialogs
 {
     internal class AddCustomThemeViewModel : NotifyPropertyChangedViewModel
     {

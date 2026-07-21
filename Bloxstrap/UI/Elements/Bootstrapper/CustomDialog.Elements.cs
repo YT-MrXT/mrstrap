@@ -3,7 +3,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Media.Effects;
 using System.Windows.Shapes;
@@ -11,9 +10,10 @@ using System.Xml.Linq;
 
 using Wpf.Ui.Markup;
 
-using Bloxstrap.UI.Elements.Controls;
+using Voidstrap.UI.Elements.Controls;
+using Voidstrap;
 
-namespace Bloxstrap.UI.Elements.Bootstrapper
+namespace Voidstrap.UI.Elements.Bootstrapper
 {
     public partial class CustomDialog
     {
@@ -380,7 +380,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
 
             var theme = ParseXmlAttribute<Theme>(xmlElement, "Theme", Theme.Default);
             if (theme == Theme.Default)
-                theme = App.Settings.Prop.Theme;
+                theme = App.Settings.Prop.Theme2;
 
             var wpfUiTheme = theme.GetFinal() == Theme.Dark ? Wpf.Ui.Appearance.ThemeType.Dark : Wpf.Ui.Appearance.ThemeType.Light;
 
@@ -417,7 +417,7 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
         private static UIElement HandleXmlElement_BloxstrapCustomBootstrapper_Fake(CustomDialog dialog, XElement xmlElement)
         {
             // this only exists to error out the theme if someone tries to use two BloxstrapCustomBootstrappers
-            throw new CustomThemeException("CustomTheme.Errors.ElementInvalidChild", xmlElement.Parent!.Name, xmlElement.Name);
+            throw new Exception($"{xmlElement.Parent!.Name} cannot have a child of {xmlElement.Name}");
         }
 
         private static DummyFrameworkElement HandleXmlElement_TitleBar(CustomDialog dialog, XElement xmlElement)
@@ -629,9 +629,6 @@ namespace Bloxstrap.UI.Elements.Bootstrapper
                 else
                 {
                     XamlAnimatedGif.AnimationBehavior.SetSourceUri(image, sourceData.Uri!);
-
-                    RepeatBehavior repeatBehavior = ParseXmlAttribute<RepeatBehavior>(xmlElement, "RepeatBehavior", RepeatBehavior.Forever);
-                    XamlAnimatedGif.AnimationBehavior.SetRepeatBehavior(image, repeatBehavior);
                 }
             }
 

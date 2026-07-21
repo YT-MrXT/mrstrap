@@ -1,4 +1,4 @@
-﻿namespace Bloxstrap.Models
+﻿namespace Voidstrap.Models
 {
     internal class WatcherData
     {

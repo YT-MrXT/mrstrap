@@ -1,87 +1,130 @@
-> [!CAUTION]
-> The only official places to download Bloxstrap are this GitHub repository and [bloxstraplabs.com](https://bloxstraplabs.com). Any other websites offering downloads or claiming to be us are not owned by us.
+<p align="center">
+<a href="https://voidstrapp.netlify.app/">
+<img src="https://raw.githubusercontent.com/voidstrap/Voidstrap/main/Bloxstrap/Voidstrap.png" alt="preview" width="100px"/>
+</a>
+</p>
 
-> [!IMPORTANT]
-> Bloxstrap is not under active development anymore. Any issues or pull requests opened may take a while to get a response.
+<h1 align="center"><b>Voidstrap</b></h1>
 
 <p align="center">
-    <img src="Images/Mrstrap-full-dark.png#gh-dark-mode-only" width="380">
-    <img src="Images/Mrstrap-full-light.png#gh-light-mode-only" width="380">
+<img src="https://raw.githubusercontent.com/KloBraticc/RandomMods/main/Untitled%20design%20(2)-Photoroom.png" alt="preview" width="100%"/>
+</p>
+
+<p align="center">
+  <a href="github.com/voidstrap/Voidstrap/releases/latest">Latest release</a> |
+  <a href="https://www.youtube.com/watch?v=P-GqTUo_HIA&t">Tutorial</a> |
+  <a href="https://voidstrapp.netlify.app/donate/donate">Donate</a> |
+  <a href="https://discord.gg/5tJBqBH8ck">Discord</a>
 </p>
 
 <div align="center">
 
-[![License][shield-repo-license]][repo-license]
-[![GitHub Workflow Status][shield-repo-workflow]][repo-actions]
-[![Crowdin][shield-crowdin-status]][crowdin-project]
-[![Downloads][shield-repo-releases]][repo-releases]
-[![Version][shield-repo-latest]][repo-latest]
+[![Total Downloads][shield-repo-total]][repo-releases]
+[![Latest Downloads][shield-repo-downloads]][repo-latest]
+[![Latest Release][shield-repo-latest]][repo-latest]
 [![Discord][shield-discord-server]][discord-invite]
-[![lol][shield-tenor-meme]][tenor-gif]
+[![Stars][shield-repo-stars]][repo-stargazers]
 
 </div>
 
-----
+<h5 align="center">
+Leave a star if you like the project! ⭐️
+</h5>
 
-Bloxstrap is a third-party replacement for the standard Roblox bootstrapper, providing additional useful features and improvements.
+> [!IMPORTANT]
+> Voidstrap currently supports **Windows 10 and above**.  
+> **macOS support is in the works**, but it is not available yet.
+>
+> In the meantime, you can use **[AppleBlox](https://github.com/AppleBlox/appleblox)** *(for macOS)* or **[Sober](https://sober.vinegarhq.org/)** *(for Linux)*.  
+> More experienced Linux users can also try tools like **[Lution](https://github.com/wookhq/Lution)**.
 
-Running into a problem or need help with something? [Check out the Wiki](https://bloxstraplabs.com/wiki). If you can't find anything, or would like to suggest something, please [submit an issue](https://github.com/bloxstraplabs/bloxstrap/issues).
+## Installation
 
-Bloxstrap is only supported for PCs running Windows.
+1. Download the latest version
+   👉 https://github.com/voidstrap/Voidstrap/releases/latest
+2. Run the Exe and Finish the setup
+3. Launch Voidstrap
+4. Enjoy a more simple Roblox
 
-## Frequently Asked Questions
+---
 
-**Q: Is this malware?**
+## Frequently Asked Questions (FAQ)
 
-**A:** No. The source code here is viewable to all, and it'd be impossible for us to slip anything malicious into the downloads without anyone noticing. Just be sure you're downloading it from an official source. The only two official sources are this GitHub repository and [bloxstraplabs.com](https://bloxstraplabs.com).
+<details>
+  <summary><strong>Can it get you banned?</strong></summary>
+  <br>
 
-**Q: Can using this get me banned?**
+  No. Voidstrap does not inject cheats, exploits, or bypass Roblox security.  
+  It functions as a launcher and configuration manager. However, as with any third-party tool, use it at your own discretion.
+</details>
 
-**A:** No, it shouldn't. Bloxstrap doesn't interact with the Roblox client in the same way that exploits do. [Read more about that here.](https://bloxstraplabs.com/wiki/info/bloxstrap-and-bans)
-## Features
+<br>
 
-- Hassle-free Discord Rich Presence to let your friends know what you're playing at a glance
-- Simple support for modding of content files for customizability (death sound, mouse cursor, etc)
-- See where your server is geographically located (courtesy of [ipinfo.io](https://ipinfo.io))
-- Ability to configure graphics fidelity and UI experience
+<details>
+  <summary><strong>Is it a virus?</strong></summary>
+  <br>
 
-## Installing
-Download the [latest release of Bloxstrap](https://github.com/bloxstraplabs/bloxstrap/releases/latest), and run it. Configure your preferences if needed, and install. That's about it!
+  No. Voidstrap is fully open-source, meaning anyone can inspect the code.  
+  If your antivirus flags it, it is most likely a false positive due to how launchers interact with Roblox processes and updates.
 
-Alternatively, you can install Bloxstrap via [Winget](https://winstall.app/apps/pizzaboxer.Bloxstrap) by running this in a Command Prompt window:
-```
-> winget install bloxstrap
-```
+  You can verify the source code yourself at:
+  https://github.com/voidstrap/Voidstrap
+  or just scroll up dummy <!-- hada add this -->
+</details>
 
-You will also need the [.NET 6 Desktop Runtime](https://aka.ms/dotnet-core-applaunch?missing_runtime=true&arch=x64&rid=win11-x64&apphost_version=6.0.36&gui=true). If you don't already have it installed, you'll be prompted to install it anyway. Be sure to install Bloxstrap after you've installed this.
+<!-- Removed build will prob show how to do that in a later date im lazy for rn -->
+## How to Fork
 
-It's not unlikely that Windows Smartscreen will show a popup when you run Bloxstrap for the first time. This happens because it's an unknown program, not because it's actually detected as being malicious. To dismiss it, just click on "More info" and then "Run anyway".
+<p align="left">
+  <a href="https://www.w3schools.com/cs/" target="_blank" rel="noreferrer">
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="40" height="40"/>
+    <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/dot-net/dot-net-original-wordmark.svg" alt="dotnet" width="40" height="40"/>
+  </a>
+</p>
 
-Once installed, Bloxstrap is added to your Start Menu, where you can access the menu and reconfigure your preferences if needed.
+Voidstrap is built using **C# and .NET**.
 
-## Code
+---
 
-Bloxstrap uses the [WPF UI](https://github.com/lepoco/wpfui) library for the user interface design. We currently use and maintain our own fork of WPF UI at [bloxstraplabs/wpfui](https://github.com/bloxstraplabs/wpfui).
+### Fork the Repository
 
+1. Go to:  
+   https://github.com/voidstrap/Voidstrap
+2. Click **Fork** (top right)
+3. This creates your own copy under your GitHub account
 
-[shield-repo-license]:  https://img.shields.io/github/license/bloxstraplabs/bloxstrap
-[shield-repo-workflow]: https://img.shields.io/github/actions/workflow/status/bloxstraplabs/bloxstrap/ci-release.yml?branch=main&label=builds
-[shield-repo-releases]: https://img.shields.io/github/downloads/bloxstraplabs/bloxstrap/latest/total?color=981bfe
-[shield-repo-latest]:   https://img.shields.io/github/v/release/bloxstraplabs/bloxstrap?color=7a39fb
+<table style="width: 100%; border-collapse: collapse;">
+  <tr>
+    <td style="width: 33%; text-align: left;">© Voidstrap</td>
+    <td style="width: 33%; text-align: right;"><a href="https://github.com/voidstrap/Voidstrap/blob/main/LICENSE.VOIDSTRAP" target="_blank">MIT</a></td>
+  </tr>
+</table>
 
-[shield-crowdin-status]: https://badges.crowdin.net/bloxstrap/localized.svg
-[shield-discord-server]: https://img.shields.io/discord/1099468797410283540?logo=discord&logoColor=white&label=discord&color=4d3dff
-[shield-tenor-meme]:     https://img.shields.io/badge/mom_made-pizza_rolls-orange
+## Star History
 
-[repo-license]:  https://github.com/bloxstraplabs/bloxstrap/blob/main/LICENSE
-[repo-actions]:  https://github.com/bloxstraplabs/bloxstrap/actions
-[repo-releases]: https://github.com/bloxstraplabs/bloxstrap/releases
-[repo-latest]:   https://github.com/bloxstraplabs/bloxstrap/releases/latest
+<p align="center">
+  <a href="https://www.star-history.com/?repos=voidstrap%2FVoidstrap%2CKloBraticc%2Fvoidstrap&type=timeline&legend=top-left">
+    <img src="https://api.star-history.com/svg?repos=voidstrap%2FVoidstrap%2CKloBraticc%2Fvoidstrap&type=timeline&legend=top-left&theme=dark" />
+  </a>
+</p>
 
-[crowdin-project]: https://crowdin.com/project/bloxstrap
-[discord-invite]:  https://discord.gg/nKjV3mGq6R
-[tenor-gif]:       https://media.tenor.com/FIkSGbGycmAAAAAd/manly-roblox.gif
+<p align="center">
+  <a href="https://discord.gg/5tJBqBH8ck">
+    <img src="https://invidget.switchblade.xyz/5tJBqBH8ck">
+  </a>
+</p>
 
-## Code signing policy
+> [!NOTE]
+> Voidstrap is still in **early development**, even though the project has existed for over **2 years**.  
+> Features may change and some things may still be unfinished.
 
-Thanks to [SignPath.io](https://signpath.io/) for providing a free code signing service, and the [SignPath Foundation](https://signpath.org/) for providing the free code signing certificate.
+[shield-repo-downloads]:  https://img.shields.io/github/downloads/voidstrap/Voidstrap/latest/total?color=981bfe
+[shield-repo-total]:      https://img.shields.io/github/downloads/voidstrap/Voidstrap/total?color=8a2be2
+[shield-repo-latest]:     https://img.shields.io/github/v/release/voidstrap/Voidstrap?color=7a39fb
+[shield-repo-stars]:      https://img.shields.io/github/stars/voidstrap/Voidstrap?color=ffd700
+[shield-discord-server]:  https://img.shields.io/discord/1327967202015580223?logo=discord&logoColor=white&label=Discord&color=4d3dff
+
+[repo-releases]:          https://github.com/voidstrap/Voidstrap/releases
+[repo-latest]:            https://github.com/voidstrap/Voidstrap/releases/latest
+[repo-stargazers]:        https://github.com/voidstrap/Voidstrap/stargazers
+[discord-invite]:         https://discord.gg/dfA9PdWgcV

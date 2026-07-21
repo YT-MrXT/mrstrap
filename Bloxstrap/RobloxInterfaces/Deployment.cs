@@ -1,30 +1,32 @@
-﻿namespace Bloxstrap.RobloxInterfaces
+﻿using System.Collections.Concurrent;
+using System.Net;
+using System.Net.Http;
+using System.Text.Json;
+using Voidstrap;
+
+namespace Voidstrap.RobloxInterfaces
 {
     public static class Deployment
     {
         public const string DefaultChannel = "production";
-        
         private const string VersionStudioHash = "version-012732894899482c";
 
-        public static string Channel = DefaultChannel;
+        public static string Channel { get; set; } = App.Settings.Prop.Channel;
+        public static string BinaryType { get; set; } = "WindowsPlayer";
+        public static bool IsDefaultChannel =>
+            string.Equals(Channel, DefaultChannel, StringComparison.OrdinalIgnoreCase);
 
-        public static string BinaryType = "WindowsPlayer";
+        public static string BaseUrl { get; private set; } = string.Empty;
 
-        public static bool IsDefaultChannel => Channel.Equals(DefaultChannel, StringComparison.OrdinalIgnoreCase);
-        
-        public static string BaseUrl { get; private set; } = null!;
-
-        public static readonly List<HttpStatusCode?> BadChannelCodes = new()
+        public static readonly HashSet<HttpStatusCode?> BadChannelCodes = new()
         {
             HttpStatusCode.Unauthorized,
             HttpStatusCode.Forbidden,
             HttpStatusCode.NotFound
         };
 
-        private static readonly Dictionary<string, ClientVersion> ClientVersionCache = new();
+        private static readonly ConcurrentDictionary<string, ClientVersion> ClientVersionCache = new();
 
-        // a list of roblox deployment locations that we check for, in case one of them don't work
-        // these are all weighted based on their priority, so that we pick the most optimal one that we can. 0 = highest
         private static readonly Dictionary<string, int> BaseUrls = new()
         {
             { "https://setup.rbxcdn.com", 0 },
@@ -34,151 +36,247 @@
             { "https://s3.amazonaws.com/setup.roblox.com", 4 }
         };
 
-        private static async Task<string?> TestConnection(string url, int priority, CancellationToken token)
+        private static readonly HttpClient SharedHttp = new()
         {
-            string LOG_IDENT = $"Deployment::TestConnection<{url}>";
+            Timeout = TimeSpan.FromSeconds(30)
+        };
 
-            await Task.Delay(priority * 1000, token);
+        static Deployment()
+        {
+            SharedHttp.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "VoidstrapUpdater/2.0");
+            SharedHttp.DefaultRequestHeaders.TryAddWithoutValidation("Accept", "application/json");
+        }
 
-            App.Logger.WriteLine(LOG_IDENT, "Connecting...");
+        public static string GetInfoUrl(string channel)
+        {
+            bool isDefault = string.Equals(channel, DefaultChannel, StringComparison.OrdinalIgnoreCase);
+
+            string path = isDefault
+                ? $"/v2/client-version/{BinaryType}"
+                : $"/v2/client-version/{BinaryType}/channel/{channel}";
+
+            return $"https://clientsettingscdn.roblox.com{path}";
+        }
+
+        private static async Task<T> SafeGetJson<T>(string url)
+        {
+            using var response = await SharedHttp.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+                throw new HttpRequestException(
+                    $"Request failed: {(int)response.StatusCode}",
+                    null,
+                    response.StatusCode);
+
+            string text = await response.Content.ReadAsStringAsync();
+
+            if (string.IsNullOrWhiteSpace(text) || text.TrimStart().StartsWith("<"))
+                throw new InvalidHTTPResponseException($"Invalid JSON response from {url}");
+
+            return JsonSerializer.Deserialize<T>(text, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            }) ?? throw new InvalidHTTPResponseException($"Failed to deserialize JSON from {url}");
+        }
+
+        public static async Task<ClientVersion> GetInfo(
+            string? inputChannel = null,
+            IEnumerable<string>? cycleChannels = null)
+        {
+            const string logIdent = "Deployment::GetInfo";
+
+            var channel = string.IsNullOrEmpty(inputChannel) ? Channel : inputChannel;
+            bool isDefault = string.Equals(channel, DefaultChannel, StringComparison.OrdinalIgnoreCase);
+
+            App.Logger.WriteLine(logIdent, $"Fetching deploy info for channel {channel}");
+
+            string cacheKey = $"{channel}-{BinaryType}";
+            if (ClientVersionCache.TryGetValue(cacheKey, out var cached))
+            {
+                App.Logger.WriteLine(logIdent, "Using cached deploy info");
+                return cached;
+            }
 
             try
             {
-                var response = await App.HttpClient.GetAsync($"{url}/versionStudio", token);
-
-                response.EnsureSuccessStatusCode();
-
-                // versionStudio is the version hash for the last MFC studio to be deployed.
-                // the response body should always be "version-012732894899482c".
-                string content = await response.Content.ReadAsStringAsync(token);
-
-                if (content != VersionStudioHash)
-                    throw new InvalidHTTPResponseException($"versionStudio response does not match (expected \"{VersionStudioHash}\", got \"{content}\")");
+                var version = await SafeGetJson<ClientVersion>(GetInfoUrl(channel));
+                ClientVersionCache.TryAdd(cacheKey, version);
+                return version;
             }
-            catch (TaskCanceledException)
+            catch (HttpRequestException ex) when (!isDefault && BadChannelCodes.Contains(ex.StatusCode))
             {
-                App.Logger.WriteLine(LOG_IDENT, "Connectivity test cancelled.");
-                throw;
-            }
-            catch (Exception ex)
-            {
-                App.Logger.WriteException(LOG_IDENT, ex);
-                throw;
-            }
+                App.Logger.WriteLine(logIdent,
+                    $"Channel {channel} failed ({ex.StatusCode}).");
 
-            return url;
+                if (cycleChannels != null)
+                {
+                    foreach (var next in cycleChannels.Distinct(StringComparer.OrdinalIgnoreCase))
+                    {
+                        try
+                        {
+                            App.Logger.WriteLine(logIdent, $"Trying next channel: {next}");
+
+                            var info = await SafeGetJson<ClientVersion>(GetInfoUrl(next));
+
+                            if (!string.IsNullOrWhiteSpace(info.Version))
+                            {
+                                Channel = next;
+                                App.Settings.Prop.Channel = next;
+                                App.Settings.Save();
+
+                                ClientVersionCache.TryAdd($"{next}-{BinaryType}", info);
+
+                                App.Logger.WriteLine(logIdent,
+                                    $"Switched to working channel: {next}");
+
+                                return info;
+                            }
+                        }
+                        catch (HttpRequestException innerEx)
+                            when (BadChannelCodes.Contains(innerEx.StatusCode))
+                        {
+                            continue;
+                        }
+                        catch
+                        {
+                            continue;
+                        }
+                    }
+                }
+
+                App.Logger.WriteLine(logIdent,
+                    "All cycle channels failed. Falling back to production.");
+
+                var fallback = await SafeGetJson<ClientVersion>(GetInfoUrl(DefaultChannel));
+                Channel = DefaultChannel;
+                App.Settings.Prop.Channel = DefaultChannel;
+                App.Settings.Save();
+
+                ClientVersionCache.TryAdd($"{DefaultChannel}-{BinaryType}", fallback);
+                return fallback;
+            }
         }
 
-        /// <summary>
-        /// This function serves double duty as the setup mirror enumerator, and as our connectivity check.
-        /// Returns null for success.
-        /// </summary>
-        /// <returns></returns>
         public static async Task<Exception?> InitializeConnectivity()
         {
-            const string LOG_IDENT = "Deployment::InitializeConnectivity";
+            const string logIdent = "Deployment::InitializeConnectivity";
 
-            var tokenSource = new CancellationTokenSource();
-
-            var exceptions = new List<Exception>();
-            var tasks = (from entry in BaseUrls select TestConnection(entry.Key, entry.Value, tokenSource.Token)).ToList();
-
-            App.Logger.WriteLine(LOG_IDENT, "Testing connectivity...");
-
-            while (tasks.Any() && String.IsNullOrEmpty(BaseUrl))
+            foreach (var entry in BaseUrls.OrderBy(x => x.Value))
             {
-                var finishedTask = await Task.WhenAny(tasks);
+                try
+                {
+                    using var resp = await SharedHttp.GetAsync($"{entry.Key}/versionStudio");
+                    if (!resp.IsSuccessStatusCode)
+                        continue;
 
-                tasks.Remove(finishedTask);
-
-                if (finishedTask.IsFaulted)
-                    exceptions.Add(finishedTask.Exception!.InnerException!);
-                else if (!finishedTask.IsCanceled)
-                    BaseUrl = finishedTask.Result;
+                    string content = (await resp.Content.ReadAsStringAsync()).Trim();
+                    if (content == VersionStudioHash)
+                    {
+                        BaseUrl = entry.Key;
+                        App.Logger.WriteLine(logIdent, $"Using base URL: {BaseUrl}");
+                        return null;
+                    }
+                }
+                catch { }
             }
 
-            // stop other running connectivity tests
-            tokenSource.Cancel();
-
-            if (string.IsNullOrEmpty(BaseUrl))
-            {
-                if (exceptions.Any())
-                    return exceptions[0];
-
-                // task cancellation exceptions don't get added to the list
-                return new TaskCanceledException("All connection attempts timed out.");
-            }
-
-            App.Logger.WriteLine(LOG_IDENT, $"Got {BaseUrl} as the optimal base URL");
-
-            return null;
+            return new Exception("Failed to connect to any setup mirrors.");
         }
 
         public static string GetLocation(string resource)
         {
-            string location = BaseUrl;
-            location += "/channel/common";
-            location += resource;
+            var location = BaseUrl;
 
-            return location;
+            if (!IsDefaultChannel)
+            {
+                var useCommon = ApplicationSettings
+                    .GetSettings(nameof(ApplicationSettings.PCClientBootstrapper), Channel)
+                    .Get<bool>("FFlagReplaceChannelNameForDownload");
+
+                var channelName = useCommon ? "common" : Channel.ToLowerInvariant();
+                location += $"/channel/{channelName}";
+            }
+
+            return $"{location}{resource}";
         }
 
-        public static async Task<ClientVersion> GetInfo(string? channel = null)
+        // redid this shit :3
+        public static async Task<
+            (string luaPackagesZip,
+             string extraTexturesZip,
+             string contentTexturesZip,
+             string versionHash,
+             string version)>
+            DownloadForModGenerator(bool overwrite = false)
         {
-            const string LOG_IDENT = "Deployment::GetInfo";
+            const string LOG_IDENT = "Deployment::DownloadForModGenerator";
 
-            if (String.IsNullOrEmpty(channel))
-                channel = Channel;
+            var clientInfo = await SafeGetJson<ClientVersion>(
+                "https://clientsettingscdn.roblox.com/v2/client-version/WindowsStudio64");
 
-            bool isDefaultChannel = String.Compare(channel, DefaultChannel, StringComparison.OrdinalIgnoreCase) == 0;
+            if (string.IsNullOrEmpty(clientInfo.VersionGuid) ||
+                !clientInfo.VersionGuid.StartsWith("version-"))
+                throw new InvalidHTTPResponseException("Invalid clientVersionUpload.");
 
-            App.Logger.WriteLine(LOG_IDENT, $"Getting deploy info for channel {channel}");
+            string versionHash = clientInfo.VersionGuid["version-".Length..];
+            string version = clientInfo.Version;
 
-            string cacheKey = $"{channel}-{BinaryType}";
+            string tmp = Path.Combine(Path.GetTempPath(), "Voidstrap");
+            Directory.CreateDirectory(tmp);
 
-            ClientVersion clientVersion;
+            string luaPackagesUrl =
+                $"https://setup.rbxcdn.com/version-{versionHash}-extracontent-luapackages.zip";
+            string extraTexturesUrl =
+                $"https://setup.rbxcdn.com/version-{versionHash}-extracontent-textures.zip";
+            string contentTexturesUrl =
+                $"https://setup.rbxcdn.com/version-{versionHash}-content-textures2.zip";
 
-            if (ClientVersionCache.ContainsKey(cacheKey))
+            string luaPackagesZip =
+                Path.Combine(tmp, $"extracontent-luapackages-{versionHash}.zip");
+            string extraTexturesZip =
+                Path.Combine(tmp, $"extracontent-textures-{versionHash}.zip");
+            string contentTexturesZip =
+                Path.Combine(tmp, $"content-textures2-{versionHash}.zip");
+
+            async Task<string> DownloadFile(string url, string path)
             {
-                App.Logger.WriteLine(LOG_IDENT, "Deploy information is cached");
-                clientVersion = ClientVersionCache[cacheKey];
-            }
-            else
-            {
-                string path = $"/v2/client-version/{BinaryType}";
-
-                if (!isDefaultChannel)
-                    path = $"/v2/client-version/{BinaryType}/channel/{channel}";
-
-                try
+                if (File.Exists(path) && !overwrite)
                 {
-                    clientVersion = await Http.GetJson<ClientVersion>("https://clientsettingscdn.roblox.com" + path);
-                }
-                catch (HttpRequestException httpEx) 
-                when (!isDefaultChannel && BadChannelCodes.Contains(httpEx.StatusCode))
-                {
-                    throw new InvalidChannelException(httpEx.StatusCode);
-                }
-                catch (Exception ex)
-                {
-                    App.Logger.WriteLine(LOG_IDENT, "Failed to contact clientsettingscdn! Falling back to clientsettings...");
-                    App.Logger.WriteException(LOG_IDENT, ex);
+                    var fi = new FileInfo(path);
+                    if (fi.Length > 0)
+                        return path;
 
-                    try
-                    {
-                        clientVersion = await Http.GetJson<ClientVersion>("https://clientsettings.roblox.com" + path);
-                    }
-                    catch (HttpRequestException httpEx)
-                    when (!isDefaultChannel && BadChannelCodes.Contains(httpEx.StatusCode))
-                    {
-                        throw new InvalidChannelException(httpEx.StatusCode);
-                    }
+                    File.Delete(path);
                 }
 
-                ClientVersionCache[cacheKey] = clientVersion;
+                using var client = new HttpClient
+                {
+                    Timeout = TimeSpan.FromMinutes(5)
+                };
+
+                using var resp = await client.GetAsync(url,
+                    HttpCompletionOption.ResponseHeadersRead);
+
+                resp.EnsureSuccessStatusCode();
+
+                await using var fs =
+                    new FileStream(path, FileMode.Create,
+                        FileAccess.Write, FileShare.None);
+
+                await resp.Content.CopyToAsync(fs);
+
+                return path;
             }
 
-            return clientVersion;
+            luaPackagesZip = await DownloadFile(luaPackagesUrl, luaPackagesZip);
+            extraTexturesZip = await DownloadFile(extraTexturesUrl, extraTexturesZip);
+            contentTexturesZip = await DownloadFile(contentTexturesUrl, contentTexturesZip);
+
+            return (luaPackagesZip,
+                    extraTexturesZip,
+                    contentTexturesZip,
+                    versionHash,
+                    version);
         }
     }
 }

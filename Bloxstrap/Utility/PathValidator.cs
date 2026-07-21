@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bloxstrap.Utility
+namespace Voidstrap.Utility
 {
     internal static class PathValidator
     {
@@ -18,34 +18,34 @@ namespace Bloxstrap.Utility
 
         private static readonly string[] _reservedNames = new string[]
         {
-            "CON",
-            "PRN",
-            "AUX",
-            "NUL",
-            "COM1",
-            "COM2",
-            "COM3",
-            "COM4",
-            "COM5",
-            "COM6",
-            "COM7",
-            "COM8",
-            "COM9",
-            "LPT1",
-            "LPT2",
-            "LPT3",
-            "LPT4",
-            "LPT5",
-            "LPT6",
-            "LPT7",
-            "LPT8",
-            "LPT9"
+             "CON",
+             "PRN",
+             "AUX",
+             "NUL",
+             "COM1",
+             "COM2",
+             "COM3",
+             "COM4",
+             "COM5",
+             "COM6",
+             "COM7",
+             "COM8",
+             "COM9",
+             "LPT1",
+             "LPT2",
+             "LPT3",
+             "LPT4",
+             "LPT5",
+             "LPT6",
+             "LPT7",
+             "LPT8",
+             "LPT9"
         };
 
         private static readonly char[] _directorySeperatorDelimiters = new char[]
         {
-            Path.DirectorySeparatorChar,
-            Path.AltDirectorySeparatorChar
+             Path.DirectorySeparatorChar,
+             Path.AltDirectorySeparatorChar
         };
 
         private static readonly char[] _invalidPathChars = GetInvalidPathChars();

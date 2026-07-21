@@ -1,15 +1,16 @@
 ﻿using System.Windows.Input;
 using CommunityToolkit.Mvvm.Input;
 
-using Bloxstrap.Resources;
+using Voidstrap.Resources;
+using Voidstrap;
 
-namespace Bloxstrap.UI.ViewModels.Dialogs
+namespace Voidstrap.UI.ViewModels.Dialogs
 {
     public class UninstallerViewModel
     {
         public string Text => String.Format(
             Strings.Uninstaller_Text,
-            null,
+            "https://github.com/BloxstrapLabs/Bloxstrap/wiki/Roblox-crashes-or-does-not-launch",
             Paths.Base
         );
 

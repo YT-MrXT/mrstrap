@@ -123,8 +123,7 @@
 				"Stretch": "Stretch",
 				"StretchDirection": "StretchDirection",
 				"Source": "ImageSource",
-				"IsAnimated": "bool",
-				"RepeatBehavior":  "RepeatBehavior"
+				"IsAnimated": "bool"
 			}
 		},
 		"Grid": {
@@ -333,11 +332,6 @@
 				"Visible",
 				"Hidden",
 				"Collapsed"
-			]
-		},
-		"RepeatBehavior": {
-			"Values": [
-				"Forever"
 			]
 		},
 		"HorizontalAlignment": {
